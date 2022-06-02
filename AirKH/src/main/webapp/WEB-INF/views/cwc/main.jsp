@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	최우창님main입니다.
+	test
 </body>
 </html>
