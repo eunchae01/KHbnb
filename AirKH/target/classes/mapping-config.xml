@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+    
+<configuration>
+	
+	<typeAliases>
+		<typeAlias type="com.air.jdy.AccDAO" alias="accdao"/>
+		<typeAlias type="com.air.jdy.AccDTO" alias="adto"/>
+		<typeAlias type="com.air.jdy.ThemeDTO" alias="tdto"/>
+		<typeAlias type="com.air.jdy.OfferDTO" alias="odto"/>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</typeAliases>
+
+</configuration>
