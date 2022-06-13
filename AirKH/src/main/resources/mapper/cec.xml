@@ -3,3 +3,61 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="userHotelDAO">
+	<!-- 회원가입 -->
+	<insert id="memberSignUp" parameterType="com.air.cec.memberHotelDTO">
+		<selectKey resultType="int" keyProperty="member_num" order="BEFORE">
+			select nvl(max(member_num), 0) from member_hotel
+		</selectKey>
+		
+		insert into member_hotel values(#{member_num} + 1, #{member_id}, #{member_nickname}, #{member_name}, #{member_pwd}, #{member_addr}, #{member_phone}, sysdate)
+	</insert>
+	
+	<insert id="hostSignUp" parameterType="com.air.cec.hostHotelDTO">
+		<selectKey resultType="int" keyProperty="host_num" order="BEFORE">
+			select nvl(max(host_num), 0) from host_hotel
+		</selectKey>
+		
+		insert into host_hotel values(#{host_num} + 1, #{host_id}, #{host_nickname}, #{host_name}, #{host_pwd}, #{host_addr}, #{host_phone}, sysdate)
+	</insert>
+	
+	<!-- 아이디로 DTO 가져오기 -->
+	<select id="hostInfo" parameterType="String" resultType="com.air.cec.hostHotelDTO">
+		select * from host_hotel where host_id = #{id}
+	</select>
+	
+	<select id="memberInfo" parameterType="String" resultType="com.air.cec.memberHotelDTO">
+		select * from member_hotel where member_id = #{id}
+	</select>
+	
+	<!-- 내 정보 업데이트 -->
+	<update id="updateHost" parameterType="com.air.cec.hostHotelDTO">
+		update host_hotel set host_nickname = #{host_nickname}, host_pwd = #{host_pwd}, host_addr = #{host_addr}, host_phone = #{host_phone} where host_num = #{host_num}
+	</update>
+	
+	<update id="updateMember" parameterType="com.air.cec.memberHotelDTO">
+		update member_hotel set member_nickname = #{member_nickname}, member_pwd = #{member_pwd}, member_addr = #{member_addr}, member_phone = #{member_phone} where member_num = #{member_num}
+	</update>
+	
+	<!-- 회원탈퇴 -->
+	<delete id="deleteHost" parameterType="int">
+		delete from host_hotel where host_num = #{num}
+	</delete>
+	
+	<update id="seqHost" parameterType="int">
+		<![CDATA[
+			update host_hotel set host_num = host_num - 1 where host_num > #{num}
+		]]>
+	</update>
+	
+	<delete id="deleteMember" parameterType="int">
+		delete from member_hotel where member_num = #{num}
+	</delete>
+	
+	<update id="seqMember" parameterType="int">
+		<![CDATA[
+			update member_hotel member_num = member_num - 1 where member_num > #{num}
+		]]>
+	</update>
+</mapper>
