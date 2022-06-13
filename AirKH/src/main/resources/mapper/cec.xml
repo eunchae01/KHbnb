@@ -6,7 +6,7 @@
     
 <mapper namespace="userHotelDAO">
 	<!-- 회원가입 -->
-	<insert id="memberSignUp" parameterType="com.air.cec.memberHotelDTO">
+	<insert id="memberSignUp" parameterType="com.air.cec.MemberHotelDTO">
 		<selectKey resultType="int" keyProperty="member_num" order="BEFORE">
 			select nvl(max(member_num), 0) from member_hotel
 		</selectKey>
@@ -14,7 +14,7 @@
 		insert into member_hotel values(#{member_num} + 1, #{member_id}, #{member_nickname}, #{member_name}, #{member_pwd}, #{member_addr}, #{member_phone}, sysdate)
 	</insert>
 	
-	<insert id="hostSignUp" parameterType="com.air.cec.hostHotelDTO">
+	<insert id="hostSignUp" parameterType="com.air.cec.HostHotelDTO">
 		<selectKey resultType="int" keyProperty="host_num" order="BEFORE">
 			select nvl(max(host_num), 0) from host_hotel
 		</selectKey>
@@ -23,20 +23,20 @@
 	</insert>
 	
 	<!-- 아이디로 DTO 가져오기 -->
-	<select id="hostInfo" parameterType="String" resultType="com.air.cec.hostHotelDTO">
+	<select id="hostInfo" parameterType="String" resultType="com.air.cec.HostHotelDTO">
 		select * from host_hotel where host_id = #{id}
 	</select>
 	
-	<select id="memberInfo" parameterType="String" resultType="com.air.cec.memberHotelDTO">
+	<select id="memberInfo" parameterType="String" resultType="com.air.cec.MemberHotelDTO">
 		select * from member_hotel where member_id = #{id}
 	</select>
 	
 	<!-- 내 정보 업데이트 -->
-	<update id="updateHost" parameterType="com.air.cec.hostHotelDTO">
+	<update id="updateHost" parameterType="com.air.cec.HostHotelDTO">
 		update host_hotel set host_nickname = #{host_nickname}, host_pwd = #{host_pwd}, host_addr = #{host_addr}, host_phone = #{host_phone} where host_num = #{host_num}
 	</update>
 	
-	<update id="updateMember" parameterType="com.air.cec.memberHotelDTO">
+	<update id="updateMember" parameterType="com.air.cec.MemberHotelDTO">
 		update member_hotel set member_nickname = #{member_nickname}, member_pwd = #{member_pwd}, member_addr = #{member_addr}, member_phone = #{member_phone} where member_num = #{member_num}
 	</update>
 	
