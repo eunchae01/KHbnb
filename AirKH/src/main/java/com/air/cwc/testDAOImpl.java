@@ -14,7 +14,7 @@ public class testDAOImpl implements testDAO {
 	
 	@Override
 	public List<testDTO> getEmpList() {
-		return this.sqlSession.selectList("all");
+		return this.sqlSession.selectList("allTest");
 	}
 	
 	@Override

@@ -44,7 +44,7 @@ public class CwcController {
 		return "cwc/wish";
 	}
 
-	// (Âò ¸ñ·ÏÀ¸·Î °Ë»öÀ» ÇØ¾ßÇÔ)
+	// (ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½Ø¾ï¿½ï¿½ï¿½)
 	@RequestMapping("wish.content.do")
 	public String Clist(Model model) {
 		List<WishDTO> list = this.dao1.getWishList();
@@ -97,10 +97,10 @@ public class CwcController {
 		}
 
 	}
-	//°áÀçÇÏ±â ´©¸£¸é
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("payment.do")
 	public String payment(@RequestParam("acc_code") int acc_code,Model model,HttpServletRequest req) {
-		//(DTO¿¡ ¸ÂÃç¼­ ¹Þ¾Æ¾ßÇÔ)
+		//(DTOï¿½ï¿½ ï¿½ï¿½ï¿½ç¼­ ï¿½Þ¾Æ¾ï¿½ï¿½ï¿½)
 		String day=req.getParameter("day");
 		String guest=req.getParameter("guest");
 		System.out.println(day);

@@ -3,7 +3,6 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<<<<<<< HEAD
 
 
 <mapper namespace="com.air.cwc.WishDAO">
@@ -25,11 +24,4 @@
 	<delete id="deletewish" parameterType="com.air.cwc.WishDTO">
 		delete from wish_hotel where acc_code = #{acc_code}
 	</delete>
-=======
-    
-<mapper namespace="com.air.cwc.WishDAO">
-	<select id="allwish" resultType="com.air.cwc.WishDTO"> select * from wish_hotel </select>
-	<insert id="addwish" parameterType="com.air.cwc.WishDTO"> insert into wish_hotel values( (select nvl(max(wish_num),0) from wish_hotel) + 1, #{acc_code}, #{acc_image1}, #{acc_addr}, #{acc_name}, #{acc_price}, #{acc_maxp}, #{acc_bedroom}, #{acc_bed}, #{acc_bath}, #{acc_star} ) </insert>
-	<delete id="deletewish" parameterType="com.air.cwc.WishDTO"> delete from wish_hotel where acc_code = #{acc_code} </delete>
->>>>>>> main
 </mapper>
