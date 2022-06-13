@@ -1,0 +1,13 @@
+.thumbnail {
+	display: block;
+	width: 550px;
+}
+.aoc-img {
+	display: block;
+	width: 250px;
+}
+
+.host-profile {
+	display: block;
+	width: 50px;
+}

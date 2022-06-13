@@ -4,10 +4,62 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
+
+<mapper namespace="accdao">
+
+	<select id="all" resultType="adto">
+		select * from acc_hotel order by acc_code
+	</select>
+	
+	<select id="tlist" resultType="tdto">
+		select * from theme_hotel order by theme_code
+	</select>
+	
+	<insert id="add" parameterType="adto">
+		insert into acc_hotel values((select max(acc_code) from acc_hotel) + 1, '1', #{acc_name},  
+		'0', #{acc_theme}, #{acc_country}, #{acc_city}, '', #{acc_price}, #{acc_spec},  
+		#{acc_build}, #{acc_type}, #{acc_maxp}, #{acc_bedroom}, #{acc_bed}, #{acc_bath}, #{acc_addr}, 
+		#{acc_mail}, #{acc_detail}, #{acc_phone}, '1', '1', '1', '1', #{acc_offer}, sysdate)
+	</insert>
+	
+	<!-- insert into acc_hotel values((select max(acc_code) from acc_hotel) + 1, 
+		'1', #{acc_name}, '0', #{acc_theme}, #{country+ ', ' + mcity + ', ' + city}, 
+		#{thumbnail}, #{acc_price}, #{acc_spec}, #{acc_build}, #{acc_type}, 
+		#{acc_maxp}, #{acc_bedroom}, #{acc_bed}, #{acc_bath}, #{add1 + ' ' + add2}, 
+		#{acc_mail}, #{acc_detail}, #{acc_phone}, '1', '1', 
+		'1', '1', sysdate) -->
+		
+	<select id="cont" parameterType="int" resultType="adto">
+		select * from acc_hotel where acc_code = #{no}
+	</select>
+	
+	<select id="olist" resultType="odto">
+		select * from offer_hotel order by offer_code
+	</select>
+	
+	<select id="stlist" parameterType="int" resultType="adto">
+		select * from acc_hotel where acc_theme = #{no} order by acc_code
+	</select>
+	
+	<select id="ahlist" parameterType="int" resultType="adto">
+		select * from acc_hotel where acc_host = #{no} order by acc_code
+	</select>
+	
+	<update id="ahup" parameterType="adto">
+		update acc_hotel set acc_name = #{acc_name} where acc_code = #{acc_code}
+		
+		<!-- , acc_theme = #{acc_theme}, 
+		acc_country = #{acc_country}, acc_city = #{acc_city}, acc_thumbnail = #{acc_thumbnail} -->
+	</update>
+	
+	<delete id="ahdel" parameterType="int">
+		delete from acc_hotel where acc_code = #{acc_code}
+	</delete>
+</mapper>
+
     
-     
- 	
+
  
  
  
- </mapper>
+
