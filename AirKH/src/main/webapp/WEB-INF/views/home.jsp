@@ -12,7 +12,7 @@
 	<br>
 	<a href="<%=request.getContextPath() %>/kyk.do">김용국 님</a>
 	<br>
-	<a href="<%=request.getContextPath() %>/jdy.do">정도윤 님</a>
+	<a href="<%=request.getContextPath() %>/jdy.do">도윤 님</a>
 	<br>
 	<a href="<%=request.getContextPath() %>/cec.do">조은채 님</a>
 	<br>
