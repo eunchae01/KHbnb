@@ -17,17 +17,17 @@ public class AccDAOImpl implements AccDAO{
 	
 	@Override
 	public List<AccDTO> getAccList() {
-		return this.sqlSession.selectList("all");
+		return this.sqlSession.selectList("allAcc");
 	}
 
 	@Override
 	public int insertAcc(AccDTO dto) {
-		return this.sqlSession.insert("add", dto);
+		return this.sqlSession.insert("addAcc", dto);
 	}
 
 	@Override
 	public AccDTO getAccCont(int no) {
-		return this.sqlSession.selectOne("cont", no);
+		return this.sqlSession.selectOne("contAcc", no);
 	}
 
 	@Override

@@ -5,40 +5,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class userHotelDAOImpl implements userHotelDAO{
+public class UserHotelDAOImpl implements UserHotelDAO{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
 	//회원가입
 	@Override
-	public int insertMember(memberHotelDTO dto) {
+	public int insertMember(MemberHotelDTO dto) {
 		return this.sqlSession.insert("memberSignUp", dto);
 	}
 
 	@Override
-	public int insertHost(hostHotelDTO dto) {
+	public int insertHost(HostHotelDTO dto) {
 		return this.sqlSession.insert("hostSignUp", dto);
 	}
 
 	//회원 정보 가져오기
 	@Override
-	public hostHotelDTO getHost(String id) {
+	public HostHotelDTO getHost(String id) {
 		return this.sqlSession.selectOne("hostInfo", id);
 	}
 	
 	@Override
-	public memberHotelDTO getMember(String id) {
+	public MemberHotelDTO getMember(String id) {
 		return this.sqlSession.selectOne("memberInfo", id);
 	}
 
 	//내정보 수정
 	@Override
-	public int updateMember(memberHotelDTO dto) {
+	public int updateMember(MemberHotelDTO dto) {
 		return this.sqlSession.update("updateMember", dto);
 	}
 
 	@Override
-	public int updateHost(hostHotelDTO dto) {
+	public int updateHost(HostHotelDTO dto) {
 		return this.sqlSession.update("updateHost", dto);
 	}
 

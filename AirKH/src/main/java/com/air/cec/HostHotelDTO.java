@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class hostHotelDTO {
+public class HostHotelDTO {
 	private int host_num;
 	private String host_id;
 	private String host_nickname;

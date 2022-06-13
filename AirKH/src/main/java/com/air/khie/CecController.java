@@ -14,14 +14,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.air.cec.hostHotelDTO;
-import com.air.cec.memberHotelDTO;
-import com.air.cec.userHotelDAO;
+import com.air.cec.HostHotelDTO;
+import com.air.cec.MemberHotelDTO;
+import com.air.cec.UserHotelDAO;
 
 @Controller
 public class CecController {
 	@Autowired
-	private userHotelDAO dao;
+	private UserHotelDAO dao;
 
 	// 회원가입
 	@RequestMapping("signup.do")
@@ -40,7 +40,7 @@ public class CecController {
 	}
 
 	@RequestMapping("signup-host-form.do")
-	public void hostSignUpOk(hostHotelDTO dto, HttpServletResponse response) throws IOException {
+	public void hostSignUpOk(HostHotelDTO dto, HttpServletResponse response) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 
 		int check = this.dao.insertHost(dto);
@@ -61,7 +61,7 @@ public class CecController {
 	}
 
 	@RequestMapping("signup-member-form.do")
-	public void memberSignUpOk(memberHotelDTO dto, HttpServletResponse response) throws IOException {
+	public void memberSignUpOk(MemberHotelDTO dto, HttpServletResponse response) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 
 		int check = this.dao.insertMember(dto);
@@ -106,7 +106,7 @@ public class CecController {
 
 			session.setAttribute("hostORmember", hostORmember);
 		} else {
-			hostHotelDTO dto = this.dao.getHost(id);
+			HostHotelDTO dto = this.dao.getHost(id);
 
 			if (pwd.equals(dto.getHost_pwd())) {
 				out.println("<script>");
@@ -149,7 +149,7 @@ public class CecController {
 
 			session.setAttribute("hostORmember", hostORmember);
 		} else {
-			memberHotelDTO dto = this.dao.getMember(id);
+			MemberHotelDTO dto = this.dao.getMember(id);
 
 			if (pwd.equals(dto.getMember_pwd())) {
 				out.println("<script>");
@@ -208,13 +208,13 @@ public class CecController {
 		if (hostORmember.equals("host")) {
 			String host_id = (String) session.getAttribute("host_id");
 
-			hostHotelDTO hostDTO = this.dao.getHost(host_id);
+			HostHotelDTO hostDTO = this.dao.getHost(host_id);
 
 			model.addAttribute("updateHost", hostDTO);
 		} else { // member
 			String member_id = (String) session.getAttribute("member_id");
 
-			memberHotelDTO memberDTO = this.dao.getMember(member_id);
+			MemberHotelDTO memberDTO = this.dao.getMember(member_id);
 
 			model.addAttribute("updateMember", memberDTO);
 		}
@@ -223,7 +223,7 @@ public class CecController {
 	}
 
 	@RequestMapping("info-update-form.do")
-	public void hostUpdate(hostHotelDTO hostDTO, memberHotelDTO memberDTO, HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public void hostUpdate(HostHotelDTO hostDTO, MemberHotelDTO memberDTO, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 
 		HttpSession session = request.getSession();
