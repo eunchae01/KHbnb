@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="rdao">
+
+	<select id="rcount" resultType="int">
+		select count(*) from review_hotel
+	
+	
+	</select>
+	
+	<select id="rlist" parameterType="pdto" resultType="rdto">
+	<![CDATA[
+		select * from (select b.*, row_number() over(order by review_num desc)
+		rnum from review_hotel b) where rnum>=#{startNo} and rnum<=#{endNo}
+	]]>
+	</select>
+	
+	<insert id="rwrite" parameterType="rdto">
+		insert into review_hotel values(#{acc_code},(select max(review_num) from review_hotel)+1 ,
+			#{member_id},#{review_cl},#{review_comm},#{review_check},#{review_acc},
+			#{review_loc},#{review_sat},#{review_date},#{review_grade},#{review_content})
+	
+	
+	</insert>
+	
+	<select id="rcontent" parameterType="int" resultType="rdto">
+		select * from review_hotel where review_num=#{no}
+	
+	</select>
+	
+	<update id="rupdate" parameterType="rdto">
+		update review_hotel set acc_code=#{acc_code}, review_cl=#{review_cl},
+		review_comm=#{review_comm},review_check=#{review_check},review_acc=#{review_acc},
+		review_loc=#{review_loc},review_sat=#{review_sat},review_date=#{review_date},
+		review_grade=#{review_grade},review_content=#{review_content} where review_num=#{review_num}
+		
+	
+	</update>
+	
+	
+	<delete id="rdelete" parameterType="int">
+		delete review_hotel where review_num=#{no}
+	
+	</delete>
+	
+	<update id="rseq" parameterType="int">
+		<![CDATA[
+			update review_hotel set review_num = review_num - 1
+			where review_num > #{no}
+		]]>	
+	
+	</update>
+	
+ 
+
+</mapper>
