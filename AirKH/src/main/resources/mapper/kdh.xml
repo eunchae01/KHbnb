@@ -3,3 +3,97 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+ <mapper namespace="hdao">
+ 	
+ 	<select id="coun" resultType="int">
+		select count(*) from HOST_HOTEL
+	</select>	
+ 
+ 	<select id="all" parameterType="pdto" resultType="hdto">
+ 		<![CDATA[
+			select * from
+				(select b.*, row_number() 
+					over(order by host_num desc) rnum from host_hotel b)
+					where rnum >= #{startNo} and rnum <= #{endNo}
+	    ]]>
+ 	
+ 	</select>
+ 	
+ 	<insert id="add" parameterType="hdto">
+ 		insert into host_hotel values((select max(host_num) from host_hotel)+1,
+ 			#{host_id},#{host_nickname},#{host_name},#{host_pwd},#{host_addr}
+ 			,#{host_phone},sysdate)
+ 	
+ 	</insert>
+ 	
+ 	<select id="content" parameterType="int" resultType="hdto">
+ 		select * from host_hotel where host_num=#{host_num}
+ 	
+ 	</select>
+ 	
+ 	<update id="update" parameterType="hdto">
+ 		update host_hotel set host_id=#{host_id},host_nickname=#{host_nickname},
+ 		host_name=#{host_name}, host_pwd=#{host_pwd},host_addr=#{host_addr},
+ 		host_phone=#{host_phone} where host_num=#{host_num}
+ 	</update>
+ 	
+ 	<delete id="del" parameterType="int">
+ 		delete from host_hotel where host_num = #{num}
+ 	
+ 	</delete>
+ 	
+ 	<update id="seq" parameterType="int">
+		<![CDATA[
+			update host_hotel set host_num = host_num - 1 where host_num > #{num}
+		]]>
+	</update>
+	
+	<select id="ido" resultType="int">
+		select count(*) from host_hotel 
+			where host_id like '%'||#{keyword} || '%'
+	</select>
+	
+	<select id="nameo" resultType="int">
+		select count(*) from host_hotel 
+			where host_name like '%'||#{keyword} || '%'
+	</select>
+	
+	<select id="addro" resultType="int">
+		select count(*) from host_hotel 
+			where host_addr like '%'||#{keyword} || '%'
+	</select>
+	
+	
+	<select id="ido1" parameterType="pdto" resultType="hdto">
+		<![CDATA[		
+		 select * from (select b.*, row_number() 
+					over(order by host_num desc) rnum from host_hotel b
+					where host_id like '%'||#{keyword} || '%')
+					where rnum >= #{startNo} and rnum <= #{endNo}
+		    ]]>
+	</select>
+	
+	<select id="nameo1" parameterType="pdto" resultType="hdto">
+	     <![CDATA[		
+		 select * from (select b.*, row_number() 
+					over(order by host_num desc) rnum from host_hotel b
+					where host_name like '%'||#{keyword} || '%')
+					where rnum >= #{startNo} and rnum <= #{endNo}
+		    ]]>
+	</select>
+	
+	<select id="addro1" parameterType="pdto" resultType="hdto">
+	     <![CDATA[		
+		 select * from (select b.*, row_number() 
+					over(order by host_num desc) rnum from host_hotel b
+					where host_addr like '%'||#{keyword} || '%')
+					where rnum >= #{startNo} and rnum <= #{endNo}
+		    ]]>
+	</select>
+ 
+
+ 
+ </mapper> 
+ 
+ 

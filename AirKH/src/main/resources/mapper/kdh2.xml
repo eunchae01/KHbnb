@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="mdao">
+	
+	<select id="mcount" resultType="int">
+		select count(*) from member_hotel
+		
+	</select>
+	
+	<select id="mlist" parameterType="pdto" resultType="mdto">
+		<![CDATA[
+			select * from
+				(select b.*, row_number() 
+					over(order by member_num desc) rnum from member_hotel b)
+					where rnum >= #{startNo} and rnum <= #{endNo}
+	    ]]>
+	</select>
+	
+	<insert id="madd" parameterType="mdto">
+		insert into member_hotel values((select max(member_num) from member_hotel)+1, #{member_id},
+			#{member_nickname},#{member_name},#{member_pwd},#{member_addr},#{member_phone},sysdate)
+	
+	
+	</insert>
+	
+	<select id="mcontent" parameterType="int" resultType="mdto">
+		select * from member_hotel where member_num=#{no}
+	
+	</select>
+	
+	<update id="mupdate" parameterType="mdto">
+		update member_hotel set member_id=#{member_id}, member_nickname=#{member_nickname},
+		member_name=#{member_name}, member_pwd=#{member_pwd},member_addr=#{member_addr},
+		member_phone=#{member_phone} where member_num=#{member_num}
+	
+	
+	
+	</update>
+	
+	<delete id="mdelete" parameterType="int">
+		delete member_hotel where member_num=#{no}
+	
+	</delete>
+	
+	<update id="mseq" parameterType="int">
+		<![CDATA[
+			update member_hotel set member_num = member_num - 1
+			where member_num > #{no}
+		]]>	
+		
+	
+	</update>
+	
+	
+	<select id="id" resultType="int">
+		select count(*) from member_hotel 
+			where member_id like '%'||#{keyword} || '%'
+	</select>
+	
+	<select id="name" resultType="int">
+		select count(*) from member_hotel 
+			where member_name like '%'||#{keyword} || '%'
+	</select>
+	
+	<select id="addr" resultType="int">
+		select count(*) from member_hotel 
+			where member_addr like '%'||#{keyword} || '%'
+	</select>
+	
+	
+	<select id="id1" parameterType="pdto" resultType="mdto">
+		<![CDATA[		
+		 select * from (select b.*, row_number() 
+					over(order by member_num desc) rnum from member_hotel b
+					where member_id like '%'||#{keyword} || '%')
+					where rnum >= #{startNo} and rnum <= #{endNo}
+		    ]]>
+	</select>
+	
+	<select id="name1" parameterType="pdto" resultType="mdto">
+	     <![CDATA[		
+		 select * from (select b.*, row_number() 
+					over(order by member_num desc) rnum from member_hotel b
+					where member_name like '%'||#{keyword} || '%')
+					where rnum >= #{startNo} and rnum <= #{endNo}
+		    ]]>
+	</select>
+	
+	<select id="addr1" parameterType="pdto" resultType="mdto">
+	     <![CDATA[		
+		 select * from (select b.*, row_number() 
+					over(order by member_num desc) rnum from member_hotel b
+					where member_addr like '%'||#{keyword} || '%')
+					where rnum >= #{startNo} and rnum <= #{endNo}
+		    ]]>
+	</select>
+ 
+
+</mapper>
