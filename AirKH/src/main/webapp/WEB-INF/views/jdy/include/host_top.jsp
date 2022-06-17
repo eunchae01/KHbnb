@@ -7,47 +7,22 @@
 <meta charset="UTF-8">
 <title>main-top</title>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/grid.min.css" />
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/top.style.css" />
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/host-top.style.css" />
 </head>
 <body>
 	<section class="top-nav">
 		<div class="container">
 			<div class="row align-items-center">
-				<div class="col-3">
+				<div class="col-9">
 					<div class="top-logo">
-						<a href="<%=request.getContextPath()%>/jdy.do">
-							<img src="<%=request.getContextPath() %>/resources/assets/logo.png" alt="" class="logo-icon" />
+						<a href="<%=request.getContextPath()%>/host_main.do">
+							<img src="<%=request.getContextPath() %>/resources/assets/host-logo.png" alt="" class="logo-icon" />
 							<h1 class="logo-title">khbnb</h1>
 						</a>
 					</div>
 				</div>
-				<div class="col-6 search">
-					<div class="search-bar round-box">
-						<form action="<%=request.getContextPath() %>/acc_search.do" method="post">
-							<input type="text" name="where" placeholder="여행지 검색" />
-							<input
-								type="number"
-								name="howMany"
-								placeholder="게스트 추가"
-								min="1"
-							/>
-							<button type="submit">
-								<img
-									src="<%=request.getContextPath() %>/resources/assets/magnifying-glass.png"
-									alt=""
-									class="search-icon"
-								/>
-							</button>
-						</form>
-					</div>
-				</div>
 				<div class="col-3">
 					<div class="join-bar">
-						<div class="join-box">
-							<a href="<%=request.getContextPath()%>/login.do">
-								로그인
-							</a>
-						</div>
 						<div class="round-box img-box dropdown">
 							<a
 								href="javascript:void(0)"
@@ -67,8 +42,7 @@
 							</a>
 							<div class="dropdown-content" id="myDropdown">
 								<a href="#">메시지</a>
-								<a href="#">위시리스트</a>
-								<a href="#">숙소 호스트 되기</a>
+								<a href="#">숙소 관리</a>
 								<a href="#">계정</a>
 								<a href="#">도움말</a>
 								<a href="#">로그아웃</a>
