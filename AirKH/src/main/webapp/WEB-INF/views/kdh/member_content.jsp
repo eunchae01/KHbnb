@@ -50,8 +50,8 @@
 	    </tr>
 	    
 	    <tr>
-	         <th>회원주소</th>
-	         <td> ${dto.member_addr } </td>
+	         <th>회원사진</th>
+	         <td> ${dto.member_pic } </td>
 	    </tr>
 	      
 	    

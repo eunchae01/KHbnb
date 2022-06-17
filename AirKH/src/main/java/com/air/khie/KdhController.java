@@ -1,7 +1,10 @@
 package com.air.khie;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -13,16 +16,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.model.common.AdminDTO;
+import com.air.common.AdminDTO;
+import com.air.common.HostDTO;
+import com.air.common.MemberDTO;
+import com.air.common.PageDTO;
+import com.air.common.ReviewDTO;
 import com.air.kdh.HostDAO;
-import com.model.common.HostDTO;
 import com.air.kdh.MemberDAO;
 import com.air.kdh.ReviewDAO;
-
-import com.model.common.PageDTO;
-import com.model.common.ReviewDTO;
-import com.model.common.MemberDTO;
 
 
 @Controller
@@ -101,7 +105,57 @@ public class KdhController {
 	}
 	
 	@RequestMapping("host_insert_ok.do")
-	public void insertOk(HostDTO dto, HttpServletResponse response) throws IOException {
+	public void insertOk(MultipartHttpServletRequest hRequest,HostDTO dto, HttpServletResponse response) throws IOException {
+		
+		
+		String uploadPath = "C:\\Users\\user\\git\\KHbnb\\AirKH\\src\\main\\webapp\\resources\\host\\";
+		
+		// 업로드된 파일들의 이름 목록을 제공하는 메서드.
+		Iterator<String> iterator = hRequest.getFileNames();
+		
+		while(iterator.hasNext()) {
+			
+			String uploadFileName = iterator.next();
+			
+			MultipartFile mFile = hRequest.getFile(uploadFileName);
+			
+			// 업로드한 파일의 이름을 구하는 메서드.
+			String originaleFileName = mFile.getOriginalFilename();
+			
+			// 실제 폴더를 만들어 보자.
+			// ........\\resources\\upload\\2022-05-30
+			
+			
+			// 실제 파일을 만들어 보자.
+			
+			String saveFile=uploadPath+originaleFileName;
+			
+				
+				
+				
+				try {
+					//  ........\\resources\\upload\\2022-05-30\\실제 파일
+					// File origin = new File(homedir + "/" + saveFileName);
+					mFile.transferTo(new File(saveFile));
+					
+					dto.setHost_pic(originaleFileName);
+					
+					System.out.println("origin file >>> " + originaleFileName);
+					
+					// transferTo() : 파일 데이터를 지정한 폴더로 실제 저장시키는 메서드. 
+					
+					
+					//isUpload = true;
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					
+				}
+			
+		}  // while문 end
+    	
+    	
+		
+		
 		int check=this.dao.insertHost(dto);
 		
 		response.setContentType("text/html;charset=UTF-8");
@@ -140,7 +194,55 @@ public class KdhController {
 	}
 	
 	@RequestMapping("host_modify_ok.do")
-	public void modifyOk(HostDTO dto,@RequestParam("page") int nowPage, HttpServletResponse response) throws IOException	{
+	public void modifyOk(MultipartHttpServletRequest hRequest,HostDTO dto,@RequestParam("page") int nowPage, HttpServletResponse response) throws IOException	{
+		
+		String uploadPath = "C:\\Users\\user\\git\\KHbnb\\AirKH\\src\\main\\webapp\\resources\\host\\";
+		
+		// 업로드된 파일들의 이름 목록을 제공하는 메서드.
+		Iterator<String> iterator = hRequest.getFileNames();
+		
+		while(iterator.hasNext()) {
+			
+			String uploadFileName = iterator.next();
+			
+			MultipartFile mFile = hRequest.getFile(uploadFileName);
+			
+			// 업로드한 파일의 이름을 구하는 메서드.
+			String originaleFileName = mFile.getOriginalFilename();
+			
+			// 실제 폴더를 만들어 보자.
+			// ........\\resources\\upload\\2022-05-30
+			
+			
+			// 실제 파일을 만들어 보자.
+			
+			String saveFile=uploadPath+originaleFileName;
+			
+				
+				
+				
+				try {
+					//  ........\\resources\\upload\\2022-05-30\\실제 파일
+					// File origin = new File(homedir + "/" + saveFileName);
+					mFile.transferTo(new File(saveFile));
+					
+					dto.setHost_pic(originaleFileName);
+					
+					System.out.println("origin file >>> " + originaleFileName);
+					
+					// transferTo() : 파일 데이터를 지정한 폴더로 실제 저장시키는 메서드. 
+					
+					
+					//isUpload = true;
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					
+				}
+			
+		}  // while문 end
+    	
+		
+		
 		int check =this.dao.updateHost(dto);
 		
 		response.setContentType("text/html;charset=UTF-8");
@@ -225,7 +327,56 @@ public class KdhController {
     }
     
     @RequestMapping("member_insert_ok.do")
-    public void minsertOk(MemberDTO dto,HttpServletResponse response) throws IOException {
+    public void minsertOk(MultipartHttpServletRequest mRequest,MemberDTO dto,HttpServletResponse response) throws IOException {
+
+			
+		String uploadPath = "C:\\Users\\user\\git\\KHbnb\\AirKH\\src\\main\\webapp\\resources\\member\\";
+		
+		// 업로드된 파일들의 이름 목록을 제공하는 메서드.
+		Iterator<String> iterator = mRequest.getFileNames();
+		
+		while(iterator.hasNext()) {
+			
+			String uploadFileName = iterator.next();
+			
+			MultipartFile mFile = mRequest.getFile(uploadFileName);
+			
+			// 업로드한 파일의 이름을 구하는 메서드.
+			String originaleFileName = mFile.getOriginalFilename();
+			
+			// 실제 폴더를 만들어 보자.
+			// ........\\resources\\upload\\2022-05-30
+			
+			
+			// 실제 파일을 만들어 보자.
+			
+			String saveFile=uploadPath+originaleFileName;
+			
+				
+				
+				
+				try {
+					//  ........\\resources\\upload\\2022-05-30\\실제 파일
+					// File origin = new File(homedir + "/" + saveFileName);
+					mFile.transferTo(new File(saveFile));
+					
+					dto.setMember_pic(originaleFileName);
+					
+					System.out.println("origin file >>> " + originaleFileName);
+					
+					// transferTo() : 파일 데이터를 지정한 폴더로 실제 저장시키는 메서드. 
+					
+					
+					//isUpload = true;
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					
+				}
+			
+		}  // while문 end
+    	
+    	
+    	
     	
     	int check=this.mdao.insertMember(dto);
     	
@@ -269,7 +420,54 @@ public class KdhController {
     }
     
     @RequestMapping("member_modify_ok.do")
-    public void mmodifyOk(MemberDTO dto,@RequestParam("page")int nowPage,HttpServletResponse response) throws IOException {
+    public void mmodifyOk(MultipartHttpServletRequest mRequest, MemberDTO dto,@RequestParam("page")int nowPage,HttpServletResponse response) throws IOException {
+    	
+		String uploadPath = "C:\\Users\\user\\git\\KHbnb\\AirKH\\src\\main\\webapp\\resources\\member\\";
+		
+		// 업로드된 파일들의 이름 목록을 제공하는 메서드.
+		Iterator<String> iterator = mRequest.getFileNames();
+		
+		while(iterator.hasNext()) {
+			
+			String uploadFileName = iterator.next();
+			
+			MultipartFile mFile = mRequest.getFile(uploadFileName);
+			
+			// 업로드한 파일의 이름을 구하는 메서드.
+			String originaleFileName = mFile.getOriginalFilename();
+			
+			// 실제 폴더를 만들어 보자.
+			// ........\\resources\\upload\\2022-05-30
+			
+			
+			// 실제 파일을 만들어 보자.
+			
+			String saveFile=uploadPath+originaleFileName;
+			
+				
+				
+				
+				try {
+					//  ........\\resources\\upload\\2022-05-30\\실제 파일
+					// File origin = new File(homedir + "/" + saveFileName);
+					mFile.transferTo(new File(saveFile));
+					
+					dto.setMember_pic(originaleFileName);
+					
+					System.out.println("origin file >>> " + originaleFileName);
+					
+					// transferTo() : 파일 데이터를 지정한 폴더로 실제 저장시키는 메서드. 
+					
+					
+					//isUpload = true;
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					
+				}
+			
+		}  // while문 end
+    	
+    	
     	int check =this.mdao.updateMember(dto);
     	
     	response.setContentType("text/html;charset=UTF-8");
@@ -329,6 +527,8 @@ public class KdhController {
 		List<MemberDTO> searchList = this.mdao.searchMemberList(dto);
 		
 		model.addAttribute("Search", searchList);
+		model.addAttribute("spage", dto);
+		
 		
 		return "kdh/member_searchList";
 	}
@@ -343,12 +543,15 @@ public class KdhController {
 			page = 1;    // 처음으로 게시물 전체 목록 태그를 선택한 경우
 		}
 		
+		
     	totalRecord=this.rdao.getListCont();
     	
     	PageDTO dto =new PageDTO(page,rowsize,totalRecord);
+    	System.out.println(dto.getEndNo());
+    	
     	
     	List<ReviewDTO> list = this.rdao.getReviewList(dto);
-    	
+    	System.out.println(dto.getEndNo());
     	
     	model.addAttribute("Page",dto);
     	model.addAttribute("Rlist",list);
@@ -467,6 +670,26 @@ public class KdhController {
     	
     	
     }
+	
+	
+	@RequestMapping("review_search.do")
+	public String rsearch(@RequestParam("field") String field,
+			@RequestParam("keyword") String keyword,@RequestParam("page")int nowPage,Model model) {
+		totalRecord=this.rdao.searchReviewCount(field, keyword);
+		
+		PageDTO dto = new PageDTO(nowPage, rowsize, totalRecord, field, keyword);
+		List<ReviewDTO> searchList = this.rdao.searchReviewList(dto);
+		
+		model.addAttribute("Search", searchList);
+		model.addAttribute("rpage", dto);
+		
+		
+		return "kdh/review_searchList";
+		
+		
+		
+	} 
+	
     
 	
 }

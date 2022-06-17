@@ -21,7 +21,7 @@
 		<table border="1" cellspacing="0" width="450">
 			<tr>
 				<th>사업주 번호</th> <th>사업주 아이디</th>
-				<th>사업주  주소</th> <th>사업주 가입일</th>
+				<th>사업주  사진</th> <th>사업주 가입일</th>
 			</tr>
 			<c:set var="list" value="${hlist }"/>
 			<c:set var="paging" value="${Paging }" />
@@ -31,7 +31,7 @@
 					<td>${dto.getHost_num() }</td>
 					<td><a href="<%=request.getContextPath() %>/host_content.do?num=${dto.getHost_num()}&page=${paging.page }">
 					${dto.getHost_id() }</a></td>
-					<td>${dto.getHost_addr() }</td>
+					<td>${dto.getHost_pic() }</td>
 					<td> ${dto.getHost_date().substring(0,10) }</td>
 				</tr>
 				
@@ -87,8 +87,7 @@
 		<input type="hidden" name="page" value="${paging.page}">
 			<select name="field">
 	         <option value="ido">아이디</option>
-	         <option value="nameo">회원명</option>
-	         <option value="addro">주소</option>
+	         <option value="nameo">사업주명</option>
 	      </select>
 	      
 	      <input name="keyword">&nbsp;&nbsp;&nbsp;

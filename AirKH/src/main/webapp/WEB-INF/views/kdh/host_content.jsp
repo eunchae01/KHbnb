@@ -50,8 +50,8 @@
 	        </tr>
 	        
 	        <tr>
-	        	<th>사업주 주소</th>
-	        	<td>${dto.getHost_addr() }
+	        	<th>사업주 사진</th>
+	        	<td>${dto.getHost_pic() }
 	        	</td>
 	        </tr>
 	        

@@ -16,7 +16,7 @@
 		<h2> 회원테이블 입력페이지</h2>
 	<hr width="50%" color="red">
 	
-		<form method="post" action="<%=request.getContextPath() %>/member_insert_ok.do">
+		<form method="post" enctype="multipart/form-data" action="<%=request.getContextPath() %>/member_insert_ok.do">
 			<table border="1" cellspacing="0" width="450">
 				<tr>
 					<th>회원아이디</th>
@@ -43,9 +43,10 @@
 				</tr>
 				
 				<tr>
-					<th>회원 주소</th>
-					<td><input name="member_addr">
-					</td>
+				
+					<th>회원사진</th>
+		   	        <td> <input type="file" name="file1"> </td>
+					
 				</tr>
 				
 				<tr>

@@ -11,12 +11,12 @@
 
 	<div align="center">
 		<hr width="50%" color="gray">
-		<h3>사업주 회원가입 폼 페이지</h3>
+		<h3>사업주 입력 페이지</h3>
 		<hr width="50%" color="gray">
 	<br>
 	
-	<form method="post" action="<%=request.getContextPath() %>/host_insert_ok.do">
-		<table border="1" cellspacing="0" width="350">
+	<form method="post" enctype="multipart/form-data"  action="<%=request.getContextPath() %>/host_insert_ok.do">
+		<table border="1" cellspacing="0" width="450">
 			<tr>
 				<th>사업주 아이디</th>
 				<td><input name="host_id">
@@ -41,8 +41,8 @@
 			</td>
 			
 			<tr>
-				<th>사업주 주소</th>
-				<td><input name="host_addr">
+				<th>사업주 사진</th>
+				<td><input type="file" name="file1"> 
 				</td>
 			</tr>
 			

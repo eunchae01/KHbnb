@@ -18,7 +18,9 @@
 		<hr width="50%" color="tomato">
 		<br>
 		
-		<form method="post" action="<%=request.getContextPath() %>/member_modify_ok.do">
+		
+		<form method="post" enctype="multipart/form-data"
+	      action="<%=request.getContextPath() %>/member_modify_ok.do">
 		<input type="hidden" name="member_num" value="${dto.getMember_num() }">
 		<input type="hidden" name="page" value="${Page }"> 
 		<table border="1" cellspacing="0" width="450">
@@ -45,8 +47,8 @@
 		
 	        
 	        <tr>
-	        	<th>회원 주소</th>
-	        	<td><input name="member_addr" value="${dto.getMember_addr() }">
+	        	<th>회원 사진</th>
+	        	<td><input type="file" name="file2" value="${dto.getMember_pic() }">
 	        	</td>
 	        </tr>
 	        

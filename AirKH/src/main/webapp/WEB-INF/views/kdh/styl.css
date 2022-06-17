@@ -22,6 +22,26 @@ body{
 	text-shadow: 1px 2px 2px #666;
 }
 
+.flex{
+	display:grid;
+	grid-template-columns: repeat(3,1fr);
+	flex-wrap:wrap;
+	
+	grid-gap:1rem;
+	
+	justify-content:space-around;
+	margin-left:350px;
+	
+
+
+}
+
+.each_item{
+	width: 150px;
+	heght: 150px;
+
+}
+
 #login a{
 text-decoration:none
 }

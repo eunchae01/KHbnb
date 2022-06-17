@@ -8,8 +8,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.model.common.HostDTO;
-import com.model.common.PageDTO;
+import com.air.common.HostDTO;
+import com.air.common.PageDTO;
 
 @Repository
 public class HostDAOImpl implements HostDAO{

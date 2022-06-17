@@ -20,10 +20,11 @@
 		
 			<table border="1" cellspacing="0" width="750">
 				<tr>
-					<th>숙소코드</th>
-					<td>${dto.acc_code }</td>
 					<th>리뷰번호</th>
 					<td>${dto.review_num }</td>
+					<th>숙소코드</th>
+					<td>${dto.acc_code }</td>
+					
 					
 					<th>리뷰아이디</th>
 					<td>${dto.member_id }</td>

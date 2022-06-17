@@ -6,16 +6,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/styl.css" />
 
 <jsp:include page="main_navi.jsp"/>
 </head>
 <body>
 <div align="center">
-	<hr width="40%" color="tomato">
-		<h2>리뷰 리스트</h2>
-	<hr width="40%" color="tomato">
 	
-	<table border="0" cellspacing="0" width="600" >
+		<h2>리뷰 리스트</h2>
+	
+	
+
 		<!-- <tr>
 			<th>리뷰번호</th> <th>회원 아이디</th>
 			<th>작성날짜</th> <th>	후기</th>
@@ -27,103 +28,46 @@
 		<c:set var="list" value="${Rlist }"/>
 		<c:set var="paging" value="${Page }"/>
 		
-		<c:if test="${!empty list }">
-		<tr>
-			<c:forEach items="${list }" begin="0" end="${list.size()-5 }" var="i">
-				
-					<td><a href="<%=request.getContextPath() %>/review_content.do?no=${i.review_num }&page=${paging.page }"> 
-					${i.review_num }</a></td>
-					<td>${i.member_id }</td>
-					<td>${i.review_date.substring(0,7) }</td>
-					</c:forEach>
-					
-				</tr>
-				<tr>
-				
-					<c:forEach items="${list }" begin="0" end="${list.size()-5 }" var="i">
-					
+		<div class="flex_r">
+		
 			
-					
-					
-					
-					<td colspan="3"><textarea rows="3" cols="50" readonly>${i.review_content }</textarea>
-					</td>
-					
-					</c:forEach>
-					
-				</tr>
-				
-				<tr>
-			<c:forEach items="${list }" begin="${list.size()-4 }" end="${list.size()-3 }" var="i">
-				
-					<td><a href="<%=request.getContextPath() %>/review_content.do?no=${i.review_num }&page=${paging.page }"> 
-					${i.review_num }</a></td>
-					<td>${i.member_id }</td>
-					<td>${i.review_date.substring(0,7) }</td>
-					</c:forEach>
-					
-				</tr>
-				<tr>
-				
-					<c:forEach items="${list }" begin="${list.size()-4 }" end="${list.size()-3 }" var="i">
-					
 			
+			<c:if test="${!empty list }">
+				<c:forEach items="${list }" var="i">
+					<div class="each_item_r">
 					
+					<a href="<%=request.getContextPath() %>/review_content.do?no=${i.review_num }&page=${paging.page }"> 
 					
+					${i.review_num }</a>
+					${i.member_id }
 					
-					<td colspan="3"><textarea rows="3" cols="50" readonly>${i.review_content }</textarea>
-					</td>
+					${i.review_date.substring(0,7) }
+					<br>
+					<textarea rows="3" cols="50" readonly>${i.review_content }</textarea>
 					
-					</c:forEach>
-					
-				</tr>
+					</div>
+						
 				
-				<tr>
-			<c:forEach items="${list }" begin="${list.size()-2 }" end="${list.size()-1 }" var="i">
-				
-					<td><a href="<%=request.getContextPath() %>/review_content.do?no=${i.review_num }&page=${paging.page }"> 
-					${i.review_num }</a></td>
-					<td>${i.member_id }</td>
-					<td>${i.review_date.substring(0,7) }</td>
-					</c:forEach>
-					
-				</tr>
-				<tr>
-				
-					<c:forEach items="${list }" begin="${list.size()-2}" end="${list.size()-1}" var="i">
-					
+				</c:forEach>
+			</c:if>
 			
-					
-					
-					
-					<td colspan="3"><textarea rows="3" cols="50" readonly>${i.review_content }</textarea>
-					</td>
-					
-					</c:forEach>
-					
-				</tr>
-				
-				
-				
-				
-				
-				</c:if>
-				<c:if test="${empty list }">
-	         <tr>
-	            <td colspan="6" align="center">
-	               <h3>전체 게시물 목록이 없습니다.....</h3>
-	            </td>
-	         </tr>
-	      </c:if>
-	      <tr>
-	         <td colspan="6" align="right">
+			 <div class="each_items_r">
 	            <input type="button" value="리뷰작성"
 	                 onclick="location.href='review_write.do'">
-	         </td>
-	      </tr>
+	      </div>
+	         </div>
+		
+		
 				
 				
-				</table>
+				
+				<c:if test="${empty list }">
+	         
+	           
+	               <h3>전체 게시물 목록이 없습니다.....</h3>
+	           
+	      </c:if>
+	      
 			<br>
 			
 			 <%-- 페이징 처리 부분 --%>
@@ -150,12 +94,11 @@
 	   
 	   <br> <br>
 	   
-	   <form method="post"
-	      action="<%=request.getContextPath() %>/review_search.do">
+	   <form method="post"	
+	      action="<%=request.getContextPath()%>/review_search.do">
 	   <input type="hidden" name="page" value="${paging.page}">
 	      <select name="field">
 	         <option value="cont">내용</option>
-	         <option value="title_cont">제목+내용</option>
 	         <option value="writer">작성자</option>
 	      </select>
 	      

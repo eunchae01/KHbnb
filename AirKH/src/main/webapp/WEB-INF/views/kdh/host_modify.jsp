@@ -18,7 +18,7 @@
 		<hr width="50%" color="tomato">
 		<br>
 		
-		<form method="post" action="<%=request.getContextPath() %>/host_modify_ok.do">
+		<form method="post" enctype="multipart/form-data" action="<%=request.getContextPath() %>/host_modify_ok.do">
 		<input type="hidden" name="host_num" value="${dto.getHost_num() }">
 		<input type="hidden" name="page" value="${Page }"> 
 		<table border="1" cellspacing="0" width="450">
@@ -45,8 +45,8 @@
 		
 	        
 	        <tr>
-	        	<th>사업주 주소</th>
-	        	<td><input name="host_addr" value="${dto.getHost_addr() }">
+	        	<th>사업주 사진</th>
+	        	<td><input type="file" name="file2" value="${dto.getHost_pic() }">
 	        	</td>
 	        </tr>
 	        

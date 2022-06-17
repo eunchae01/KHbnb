@@ -6,55 +6,56 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/styl.css" />
+
+
 <jsp:include page="main_navi.jsp"/>
 </head>
 <body>
 
 	<div align="center">
-		<hr width="50%" color="red">
-			<h3>회원 전체리스트 페이지</h3>
-		<hr width="50%" color="red">
 		<br>
+			<h3>회원 전체리스트 페이지</h3>
 		
-		<table border="1" cellspacing="0" width="500">
-			<tr>
-				<th>회원 번호</th> <th>회원 아이디</th>
-				<th>회원  주소</th> <th>회원 가입일</th>
-			</tr>
+		<br>
+		<div class="flex">
+		
 			<c:set var="list" value="${mlist }"/>
 			<c:set var="paging" value="${mpage }"/>
 			
 			<c:if test="${!empty list }">
 				<c:forEach items="${list }" var="dto">
-				<tr>
-					<td>${dto.member_num}</td>
-					<td>
+					<div class="each_item">
+					
+						<img src="<%=request.getContextPath()%>/resources/member/${dto.member_pic}"  width="70px" height="70px">
+					<br>
+					${dto.member_num}
+					
 						<a href="<%=request.getContextPath() %>/member_content.do?no=${dto.member_num}&page=${paging.page}">
-						${dto.member_id}</a></td>
-					<td> ${dto.member_addr }</td>
-					<td> ${dto.member_date.substring(0,10) }</td>
-				</tr>
+						${dto.member_id}</a>
+					 <%-- ${dto.member_pic } --%>
+					 <br>
+					 ${dto.member_date.substring(0,10) }
 				
+					</div>
 				
 				</c:forEach>
 			</c:if>
 			
-			  <c:if test="${empty list }">
-	         <tr>
-	            <td colspan="5" align="center">
-	               <h3>전체 게시물 목록이 없습니다.....</h3>
-	            </td>
-	         </tr>
-	      </c:if>
-	      
-	      <tr>
-	         <td colspan="5" align="right">
+			 <div class="each_items">
 	            <input type="button" value="회원등록"
 	                 onclick="location.href='member_insert.do'">
-	         </td>
-	      </tr>
-		
-		</table>
+	      </div>
+	         </div>
+			
+			
+			  <c:if test="${empty list }">
+	        
+	               <h3>전체 게시물 목록이 없습니다.....</h3>
+	          
+	      </c:if>
+	      
+	     
 		<br>
 		
 		<c:if test="${paging.getPage() > paging.getBlock() }">
@@ -83,7 +84,7 @@
 			<select name="field">
 	         <option value="id">아이디</option>
 	         <option value="name">회원명</option>
-	         <option value="addr">주소</option>
+	         
 	      </select>
 	      
 	      <input name="keyword">&nbsp;&nbsp;&nbsp;
