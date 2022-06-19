@@ -10,11 +10,13 @@
 	<jsp:include page="../jdy/include/main_top.jsp"/>
 
 	<div align="center">
-		<h1>회원가입 페이지</h1>
-		<br>
+		<div>
+			<h3><a href="<%=request.getContextPath() %>/find-host.do">호스트 아이디 / 비밀번호 찾기</a></h3>
+		</div>
 		
-		<button onclick="location.href='signup-host.do'">호스트로 회원가입</button>
-		<button onclick="location.href='signup-member.do'">사용자로 회원가입</button>
+		<div>
+			<h3><a href="<%=request.getContextPath() %>/find-member.do">멤버 아이디 / 비밀번호 찾기</a></h3>
+		</div>
 	</div>
 </body>
 </html>

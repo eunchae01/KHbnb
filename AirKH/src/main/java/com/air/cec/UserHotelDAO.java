@@ -1,9 +1,19 @@
 package com.air.cec;
 
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 public interface UserHotelDAO {
 	//회원가입
 	public int insertMember(MemberHotelDTO dto);
 	public int insertHost(HostHotelDTO dto);
+	
+	public String fileUpload(MultipartHttpServletRequest fileRequest);
+	
+	// 아이디 / 비밀번호 찾기
+	public MemberHotelDTO findMemberId(String phone);
+	public HostHotelDTO findHostId(String phone);
+	public MemberHotelDTO findMemberPwd(String phone);
+	public HostHotelDTO findHostPwd(String phone);
 	
 	//회원 정보 가져오기
 	public HostHotelDTO getHost(String id);

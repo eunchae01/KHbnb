@@ -11,8 +11,8 @@
 	<h1>TOP</h1>
 	<a href="<%=request.getContextPath()%>/jdy.do">로고 메인으로</a>
 	<a href="">호스트 되기(호스트 로그인 -> 숙소 등록하기)</a>
-	<a href="">로그인</a>
-	<a href="">회원가입</a>
+	<a href="<%=request.getContextPath()%>/login.do">로그인</a>
+	<a href="<%=request.getContextPath()%>/signup.do">회원가입</a>
 	<a href="">고객센터</a>
 	<a href="">관리자 페이지</a>
 	

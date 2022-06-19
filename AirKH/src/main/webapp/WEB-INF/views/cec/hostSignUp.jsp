@@ -5,40 +5,56 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=692e1f73c3a0256f966eeb53fcd5a257&libraries=services"></script>
-<script>
-	function execDaumPostcode() {
-    	new daum.Postcode({
-        	oncomplete: function(data) {
-	                document.getElementById('addr').value = data.address;
-	            }
-        }).open();
-	}
-</script>
 </head>
 <body>
+	<jsp:include page="../jdy/include/main_top.jsp"/>
+
 	<div align="center">
 		<h1>호스트로 회원가입 화면</h1>
 		<br>
-		
-		<form method="post" action="<%=request.getContextPath() %>/signup-host-form.do">
+
+		<form method="post" enctype="multipart/form-data" action="<%=request.getContextPath() %>/signup-host-form.do">
 			<input name="host_id" placeholder="아이디">
 			<br>
 			<input name="host_pwd" placeholder="비밀번호">
 			<br>
 			<input name="host_nickname" placeholder="닉네임">
 			<br>
+			<textarea name="host_int" placeholder="자기소개" rows="7" cols="25"></textarea>
+			<br>
+			<div class="imgCon"><img id="preview" width="450" height="275"></div>
+			<input name="file" placeholder="프로필사진" type="file" id="input-image" style="display: block">
+			<br>
 			<input name="host_name" placeholder="이름">
 			<br>
 			<input name="host_phone" placeholder="핸드폰번호">
-			<br>
-			<input name="host_addr" placeholder="주소" id="addr">
-			<input type="button" onclick="execDaumPostcode()" value="검색">
 			<br>
 			
 			<button type="submit">가입하기</button>
 		</form>
 	</div>
+	
+	<script type="text/javascript"> 
+		function readImage(input) {
+		    // 인풋 태그에 파일이 있는 경우
+		    if(input.files && input.files[0]) {
+		        // 이미지 파일인지 검사 (생략)
+		        // FileReader 인스턴스 생성
+		        const reader = new FileReader();
+		        // 이미지가 로드가 된 경우
+		        reader.onload = e => {
+		            const previewImage = document.getElementById("preview");
+		            previewImage.src = e.target.result;
+		        }
+		        // reader가 이미지 읽도록 하기
+		        reader.readAsDataURL(input.files[0]);
+		    }
+		}
+		// input file에 change 이벤트 부여
+		const inputImage = document.getElementById("input-image")
+		inputImage.addEventListener("change", e => {
+		    readImage(e.target)
+		});
+	</script>
 </body>
 </html>

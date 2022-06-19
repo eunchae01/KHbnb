@@ -7,19 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=692e1f73c3a0256f966eeb53fcd5a257&libraries=services"></script>
-<script>
-	function execDaumPostcode() {
-    	new daum.Postcode({
-        	oncomplete: function(data) {
-	                document.getElementById('addr').value = data.address;
-	            }
-        }).open();
-	}
-</script>
 </head>
 <body>
+	
+
+	<jsp:include page="../jdy/include/main_top.jsp"/>
+
 	<div align="center">
 		<h1>회원정보 수정 페이지</h1>
 		<br>
@@ -28,7 +21,7 @@
 		<c:set var="dtoMember" value="${updateMember }"/>
 		
 		<c:if test="${!empty dtoHost }">
-			<form method="post" action="<%=request.getContextPath() %>/info-update-form.do">
+			<form method="post" enctype="multipart/form-data" action="<%=request.getContextPath() %>/info-update-form.do">
 			<input type="hidden" name="host_num" value="${dtoHost.getHost_num() }">
 			<table>
 				<tr>
@@ -52,8 +45,13 @@
 				</tr>
 				
 				<tr>
-					<th>주소</th>
-					<td><input name="host_addr" value="${dtoHost.getHost_addr() }" id="addr"><input type="button" onclick="execDaumPostcode()" value="검색"></td>
+					<th>소개글</th>
+					<td><textarea rows="7" cols="25" name="host_int">${dtoHost.getHost_int() }</textarea>
+				</tr>
+				
+				<tr>
+					<th>이미지사진</th>
+					<td><div class="imgCon"><img id="preview" width="450" height="275" src="<%=request.getContextPath() %>/resources/host/${dtoHost.getHost_pic() }"></div><input name="file" placeholder="프로필사진" type="file" id="input-image" style="display: block"><td>
 				</tr>
 				
 				<tr>
@@ -68,10 +66,34 @@
 				</tr>
 			</table>
 		</form>
+		
+		<script type="text/javascript"> 
+		function readImage(input) {
+		    // 인풋 태그에 파일이 있는 경우
+		    if(input.files && input.files[0]) {
+		        // 이미지 파일인지 검사 (생략)
+		        // FileReader 인스턴스 생성
+		        const reader = new FileReader();
+		        // 이미지가 로드가 된 경우
+		        reader.onload = e => {
+		            const previewImage = document.getElementById("preview");
+		            previewImage.src = e.target.result;
+		        }
+		        // reader가 이미지 읽도록 하기
+		        reader.readAsDataURL(input.files[0]);
+		    }
+		}
+		// input file에 change 이벤트 부여
+		const inputImage = document.getElementById("input-image")
+		inputImage.addEventListener("change", e => {
+		    readImage(e.target)
+		});
+	</script>
+	
 		</c:if>
 		
 		<c:if test="${!empty dtoMember }">
-			<form method="post" action="<%=request.getContextPath() %>/info-update-form.do">
+			<form method="post" enctype="multipart/form-data" action="<%=request.getContextPath() %>/info-update-form.do">
 			<input type="hidden" name="member_num" value="${dtoMember.getMember_num() }">
 			<table>
 				<tr>
@@ -112,6 +134,7 @@
 			</table>
 		</form>
 		</c:if>
+		
 		
 	</div>
 </body>

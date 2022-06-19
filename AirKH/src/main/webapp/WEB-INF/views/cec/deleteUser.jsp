@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page="../jdy/include/main_top.jsp"/>
+
 	<div>
 		<h1>회원 탈퇴페이지</h1>
 		<br>

@@ -23,6 +23,8 @@
 </script>
 </head>
 <body>
+	<jsp:include page="../jdy/include/main_top.jsp"/>
+
 	<div align="center">
 		<h1>로그인 페이지</h1>
 		<br>
@@ -54,7 +56,7 @@
 		</form>
 		<br>
 		
-		<a href="<%=request.getContextPath() %>/find-info.do">아이디나 비밀번호를 잊으셨나요?</a>
+		<a href="<%=request.getContextPath() %>/find-user.do">아이디나 비밀번호를 잊으셨나요?</a>
 		<p>계정이 없으신가요? <a href="<%=request.getContextPath() %>/signup.do">가입하기</a></p>
 	</div>
 </body>

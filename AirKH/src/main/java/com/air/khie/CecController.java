@@ -2,6 +2,7 @@ package com.air.khie;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,10 +14,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.air.cec.HostHotelDTO;
 import com.air.cec.MemberHotelDTO;
 import com.air.cec.UserHotelDAO;
+import com.model.common.MemberDTO;
 
 @Controller
 public class CecController {
@@ -40,33 +43,41 @@ public class CecController {
 	}
 
 	@RequestMapping("signup-host-form.do")
-	public void hostSignUpOk(HostHotelDTO dto, HttpServletResponse response) throws IOException {
+	public void hostSignUpOk(HostHotelDTO dto, HttpServletResponse response, MultipartHttpServletRequest fileRequest, HttpServletRequest request) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 
-		int check = this.dao.insertHost(dto);
-
 		PrintWriter out = response.getWriter();
+		
+		String fileName = this.dao.fileUpload(fileRequest);
 
-		if (check > 0) {
-			out.println("<script>");
+		dto.setHost_pic(fileName);
+		
+	    int check = this.dao.insertHost(dto);
+		  
+		if (check > 0) { out.println("<script>");
 			out.println("alert('가입이 완료되었습니다!')");
-			out.println("location.href='login.do'");
-			out.println("</script>");
+		    out.println("location.href='login.do'"); 
+		    out.println("</script>"); 
 		} else {
-			out.println("<script>");
-			out.println("alert('가입중 오류가 발생했습니다.')");
-			out.println("history.back()");
-			out.println("</script>");
+		    out.println("<script>"); 
+		    out.println("alert('가입중 오류가 발생했습니다.')");
+		    out.println("history.back()"); 
+		    out.println("</script>"); 
 		}
+		 
 	}
 
 	@RequestMapping("signup-member-form.do")
-	public void memberSignUpOk(MemberHotelDTO dto, HttpServletResponse response) throws IOException {
+	public void memberSignUpOk(MemberHotelDTO dto, HttpServletResponse response, MultipartHttpServletRequest fileRequest) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 
-		int check = this.dao.insertMember(dto);
-
 		PrintWriter out = response.getWriter();
+		
+		String fileName = this.dao.fileUpload(fileRequest);
+
+		dto.setMember_pic(fileName);
+		
+		int check = this.dao.insertMember(dto);
 
 		if (check > 0) {
 			out.println("<script>");
@@ -78,6 +89,7 @@ public class CecController {
 			out.println("alert('가입중 오류가 발생했습니다.')");
 			out.println("history.back()");
 			out.println("</script>");
+			
 		}
 	}
 
@@ -108,22 +120,30 @@ public class CecController {
 		} else {
 			HostHotelDTO dto = this.dao.getHost(id);
 
-			if (pwd.equals(dto.getHost_pwd())) {
-				out.println("<script>");
-				out.println("alert('로그인 성공')");
-				out.println("location.href='info-update.do'");
-				out.println("</script>");
+			if (dto != null) {
+				if (pwd.equals(dto.getHost_pwd())) {
+					out.println("<script>");
+					out.println("alert('로그인 성공')");
+					out.println("location.href='jdy.do'");
+					out.println("</script>");
 
-				HttpSession session = request.getSession();
+					HttpSession session = request.getSession();
 
-				String hostORmember = "host";
+					String hostORmember = "host";
 
-				session.setAttribute("host_num", dto.getHost_num());
-				session.setAttribute("host_id", dto.getHost_id());
-				session.setAttribute("hostORmember", hostORmember);
+					session.setAttribute("host_num", dto.getHost_num());
+					session.setAttribute("host_id", dto.getHost_id());
+					session.setAttribute("hostORmember", hostORmember);
+					
+				} else {
+					out.println("<script>");
+					out.println("alert(' 비밀번호를 확인해주세요.')");
+					out.println("history.back()");
+					out.println("</script>");
+				}
 			} else {
 				out.println("<script>");
-				out.println("alert('아이디나 비밀번호를 확인해주세요.')");
+				out.println("alert('아이디를 확인해주세요.')");
 				out.println("history.back()");
 				out.println("</script>");
 			}
@@ -151,22 +171,29 @@ public class CecController {
 		} else {
 			MemberHotelDTO dto = this.dao.getMember(id);
 
-			if (pwd.equals(dto.getMember_pwd())) {
-				out.println("<script>");
-				out.println("alert('로그인 성공')");
-				out.println("location.href='info-update.do'");
-				out.println("</script>");
+			if (dto != null) {
+				if (pwd.equals(dto.getMember_pwd())) {
+					out.println("<script>");
+					out.println("alert('로그인 성공')");
+					out.println("location.href='info-update.do'");
+					out.println("</script>");
 
-				HttpSession session = request.getSession();
+					HttpSession session = request.getSession();
 
-				String hostORmember = "member";
+					String hostORmember = "member";
 
-				session.setAttribute("member_num", dto.getMember_num());
-				session.setAttribute("member_id", dto.getMember_id());
-				session.setAttribute("hostORmember", hostORmember);
+					session.setAttribute("member_num", dto.getMember_num());
+					session.setAttribute("member_id", dto.getMember_id());
+					session.setAttribute("hostORmember", hostORmember);
+				} else {
+					out.println("<script>");
+					out.println("alert(' 비밀번호를 확인해주세요.')");
+					out.println("history.back()");
+					out.println("</script>");
+				}
 			} else {
 				out.println("<script>");
-				out.println("alert('아이디나 비밀번호를 확인해주세요.')");
+				out.println("alert('아이디를 확인해주세요.')");
 				out.println("history.back()");
 				out.println("</script>");
 			}
@@ -174,28 +201,142 @@ public class CecController {
 	}
 
 	// 아이디 & 비밀번호 찾기
-	@RequestMapping("find-info.do")
+	@RequestMapping("find-user.do")
 	public String findInfo() {
-		return "cec/findInfo";
+		return "cec/findUser";
+	}
+	
+	@RequestMapping("find-host.do")
+	public String findHost() {
+		return "cec/findHost";
+	}
+	
+	@RequestMapping("find-member.do")
+	public String findMember() {
+		return "cec/findMember";
 	}
 
-	@RequestMapping("find-info-id.do")
-	public void findInfoId(@RequestParam("id") String id, @RequestParam("phone") String phone,
+	@RequestMapping("find-host-id.do")
+	public void findHostId(@RequestParam("host_name") String name, @RequestParam("host_phone") String phone, HttpServletResponse response) throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+
+		HostHotelDTO dto = this.dao.findHostId(phone);
+		
+		PrintWriter out = response.getWriter();
+
+		 if (dto != null) { 
+			 if (name.equals(dto.getHost_name())) {
+				 out.println("<script>"); 
+				 out.println("alert('아이디는" + dto.getHost_id() + "입니다')"); 
+				 out.println("history.back()"); 
+				 out.println("</script>"); 
+			} else {
+				out.println("<script>"); 
+				out.println("alert('이름을 확인해주세요.')");
+				out.println("history.back()"); 
+				out.println("</script>"); 
+			} 
+		} else {
+			out.println("<script>"); 
+			out.println("alert('핸드폰번호를 확인해주세요.')");
+			out.println("history.back()"); 
+			out.println("</script>"); 
+		}
+	}
+
+	@RequestMapping("find-host-pwd.do")
+	public void findHostPwd(@RequestParam("host_id") String id, @RequestParam("host_phone") String phone,
+			@RequestParam("host_name") String name, HttpServletResponse response)
+			throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+		
+		HostHotelDTO dto = this.dao.findHostPwd(phone);
+
+		PrintWriter out = response.getWriter();
+		
+		if (dto != null) {	//핸드폰번호 맞을때
+			if (id.equals(dto.getHost_id())) {	//아이디 맞을때
+				if (name.equals(dto.getHost_name())) {
+					out.println("<script>"); 
+					out.println("alert('비밀번호는" + dto.getHost_pwd() + "입니다.')");
+					out.println("history.back()"); 
+					out.println("</script>"); 
+				}
+			} else {
+				out.println("<script>"); 
+				out.println("alert('아이디를 확인해주세요.')");
+				out.println("history.back()"); 
+				out.println("</script>"); 
+			}
+			
+		} else {	//핸드폰 번호 틀릴때
+			out.println("<script>"); 
+			out.println("alert('핸드폰번호를 확인해주세요.')");
+			out.println("history.back()"); 
+			out.println("</script>"); 
+		}
+	}
+	
+	@RequestMapping("find-member-id.do")
+	public void findMemberId(@RequestParam("member_name") String name, @RequestParam("member_phone") String phone,
 			HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 
+		MemberHotelDTO dto = this.dao.findMemberId(phone);
+		
 		PrintWriter out = response.getWriter();
+
+		 if (dto != null) { 
+			 if (name.equals(dto.getMember_name())) {
+				 out.println("<script>"); 
+				 out.println("alert('아이디는" + dto.getMember_id() + "입니다')"); 
+				 out.println("history.back()"); 
+				 out.println("</script>"); 
+			} else {
+				out.println("<script>"); 
+				out.println("alert('이름을 확인해주세요.')");
+				out.println("history.back()"); 
+				out.println("</script>"); 
+			} 
+		} else {
+			out.println("<script>"); 
+			out.println("alert('핸드폰번호를 확인해주세요.')");
+			out.println("history.back()"); 
+			out.println("</script>"); 
+		}
 
 	}
 
-	@RequestMapping("find-info-pwd.do")
-	public void findInfoPwd(@RequestParam("id") String id, @RequestParam("phone") String phone,
-			@RequestParam("name") String name, HttpServletRequest request, HttpServletResponse response)
+	@RequestMapping("find-member-pwd.do")
+	public void findMemberPwd(@RequestParam("member_id") String id, @RequestParam("member_phone") String phone,
+			@RequestParam("member_name") String name, HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
+		
+		MemberHotelDTO dto = this.dao.findMemberPwd(phone);
 
 		PrintWriter out = response.getWriter();
-
+		
+		if (dto != null) {	//핸드폰번호 맞을때
+			if (id.equals(dto.getMember_id())) {	//아이디 맞을때
+				if (name.equals(dto.getMember_name())) {
+					out.println("<script>"); 
+					out.println("alert('비밀번호는" + dto.getMember_pwd() + "입니다.')");
+					out.println("history.back()"); 
+					out.println("</script>"); 
+				}
+			} else {
+				out.println("<script>"); 
+				out.println("alert('아이디를 확인해주세요.')");
+				out.println("history.back()"); 
+				out.println("</script>"); 
+			}
+		} else {	//핸드폰 번호 틀릴때
+			out.println("<script>"); 
+			out.println("alert('핸드폰번호를 확인해주세요.')");
+			out.println("history.back()"); 
+			out.println("</script>"); 
+		}
 	}
 
 	// 내정보 수정
@@ -223,7 +364,7 @@ public class CecController {
 	}
 
 	@RequestMapping("info-update-form.do")
-	public void hostUpdate(HostHotelDTO hostDTO, MemberHotelDTO memberDTO, HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public void hostUpdate(HostHotelDTO hostDTO, MemberHotelDTO memberDTO, HttpServletRequest request, MultipartHttpServletRequest fileRequest, HttpServletResponse response) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 
 		HttpSession session = request.getSession();
@@ -231,7 +372,12 @@ public class CecController {
 
 		PrintWriter out = response.getWriter();
 		
+		String fileName = this.dao.fileUpload(fileRequest);
+
 		if (hostORmember.equals("host")) { 
+
+			hostDTO.setHost_pic(fileName);
+			
 			int check = this.dao.updateHost(hostDTO);
 
 			if (check > 0) {
@@ -246,6 +392,9 @@ public class CecController {
 				out.println("</script>");
 			}
 		} else { //member
+
+			memberDTO.setMember_pic(fileName);
+			
 			int check = this.dao.updateMember(memberDTO);
 
 			if (check > 0) {
