@@ -54,7 +54,7 @@ img {
 
 /* profile */
 .host-main {
-	padding-top: 48px;
+	padding-top: 150px;
 }
 
 .profile {
@@ -96,6 +96,10 @@ h3 {
 	color: white;
 	background-color: #12d0b4;
 	border-radius: 5px;
+}
+
+.host-acc-title a:hover {
+	opacity: 0.6;
 }
 
 /* acc-list */

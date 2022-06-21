@@ -67,8 +67,7 @@
 		acc_price = #{acc_price}, acc_build = #{acc_build}, acc_type = #{acc_type}, 
 		acc_maxp = #{acc_maxp}, acc_bedroom = #{acc_bedroom}, acc_bed = #{acc_bed}, 
 		acc_bath = #{acc_bath}, acc_mail = #{acc_mail}, acc_detail = #{acc_detail}, 
-		acc_phone = #{acc_phone}, acc_offer = #{acc_offer} 
-		where acc_code = #{acc_code}
+		acc_phone = #{acc_phone} where acc_code = #{acc_code}
 		<!-- 나머지 사진들 -->
 	</update>
 	

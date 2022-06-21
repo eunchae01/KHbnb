@@ -57,6 +57,7 @@ img {
 .cont-title {
 	font-size: 28px;
 	margin-bottom: 10px;
+	padding-top: 120px;
 }
 
 .head-box {
@@ -100,6 +101,7 @@ img {
 .thumbnail {
 	display: block;
 	width: 560px;
+	height: 370px;
 }
 
 .aoc-img {

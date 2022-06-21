@@ -73,11 +73,12 @@ public class JdyController {
 	public String searchT(@RequestParam int no, Model model) {
 
 		List<AccDTO> list = this.dao.searchByThemeAcc(no);
-
+		List<ThemeDTO> tlist = this.dao.getThemeList();
+		
 		model.addAttribute("List", list);
+		model.addAttribute("tList", tlist);
 
 		return "jdy/acc_search_result";
-
 	}
 
 	// 사용자 : 숙소 검색
@@ -110,6 +111,7 @@ public class JdyController {
 			}
 			
 			List<AccDTO> list = this.dao.searchAcc(map, id);
+			List<ThemeDTO> tlist = this.dao.getThemeList();
 			
 			if(list.isEmpty()) {
 				out.println("<script>");
@@ -120,6 +122,7 @@ public class JdyController {
 			}
 			
 			model.addAttribute("List", list);
+			model.addAttribute("tList", tlist);
 			return "jdy/acc_search_result";
 		}
 		
@@ -212,6 +215,7 @@ public class JdyController {
 
 		AccDTO dto = this.dao.getAccCont(no);
 		List<OfferDTO> olist = this.dao.getOfferList();
+		List<ThemeDTO> tlist = this.dao.getThemeList();
 
 		String offer_str = dto.getAcc_offer();
 		String[] offer_arr = offer_str.split(",");
@@ -224,6 +228,7 @@ public class JdyController {
 		model.addAttribute("Cont", dto);
 		model.addAttribute("oList", olist);
 		model.addAttribute("offer", int_arr);
+		model.addAttribute("tList", tlist);
 
 		return "jdy/host_acc_modify";
 	}

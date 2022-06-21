@@ -23,7 +23,7 @@
 					<ul class="theme-bar">
 						<c:if test="${!empty tlist }">
 							<c:forEach items="${tlist }" var="tdto">
-								<a href="search_theme.do?no=${tdto.theme_code }">
+								<a href="search_theme.do?no=${tdto.theme_code }" class="theme-hover">
 									<li>
 										<img src="<%=request.getContextPath() %>/resources/theme/${tdto.theme_icon }" alt=""
 										 class="theme-icon" />
@@ -86,7 +86,7 @@
 	
 	<div>
 		<h1>BOTTOM</h1>
-		<p>~~~~ top버튼</p>
+		<p>footer~~~~ top버튼</p>
 	</div>
 	<h1>호스트메뉴</h1>
 	<a href="<%=request.getContextPath()%>/host_main.do">숙소 리스트 메인페이지</a>

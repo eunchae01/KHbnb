@@ -24,7 +24,7 @@
 				<div class="col-6 search">
 					<div class="search-bar round-box">
 						<form action="<%=request.getContextPath() %>/acc_search.do" method="post">
-							<input type="text" name="where" placeholder="여행지 검색" />
+							<input class="where" type="text" name="where" placeholder="여행지 검색" />
 							<input
 								type="number"
 								name="howMany"

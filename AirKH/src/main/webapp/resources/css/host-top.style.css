@@ -54,9 +54,15 @@ h3 {
 }
 
 .top-nav {
+	z-index: 1;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	background-color: white;
 	border-bottom: 0.5px solid lightgray;
 	padding: 15px 0;
-	margin-bottom: 15px;
+	box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
 }
 
 .top-logo {

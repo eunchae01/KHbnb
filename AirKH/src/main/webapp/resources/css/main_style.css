@@ -62,12 +62,21 @@ div {
 
 /* theme nav-bar */
 .t-nav-bar{
+	padding-top: 100px;
 	margin-bottom: 20px;
 }
 
 .theme-bar {
 	display: flex;
 	justify-content: space-between;
+}
+
+.theme-hover {
+	border-bottom: 2px solid white;
+}
+
+.theme-hover:hover {
+	border-bottom: 2px solid #ff405c;
 }
 
 .theme-bar a li {

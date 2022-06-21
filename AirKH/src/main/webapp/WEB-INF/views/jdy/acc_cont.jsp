@@ -14,8 +14,7 @@
 </head>
 <body>
 
-	<jsp:include page="./include/main_top.jsp"></jsp:include>
-	
+	<jsp:include page="./include/main_top.jsp" />
 	<c:set var="dto" value="${Cont }" />
 	<c:set var="list" value="${oList }" />
 	<c:set var="off" value="${offer }" />

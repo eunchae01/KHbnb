@@ -49,6 +49,10 @@ dd {
 }
 
 /* insert */
+.insert {
+	padding-top: 100px;
+}
+
 label {
 	display: inline-block;
 	margin-bottom: 5px;
@@ -110,4 +114,8 @@ label {
 	background-color: #12d0b4;
 	border-radius: 5px;
 	cursor: pointer;
+}
+
+.submit-btn:hover {
+	opacity: 0.6;
 }

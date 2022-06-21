@@ -49,14 +49,21 @@ dd {
 }
 
 /* top-nav */
-h3 {
-	font-size: 16px;
-}
-
 .top-nav {
+	z-index: 1;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	background-color: white;
 	border-bottom: 0.5px solid lightgray;
 	padding: 15px 0;
 	margin-bottom: 15px;
+	box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+	font-size: 16px;
 }
 
 .top-logo {
@@ -81,18 +88,25 @@ h3 {
 	color: #ff405c;
 }
 
-.search {
-	padding: 0 50px;
-	height: 50px;
-}
-
-.search-bar {
+.search .search-bar {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	padding-left: 30px;
 	border: 1px solid lightgray;
 	height: 50px;
 	box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.1);
+}
+
+.search .search-bar:hover {
+	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+	transition-property: box-shadow;
+	transition-duration: 200ms;
+}
+
+.where {
+	margin-right: 20px;
+	border-right: 1px solid lightgray;
 }
 
 .search-bar form {
@@ -102,6 +116,7 @@ h3 {
 
 .search-icon {
 	width: 30px;
+	margin-left: 50px;
 }
 
 .join-bar {
@@ -145,7 +160,9 @@ h3 {
 }
 
 .dropdown:hover {
-	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+	transition-property: box-shadow;
+	transition-duration: 200ms;
 }
 
 .dropdown {

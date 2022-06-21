@@ -14,7 +14,35 @@
 </head>
 <body>
 	
-	<jsp:include page="./include/main_top.jsp"></jsp:include>
+	<jsp:include page="./include/main_top.jsp" />
+	
+	<c:set var="tlist" value="${tList }" />
+	
+	<section class="t-nav-bar">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<ul class="theme-bar">
+						<c:if test="${!empty tlist }">
+							<c:forEach items="${tlist }" var="tdto">
+								<a href="search_theme.do?no=${tdto.theme_code }" class="theme-hover">
+									<li>
+										<img src="<%=request.getContextPath() %>/resources/theme/${tdto.theme_icon }" alt=""
+										 class="theme-icon" />
+										<strong class="theme-name">${tdto.theme_name }</strong>
+									</li>
+								</a>
+							</c:forEach>
+						</c:if>
+					
+						<c:if test="${empty tlist }">
+							<h3>테마 조회 불가!</h3>
+						</c:if>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
 	
 	<section class="acc-preview">
 		<div class="container">
