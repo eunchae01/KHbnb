@@ -9,36 +9,52 @@
 </head>
 <body>
 
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/styl.css" />
+
 <jsp:include page="main_navi.jsp"/>
 
 	<div align="center">
-		<hr width="50%" color="red">
+		<br>
 
 			<h3>회원 테이블 검색 페이지</h3>
-		<hr width="50%" color="red">
-		<br>
 		
-		<table border="1" cellspacing="0" width="450">
-			<tr>
-				<th>회원 번호</th> <th>회원 아이디</th>
-				<th>회원  주소</th> <th>회원 가입일</th>
-			</tr>
+		<br>
+			
+		<div class="flex">
+		
 			<c:set var="list" value="${Search }"/>
+			<c:set var="paging" value="${spage }"/>
+			
 			<c:if test="${!empty list }">
 				<c:forEach items="${list }" var="dto">
-				<tr>
-					<td>${dto.getMember_num() }</td>
-					<td>
-					${dto.getMember_id() }</td>
-					<td>${dto.getMember_addr() }</td>
-					<td> ${dto.getMember_date().substring(0,10) }</td>
-				</tr>
-				
-				
+					<div class="each_item">
 					
+						<img src="<%=request.getContextPath()%>/resources/member/${dto.member_pic}"  width="110px">
+					<br>
+					${dto.member_num}
+					
+						<a href="<%=request.getContextPath() %>/member_content.do?no=${dto.member_num}&page=${paging.page}">
+						${dto.member_id}</a>
+					 <%-- ${dto.member_pic } --%>
+					 <br>
+					 ${dto.member_date.substring(0,10) }
+				
+					</div>
 				
 				</c:forEach>
 			</c:if>
+		
+		<br>
+		
+			
+				<div class="each_items">
+					<input type="button" value="회원목록" onclick="location.href='member_list.do'">
+				</div>
+				
+					
+		</div>
+			
+			
 			
 			<c:if test="${empty list }">
 				<tr>
@@ -48,15 +64,37 @@
 				</tr>
 			</c:if>
 			
-			<tr>
-				<td colspan="4" align="right">
-					<input type="button" value="회원목록" onclick="location.href='member_list.do'">
-				</td>
-			</tr>
+		
+			
+			
 			
 		
-		</table>
+	
+		
+		
+		
 		<br>
+		
+		
+		<c:if test="${paging.getPage() > paging.getBlock() }">
+			<a href="member_search.do?page=1">[처음으로]</a>
+			<a href="member_search.do?page=${paging.getStartBlock() - 1 }">◀</a>
+		</c:if>
+		
+		<c:forEach begin="${paging.getStartBlock() }"
+					end="${paging.getEndBlock() }" var="i">
+			<c:if test="${i ==paging.getPage() }">
+				<b> <a href="member_search.do?page=${i }">[${i }]</a></b>
+			</c:if>
+			<c:if test="${i != paging.getPage() }">
+				<a href="member_search.do?page=${i }">[${i }]</a>
+			</c:if>
+		</c:forEach>
+		
+		<c:if test="${paging.getEndBlock() < paging.getAllPage() }">
+			<a href="member_search.do?page=${paging.getEndBlock() + 1 }">▶</a>
+			<a href="member_search.do?page=${paging.getAllPage() }">[마지막으로]</a>
+		</c:if>
 		</div>
 
 </body>

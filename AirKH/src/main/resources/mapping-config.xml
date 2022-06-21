@@ -8,16 +8,19 @@
 
 	<typeAliases>
 		<typeAlias type="com.air.kdh.HostDAO" alias="hdao" />
-		<typeAlias type="com.model.common.HostDTO" alias="hdto" />
+		<typeAlias type="com.air.common.HostDTO" alias="hdto" />
 		
 		<typeAlias type="com.air.kdh.MemberDAO" alias="mdao" />
-		<typeAlias type="com.model.common.MemberDTO" alias="mdto" />
+		<typeAlias type="com.air.common.MemberDTO" alias="mdto" />
 		
 		<typeAlias type="com.air.kdh.ReviewDAO" alias="rdao" />
-		<typeAlias type="com.model.common.ReviewDTO" alias="rdto" />
+		<typeAlias type="com.air.common.ReviewDTO" alias="rdto" />
+		
+		<typeAlias type="com.air.common.PaymentDTO" alias="padto" />
+		<typeAlias type="com.air.kdh.PaymentsDAO" alias="padao" />
 		
 		
-		<typeAlias type="com.model.common.PageDTO" alias="pdto" />
+		<typeAlias type="com.air.common.PageDTO" alias="pdto" />
 		
 		
 		

@@ -6,57 +6,51 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/styl.css" />
+
+
+<jsp:include page="main_navi.jsp"/>
 </head>
 <body>
 
-<jsp:include page="main_navi.jsp"/>
-
 	<div align="center">
-		<hr width="50%" color="red">
-
-			<h3>사업주 테이블 전체 목록 페이지</h3>
-		<hr width="50%" color="red">
 		<br>
+			<h3>호스트 전체리스트 페이지</h3>
 		
-		<table border="1" cellspacing="0" width="450">
-			<tr>
-				<th>사업주 번호</th> <th>사업주 아이디</th>
-				<th>사업주  주소</th> <th>사업주 가입일</th>
-			</tr>
+		<br>
+		<div class="flex">
+		
 			<c:set var="list" value="${hlist }"/>
-			<c:set var="paging" value="${Paging }" />
+			<c:set var="paging" value="${Paging }"/>
+			
 			<c:if test="${!empty list }">
 				<c:forEach items="${list }" var="dto">
-				<tr>
-					<td>${dto.getHost_num() }</td>
-					<td><a href="<%=request.getContextPath() %>/host_content.do?num=${dto.getHost_num()}&page=${paging.page }">
-					${dto.getHost_id() }</a></td>
-					<td>${dto.getHost_addr() }</td>
-					<td> ${dto.getHost_date().substring(0,10) }</td>
-				</tr>
-				
-				
+					<div class="each_item">
+					<a href="<%=request.getContextPath() %>/host_content.do?no=${dto.host_num}&page=${paging.page}">
 					
+						<img src="<%=request.getContextPath()%>/resources/host/${dto.host_pic}"  width="70px" height="70px">
+					<br>
+					
+		
+						
+						${dto.host_id}</a>
+					 <%-- ${dto.member_pic } --%>
+					 <br>
+					 ${dto.host_date.substring(0,10) }
+				
+					</div>
 				
 				</c:forEach>
 			</c:if>
 			
-			<c:if test="${empty list }">
-				<tr>
-					<td colspan="4" align="center">
-						<h3>검색된 회원목록이 없습니다.</h3>
-					</td>
-				</tr>
-			</c:if>
+			 <div class="each_items">
+	            <input type="button" value="호스트등록"
+	                 onclick="location.href='host_insert.do'">
+	      </div>
+	         </div>
 			
-			<tr>
-				<td colspan="4" align="right">
-					<input type="button" value="사업주등록" onclick="location.href='host_insert.do'">
-				</td>
-			</tr>
 			
-		
-		</table>
 		<br>
 		
 		<c:if test="${paging.getPage() > paging.getBlock() }">
@@ -87,8 +81,7 @@
 		<input type="hidden" name="page" value="${paging.page}">
 			<select name="field">
 	         <option value="ido">아이디</option>
-	         <option value="nameo">회원명</option>
-	         <option value="addro">주소</option>
+	         <option value="nameo">호스트명</option>
 	      </select>
 	      
 	      <input name="keyword">&nbsp;&nbsp;&nbsp;

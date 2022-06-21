@@ -11,16 +11,16 @@
 <jsp:include page="main_navi.jsp"/>
 
 <div align="center">
-		<hr width="50%" color="gray">
+		
 		<c:set var="dto" value="${Modify }"/>
 			<h2>리뷰 테이블 ${dto.member_id}님 리뷰 수정 폼 페이지</h2>
-		<hr width="50%" color="gray">
+		
 		
 		<form method="post"
 	      action="<%=request.getContextPath() %>/review_modify_ok.do">
 			<input type="hidden" name="review_num" value="${dto.review_num }">
 			<input type="hidden" name="page" value="${Page }">
-			<table border="1" cellspacing="0" width="750">
+			<table border="0" cellspacing="0" width="750">
 				<tr>
 					<th>숙소코드</th>
 					<td colspan="2"><input name="acc_code" value="${dto.acc_code }"></td>

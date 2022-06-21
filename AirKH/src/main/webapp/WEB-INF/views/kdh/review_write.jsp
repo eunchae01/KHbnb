@@ -10,13 +10,13 @@
 <body>
 
 	<div align="center">
-		<hr width="50%" color="gray">
+		
 			<h2>리뷰 테이블 글쓰기 폼페이지</h2>
-		<hr width="50%" color="gray">
+		
 		
 		<form method="post" action="<%=request.getContextPath() %>/review_write_ok.do">
 		
-			<table border="1" cellspacing="0" width="750">
+			<table border="0" cellspacing="0" width="750">
 				<tr>
 					<th>숙소코드</th>
 					<td colspan="2"><input name="acc_code" ></td>

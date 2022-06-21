@@ -11,19 +11,20 @@
 <jsp:include page="main_navi.jsp"/>
 
 <div align="center">
-		<hr width="50%" color="gray">
+		
 		<c:set var="dto" value="${Cont }"/>
 			<h2>리뷰 테이블 ${dto.member_id}상세내역 페이지</h2>
-		<hr width="50%" color="gray">
 		
 		
 		
-			<table border="1" cellspacing="0" width="750">
+		
+			<table border="0" cellspacing="0" width="750">
 				<tr>
-					<th>숙소코드</th>
-					<td>${dto.acc_code }</td>
 					<th>리뷰번호</th>
 					<td>${dto.review_num }</td>
+					<th>숙소코드</th>
+					<td>${dto.acc_code }</td>
+					
 					
 					<th>리뷰아이디</th>
 					<td>${dto.member_id }</td>

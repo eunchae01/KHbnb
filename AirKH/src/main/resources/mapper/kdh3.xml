@@ -20,7 +20,7 @@
 	</select>
 	
 	<insert id="rwrite" parameterType="rdto">
-		insert into review_hotel values(#{acc_code},(select max(review_num) from review_hotel)+1 ,
+		insert into review_hotel values((select max(review_num) from review_hotel)+1 ,#{acc_code},
 			#{member_id},#{review_cl},#{review_comm},#{review_check},#{review_acc},
 			#{review_loc},#{review_sat},#{review_date},#{review_grade},#{review_content})
 	
@@ -54,6 +54,35 @@
 		]]>	
 	
 	</update>
+	
+	<select id="cont" resultType="int">
+		select count(*) from review_hotel 
+			where review_content like '%'||#{keyword} || '%'
+	</select>
+	
+	<select id="writer" resultType="int">
+		select count(*) from review_hotel 
+			where member_id like '%'||#{keyword} || '%'
+	</select>
+	
+	
+	<select id="cont1" parameterType="pdto" resultType="rdto">
+		<![CDATA[		
+		 select * from (select b.*, row_number() 
+					over(order by review_num desc) rnum from review_hotel b
+					where review_content like '%'||#{keyword} || '%')
+					where rnum >= #{startNo} and rnum <= #{endNo}
+		    ]]>
+	</select>
+	
+	<select id="writer1" parameterType="pdto" resultType="rdto">
+	     <![CDATA[		
+		 select * from (select b.*, row_number() 
+					over(order by review_num desc) rnum from review_hotel b
+					where member_id like '%'||#{keyword} || '%')
+					where rnum >= #{startNo} and rnum <= #{endNo}
+		    ]]>
+	</select>
 	
  
 
