@@ -1,0 +1,133 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+}
+
+body {
+	font-family: 'DM Sans', sans-serif;
+}
+
+/* Reset CSS */
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+button,
+input,
+textarea {
+	font-family: 'DM Sans', sans-serif;
+	font-size: 16px;
+	border: none;
+}
+
+button {
+	border: none;
+	border-radius: 2px;
+	cursor: pointer;
+	background-color: inherit;
+}
+
+button:focus,
+button:active,
+input:focus,
+input:active,
+textarea:focus,
+textarea:active {
+	outline: none;
+	box-shadow: none;
+}
+
+ul,
+ol,
+li,
+dl,
+dt,
+dd {
+	list-style-type: none;
+	padding-left: 0;
+	margin-left: 0;
+}
+
+/* cont-table */
+.cont-table input, .cont-table textarea {
+	border: 0.5px solid gray;
+	border-radius: 2px;
+}
+
+textarea {
+	width: 800px;
+	height: 100px
+}
+
+.cont-table {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items:center;
+	padding-top: 120px;
+}
+
+.cont-table h1 {
+	margin-bottom: 30px;
+}
+
+.cont-table table {
+	border-spacing: 0;
+	margin-bottom: 30px;
+}
+
+.cont-table table th,
+td {
+	border-bottom: 1px solid lightgray;
+}
+
+.cont-table table td {
+	padding: 20px 0;
+}
+
+.cont-table table th {
+	width: 200px;
+}
+
+.cont-table table td img {
+	width: 160px;
+}
+
+.btn-group {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 30px;
+}
+
+.btn-group button {
+	font-weight: 700;
+	height: 40px;
+	width: 100px;
+	color: white;
+	background-color: #12d0b4;
+	border-radius: 5px;
+}
+
+.btn-group button:first-child {
+	margin-right: 30px;
+}
+
+.btn-group button:hover {
+	opacity: 0.6;
+}
+
+#submit-btn {
+	font-weight: 700;
+	height: 40px;
+	width: 100px;
+	color: white;
+	background-color: #12d0b4;
+	border-radius: 5px;
+	border: none;
+}
+
+#submit-btn:hover {
+	opacity: 0.6;
+}
