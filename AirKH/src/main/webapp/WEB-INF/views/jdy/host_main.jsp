@@ -13,7 +13,7 @@
 <body>
 	<jsp:include page="./include/host_top.jsp" />
 	<c:set var="list" value="${List }" />
-
+	<c:set var="ho_list" value="${host_list }" />
 	<section class="host-main">
 		<div class="container">
 			<div class="row">
@@ -59,11 +59,20 @@
 										</div>
 									</a>	
 								</c:forEach>
+								
 							</div>
 						</c:if>
 						<c:if test="${empty list }">
 							<h3>숙소 정보 없음!</h3>
 						</c:if>
+					</div>
+					<div class="host-review">
+						<c:forEach items="${ho_list }" var="ho">
+							<li class="memeber_img"><img src="<%=request.getContextPath()%>/resources/member/${ho.member_pic }" width="70"></li>
+								<li class="re_list_name">${ho.member_id }</li>
+								<li class="re_list_date">${ho.review_date.substring(0,10) }</li>
+								<li class="re_list_cont">${ho.review_content }</li>
+						</c:forEach>
 					</div>
 				</div>
 			</div>
