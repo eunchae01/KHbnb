@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%@ include file="sample.jsp"%>
+	<jsp:include page="../jdy/include/host_top.jsp"></jsp:include>
+
 
 <div>
 <div>

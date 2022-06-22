@@ -9,6 +9,37 @@
 <head>
 <meta charset="UTF-8">
 <title>숙소 상세</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+<script type="text/javascript">
+$(function () {
+    $('#day').daterangepicker({
+        "locale": {
+            "format": "YYYY-MM-DD",
+            "separator": " ~ ",
+            "applyLabel": "확인",
+            "cancelLabel": "취소",
+            "fromLabel": "From",
+            "toLabel": "To",
+            "customRangeLabel": "Custom",
+            "weekLabel": "W",
+            "daysOfWeek": ["월", "화", "수", "목", "금", "토", "일"],
+            "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+            "firstDay": 1
+        },
+        "drops": "down"
+    }, function (start, end, label) {
+        console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+    });
+});
+
+</script>
+
+
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/grid.min.css" />
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/cont.css" />
 </head>
@@ -18,6 +49,7 @@
 	<c:set var="dto" value="${Cont }" />
 	<c:set var="list" value="${oList }" />
 	<c:set var="off" value="${offer }" />
+	<c:set var="like" value="${like }" />
 	
 	<header class="header">
 		<div class="container">
@@ -45,8 +77,15 @@
 							<li><a href="#">${dto.acc_city }, ${dto.acc_country }</a></li>
 						</ul>
 						<div class="rate">
+							<c:if test="${!empty like }">
+							<img class="icons" src="<%=request.getContextPath() %>/resources/assets/heart.png" alt="" />
+							<a href="<%=request.getContextPath() %>/wish_delete.do?acc_code=${dto.acc_code}"><strong>&nbsp;찜하기</strong></a>
+							</c:if>
+
+							<c:if test="${empty like }">
 							<img class="icons" src="<%=request.getContextPath() %>/resources/assets/blank-heart.png" alt="" />
-							<a href="#"><strong>&nbsp;찜하기</strong></a>
+							<a href="<%=request.getContextPath() %>/wish_add.do?acc_code=${dto.acc_code}"><strong>&nbsp;찜하기</strong></a>
+							</c:if>
 						</div>
 					</div>
 				</div>
@@ -151,7 +190,23 @@
 					</div>
 				</div>
 				<div class="col-4">
-					<div class="bill">요금 계산서</div>
+					<hr color="#FF1111">
+					<br> <font
+						style="font-family: serif; font-size: 30px; font-weight: bold;">
+						₩<fmt:formatNumber value="${dto.acc_price  }" />
+					</font>/박<br> ★${dto.acc_star} · 후기n개 <br> <br>
+					<form method="post"
+						action="<%=request.getContextPath()%>/payment.do?acc_code=${dto.getAcc_code() }">
+						날짜 검색 <input class="btn btn-outline-danger"
+							style="width: 100%; background-color: white; color: red;"
+							min="${minDate }" type="text" id="day" name="day"><br>
+						인원 <input class="btn btn-outline-danger"
+							style="width: 100%; background-color: white; color: red;"
+							type="number" id="guest" name="guest" value="1" min="1"
+							max="${dto.acc_maxp }"> <br> <br>
+						<button type="submit" class="btn btn-danger" style="width: 100%">예약하기</button>
+						<hr color="#FF1111">
+					</form>
 				</div>
 			</div>
 		</div>
