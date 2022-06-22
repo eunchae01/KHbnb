@@ -22,7 +22,7 @@
 	
 	.contaniner2{
 		display: inline-block;
-		width: 40%;
+		width: 42%;
 		height: 607px;
 		margin-left: -40%;
 		margin-top: 1%;
@@ -37,13 +37,14 @@
 	}
 
 	.form-control{
-		width: 40%;
+		width: 40% !important;
 		margin-left: 13%;
 	}
 	
 	label{
-		margin-left: -10%;
+		margin-left: -13%;
 		text-align: left;
+		margin-right: 1px;
 	}
 	
 	.imgCon img{
@@ -54,7 +55,7 @@
 	}
 	
 	textarea{
-		resize: none;
+		resize: none !important;
 	}
 </style>
 </head>

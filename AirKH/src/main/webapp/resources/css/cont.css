@@ -56,7 +56,6 @@ img {
 /* cont header */
 .cont-title {
 	font-size: 28px;
-	font-weight: 700;
 	margin-bottom: 10px;
 	padding-top: 120px;
 }
@@ -84,10 +83,6 @@ img {
 }
 
 .head-box a {
-	text-decoration: underline;
-}
-
-.head-box a:hover {
 	text-decoration: underline;
 }
 
@@ -134,9 +129,8 @@ img {
 }
 
 /* cont-desc-section */
-.cont-desc-section h2 {
+h2 {
 	margin-bottom: 30px;
-	font-weight: 700;
 }
 
 .com-box {
@@ -152,7 +146,6 @@ img {
 /* desc-head */
 .desc-title-box h2 {
 	margin-bottom: 10px;
-	
 }
 .desc-head {
 	display: flex;

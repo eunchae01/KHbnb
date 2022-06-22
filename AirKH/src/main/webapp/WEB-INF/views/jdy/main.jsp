@@ -16,7 +16,6 @@
 	<jsp:include page="./include/main_top.jsp"></jsp:include>
 	<c:set var="tlist" value="${tList }" />
 	
-	
 	<section class="t-nav-bar">
 		<div class="container">
 			<div class="row">
@@ -51,8 +50,7 @@
 				<c:if test="${!empty list }">
 					<c:forEach items="${list }" var="adto">
 						<div class="col-3">
-							<a href="<%=request.getContextPath()%>
-							/acc_content.do?no=${adto.acc_code}&hostno=${adto.acc_host}" class="link-to-acc">
+							<a href="<%=request.getContextPath()%>/acc_content.do?no=${adto.acc_code}" class="link-to-acc">
 								<img class="acc-image" src="<%=request.getContextPath() %>/resources/upload/${adto.acc_date.substring(0, 10) }/${adto.acc_thumbnail }" alt="" />
 								<div class="acc-list">
 									<div class="acc-info">
@@ -72,7 +70,7 @@
 										</div>
 									</div>
 									<div class="acc-loc">${adto.acc_city }, ${adto.acc_country }</div>
-									<div class="acc-price"><strong>&#65510;<fmt:formatNumber value="${adto.acc_price }" /></strong>/박</div>
+									<div class="acc-price"><strong>&bsol;<fmt:formatNumber value="${adto.acc_price }" /></strong>/박</div>
 								</div>
 							</a>
 						</div>
@@ -92,7 +90,6 @@
 	</div>
 	<h1>호스트메뉴</h1>
 	<a href="<%=request.getContextPath()%>/host_main.do">숙소 리스트 메인페이지</a>
-	<div>${udto.getMember_name() }님 환영합니다.</div>
 	
 	
 	
