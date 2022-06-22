@@ -95,7 +95,7 @@
 			<h5>메시지</h5>
 			<hr id="line1">
 			<div class="chatt">
-				채팅방 목록
+				채팅방 목록123
 			</div>
 		</div>
 
