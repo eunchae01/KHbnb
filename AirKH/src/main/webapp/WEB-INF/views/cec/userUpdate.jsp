@@ -7,6 +7,51 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<style>
+	.contaniner1{
+		float: left;
+		width: 60%;
+	}
+	
+	.contaniner2{
+		display: inline-block;
+		width: 40%;
+		height: 607px;
+		margin-left: -40%;
+		margin-top: 1%;
+	}
+	
+	.contaniner3{
+		display: inline-block;
+		width: 40%;
+		height: 380px;
+		margin-left: -40%;
+		margin-top: 1%;
+	}
+
+	.form-control{
+		width: 40%;
+		margin-left: 13%;
+	}
+	
+	label{
+		margin-left: -10%;
+		text-align: left;
+	}
+	
+	.imgCon img{
+		border-radius: 50%;
+		width: 200px;
+		height: 200px;
+		margin-left: 15%;
+	}
+	
+	textarea{
+		resize: none;
+	}
+</style>
 </head>
 <body>
 	
@@ -23,48 +68,35 @@
 		<c:if test="${!empty dtoHost }">
 			<form method="post" enctype="multipart/form-data" action="<%=request.getContextPath() %>/info-update-form.do">
 			<input type="hidden" name="host_num" value="${dtoHost.getHost_num() }">
-			<table>
-				<tr>
-					<th>아이디</th>
-					<td><input name="host_id" value="${dtoHost.getHost_id() }" readonly></td>
-				</tr>
-				
-				<tr>
-					<th>닉네임</th>
-					<td><input name="host_nickname" value="${dtoHost.getHost_nickname() }"></td>
-				</tr>
-				
-				<tr>
-					<th>이름</th>
-					<td><input name="host_name" value="${dtoHost.getHost_name() }" readonly></td>
-				</tr>
-				
-				<tr>
-					<th>비밀번호</th>
-					<td><input name="host_pwd" value="${dtoHost.getHost_pwd() }"></td>
-				</tr>
-				
-				<tr>
-					<th>소개글</th>
-					<td><textarea rows="7" cols="25" name="host_int">${dtoHost.getHost_int() }</textarea>
-				</tr>
-				
-				<tr>
-					<th>이미지사진</th>
-					<td><div class="imgCon"><img id="preview" width="450" height="275" src="<%=request.getContextPath() %>/resources/host/${dtoHost.getHost_pic() }"></div><input name="file" placeholder="프로필사진" type="file" id="input-image" style="display: block"><td>
-				</tr>
-				
-				<tr>
-					<th>핸드폰 번호</th>
-					<td><input name="host_phone" value="${dtoHost.getHost_phone() }"></td>
-				</tr>
-				
-				<tr>
-					<td colspan="2" align="center">
-						<input type="submit" value="수정하기">
-					</td>
-				</tr>
-			</table>
+			<div class="contaniner1">
+				<label for="input1" class="col-sm-2 col-form-label">아이디</label>	
+				<input name="host_id" class="form-control"  value="${dtoHost.getHost_id() }" disabled>
+				<label for="input2" class="col-sm-2 col-form-label">비밀번호</label>
+				<input name="host_pwd" class="form-control" type="password">
+				<label for="input3" class="col-sm-2 col-form-label" >닉네임</label>
+				<input name="host_nickname" class="form-control" value="${dtoHost.getHost_nickname() }">
+				<label for="input4" class="col-sm-2 col-form-label">자기소개</label>
+				<textarea name="host_int" class="form-control" rows="7">${dtoHost.getHost_int() }</textarea>
+				<label for="input5" class="col-sm-2 col-form-label" >이름</label>
+				<input name="host_name" class="form-control" value="${dtoHost.getHost_name() }" disabled>
+				<label for="input6" class="col-sm-2 col-form-label">핸드폰 번호</label>
+				<input name="host_phone" class="form-control" value="${dtoHost.getHost_phone() }">
+			</div>
+			
+			<div class="contaniner2">
+				<div class="imgCon">
+					<img id="preview" src="<%=request.getContextPath() %>/resources/host/${dtoHost.getHost_pic() }">
+				</div>
+				<br>
+				<label for="input-image" class="col-sm-2 col-form-label">프로필 사진</label>
+				<input name="file" type="file"  class="form-control" id="input-image" style="display: block">
+			</div>
+			<br><br>
+			
+			<div>
+				<input type="submit"  class="btn btn-primary" value="수정하기">
+			</div>
+			<br>
 		</form>
 		
 		<script type="text/javascript"> 
@@ -95,47 +127,35 @@
 		<c:if test="${!empty dtoMember }">
 			<form method="post" enctype="multipart/form-data" action="<%=request.getContextPath() %>/info-update-form.do">
 			<input type="hidden" name="member_num" value="${dtoMember.getMember_num() }">
-			<table>
-				<tr>
-					<th>아이디</th>
-					<td><input name="member_id" value="${dtoMember.getMember_id() }" readonly></td>
-				</tr>
-				
-				<tr>
-					<th>닉네임</th>
-					<td><input name="member_nickname" value="${dtoMember.getMember_nickname() }"></td>
-				</tr>
-				
-				<tr>
-					<th>이름</th>
-					<td><input name="member_name" value="${dtoMember.getMember_name() }" readonly></td>
-				</tr>
-				
-				<tr>
-					<th>비밀번호</th>
-					<td><input name="member_pwd" value="${dtoMember.getMember_pwd() }"></td>
-				</tr>
-				
-				<tr>
-					<th>주소</th>
-					<td><input name="member_addr" value="${dtoMember.getMember_addr() }" id="addr"><input type="button" onclick="execDaumPostcode()" value="검색"></td>
-				</tr>
-				
-				<tr>
-					<th>핸드폰 번호</th>
-					<td><input name="member_phone" value="${dtoMember.getMember_phone() }"></td>
-				</tr>
-				
-				<tr>
-					<td colspan="2" align="center">
-						<input type="submit" value="수정하기">
-					</td>
-				</tr>
-			</table>
+			<div class="contaniner1">	
+				<label for="input1" class="col-sm-2 col-form-label">이름</label>
+				<input name="member_name" class="form-control" id="input1" value="${dtoMember.getMember_id() }" disabled>
+				<label for="input2" class="col-sm-2 col-form-label">아이디</label>
+				<input name="member_id" class="form-control" id="input2" value="${dtoMember.getMember_id() }" disabled>
+				<label for="input3" class="col-sm-2 col-form-label">비밀번호</label>
+				<input name="member_pwd" class="form-control" type="password" id="input3">
+				<label for="input4" class="col-sm-2 col-form-label">닉네임</label>
+				<input name="member_nickname" class="form-control" id="input4" value="${dtoMember.getMember_nickname() }">
+				<label for="input5" class="col-sm-2 col-form-label">핸드폰 번호</label>
+				<input name="member_phone" class="form-control" id="input5" value="${dtoMember.getMember_phone() }">
+			</div>
+			
+			<div class="contaniner3">
+				<div class="imgCon">
+					<img id="preview" src="<%=request.getContextPath() %>/resources/host/${dtoMember.getMember_pic() }">
+				</div>
+				<br>
+				<label for="input-image" class="col-sm-2 col-form-label">프로필 사진</label>
+				<input name="file" type="file" class="form-control" id="input-image" style="display: block">
+			</div>
+			<br><br><br><br><br>
+			
+			<div>
+				<button type="submit" class="btn btn-primary">수정하기</button>
+			</div>
+			<br>
 		</form>
 		</c:if>
-		
-		
 	</div>
 </body>
 </html>

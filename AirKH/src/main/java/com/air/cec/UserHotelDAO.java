@@ -8,6 +8,7 @@ public interface UserHotelDAO {
 	public int insertHost(HostHotelDTO dto);
 	
 	public String fileUpload(MultipartHttpServletRequest fileRequest);
+	public String fileUploadMember(MultipartHttpServletRequest fileRequest);
 	
 	// 아이디 / 비밀번호 찾기
 	public MemberHotelDTO findMemberId(String phone);

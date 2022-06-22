@@ -73,7 +73,7 @@ public class CecController {
 
 		PrintWriter out = response.getWriter();
 		
-		String fileName = this.dao.fileUpload(fileRequest);
+		String fileName = this.dao.fileUploadMember(fileRequest);
 
 		dto.setMember_pic(fileName);
 		
@@ -373,6 +373,7 @@ public class CecController {
 		PrintWriter out = response.getWriter();
 		
 		String fileName = this.dao.fileUpload(fileRequest);
+		String fileNameMember = this.dao.fileUploadMember(fileRequest);
 
 		if (hostORmember.equals("host")) { 
 
@@ -393,7 +394,7 @@ public class CecController {
 			}
 		} else { //member
 
-			memberDTO.setMember_pic(fileName);
+			memberDTO.setMember_pic(fileNameMember);
 			
 			int check = this.dao.updateMember(memberDTO);
 
@@ -413,7 +414,12 @@ public class CecController {
 
 	// 회원탈퇴
 	@RequestMapping("delete-user.do")
-	public void deleteMember(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public String deleteUser() {
+		return "cec/deleteUser";
+	}
+	
+	@RequestMapping("delete-user-ok.do")
+	public void deleteUserOk(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 
 		HttpSession session = request.getSession();

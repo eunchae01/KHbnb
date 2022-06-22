@@ -11,6 +11,8 @@
 	    if($("#id").css('display') == 'none'){
 	    	$('#id').show();
 	    	$("#pwd").hide();
+	    	$("#pwd-tab").removeClass("active");
+	    	$("#id-tab").addClass("active");
 		}
 	}
 	
@@ -18,35 +20,51 @@
 	    if($("#pwd").css('display') == 'none'){
 	    	$('#pwd').show();
 	    	$("#id").hide();
+	    	$("#id-tab").removeClass("active");
+	    	$("#pwd-tab").addClass("active");
 		}
 	}
 </script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<style>
+	.nav{
+		width: 30%;
+		padding-left: 8%;
+	}
+</style>
 </head>
 <body>
 	<jsp:include page="../jdy/include/main_top.jsp"/>
 
 	<div align="center">
-		<h1>아이디/비번 찾는 페이지</h1>
-		<br>
+		<ul class="nav nav-tabs">
+			<li class="nav-item">
+				<button class="nav-link active" id="id-tab" data-toggle="tab" onclick="findId()">아이디 찾기</button>
+			</li>
+			
+			<li class="nav-item">
+				<button class="nav-link" id="pwd-tab" data-toggle="tab" onclick="findPwd()">비밀번호 찾기</button>
+			</li>
+		</ul>	
+		<br><br>
 		
-		<button onclick="findId()">아이디 찾기</button>
-		<button onclick="findPwd()">비밀번호 찾기</button>
 		<div id="id">
-			<h2>아이디찾기</h2>
 			<form method="post" action="<%=request.getContextPath() %>/find-host-id.do">
 				<table>
 					<tr>
 						<th>이름</th>
-						<td><input name="host_name"></td>
+						<td><input name="host_name" class="form-control"></td>
 					</tr>
 					<tr>
 						<th>핸드폰번호</th>
-						<td><input name="host_phone"></td>
+						<td><input name="host_phone" class="form-control"></td>
 					</tr>
 					
 					<tr>
 						<td colspan="2" align="center">
-							<input type="submit" value="아이디 찾기">
+							<br>
+							<input type="submit" class="btn btn-primary" value="아이디 찾기">
 						</td>
 					</tr>
 				</table>
@@ -54,25 +72,25 @@
 		</div>
 			
 		<div id="pwd" style="display:none">
-			<h2>비밀번호찾기</h2>
 			<form method="post" action="<%=request.getContextPath() %>/find-host-pwd.do">
 				<table>
 					<tr>
 						<th>아이디</th>
-						<td><input name="host_id"></td>
+						<td><input name="host_id" class="form-control"></td>
 					</tr>
 					<tr>
 						<th>이름</th>
-						<td><input name="host_name"></td>
+						<td><input name="host_name" class="form-control"></td>
 					</tr>
 					<tr>
 						<th>핸드폰번호</th>
-						<td><input name="host_phone"></td>
+						<td><input name="host_phone" class="form-control"></td>
 					</tr>
 					
 					<tr>
 						<td colspan="2" align="center">
-							<input type="submit" value="비밀번호 찾기">
+							<br>
+							<input type="submit" class="btn btn-primary" value="비밀번호 찾기">
 						</td>
 					</tr>
 				</table>
