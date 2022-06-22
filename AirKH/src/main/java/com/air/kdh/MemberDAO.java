@@ -2,8 +2,8 @@ package com.air.kdh;
 
 import java.util.List;
 
-import com.model.common.MemberDTO;
-import com.model.common.PageDTO;
+import com.air.common.MemberDTO;
+import com.air.common.PageDTO;
 
 public interface MemberDAO {
 	

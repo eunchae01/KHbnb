@@ -6,8 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.model.common.PageDTO;
-import com.model.common.ReviewDTO;
+import com.air.common.PageDTO;
+import com.air.common.ReviewDTO;
 
 @Repository
 public class ReviewDAOImpl implements ReviewDAO{
@@ -56,14 +56,12 @@ public class ReviewDAOImpl implements ReviewDAO{
 
 	@Override
 	public int searchReviewCount(String field, String keyword) {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.sqlSession.selectOne(field,keyword);
 	}
 
 	@Override
 	public List<ReviewDTO> searchReviewList(PageDTO dto) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.sqlSession.selectList(dto.getField()+"1",dto);
 	}
 
 	

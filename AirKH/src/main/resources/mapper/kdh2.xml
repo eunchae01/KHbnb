@@ -21,8 +21,12 @@
 	</select>
 	
 	<insert id="madd" parameterType="mdto">
-		insert into member_hotel values((select max(member_num) from member_hotel)+1, #{member_id},
-			#{member_nickname},#{member_name},#{member_pwd},#{member_addr},#{member_phone},sysdate)
+	<selectKey resultType="int" keyProperty="member_num" order="BEFORE">
+         select nvl(max(member_num), 0) from member_hotel
+      </selectKey>
+	
+		insert into member_hotel values(#{member_num}+1, #{member_id},
+			#{member_nickname}, #{member_name}, #{member_pwd}, #{member_pic}, #{member_phone}, sysdate)
 	
 	
 	</insert>
@@ -34,7 +38,7 @@
 	
 	<update id="mupdate" parameterType="mdto">
 		update member_hotel set member_id=#{member_id}, member_nickname=#{member_nickname},
-		member_name=#{member_name}, member_pwd=#{member_pwd},member_addr=#{member_addr},
+		member_name=#{member_name}, member_pwd=#{member_pwd},member_pic=#{member_pic},
 		member_phone=#{member_phone} where member_num=#{member_num}
 	
 	
@@ -66,10 +70,6 @@
 			where member_name like '%'||#{keyword} || '%'
 	</select>
 	
-	<select id="addr" resultType="int">
-		select count(*) from member_hotel 
-			where member_addr like '%'||#{keyword} || '%'
-	</select>
 	
 	
 	<select id="id1" parameterType="pdto" resultType="mdto">
@@ -90,14 +90,7 @@
 		    ]]>
 	</select>
 	
-	<select id="addr1" parameterType="pdto" resultType="mdto">
-	     <![CDATA[		
-		 select * from (select b.*, row_number() 
-					over(order by member_num desc) rnum from member_hotel b
-					where member_addr like '%'||#{keyword} || '%')
-					where rnum >= #{startNo} and rnum <= #{endNo}
-		    ]]>
-	</select>
+	
  
 
 </mapper>

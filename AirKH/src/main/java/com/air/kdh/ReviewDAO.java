@@ -2,8 +2,8 @@ package com.air.kdh;
 
 import java.util.List;
 
-import com.model.common.PageDTO;
-import com.model.common.ReviewDTO;
+import com.air.common.PageDTO;
+import com.air.common.ReviewDTO;
 
 public interface ReviewDAO {
 	

@@ -13,15 +13,17 @@
 
 	<div align="center">
 		<c:set var="dto" value="${modify }"/>
-		<hr width="50%" color="tomato">
+		
 			<h3>회원 테이블 ${dto.getMember_id() } 회원 정보 수정폼 페이지</h3>
-		<hr width="50%" color="tomato">
+		
 		<br>
 		
-		<form method="post" action="<%=request.getContextPath() %>/member_modify_ok.do">
+		
+		<form method="post" enctype="multipart/form-data"
+	      action="<%=request.getContextPath() %>/member_modify_ok.do">
 		<input type="hidden" name="member_num" value="${dto.getMember_num() }">
 		<input type="hidden" name="page" value="${Page }"> 
-		<table border="1" cellspacing="0" width="450">
+		<table border="0" cellspacing="0" width="450">
 			<tr>
 				<th>회원 아이디</th>
 				<td><input name="member_id" value="${dto.getMember_id() }" readonly></td>
@@ -45,8 +47,8 @@
 		
 	        
 	        <tr>
-	        	<th>회원 주소</th>
-	        	<td><input name="member_addr" value="${dto.getMember_addr() }">
+	        	<th>회원 사진</th>
+	        	<td><input type="file" name="file2" value="${dto.getMember_pic() }">
 	        	</td>
 	        </tr>
 	        

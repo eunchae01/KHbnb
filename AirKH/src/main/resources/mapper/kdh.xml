@@ -21,8 +21,14 @@
  	</select>
  	
  	<insert id="add" parameterType="hdto">
- 		insert into host_hotel values((select max(host_num) from host_hotel)+1,
- 			#{host_id},#{host_nickname},#{host_name},#{host_pwd},#{host_addr}
+ 	<selectKey resultType="int" keyProperty="host_num" order="BEFORE">
+         select nvl(max(host_num), 0) from host_hotel
+      </selectKey>
+ 	
+ 	
+ 	
+ 		insert into host_hotel values(#{host_num}+1,
+ 			#{host_id},#{host_nickname},#{host_name},#{host_pwd},#{host_int},#{host_pic}
  			,#{host_phone},sysdate)
  	
  	</insert>
@@ -34,8 +40,8 @@
  	
  	<update id="update" parameterType="hdto">
  		update host_hotel set host_id=#{host_id},host_nickname=#{host_nickname},
- 		host_name=#{host_name}, host_pwd=#{host_pwd},host_addr=#{host_addr},
- 		host_phone=#{host_phone} where host_num=#{host_num}
+ 		host_name=#{host_name}, host_pwd=#{host_pwd}, host_int=#{host_int},
+ 		host_pic=#{host_pic},host_phone=#{host_phone} where host_num=#{host_num}
  	</update>
  	
  	<delete id="del" parameterType="int">
@@ -59,10 +65,7 @@
 			where host_name like '%'||#{keyword} || '%'
 	</select>
 	
-	<select id="addro" resultType="int">
-		select count(*) from host_hotel 
-			where host_addr like '%'||#{keyword} || '%'
-	</select>
+	
 	
 	
 	<select id="ido1" parameterType="pdto" resultType="hdto">
@@ -83,14 +86,7 @@
 		    ]]>
 	</select>
 	
-	<select id="addro1" parameterType="pdto" resultType="hdto">
-	     <![CDATA[		
-		 select * from (select b.*, row_number() 
-					over(order by host_num desc) rnum from host_hotel b
-					where host_addr like '%'||#{keyword} || '%')
-					where rnum >= #{startNo} and rnum <= #{endNo}
-		    ]]>
-	</select>
+	
  
 
  

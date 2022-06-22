@@ -173,7 +173,7 @@ margin-top:5%;
 	font-weight: bold;
 		text-decoration:none;
 		display: inline-block; /*수직적 요소에서 수평적 요소로 전환 */
-			margin: 10px 50px;
+			margin: 10px 10px;
 			padding: 5	px;
 	
 	}
@@ -214,10 +214,13 @@ margin-top:5%;
 			
 			<ul>
 			
-			 <li><a href="<%=request.getContextPath()%>/host_list.do" class="head-bar">[사업자관리]</a></li>
+			 <li><a href="<%=request.getContextPath()%>/host_list.do" class="head-bar">[호스트관리]</a></li>
 			 <li><a href="<%=request.getContextPath()%>/member_list.do" class="head-bar">[회원관리]</a></li>
 			 <li><a href="<%=request.getContextPath()%>/review_list.do" class="head-bar">[리뷰관리]</a></li>
+			 <li><a href="<%=request.getContextPath()%>/payment_list.do" class="head-bar">[결제관리]</a></li>
 			 <li><a href="<%=request.getContextPath()%>/acc_list.do" class="head-bar">[숙소관리]</a></li>
+			 <li><a href="<%=request.getContextPath()%>/reserve_list.do" class="head-bar">[예약관리]</a></li>
+			
 			 
 				
 				

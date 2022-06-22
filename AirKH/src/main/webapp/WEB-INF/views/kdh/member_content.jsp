@@ -13,12 +13,17 @@
 	<div align="center">
 	<c:set var="dto" value="${Cont }"/>
 	<c:set var="pageing" value="${Page }"/>
-
-	<hr width="40%" color="blue">
-		<h2>회원 ${dto.member_id }의 상세정보</h2>
-	<hr width="40%" color="blue">
+	<table border="0" cellspacing="0" width="300">
+	<tr>
 	
-	<table border="1" cellspacing="0" width="450">
+		<th><h2>회원 ${dto.member_id }의<br> 상세정보</h2></th>
+		<td>
+		<img src="<%=request.getContextPath()%>/resources/member/${dto.member_pic}"  width="70px" height="70px">
+		</td>
+	</tr>
+	</table>
+	
+	<table border="0" cellspacing="0" width="450">
 		<tr>
 			<th>회원 번호</th>
 			<td>${dto.member_num }</td>
@@ -49,10 +54,7 @@
 	         </td>
 	    </tr>
 	    
-	    <tr>
-	         <th>회원주소</th>
-	         <td> ${dto.member_addr } </td>
-	    </tr>
+	   
 	      
 	    
 	    <tr>
@@ -66,6 +68,7 @@
 	            </td>
 	         </tr>
 	      </c:if>
+	      
 	      
 	      <tr>
 	      	<td colspan="2" align="center">

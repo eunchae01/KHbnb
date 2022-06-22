@@ -2,8 +2,8 @@ package com.air.kdh;
 
 import java.util.List;
 
-import com.model.common.HostDTO;
-import com.model.common.PageDTO;
+import com.air.common.HostDTO;
+import com.air.common.PageDTO;
 
 
 
