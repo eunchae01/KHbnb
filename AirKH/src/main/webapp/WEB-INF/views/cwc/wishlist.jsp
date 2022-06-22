@@ -14,13 +14,17 @@ html, body {
 }
 
 .container {
-	margin-top: 15px;
-	margin-left: 20px;
-	margin-right: 10px;
+	width: 100%;
+	margin: 20px;
 }
 
 .container2 {
-	display: flex;
+	display: block;
+}
+
+img{
+width: 300px;
+height: 170px;
 }
 
 ul {
@@ -45,7 +49,7 @@ a {
 </style>
 </head>
 <body>
-	<%@ include file="sample.jsp"%>
+	<%@ include file="../jdy/include/main_top.jsp"%>
 	
 	<c:set var="list" value="${wishList }" />
 	<div class="container">
@@ -58,7 +62,7 @@ a {
 			<c:if test="${!empty list }">
 			<c:forEach items="${list }" var="dto">
 				<li><a href="<%=request.getContextPath()%>/wish.content.do">
-						<div>${dto.getAcc_image1() }</div>
+						<div><img src="<%=request.getContextPath() %>/resources/hotel_images/${{dto.getAcc_thumbnail() }"></div>
 						<div>찜 이름</div>
 				</a></li>
 

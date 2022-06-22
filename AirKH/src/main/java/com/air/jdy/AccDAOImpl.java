@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.air.cwc.WishDTO;
+
 @Service
 @Repository
 public class AccDAOImpl implements AccDAO{
@@ -64,14 +66,14 @@ public class AccDAOImpl implements AccDAO{
 	public String uploadFile(MultipartHttpServletRequest mRequest) {
 		boolean isUpload = false;
 		String saveFileName = null;
-		String uploadPath = "C:\\Users\\coolb\\OneDrive\\바탕 화면\\t\\AirKH\\src\\main\\webapp\\resources\\upload\\";
+		String uploadPath = "C:\\Users\\coolb\\OneDrive\\諛뷀깢 �솕硫�\\t\\AirKH\\src\\main\\webapp\\resources\\upload\\";
 		
 		Calendar cal = Calendar.getInstance();
 		Date date = cal.getTime();
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 		String date1 = format1.format(date);
 		
-		// 업로드 된 파일들의 이름 목록을 제공하는 메서드.
+		// �뾽濡쒕뱶 �맂 �뙆�씪�뱾�쓽 �씠由� 紐⑸줉�쓣 �젣怨듯븯�뒗 硫붿꽌�뱶.
 		Iterator<String> iterator = mRequest.getFileNames();
 		
 		while(iterator.hasNext()) {
@@ -79,10 +81,10 @@ public class AccDAOImpl implements AccDAO{
 			
 			MultipartFile mFile = mRequest.getFile(uploadFileName);
 			
-			// 업로드한 파일의 이름을 구하는 메서드.
+			// �뾽濡쒕뱶�븳 �뙆�씪�쓽 �씠由꾩쓣 援ы븯�뒗 硫붿꽌�뱶.
 			String originalFileName = mFile.getOriginalFilename();
 			
-			// 실제 폴더를 만들어 보자.
+			// �떎�젣 �뤃�뜑瑜� 留뚮뱾�뼱 蹂댁옄.
 			// .......\\resources\\upload\\2022-05-30
 			String homedir = uploadPath + date1;
 			File path1 = new File(homedir);
@@ -91,16 +93,16 @@ public class AccDAOImpl implements AccDAO{
 				path1.mkdirs();
 			}
 			
-			// 실제 파일을 만들어보자.
+			// �떎�젣 �뙆�씪�쓣 留뚮뱾�뼱蹂댁옄.
 			saveFileName = originalFileName;
 			if(saveFileName != null) {
 				saveFileName = System.currentTimeMillis() + "_" + saveFileName;
 				
 				try {
-					// .......\\resources\\upload\\2022-05-30\\실제 파일
+					// .......\\resources\\upload\\2022-05-30\\�떎�젣 �뙆�씪
 					File origin = new File(homedir + "/" + saveFileName);
 					
-					// transferTo() : 파일 데이터를 지정한 폴더로 실제 저장시키는 메서드. 
+					// transferTo() : �뙆�씪 �뜲�씠�꽣瑜� 吏��젙�븳 �뤃�뜑濡� �떎�젣 ���옣�떆�궎�뒗 硫붿꽌�뱶. 
 					mFile.transferTo(origin);
 					
 					isUpload = true;
@@ -109,7 +111,7 @@ public class AccDAOImpl implements AccDAO{
 				}
 			}
 			
-		} // while문 end
+		} // while臾� end
 		if(isUpload) {
 			return saveFileName;
 		}else {
@@ -131,6 +133,10 @@ public class AccDAOImpl implements AccDAO{
 	@Override
 	public List<AccDTO> getAccListForHost(int no) {
 		return this.sqlSession.selectList("ahlist", no);
+	}
+	@Override
+	public WishDTO likeAcc(int no) {
+		return this.sqlSession.selectOne("like", no);
 	}
 	
 }

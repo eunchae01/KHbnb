@@ -7,7 +7,7 @@ public class WishDTO {
 
 	private int wish_num;
 	private int acc_code;
-	private String acc_image1;
+	private String acc_thumbnail;
 	private String acc_addr;
 	private String acc_name;
 	private int acc_price;

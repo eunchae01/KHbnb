@@ -1,114 +1,102 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="EUC-KR">
 <title>Insert title here</title>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<style type="text/css">
+html, body {
+	width: 100%;
+	height: 100%;
+}
 
-<script type="text/javascript">
-$(function () {
-    $('#day').daterangepicker({
-        "locale": {
-            "format": "YYYY-MM-DD",
-            "separator": " ~ ",
-            "applyLabel": "확인",
-            "cancelLabel": "취소",
-            "fromLabel": "From",
-            "toLabel": "To",
-            "customRangeLabel": "Custom",
-            "weekLabel": "W",
-            "daysOfWeek": ["월", "화", "수", "목", "금", "토", "일"],
-            "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
-            "firstDay": 1
-        },
-        "drops": "down"
-    }, function (start, end, label) {
-        console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
-    });
-});
-</script>
+table {
+	width: 100%
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+	padding: 0px
+}
+
+.wcontainer {
+	width: 100%;
+	margin:10px;
+}
+.tcontainer {
+	margin:10px;
+	margin-top: 100px;
+}
+
+.back a {
+	font-size: 50px;
+	text-decoration: none;
+	color: black;
+}
+.wl{
+	margin-bottom: 20px;
+}
+table {
+	width: 90%;
+}
+td{
+padding: 10px;}
+</style>
 </head>
 <body>
-	<div align="center">
-		<hr width="50%" color="red">
-		<h3>숙소 목록</h3>
-		<hr width="50%" color="red">
-		<br>
+	<jsp:include page="../jdy/include/main_top.jsp"></jsp:include>
+	<c:set var="list" value="${wishList }" />
 
-		<table border="1" cellspacing="0" width="400">
-			<tr>
-				<th>숙소코드</th>
-				<th>호스트 코드</th>
-				<th>숙소이름</th>
-				<th>숙소 위치</th>
-			</tr>
+	<div class="wcontainer">
 
-			<c:set var="list" value="${List }" />
+		<div class="tcontainer">
+		<div class="wl">
+			<h1>위시 리스트</h1>
+		</div>
+		
 			<c:if test="${!empty list }">
 				<c:forEach items="${list }" var="dto">
-					<tr>
-						<td>${dto.getAcc_code() }</td>
-						<td>${dto.getAcc_host() }</td>
-						<td>${dto.getAcc_name() }</td>
-						<td>${dto.getAcc_addr() }</td>
-						<td>
-							<form method="post"
-								action="<%=request.getContextPath()%>/wish_add.do">
-								<input type="hidden" name="acc_code"
-									value="${dto.getAcc_code() }"> <input type="hidden"
-									name="acc_image1" value="${dto.getAcc_image1() }"> <input
-									type="hidden" name="acc_addr" value="${dto.getAcc_addr() }">
-								<input type="hidden" name="acc_name"
-									value="${dto.getAcc_name() }"> <input type="hidden"
-									name="acc_price" value="${dto.getAcc_price() }"> <input
-									type="hidden" name="acc_maxp" value="${dto.getAcc_maxp() }">
-								<input type="hidden" name="acc_bedroom"
-									value="${dto.getAcc_bedroom() }"> <input type="hidden"
-									name="acc_bed" value="${dto.getAcc_bed() }"> <input
-									type="hidden" name="acc_bath" value="${dto.getAcc_bath() }">
-								<input type="hidden" name="acc_star"
-									value="${dto.getAcc_star() }"> <input type="submit"
-									value="찜">
-							</form>
-						</td>
-					</tr>
+					<table>
+						<tr>
+							<td rowspan="4" width="400px" height="250px"><a href="<%=request.getContextPath()%>/acc_content.do?no=${dto.getAcc_code() }"><img
+								src="<%=request.getContextPath() %>/resources/upload/2022-06-13/${dto.getAcc_thumbnail() }"
+								alt="" class="thumbnail" width="400px" height="250px" /></a></td>
+							<td>${dto.getAcc_name() }</td>
+							<td align="right">
+							
+							<font color="red"> <input
+									type="button" value="♥" style="color: red;"
+									onclick="if(confirm('삭제하시겠습니까?')) {
+                       location.href='wish_delete.do?acc_code=${dto.getAcc_code() }'
+                       }else { return; }"></font></td>
+						</tr>
+
+						<tr>
+							<td colspan="2">${dto.getAcc_addr() }</td>
+						</tr>
+
+						<tr>
+							<td colspan="2">최대 인원 ${dto.getAcc_maxp() } · 침실
+								${dto.getAcc_bedroom() } · 침대 ${dto.getAcc_bed() } · 욕실
+								${dto.getAcc_bath() }</td>
+						</tr>
+
+						<tr>
+							<td><font color="red">★</font>${dto.getAcc_star() }</td>
+							<td align="right">₩<fmt:formatNumber value="${dto.getAcc_price() }" />/박
+							</td>
+						</tr>
+					</table>
+					
+					<hr color="#f1f1f1">
 				</c:forEach>
-				
-				
 			</c:if>
-
-			<c:if test="${empty list }">
-				<tr>
-					<td colspan="4" align="center">
-						<h3>전체 사원 리스트가 없습니다.....</h3>
-					</td>
-				</tr>
-			</c:if>
-
-		</table>
-		<c:forEach items="${list }" var="dto">
-		<form method="post" action="<%=request.getContextPath()%>/payment.do?acc_code=${dto.getAcc_code() }">
-			날짜 검색: <input type="text" id="day" name="day">
-		 	인원: <input type="number" id="guest" name="guest" value="1" placeholder="게스트 최대" min="1" max="${dto.getAcc_maxp() }">
-			
-			<input type="hidden" name="${dto.getAcc_code() }" value="${dto.getAcc_code() }">
-			<input type="hidden" name="${dto.getAcc_name() }" value="${dto.getAcc_name() }">
-			<input type="hidden" name="${dto.getAcc_price() }" value="${dto.getAcc_price() }">
-			<input type="hidden" name="${dto.getAcc_image1() }" value="${dto.getAcc_image1() }">
-			<input type="hidden" name="${dto.getAcc_addr() }" value="${dto.getAcc_addr() }">
-			<input type="hidden" name="${dto.getAcc_star() }" value="${dto.getAcc_star() }">
-			<input type="submit" value="예약하기">
-			
-		</form>
-		</c:forEach>
+		</div>
 	</div>
 </body>
 </html>
