@@ -25,7 +25,7 @@
 		
 		
 		
-		<typeAlias type="com.air.cec.UserHotelDAO" alias="userHotelDAO"/>
+		<typeAlias type="com.air.cec.UserHotelDAO" alias="UserHotelDAO"/>
 		
 		
 		

@@ -4,7 +4,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
-<mapper namespace="userHotelDAO">
+<mapper namespace="UserHotelDAO">
 	<!-- 회원가입 -->
 	<insert id="memberSignUp" parameterType="com.air.cec.MemberHotelDTO">
 		<selectKey resultType="int" keyProperty="member_num" order="BEFORE">

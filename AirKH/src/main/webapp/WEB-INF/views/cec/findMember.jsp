@@ -28,6 +28,10 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <style>
+	.container1{
+		margin: 225px auto;
+	}
+
 	.nav{
 		width: 30%;
 		padding-left: 8%;
@@ -37,7 +41,7 @@
 <body>
 	<jsp:include page="../jdy/include/main_top.jsp"/>
 
-	<div align="center">
+	<div align="center" class="container1">
 		<ul class="nav nav-tabs">
 			<li class="nav-item">
 				<button class="nav-link active" id="id-tab" data-toggle="tab" onclick="findId()">아이디 찾기</button>
@@ -63,7 +67,7 @@
 					
 					<tr>
 						<td colspan="2" align="center">
-							<br>
+							<br><br>
 							<input type="submit" class="btn btn-primary" value="아이디 찾기">
 						</td>
 					</tr>
@@ -89,7 +93,7 @@
 					
 					<tr>
 						<td colspan="2" align="center">
-							<br>
+							<br><br>
 							<input type="submit" class="btn btn-primary" value="비밀번호 찾기">
 						</td>
 					</tr>
