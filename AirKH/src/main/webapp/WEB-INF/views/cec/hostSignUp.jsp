@@ -16,6 +16,7 @@
 	.contaniner1{
 		float: left;
 		width: 60%;
+		margin-left: 1%;
 	}
 	
 	.contaniner2{
@@ -27,11 +28,11 @@
 	}
 
 	.form-control{
-		width: 40%;
+		width: 40% !important;
 		margin-left: 13%;
 	}
 	
-	label{
+	.col-sm-2{
 		margin-left: -13%;
 		text-align: left;
 	}
@@ -44,7 +45,7 @@
 	}
 	
 	textarea{
-		resize: none;
+		resize: none !important;
 	}
 </style>
 </head>

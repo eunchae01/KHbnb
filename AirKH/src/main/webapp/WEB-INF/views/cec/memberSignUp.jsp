@@ -14,24 +14,25 @@
 	
 	.contaniner1{
 		float: left;
-		width: 60%;
+		width: 50%;
+		margin-left: 10%;
 	}
 	
 	.contaniner2{
 		display: inline-block;
-		width: 45%;
+		width: 50%;
 		height: 380px;
 		margin-left: -40%;
 		margin-top: 1%;
 	}
 
 	.form-control{
-		width: 40%;
+		width: 40% !important;
 		margin-left: 13%;
 	}
 	
 	label{
-		margin-left: -13%;
+		margin-left: -10%;
 		text-align: left;
 	}
 	
@@ -44,7 +45,7 @@
 </style>
 </head>
 <body>
-	<jsp:include page="../jdy/include/main_top.jsp"/>
+ 	<jsp:include page="../jdy/include/main_top.jsp"/> 
 
 	<div align="center" class="containerMaster">
 		<h1>일반사용자로 회원가입</h1>
