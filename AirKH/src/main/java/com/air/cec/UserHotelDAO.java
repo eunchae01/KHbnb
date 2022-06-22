@@ -19,7 +19,6 @@ public interface UserHotelDAO {
 	//회원 정보 가져오기
 	public HostHotelDTO getHost(String id);
 	public MemberHotelDTO getMember(String id);
-	public HostHotelDTO getHostByNum(int no);
 	
 	//내정보 수정
 	public int updateMember(MemberHotelDTO dto);

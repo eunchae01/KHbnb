@@ -23,9 +23,6 @@
 		<typeAlias type="com.air.common.PageDTO" alias="pdto" />
 		
 		
-		<typeAlias type="com.air.kyk.ReviewDAOm" alias="reviewDao" />
-		<typeAlias type="com.air.kyk.ReviewDTOm" alias="re_dto" />
-		<typeAlias type="com.air.kyk.AvgDTO" alias="avg_dto" />
 		
 		
 		<typeAlias type="com.air.cec.UserHotelDAO" alias="UserHotelDAO"/>

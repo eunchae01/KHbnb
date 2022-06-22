@@ -19,16 +19,12 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.air.cec.HostHotelDTO;
 import com.air.cec.MemberHotelDTO;
 import com.air.cec.UserHotelDAO;
-import com.air.common.MemberDTO;
-import com.air.kyk.ReviewDAOm;
+import com.model.common.MemberDTO;
 
 @Controller
 public class CecController {
 	@Autowired
 	private UserHotelDAO dao;
-	
-	@Autowired
-	private ReviewDAOm re_dao;
 
 	// 회원가입
 	@RequestMapping("signup.do")
@@ -479,5 +475,11 @@ public class CecController {
 		session.invalidate();
 
 		return "home";
+	}
+	
+	// 메세지
+	@RequestMapping("message.do")
+	public String message() {
+		return "cec/message";
 	}
 }
