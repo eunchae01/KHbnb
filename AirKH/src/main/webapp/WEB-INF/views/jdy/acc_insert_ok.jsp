@@ -6,9 +6,10 @@
 <meta charset="UTF-8">
 <title>숙소 등록 성공</title>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/grid.min.css" />
-<link rel="stylesheet" href="" />
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/insert-ok.css" />
 </head>
 <body>
+	<jsp:include page="./include/host_top.jsp" />
 	<section class="insert-ok">
 		<div class="container">
 			<div class="row">
@@ -32,6 +33,7 @@
 						에어비앤비 서비스 약관에 동의하고 숙소를 등록하는 것은 회원님의
 						거주 지역의 법과 규정을 준수하겠다는 것을 의미합니다.
 					</div>
+					<a class="confirm-btn" href="<%=request.getContextPath()%>/host_main.do">확인</a>
 				</div>
 				<div class="col-6">
 					<img src="./resources/assets/architecture-and-city.png" alt="" />

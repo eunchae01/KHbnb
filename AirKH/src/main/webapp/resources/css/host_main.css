@@ -1,0 +1,138 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+}
+
+body {
+	font-family: 'DM Sans', sans-serif;
+}
+
+/* Reset CSS */
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+button,
+input,
+textarea {
+	font-family: 'DM Sans', sans-serif;
+	font-size: 16px;
+	border: none;
+}
+
+button {
+	border: none;
+	border-radius: 2px;
+	cursor: pointer;
+}
+
+button:focus,
+button:active,
+input:focus,
+input:active,
+textarea:focus,
+textarea:active {
+	outline: none;
+	box-shadow: none;
+}
+
+ul,
+ol,
+li,
+dl,
+dt,
+dd {
+	list-style-type: none;
+	padding-left: 0;
+	margin-left: 0;
+}
+
+img {
+	display: block;
+}
+
+/* profile */
+.host-main {
+	padding-top: 150px;
+}
+
+.profile {
+	padding: 24px;
+	border: 1px solid lightgray;
+	border-radius: 15px;
+}
+
+.profile-img {
+	width: 128px;
+	margin: 0 auto 32px;
+	border-radius: 100%;
+}
+
+h3 {
+	margin-bottom: 16px;
+}
+
+/* host-acc */
+
+.host-acc {
+	padding-left: 40px;
+}
+
+.host-acc-title {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 24px;
+}
+
+.host-acc-title a {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-weight: 700;
+	height: 40px;
+	width: 180px;
+	color: white;
+	background-color: #12d0b4;
+	border-radius: 5px;
+}
+
+.host-acc-title a:hover {
+	opacity: 0.6;
+}
+
+/* acc-list */
+.host-acc-list {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.acc-box {
+	width: 320px;
+	margin-bottom: 20px;
+}
+
+.acc-img-frame {
+	width: 320px;
+	height: 210px;
+	margin-bottom: 10px;
+	border-radius: 15px;
+	overflow: hidden;
+}
+
+.acc-img-frame img {
+	width: 330px;
+}
+
+.rate {
+	display: flex;
+	align-items: center;
+}
+
+.rate img {
+	width: 15px;
+	height: 15px;
+	margin-right: 5px;
+}
