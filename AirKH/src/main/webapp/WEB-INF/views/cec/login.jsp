@@ -29,8 +29,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <style>
 	.nav{
-		width:35%;
-		padding-left: 7%;
+		width: 40%;
+		padding-left: 9%;
+		margin-top: 10%;
 	}
 
 	#floatingInput {
@@ -44,13 +45,18 @@
 	.labelForInput{
 		margin-left: 35%;
 	}
+	
+	.tab-content{
+		margin-top: 1%;
+	}
+
 </style>
 </head>
 <body>
 	<jsp:include page="../jdy/include/main_top.jsp"/>
 	<br>
 	
-	<div align="center">
+	<div align="center" class="container1">
 
 		<ul class="nav nav-tabs">
 			<li class="nav-item">
@@ -75,7 +81,7 @@
 					<div class="form-floating">	
 						<input name="member_pwd" type="password" class="form-control" id="floatingPassword" placeholder="Password">
 						<label class="labelForInput" for="floatingPassword">Password</label>
-						<br>
+						<br><br>
 					</div>	
 						<input type="submit" value="로그인" class="btn btn-primary">
 				</form>
@@ -92,7 +98,7 @@
 					<div class="form-floating">
 						<input name="host_pwd" type="password" class="form-control" id="floatingPassword" placeholder="비밀번호">
 						<label class="labelForInput" for="floatingPassword">Password</label>
-						<br>
+						<br><br>
 					</div>
 						<input type="submit" value="로그인"  class="btn btn-primary">
 				</form>

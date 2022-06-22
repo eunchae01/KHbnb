@@ -109,7 +109,7 @@ public class CecController {
 		if (id.equals("admin") && pwd.equals("1234")) {
 			out.println("<script>");
 			out.println("alert('관리자 로그인')");
-			out.println("history.back()");
+			out.println("location.href='admin_loginOk.do'");
 			out.println("</script>");
 
 			HttpSession session = request.getSession();
@@ -160,7 +160,7 @@ public class CecController {
 		if (id.equals("admin") && pwd.equals("1234")) {
 			out.println("<script>");
 			out.println("alert('관리자 로그인')");
-			out.println("history.back()");
+			out.println("location.href='admin_loginOk.do'");
 			out.println("</script>");
 
 			HttpSession session = request.getSession();
