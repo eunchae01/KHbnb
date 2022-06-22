@@ -48,6 +48,11 @@
 		select * from member_hotel where member_id = #{id}
 	</select>
 	
+	<!-- 회원 번호로 DTO 가져오기 -->
+	<select id="hostByNum" parameterType="int" resultType="com.air.cec.HostHotelDTO">
+		select * from host_hotel where host_num = #{no}
+	</select>
+	
 	<!-- 내 정보 업데이트 -->
 	<update id="updateHost" parameterType="com.air.cec.HostHotelDTO">
 		update host_hotel set host_nickname = #{host_nickname}, host_pwd = #{host_pwd}, host_phone = #{host_phone}, host_int = #{host_int}, host_pic = #{host_pic} where host_num = #{host_num}

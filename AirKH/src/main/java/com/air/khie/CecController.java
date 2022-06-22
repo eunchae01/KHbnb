@@ -124,7 +124,7 @@ public class CecController {
 				if (pwd.equals(dto.getHost_pwd())) {
 					out.println("<script>");
 					out.println("alert('로그인 성공')");
-					out.println("location.href='jdy.do'");
+					out.println("location.href='host_main.do'");
 					out.println("</script>");
 
 					HttpSession session = request.getSession();

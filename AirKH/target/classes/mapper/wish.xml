@@ -11,11 +11,15 @@
 		select * from wish_hotel
 	</select>
 	
-	<insert id="addwish" parameterType="com.air.cwc.WishDTO">
+	<select id="wlist" parameterType="int" resultType="com.air.cwc.WishDTO">
+		select *from wish_hotel where acc_code=#{acc_code}
+	</select>
+	
+	<insert id="addwish" parameterType="com.air.jdy.AccDTO">
 		insert into wish_hotel values(
 		(select nvl(max(wish_num),0) from wish_hotel) + 1,
 		#{acc_code},
-		#{acc_image1}, #{acc_addr}, #{acc_name},
+		#{acc_thumbnail}, #{acc_addr}, #{acc_name},
 		#{acc_price}, #{acc_maxp},
 		#{acc_bedroom}, #{acc_bed},
 		#{acc_bath}, #{acc_star} )

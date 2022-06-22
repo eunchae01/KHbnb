@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.air.cec.HostHotelDTO;
+import com.air.cec.MemberHotelDTO;
+import com.air.cec.UserHotelDAO;
 import com.air.cwc.WishDTO;
 import com.air.jdy.AccDAO;
 import com.air.jdy.AccDTO;
@@ -31,25 +33,35 @@ public class JdyController {
 	@Autowired
 	private AccDAO dao;
 	
-	// user 愿��젴 (寃뚯뒪�듃, �샇�뒪�듃)
+	@Autowired
+	private UserHotelDAO userDao;
 	
-	// 寃뚯뒪�듃
-	// 硫붿씤�럹�씠吏�
+	// user �울옙占쎌�� (野����わ옙��, 占쎌��占쎈�わ옙��)
+	
+	// 野����わ옙��
+	// 筌�遺우�ㅿ옙�뱄옙��筌�占�
 	@RequestMapping("jdy.do")
 	public String list(Model model) {
-
+		
+		
 		List<AccDTO> list = this.dao.getAccList();
 		List<ThemeDTO> tlist = this.dao.getThemeList();
-
+		
+		
+		
 		model.addAttribute("List", list);
 		model.addAttribute("tList", tlist);
 
 		return "jdy/main";
 	}
 	
-	// �궗�슜�옄 �닕�냼 �긽�꽭 �럹�씠吏�
+	// 占쎄�占쎌��占쎌�� 占쎈��占쎈�� 占쎄맒占쎄쉭 占쎈�뱄옙��筌�占�
 	@RequestMapping("acc_content.do")
-	public String content(@RequestParam int no, Model model) {
+	public String content(@RequestParam int no, @RequestParam int hostno, Model model, HttpServletRequest request) {
+		
+		// 호스트 정보 받아오기
+		HostHotelDTO hostDto = this.userDao.getHostByNum(hostno);
+		model.addAttribute("Host", hostDto);
 
 		AccDTO dto = this.dao.getAccCont(no);
 		List<OfferDTO> olist = this.dao.getOfferList();
@@ -71,7 +83,7 @@ public class JdyController {
 		return "jdy/acc_cont";
 	}
 
-	// �궗�슜�옄 nav-bar �뀒留� 寃��깋
+	// 占쎄�占쎌��占쎌�� nav-bar 占쎈��筌�占� 野�占쏙옙源�
 	@RequestMapping("search_theme.do")
 	public String searchT(@RequestParam int no, Model model) {
 
@@ -84,7 +96,7 @@ public class JdyController {
 		return "jdy/acc_search_result";
 	}
 
-	// �궗�슜�옄 : �닕�냼 寃��깋
+	// 占쎄�占쎌��占쎌�� : 占쎈��占쎈�� 野�占쏙옙源�
 	@RequestMapping("acc_search.do")
 	public String searchAcc(@RequestParam("where") String where, 
 			@RequestParam("howMany") String howMany, Model model,
@@ -118,7 +130,7 @@ public class JdyController {
 			
 			if(list.isEmpty()) {
 				out.println("<script>");
-				out.println("alert('寃��깋 寃곌낵媛� �뾾�뒿�땲�떎.')");
+				out.println("alert('野�占쏙옙源� 野�怨��드�占� 占쎈씨占쎈�울옙�뀐옙��.')");
 				out.println("location.href='jdy.do'");
 				out.println("</script>");
 				return null;
@@ -132,9 +144,9 @@ public class JdyController {
 	}
 	
 	// =============================================================
-	// �샇�뒪�듃
+	// 占쎌��占쎈�わ옙��
 
-	// �샇�뒪�듃 硫붿씤�럹�씠吏�
+	// 占쎌��占쎈�わ옙�� 筌�遺우�ㅿ옙�뱄옙��筌�占�
 	@RequestMapping("host_main.do")
 	public String hostMain(Model model, HttpSession session) {
 
@@ -144,7 +156,7 @@ public class JdyController {
 		return "jdy/host_main";
 	}
 
-	// �샇�뒪�듃 湲곕뒫 : �닕�냼 �벑濡� �럹�씠吏�
+	// 占쎌��占쎈�わ옙�� 疫꿸��� : 占쎈��占쎈�� 占쎈�嚥∽옙 占쎈�뱄옙��筌�占�
 	@RequestMapping("acc_insert.do")
 	public String insert(@RequestParam int no, Model model) {
 
@@ -154,7 +166,7 @@ public class JdyController {
 		return "jdy/acc_insert";
 	}
 
-	// �샇�뒪�듃 湲곕뒫 : �닕�냼 �벑濡�
+	// 占쎌��占쎈�わ옙�� 疫꿸��� : 占쎈��占쎈�� 占쎈�嚥∽옙
 	@RequestMapping("acc_insert_ok.do")
 	public String insertOk(AccDTO dto, HttpServletResponse response, MultipartHttpServletRequest mRequest)
 			throws IOException {
@@ -164,14 +176,14 @@ public class JdyController {
 
 		String fileName = this.dao.uploadFile(mRequest);
 
-		// �궗吏� �벑濡�
+		// 占쎄�筌�占� 占쎈�嚥∽옙
 		if (fileName != null) {
 			out.println("<script>");
-			out.println("alert('�궗吏� �벑濡� �꽦怨�!')");
+			out.println("alert('占쎄�筌�占� 占쎈�嚥∽옙 占쎄쉐�⑨옙!')");
 			out.println("</script>");
 		} else {
 			out.println("<script>");
-			out.println("alert('�궗吏� �벑濡� �떎�뙣!')");
+			out.println("alert('占쎄�筌�占� 占쎈�嚥∽옙 占쎈��占쎈��!')");
 			out.println("</script>");
 		}
 
@@ -183,14 +195,14 @@ public class JdyController {
 			return "jdy/acc_insert_ok";
 		} else {
 			out.println("<script>");
-			out.println("alert('�닕�냼 �벑濡� �떎�뙣!')");
+			out.println("alert('占쎈��占쎈�� 占쎈�嚥∽옙 占쎈��占쎈��!')");
 			out.println("history.back()");
 			out.println("</script>");
 			return null;
 		}
 	}
 
-	// �샇�뒪�듃: �닕�냼 �긽�꽭 �럹�씠吏�
+	// 占쎌��占쎈�わ옙��: 占쎈��占쎈�� 占쎄맒占쎄쉭 占쎈�뱄옙��筌�占�
 	@RequestMapping("host_acc_cont.do")
 	public String hostACont(@RequestParam int no, Model model) {
 
@@ -212,7 +224,7 @@ public class JdyController {
 		return "jdy/host_acc_cont";
 	}
 
-	// �샇�뒪�듃: �닕�냼 �닔�젙 踰꾪듉 �겢由� -> �닔�젙 �럹�씠吏�濡� �씠�룞
+	// 占쎌��占쎈�わ옙��: 占쎈��占쎈�� 占쎈��占쎌�� 甕곌쑵�� 占쎄깻�깍옙 -> 占쎈��占쎌�� 占쎈�뱄옙��筌�占썸에占� 占쎌��占쎈�
 	@RequestMapping("host_acc_modify.do")
 	public String hostAModify(@RequestParam int no, Model model) {
 
@@ -236,7 +248,7 @@ public class JdyController {
 		return "jdy/host_acc_modify";
 	}
 
-	// �샇�뒪�듃: �닔�젙 �럹�씠吏��뿉�꽌 �닔�젙�븯湲� 鍮꾨쾲 �븞�꽔�쓬!!!!!鍮꾨쾲�솗�씤!!!!
+	// 占쎌��占쎈�わ옙��: 占쎈��占쎌�� 占쎈�뱄옙��筌�占쏙옙肉�占쎄� 占쎈��占쎌��占쎈릭疫뀐옙 ��袁⑥쓰 占쎈�占쎄�占쎌��!!!!!��袁⑥쓰占쎌��占쎌��!!!!
 	@RequestMapping("acc_modify_ok.do")
 	public void hostAModifyOk(AccDTO dto, HttpServletResponse response) throws IOException {
 
@@ -247,19 +259,19 @@ public class JdyController {
 
 		if (check > 0) {
 			out.println("<script>");
-			out.println("alert('�닕�냼 �닔�젙 �꽦怨�!')");
+			out.println("alert('占쎈��占쎈�� 占쎈��占쎌�� 占쎄쉐�⑨옙!')");
 			out.println("location.href='host_acc_cont.do?no=" + dto.getAcc_code() + "'");
 			out.println("</script>");
 		} else {
 			out.println("<script>");
-			out.println("alert('�닕�냼 �닔�젙 �떎�뙣!')");
+			out.println("alert('占쎈��占쎈�� 占쎈��占쎌�� 占쎈��占쎈��!')");
 			out.println("history.back()");
 			out.println("</script>");
 		}
 
 	}
 
-	// �샇�뒪�듃: �닕�냼 �긽�꽭 �럹�씠吏��쓽 �궘�젣 踰꾪듉 �븘吏� �닕�냼 肄붾뱶 �뾽�뜲�씠�듃 湲곕뒫 XXXXX 鍮꾨쾲 �븘�슂
+	// 占쎌��占쎈�わ옙��: 占쎈��占쎈�� 占쎄맒占쎄쉭 占쎈�뱄옙��筌�占쏙옙�� 占쎄�占쎌�� 甕곌쑵�� 占쎈�筌�占� 占쎈��占쎈�� ��遺얜굡 占쎈씜占쎈�뀐옙��占쎈�� 疫꿸��� XXXXX ��袁⑥쓰 占쎈�占쎌��
 	@RequestMapping("host_adelete.do")
 	public void hostADelete(@RequestParam int no, 
 			@RequestParam int num, HttpServletResponse response)throws IOException {
@@ -271,12 +283,12 @@ public class JdyController {
 		
 		if (check > 0) {
 			out.println("<script>");
-			out.println("alert('�닕�냼 �궘�젣 �꽦怨�!')");
+			out.println("alert('占쎈��占쎈�� 占쎄�占쎌�� 占쎄쉐�⑨옙!')");
 			out.println("location.href='host_main.do?no=" + num + "'");
 			out.println("</script>");
 		} else {
 			out.println("<script>");
-			out.println("alert('�닕�냼 �궘�젣 �떎�뙣!')");
+			out.println("alert('占쎈��占쎈�� 占쎄�占쎌�� 占쎈��占쎈��!')");
 			out.println("history.back()");
 			out.println("</script>");
 		}
