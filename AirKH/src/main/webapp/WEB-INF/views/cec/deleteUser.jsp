@@ -5,22 +5,44 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<style>
+	.container{
+		margin: 50px auto;
+		height: 500px;
+	}
+	
+	.delete1{
+		float:left;
+		margin-left: 10%;
+		margin-top: 10%;
+	}
+	
+	.delete2{
+		float:right;
+		margin-right: 10%;
+	}
+</style>
 </head>
 <body>
-	<div>
-		<h1>회원 탈퇴페이지</h1>
-		<br>
+	<jsp:include page="../jdy/include/main_top.jsp"/>
+
+	<div class="container">
+		<div class="delete1">
+			<h2>회원탈퇴 안내</h2>
+			<h5>지금까지 저희 사이트를 이용해주셔서 감사합니다.</h5>
+			<h5>회원을 탈퇴하면 나의 계정 정보 및</h5>
+			<h5>모든 내역이 삭제되고 복구 할 수 없습니다.</h5>
+			<br>
+			
+			<input type="button" value="탈퇴하기" class="btn btn-danger" onclick="if(confirm('그래도 탈퇴하시겠습니까?')){location.href='delete-user-ok.do'}else {return;}">
+			
+		</div>
 		
-		<h3>회원탈퇴 안내</h3>
-		<h5>지금까지 저희 사이트를 이용해주셔서 감사합니다.</h5>
-		<h5>회원을 탈퇴하면 나의 계정 정보 및 모든 내역이 삭제되고 복구 할 수 없습니다.</h5>
-		
-		
-		<form method="post" action="<%=request.getContextPath() %>/delete-user-ok.do">
-			<input type="checkbox" name="confirm" value="delete">위 내용에 동의합니다.
-			<br><br>
-			<input type="submit" value="탈퇴하기">
-		</form>
+		<div class="delete2">
+			<img src="<%=request.getContextPath() %>/resources/assets/architecture-and-city.png">
+		</div>
 	</div>
 </body>
 </html>

@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/top.style.css" />
 </head>
 <body>
+
 	<section class="top-nav">
 		<div class="container">
 			<div class="row align-items-center">
@@ -79,6 +80,7 @@
 			</div>
 		</div>
 	</section>
+
 </body>
 <script>
 	/* When the user clicks on the button, 

@@ -11,7 +11,7 @@ public class MemberHotelDTO {
 	private String member_nickname;
 	private String member_name;
 	private String member_pwd;
-	private String member_addr;
+	private String member_pic;
 	private String member_phone;
 	private String member_date;
 }

@@ -22,23 +22,25 @@
 		float:right;
 		margin-right: 30%;
 	}
+	
 </style>
 </head>
 <body>
 	<jsp:include page="../jdy/include/main_top.jsp"/>
 
-		<div align="center" class="container">
-			<div class="sign-up1">
-				<img width="200" src="<%=request.getContextPath() %>/resources/assets/avatar.png">
-				<br><br>
-				<button class="btn btn-outline-secondary" onclick="location.href='signup-member.do'">사용자로 회원가입</button>
-			</div>
-			
-			<div class="sign-up2">
-				<img width="200" src="<%=request.getContextPath() %>/resources/assets/house.png">
-				<br><br>
-				<button class="btn btn-outline-secondary" onclick="location.href='signup-host.do'">호스트로 회원가입</button>
-			</div>	
+	<div align="center" class="container">
+		<div class="sign-up1">
+			<img width="200" src="<%=request.getContextPath() %>/resources/assets/avatar.png">
+			<br><br>
+			<button class="btn btn-outline-secondary" onclick="location.href='find-member.do'">멤버 아이디 / 비밀번호 찾기</button>
 		</div>
+	
+		<div class="sign-up2">
+			<img width="200" src="<%=request.getContextPath() %>/resources/assets/house.png">
+			<br><br>
+			<button class="btn btn-outline-secondary" onclick="location.href='find-host.do'">호스트 아이디 / 비밀번호 찾기</button>
+		</div>
+		
+	</div>
 </body>
 </html>
