@@ -5,18 +5,99 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>main-top</title>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/grid.min.css" />
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/top.style.css" />
 </head>
 <body>
-	<h1>TOP</h1>
-	<a href="<%=request.getContextPath()%>/jdy.do">로고 메인으로</a>
-	<a href="">호스트 되기(호스트 로그인 -> 숙소 등록하기)</a>
-	<a href="">로그인</a>
-	<a href="">회원가입</a>
-	<a href="">고객센터</a>
-	<a href="">관리자 페이지</a>
-	
-	<hr>
-	
+	<section class="top-nav">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-3">
+					<div class="top-logo">
+						<a href="<%=request.getContextPath()%>/jdy.do">
+							<img src="<%=request.getContextPath() %>/resources/assets/logo.png" alt="" class="logo-icon" />
+							<h1 class="logo-title">khbnb</h1>
+						</a>
+					</div>
+				</div>
+				<div class="col-6 search">
+					<div class="search-bar round-box">
+						<form action="<%=request.getContextPath() %>/acc_search.do" method="post">
+							<input class="where" type="text" name="where" placeholder="여행지 검색" />
+							<input
+								type="number"
+								name="howMany"
+								placeholder="게스트 추가"
+								min="1"
+							/>
+							<button type="submit">
+								<img
+									src="<%=request.getContextPath() %>/resources/assets/magnifying-glass.png"
+									alt=""
+									class="search-icon"
+								/>
+							</button>
+						</form>
+					</div>
+				</div>
+				<div class="col-3">
+					<div class="join-bar">
+						<div class="join-box">
+							<a href="<%=request.getContextPath()%>/login.do">
+								로그인
+							</a>
+						</div>
+						<div class="round-box img-box dropdown">
+							<a
+								href="javascript:void(0)"
+								class="dropdown-box"
+								onclick="myFunction()"
+							>
+								<img
+									src="<%=request.getContextPath() %>/resources/assets/menu.png"
+									alt=""
+									class="menu-icon dropbtn"
+								/>
+								<img
+									src="<%=request.getContextPath() %>/resources/assets/user.png"
+									alt=""
+									class="user-icon dropbtn"
+								/>
+							</a>
+							<div class="dropdown-content" id="myDropdown">
+								<a href="#">메시지</a>
+								<a href="#">위시리스트</a>
+								<a href="#">숙소 호스트 되기</a>
+								<a href="#">계정</a>
+								<a href="#">도움말</a>
+								<a href="#">로그아웃</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 </body>
+<script>
+	/* When the user clicks on the button, 
+	toggle between hiding and showing the dropdown content */
+	function myFunction() {
+		document.getElementById('myDropdown').classList.toggle('show');
+	}
+
+	// Close the dropdown if the user clicks outside of it
+	window.onclick = function (e) {
+		if (!e.target.matches('.dropbtn')) {
+			var dropdowns = document.getElementsByClassName('dropdown-content');
+			for (var d = 0; d < dropdowns.length; d++) {
+				var openDropdown = dropdowns[d];
+				if (openDropdown.classList.contains('show')) {
+					openDropdown.classList.remove('show');
+				}
+			}
+		}
+	};
+</script>
 </html>

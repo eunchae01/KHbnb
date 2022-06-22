@@ -1,6 +1,7 @@
 package com.air.jdy;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -12,8 +13,7 @@ public interface AccDAO {
 	AccDTO getAccCont(int no);
 	int updateAcc(AccDTO dto);
 	int deleteAcc(int no);
-	void updateSeqAcc(int no);
-	List<AccDTO> searchAcc(String field, String keyword);
+	List<AccDTO> searchAcc(Map<String, Object> map, String id);
 	List<AccDTO> searchByThemeAcc(int no);
 	List<ThemeDTO> getThemeList();
 	List<OfferDTO> getOfferList();

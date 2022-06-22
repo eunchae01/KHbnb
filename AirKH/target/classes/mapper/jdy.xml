@@ -6,52 +6,74 @@
     
 <mapper namespace="accdao">
 
+	<!-- 숙소 전체 리스트 조회 -->
 	<select id="allAcc" resultType="adto">
 		select * from acc_hotel order by acc_code
 	</select>
 	
+	<!-- 테마 조회 main nav-bar -->
 	<select id="tlist" resultType="tdto">
 		select * from theme_hotel order by theme_code
 	</select>
 	
-	<insert id="addAcc" parameterType="adto">
-		insert into acc_hotel values((select max(acc_code) from acc_hotel) + 1, '1', #{acc_name},  
-		'0', #{acc_theme}, #{acc_country}, #{acc_city}, '', #{acc_price}, #{acc_spec},  
-		#{acc_build}, #{acc_type}, #{acc_maxp}, #{acc_bedroom}, #{acc_bed}, #{acc_bath}, #{acc_addr}, 
-		#{acc_mail}, #{acc_detail}, #{acc_phone}, '1', '1', '1', '1', #{acc_offer}, sysdate)
-	</insert>
-	
-	<!-- insert into acc_hotel values((select max(acc_code) from acc_hotel) + 1, 
-		'1', #{acc_name}, '0', #{acc_theme}, #{country+ ', ' + mcity + ', ' + city}, 
-		#{thumbnail}, #{acc_price}, #{acc_spec}, #{acc_build}, #{acc_type}, 
-		#{acc_maxp}, #{acc_bedroom}, #{acc_bed}, #{acc_bath}, #{add1 + ' ' + add2}, 
-		#{acc_mail}, #{acc_detail}, #{acc_phone}, '1', '1', 
-		'1', '1', sysdate) -->
-		
+	<!-- 숙소 상세 페이지 -->
 	<select id="contAcc" parameterType="int" resultType="adto">
 		select * from acc_hotel where acc_code = #{no}
 	</select>
 	
+	<!-- 숙소 상세 페이지 - 숙소 편의 시설 -->
 	<select id="olist" resultType="odto">
 		select * from offer_hotel order by offer_code
 	</select>
 	
+	<!-- 숙소 테마별 검색 -->
 	<select id="stlist" parameterType="int" resultType="adto">
 		select * from acc_hotel where acc_theme = #{no} order by acc_code
 	</select>
 	
+	<!-- 숙소 검색 -->
+	<select id="both" parameterType="Map" resultType="adto">
+		select * from acc_hotel where acc_maxp >= #{howMany} and (acc_country like '%' || #{where} || '%' or 
+		acc_city like '%' || #{where} || '%')
+	</select>
+	
+	<select id="where" parameterType="Map" resultType="adto">
+		select * from acc_hotel where (acc_country like '%' || #{where} || '%' or 
+		acc_city like '%' || #{where} || '%')
+	</select>
+	
+	<select id="howMany" parameterType="Map" resultType="adto">
+		select * from acc_hotel where acc_maxp >= #{howMany}
+	</select>
+	
+	<!-- 호스트: 숙소 목록 조회 -->
 	<select id="ahlist" parameterType="int" resultType="adto">
 		select * from acc_hotel where acc_host = #{no} order by acc_code
 	</select>
 	
+	<!-- 호스트: 숙소 등록 -->
+	<insert id="addAcc" parameterType="adto">
+		insert into acc_hotel values((select max(acc_code) from acc_hotel) + 1, #{acc_host}, #{acc_name},  
+		'0', #{acc_theme}, #{acc_country}, #{acc_city}, #{acc_thumbnail}, #{acc_price}, #{acc_spec},  
+		#{acc_build}, #{acc_type}, #{acc_maxp}, #{acc_bedroom}, #{acc_bed}, #{acc_bath}, #{acc_addr}, 
+		#{acc_mail}, #{acc_detail}, #{acc_phone}, '1', '1', '1', '1', #{acc_offer}, sysdate)
+	</insert>
+	
+	<!-- 호스트: 숙소 수정 -->
 	<update id="ahup" parameterType="adto">
-		update acc_hotel set acc_name = #{acc_name} where acc_code = #{acc_code}
-		
-		<!-- , acc_theme = #{acc_theme}, 
-		acc_country = #{acc_country}, acc_city = #{acc_city}, acc_thumbnail = #{acc_thumbnail} -->
+		update acc_hotel set 
+		acc_name = #{acc_name}, acc_theme = #{acc_theme}, acc_country = #{acc_country}, 
+		acc_city = #{acc_city}, acc_addr = #{acc_addr}, 
+		acc_price = #{acc_price}, acc_build = #{acc_build}, acc_type = #{acc_type}, 
+		acc_maxp = #{acc_maxp}, acc_bedroom = #{acc_bedroom}, acc_bed = #{acc_bed}, 
+		acc_bath = #{acc_bath}, acc_mail = #{acc_mail}, acc_detail = #{acc_detail}, 
+		acc_phone = #{acc_phone} where acc_code = #{acc_code}
+		<!-- 나머지 사진들 -->
 	</update>
 	
+	<!-- 호스트: 숙소 삭제 -->
 	<delete id="ahdel" parameterType="int">
 		delete from acc_hotel where acc_code = #{acc_code}
 	</delete>
+	
 </mapper>
