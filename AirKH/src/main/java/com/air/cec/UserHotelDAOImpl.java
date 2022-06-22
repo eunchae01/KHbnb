@@ -192,4 +192,9 @@ public class UserHotelDAOImpl implements UserHotelDAO{
 	public void updatHostSequence(int no) {
 		this.sqlSession.update("seqHost", no);
 	}
+
+	@Override
+	public HostHotelDTO getHostByNum(int no) {
+		return this.sqlSession.selectOne("hostByNum", no);
+	}
 }

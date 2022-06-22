@@ -40,7 +40,6 @@
 						<c:if test="${!empty list }">
 							<div class="host-acc-list">
 								<c:forEach items="${list }" var="adto">
-								
 									<a href="<%=request.getContextPath()%>/host_acc_cont.do?no=${adto.acc_code}">
 										<div class="acc-box">
 											<div class="acc-img-frame">

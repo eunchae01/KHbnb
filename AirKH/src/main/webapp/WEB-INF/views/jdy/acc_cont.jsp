@@ -50,6 +50,7 @@ $(function () {
 	<c:set var="list" value="${oList }" />
 	<c:set var="off" value="${offer }" />
 	<c:set var="like" value="${like }" />
+	<c:set var="host" value="${Host }" />
 	
 	<header class="header">
 		<div class="container">
@@ -123,7 +124,7 @@ $(function () {
 				<div class="col-8 desc-h2">
 					<div class="desc-head com-box">
 						<div class="desc-title-box">
-							<h2>000님이 호스팅하는 ${dto.acc_name }</h2>
+							<h2>${host.host_name }님이 호스팅하는 <br>${dto.acc_name }</h2>
 							<ul>
 								<li>최대 인원 ${dto.acc_maxp }명&nbsp;</li>
 								<li>&middot; 침실 ${dto.acc_bedroom }개&nbsp;</li>
@@ -131,8 +132,8 @@ $(function () {
 								<li>&middot; 욕실 ${dto.acc_bath }개</li>
 							</ul>
 						</div>
-						<a href="#">
-							<img src="<%=request.getContextPath() %>/resources/assets/user.png" alt="" class="host-profile" />
+						<a href="#host">
+							<img src="<%=request.getContextPath() %>/resources/host/${host.host_pic}" alt="" class="host-profile" />
 						</a>
 					</div>
 					<div class="com-box">
@@ -257,7 +258,7 @@ $(function () {
 					</ul>
 					<hr />
 					<div class="host-desc">
-						<h3>호스트 소개란~~~~~~~</h3>
+						<h3 id="host">호스트 소개란~~~~~~~</h3>
 					</div>
 					<hr />
 				</div>
