@@ -24,13 +24,17 @@ import com.air.jdy.AccDAO;
 import com.air.jdy.AccDTO;
 import com.air.jdy.OfferDTO;
 import com.air.jdy.ThemeDTO;
+import com.air.kyk.AvgDTO;
+import com.air.kyk.ReviewDAOm;
+import com.air.kyk.ReviewDTOm;
 
 @Controller
 public class JdyController {
 
 	@Autowired
 	private AccDAO dao;
-	
+	@Autowired
+	private ReviewDAOm re_dao;
 	// user 愿��젴 (寃뚯뒪�듃, �샇�뒪�듃)
 	
 	// 寃뚯뒪�듃
@@ -55,6 +59,11 @@ public class JdyController {
 		List<OfferDTO> olist = this.dao.getOfferList();
 		WishDTO like=this.dao.likeAcc(no);
 
+		List<ReviewDTOm> re_dto = this.re_dao.reviewCont(no);
+		int count = this.re_dao.getReivewListCount(no);
+		AvgDTO re_avg = this.re_dao.avgCont(no);
+		
+		
 		String offer_str = dto.getAcc_offer();
 		String[] offer_arr = offer_str.split(",");
 		int[] int_arr = new int[offer_arr.length];
@@ -63,6 +72,10 @@ public class JdyController {
 			int_arr[i] = Integer.parseInt(offer_arr[i]);
 		}
 
+		model.addAttribute("re_avg",re_avg);
+		model.addAttribute("review_list", re_dto);
+		model.addAttribute("count", count);
+		
 		model.addAttribute("Cont", dto);
 		model.addAttribute("oList", olist);
 		model.addAttribute("offer", int_arr);
@@ -140,6 +153,14 @@ public class JdyController {
 
 		List<AccDTO> list = this.dao.getAccListForHost(Integer.parseInt(session.getAttribute("host_num").toString()));
 		model.addAttribute("List", list);
+		
+			int host_num = (Integer) session.getAttribute("host_num");
+			List<ReviewDTOm> host_list = this.re_dao.hostReviewCont(host_num);
+			model.addAttribute("host_list",host_list);
+		
+				
+				
+				
 
 		return "jdy/host_main";
 	}

@@ -19,12 +19,16 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.air.cec.HostHotelDTO;
 import com.air.cec.MemberHotelDTO;
 import com.air.cec.UserHotelDAO;
-import com.model.common.MemberDTO;
+import com.air.common.MemberDTO;
+import com.air.kyk.ReviewDAOm;
 
 @Controller
 public class CecController {
 	@Autowired
 	private UserHotelDAO dao;
+	
+	@Autowired
+	private ReviewDAOm re_dao;
 
 	// 회원가입
 	@RequestMapping("signup.do")
@@ -124,7 +128,7 @@ public class CecController {
 				if (pwd.equals(dto.getHost_pwd())) {
 					out.println("<script>");
 					out.println("alert('로그인 성공')");
-					out.println("location.href='jdy.do'");
+					out.println("location.href='host_main.do'");
 					out.println("</script>");
 
 					HttpSession session = request.getSession();
