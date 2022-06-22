@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.air.cec.HostHotelDTO;
+import com.air.cwc.WishDTO;
 import com.air.jdy.AccDAO;
 import com.air.jdy.AccDTO;
 import com.air.jdy.OfferDTO;
@@ -30,10 +31,10 @@ public class JdyController {
 	@Autowired
 	private AccDAO dao;
 	
-	// user 관련 (게스트, 호스트)
+	// user 愿��젴 (寃뚯뒪�듃, �샇�뒪�듃)
 	
-	// 게스트
-	// 메인페이지
+	// 寃뚯뒪�듃
+	// 硫붿씤�럹�씠吏�
 	@RequestMapping("jdy.do")
 	public String list(Model model) {
 
@@ -46,12 +47,13 @@ public class JdyController {
 		return "jdy/main";
 	}
 	
-	// 사용자 숙소 상세 페이지
+	// �궗�슜�옄 �닕�냼 �긽�꽭 �럹�씠吏�
 	@RequestMapping("acc_content.do")
 	public String content(@RequestParam int no, Model model) {
 
 		AccDTO dto = this.dao.getAccCont(no);
 		List<OfferDTO> olist = this.dao.getOfferList();
+		WishDTO like=this.dao.likeAcc(no);
 
 		String offer_str = dto.getAcc_offer();
 		String[] offer_arr = offer_str.split(",");
@@ -64,11 +66,12 @@ public class JdyController {
 		model.addAttribute("Cont", dto);
 		model.addAttribute("oList", olist);
 		model.addAttribute("offer", int_arr);
+		model.addAttribute("like",like);
 
 		return "jdy/acc_cont";
 	}
 
-	// 사용자 nav-bar 테마 검색
+	// �궗�슜�옄 nav-bar �뀒留� 寃��깋
 	@RequestMapping("search_theme.do")
 	public String searchT(@RequestParam int no, Model model) {
 
@@ -81,7 +84,7 @@ public class JdyController {
 		return "jdy/acc_search_result";
 	}
 
-	// 사용자 : 숙소 검색
+	// �궗�슜�옄 : �닕�냼 寃��깋
 	@RequestMapping("acc_search.do")
 	public String searchAcc(@RequestParam("where") String where, 
 			@RequestParam("howMany") String howMany, Model model,
@@ -115,7 +118,7 @@ public class JdyController {
 			
 			if(list.isEmpty()) {
 				out.println("<script>");
-				out.println("alert('검색 결과가 없습니다.')");
+				out.println("alert('寃��깋 寃곌낵媛� �뾾�뒿�땲�떎.')");
 				out.println("location.href='jdy.do'");
 				out.println("</script>");
 				return null;
@@ -129,9 +132,9 @@ public class JdyController {
 	}
 	
 	// =============================================================
-	// 호스트
+	// �샇�뒪�듃
 
-	// 호스트 메인페이지
+	// �샇�뒪�듃 硫붿씤�럹�씠吏�
 	@RequestMapping("host_main.do")
 	public String hostMain(Model model, HttpSession session) {
 
@@ -141,7 +144,7 @@ public class JdyController {
 		return "jdy/host_main";
 	}
 
-	// 호스트 기능 : 숙소 등록 페이지
+	// �샇�뒪�듃 湲곕뒫 : �닕�냼 �벑濡� �럹�씠吏�
 	@RequestMapping("acc_insert.do")
 	public String insert(@RequestParam int no, Model model) {
 
@@ -151,7 +154,7 @@ public class JdyController {
 		return "jdy/acc_insert";
 	}
 
-	// 호스트 기능 : 숙소 등록
+	// �샇�뒪�듃 湲곕뒫 : �닕�냼 �벑濡�
 	@RequestMapping("acc_insert_ok.do")
 	public String insertOk(AccDTO dto, HttpServletResponse response, MultipartHttpServletRequest mRequest)
 			throws IOException {
@@ -161,14 +164,14 @@ public class JdyController {
 
 		String fileName = this.dao.uploadFile(mRequest);
 
-		// 사진 등록
+		// �궗吏� �벑濡�
 		if (fileName != null) {
 			out.println("<script>");
-			out.println("alert('사진 등록 성공!')");
+			out.println("alert('�궗吏� �벑濡� �꽦怨�!')");
 			out.println("</script>");
 		} else {
 			out.println("<script>");
-			out.println("alert('사진 등록 실패!')");
+			out.println("alert('�궗吏� �벑濡� �떎�뙣!')");
 			out.println("</script>");
 		}
 
@@ -180,14 +183,14 @@ public class JdyController {
 			return "jdy/acc_insert_ok";
 		} else {
 			out.println("<script>");
-			out.println("alert('숙소 등록 실패!')");
+			out.println("alert('�닕�냼 �벑濡� �떎�뙣!')");
 			out.println("history.back()");
 			out.println("</script>");
 			return null;
 		}
 	}
 
-	// 호스트: 숙소 상세 페이지
+	// �샇�뒪�듃: �닕�냼 �긽�꽭 �럹�씠吏�
 	@RequestMapping("host_acc_cont.do")
 	public String hostACont(@RequestParam int no, Model model) {
 
@@ -209,7 +212,7 @@ public class JdyController {
 		return "jdy/host_acc_cont";
 	}
 
-	// 호스트: 숙소 수정 버튼 클릭 -> 수정 페이지로 이동
+	// �샇�뒪�듃: �닕�냼 �닔�젙 踰꾪듉 �겢由� -> �닔�젙 �럹�씠吏�濡� �씠�룞
 	@RequestMapping("host_acc_modify.do")
 	public String hostAModify(@RequestParam int no, Model model) {
 
@@ -233,7 +236,7 @@ public class JdyController {
 		return "jdy/host_acc_modify";
 	}
 
-	// 호스트: 수정 페이지에서 수정하기 비번 안넣음!!!!!비번확인!!!!
+	// �샇�뒪�듃: �닔�젙 �럹�씠吏��뿉�꽌 �닔�젙�븯湲� 鍮꾨쾲 �븞�꽔�쓬!!!!!鍮꾨쾲�솗�씤!!!!
 	@RequestMapping("acc_modify_ok.do")
 	public void hostAModifyOk(AccDTO dto, HttpServletResponse response) throws IOException {
 
@@ -244,19 +247,19 @@ public class JdyController {
 
 		if (check > 0) {
 			out.println("<script>");
-			out.println("alert('숙소 수정 성공!')");
+			out.println("alert('�닕�냼 �닔�젙 �꽦怨�!')");
 			out.println("location.href='host_acc_cont.do?no=" + dto.getAcc_code() + "'");
 			out.println("</script>");
 		} else {
 			out.println("<script>");
-			out.println("alert('숙소 수정 실패!')");
+			out.println("alert('�닕�냼 �닔�젙 �떎�뙣!')");
 			out.println("history.back()");
 			out.println("</script>");
 		}
 
 	}
 
-	// 호스트: 숙소 상세 페이지의 삭제 버튼 아직 숙소 코드 업데이트 기능 XXXXX 비번 필요
+	// �샇�뒪�듃: �닕�냼 �긽�꽭 �럹�씠吏��쓽 �궘�젣 踰꾪듉 �븘吏� �닕�냼 肄붾뱶 �뾽�뜲�씠�듃 湲곕뒫 XXXXX 鍮꾨쾲 �븘�슂
 	@RequestMapping("host_adelete.do")
 	public void hostADelete(@RequestParam int no, 
 			@RequestParam int num, HttpServletResponse response)throws IOException {
@@ -268,12 +271,12 @@ public class JdyController {
 		
 		if (check > 0) {
 			out.println("<script>");
-			out.println("alert('숙소 삭제 성공!')");
+			out.println("alert('�닕�냼 �궘�젣 �꽦怨�!')");
 			out.println("location.href='host_main.do?no=" + num + "'");
 			out.println("</script>");
 		} else {
 			out.println("<script>");
-			out.println("alert('숙소 삭제 실패!')");
+			out.println("alert('�닕�냼 �궘�젣 �떎�뙣!')");
 			out.println("history.back()");
 			out.println("</script>");
 		}

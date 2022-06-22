@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.air.cwc.WishDTO;
+
 public interface AccDAO {
 	
 	List<AccDTO> getAccList();
@@ -18,5 +20,5 @@ public interface AccDAO {
 	List<ThemeDTO> getThemeList();
 	List<OfferDTO> getOfferList();
 	String uploadFile(MultipartHttpServletRequest mRequest);
-	
+	WishDTO likeAcc(int no);
 }

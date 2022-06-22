@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.air.jdy.AccDTO;
+
 @Repository
 public class WishDAOImpl implements WishDAO{
 
@@ -19,8 +21,11 @@ public class WishDAOImpl implements WishDAO{
 	}
 	
 	@Override
-	public int addWish(WishDTO dto) {
+	public int addWish(AccDTO dto) {
+		if(this.sqlSession.selectOne("wlist",dto)==null) {
 		return this.sqlSession.insert("addwish", dto);
+		}else
+			return -1;
 	}
 	
 	@Override

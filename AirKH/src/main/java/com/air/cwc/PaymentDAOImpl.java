@@ -12,7 +12,12 @@ public class PaymentDAOImpl implements PaymentDAO {
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public List<PaymentDTO> getPaymentList() {
-		return this.sqlSession.selectList("allpayment");
+	public List<PaymentDTO> getPayList() {
+		return this.sqlSession.selectList("paylist");
+	}
+	
+	@Override
+	public int insertPay(PaymentDTO dto) {
+		return this.sqlSession.insert("addpayment", dto);
 	}
 }

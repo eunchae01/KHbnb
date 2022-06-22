@@ -76,4 +76,7 @@
 		delete from acc_hotel where acc_code = #{acc_code}
 	</delete>
 	
+	<select id="like" parameterType="int" resultType="com.air.cwc.WishDTO">
+		select *from wish_hotel where acc_code= #{acc_code}
+	</select>
 </mapper>
