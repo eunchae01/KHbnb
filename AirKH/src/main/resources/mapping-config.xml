@@ -34,6 +34,10 @@
 		<typeAlias type="com.air.jdy.ThemeDTO" alias="tdto"/>
 		<typeAlias type="com.air.jdy.OfferDTO" alias="odto"/>
 		
+		<typeAlias type="com.air.kyk.ReviewDAOm" alias="reviewDao"/>
+	    <typeAlias type="com.air.kyk.ReviewDTOm" alias="re_dto"/>
+	    <typeAlias type="com.air.kyk.AvgDTO" alias="avg_dto"/>
+		
 	</typeAliases>
 
 </configuration>

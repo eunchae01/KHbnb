@@ -212,6 +212,9 @@ $(function () {
 		</div>
 	</section>
 	
+	<c:set var="list" value="${review_list}"/>
+	<c:set var="count" value="${count}"/>
+	<c:set var="vi" value="${re_avg }"/>
 	<section class="bottom">
 		<div class="container">
 			<div class="row">
@@ -228,7 +231,26 @@ $(function () {
 								<strong>${dto.acc_star }</strong>
 							</c:if>
 						</li>
-						<li>&middot; 후기 000개</li>
+						
+						
+						<li>&middot; 후기 ${count }개</li>
+						<ul  class="re_grade">
+							<li><span>청결도</span> <div class="bar clean"></div>${vi.cl_avg }</li>
+							<li><span>의사소통</span> <div class="bar comm"></div>${vi.comm_avg }</li>
+							<li><span>체크인</span> <div class="bar check"></div>${vi.check_avg }</li>
+							<li><span>정확성</span> <div class="bar acc"></div>${vi.acc_avg}</li>
+							<li><span>위치</span> <div class="bar loc"></div>${vi.loc_avg }</li>
+							<li><span>가격 대비 만족도</span> <div class="bar sat"></div>${vi.sat_avg }</li>
+						</ul>
+						
+						<ul class="re_list">
+							<c:forEach items="${list }" var="mo">
+								<li class="memeber_img"><img src="<%=request.getContextPath()%>/resources/member/${mo.member_pic }" width="70"></li>
+								<li class="re_list_name">${mo.member_id }</li>
+								<li class="re_list_date">${mo.review_date.substring(0,10) }</li>
+								<li class="re_list_cont">${mo.review_content }</li>
+							</c:forEach>
+						</ul>
 					</ul>
 					<hr />
 					<div class="host-desc">
