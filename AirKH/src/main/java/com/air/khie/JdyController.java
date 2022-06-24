@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.air.cec.HostHotelDTO;
+import com.air.cec.UserHotelDAO;
 import com.air.cwc.WishDTO;
 import com.air.jdy.AccDAO;
 import com.air.jdy.AccDTO;
@@ -35,6 +36,8 @@ public class JdyController {
 	private AccDAO dao;
 	@Autowired
 	private ReviewDAOm re_dao;
+	@Autowired
+	private UserHotelDAO userDao;
 	
 	// user 愿��젴 (寃뚯뒪�듃, �샇�뒪�듃)
 	
@@ -54,7 +57,10 @@ public class JdyController {
 	
 	// �궗�슜�옄 �닕�냼 �긽�꽭 �럹�씠吏�
 	@RequestMapping("acc_content.do")
-	public String content(@RequestParam int no, Model model) {
+	public String content(@RequestParam int no, @RequestParam int hostno, Model model) {
+		
+		// 호스트 정보 받아오기
+        HostHotelDTO hostDto = this.userDao.getHostByNum(hostno);
 
 		AccDTO dto = this.dao.getAccCont(no);
 		List<OfferDTO> olist = this.dao.getOfferList();
@@ -72,11 +78,12 @@ public class JdyController {
 		for (int i = 0; i < offer_arr.length; i++) {
 			int_arr[i] = Integer.parseInt(offer_arr[i]);
 		}
-
+		
 		model.addAttribute("re_avg",re_avg);
 	    model.addAttribute("review_list", re_dto);
 	    model.addAttribute("count", count);
 
+	    model.addAttribute("Host", hostDto);
 		model.addAttribute("Cont", dto);
 		model.addAttribute("oList", olist);
 		model.addAttribute("offer", int_arr);
@@ -179,21 +186,18 @@ public class JdyController {
 
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-
+		
+		// 파일 업로드 후 파일 문자열 받아오기 
 		String fileName = this.dao.uploadFile(mRequest);
+		
+		// , 기준으로 잘라서 dto에 넣기
+		String[] fileArr = fileName.split(",");
 
-		// �궗吏� �벑濡�
-		if (fileName != null) {
-			out.println("<script>");
-			out.println("alert('�궗吏� �벑濡� �꽦怨�!')");
-			out.println("</script>");
-		} else {
-			out.println("<script>");
-			out.println("alert('�궗吏� �벑濡� �떎�뙣!')");
-			out.println("</script>");
-		}
-
-		dto.setAcc_thumbnail(fileName);
+		dto.setAcc_thumbnail(fileArr[0]);
+		dto.setAcc_image1(fileArr[1]);
+		dto.setAcc_image2(fileArr[2]);
+		dto.setAcc_image3(fileArr[3]);
+		dto.setAcc_image4(fileArr[4]);
 
 		int check = this.dao.insertAcc(dto);
 
@@ -201,7 +205,7 @@ public class JdyController {
 			return "jdy/acc_insert_ok";
 		} else {
 			out.println("<script>");
-			out.println("alert('�닕�냼 �벑濡� �떎�뙣!')");
+			out.println("alert('숙소 등록 실패')");
 			out.println("history.back()");
 			out.println("</script>");
 			return null;
@@ -254,7 +258,7 @@ public class JdyController {
 		return "jdy/host_acc_modify";
 	}
 
-	// �샇�뒪�듃: �닔�젙 �럹�씠吏��뿉�꽌 �닔�젙�븯湲� 鍮꾨쾲 �븞�꽔�쓬!!!!!鍮꾨쾲�솗�씤!!!!
+	// 호스트: 숙소 수정
 	@RequestMapping("acc_modify_ok.do")
 	public void hostAModifyOk(AccDTO dto, HttpServletResponse response) throws IOException {
 
@@ -265,19 +269,19 @@ public class JdyController {
 
 		if (check > 0) {
 			out.println("<script>");
-			out.println("alert('�닕�냼 �닔�젙 �꽦怨�!')");
+			out.println("alert('숙소가 수정되었습니다!')");
 			out.println("location.href='host_acc_cont.do?no=" + dto.getAcc_code() + "'");
 			out.println("</script>");
 		} else {
 			out.println("<script>");
-			out.println("alert('�닕�냼 �닔�젙 �떎�뙣!')");
+			out.println("alert('숙소 수정 실패!')");
 			out.println("history.back()");
 			out.println("</script>");
 		}
 
 	}
 
-	// �샇�뒪�듃: �닕�냼 �긽�꽭 �럹�씠吏��쓽 �궘�젣 踰꾪듉 �븘吏� �닕�냼 肄붾뱶 �뾽�뜲�씠�듃 湲곕뒫 XXXXX 鍮꾨쾲 �븘�슂
+	// 호스트: 숙소 삭제 기능
 	@RequestMapping("host_adelete.do")
 	public void hostADelete(@RequestParam int no, 
 			@RequestParam int num, HttpServletResponse response)throws IOException {
@@ -289,12 +293,12 @@ public class JdyController {
 		
 		if (check > 0) {
 			out.println("<script>");
-			out.println("alert('�닕�냼 �궘�젣 �꽦怨�!')");
+			out.println("alert('숙소가 삭제되었습니다!')");
 			out.println("location.href='host_main.do?no=" + num + "'");
 			out.println("</script>");
 		} else {
 			out.println("<script>");
-			out.println("alert('�닕�냼 �궘�젣 �떎�뙣!')");
+			out.println("alert('숙소 삭제 실패!')");
 			out.println("history.back()");
 			out.println("</script>");
 		}

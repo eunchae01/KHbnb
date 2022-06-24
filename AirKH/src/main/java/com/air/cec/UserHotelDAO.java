@@ -30,4 +30,5 @@ public interface UserHotelDAO {
 	
 	public void updateMemberSequence(int no);
 	public void updatHostSequence(int no);
+	public HostHotelDTO getHostByNum(int hostno);
 }
