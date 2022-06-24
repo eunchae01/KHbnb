@@ -26,6 +26,12 @@
 		select * from offer_hotel order by offer_code
 	</select>
 	
+	<select id="tcont" parameterType="int" resultType="tdto">
+		select * from theme_hotel where theme_code=#{no}
+	
+	
+	</select>
+	
 	<!-- 숙소 테마별 검색 -->
 	<select id="stlist" parameterType="int" resultType="adto">
 		select * from acc_hotel where acc_theme = #{no} order by acc_code

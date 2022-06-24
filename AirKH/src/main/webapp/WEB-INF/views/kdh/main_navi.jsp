@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- <link rel="stylesheet" href="styl.css"> -->
+<!-- <link rel="stylesheet" href="sty.css"> -->
 <style type="text/css">
 @charset "UTF-8";
 
@@ -22,23 +22,8 @@ body{
 		
 		
 }
-#login{
-	
-	margin-left: 1100px;
-	margin-bottom:10px;
-	font-size: 15px;
-	word-spacing:20px;
-	text-shadow: 1px 2px 2px #666;
-}
 
-#login a{
-text-decoration:none
-}
 
-#login a:hover{
-		color: #F90;
-	
-}
 
 	.p-image img{
 	
@@ -57,7 +42,7 @@ text-decoration:none
 	
 	.p-text {
 	float:left;
-	margin-left:50px;
+	margin-left:150px;
 	
 	}
 	
@@ -89,6 +74,7 @@ text-decoration:none
 	display: flex;
 	justify-content:center;
 	align-items:center;
+	
 
 	}
 	
@@ -148,6 +134,7 @@ text-decoration:none
 	}
 
 	#navi{
+	width:100%;
 		background-color: black;
 	}
 	
@@ -157,7 +144,7 @@ text-decoration:none
 	
 	.head-bar{
 	color:white;
-	margin: 10px 40px;
+	margin: 10px 60px;
 	}
 	
 	.top li{
@@ -182,18 +169,7 @@ margin-top:5%;
 	font-size:15px;
 	style:bold;
 }
-	
-#foot{
-	padding: 5px 0;
-	width: 1200px;
-	margin: 0 auto;
-	
-	text-align:center;
-	background-color:black;
-	color:white;
-	font-size:15px;
-	clear:both;
-}
+
 
 
 
@@ -209,7 +185,7 @@ margin-top:5%;
 	<div align="center">
 	<div class="top">
 	<nav id ="navi">
-			<h1 class="head-bar">관리자 메뉴</h1>
+			<h1 class="head-bar"></h1>
 			
 			
 			<ul>
@@ -218,8 +194,9 @@ margin-top:5%;
 			 <li><a href="<%=request.getContextPath()%>/member_list.do" class="head-bar">[회원관리]</a></li>
 			 <li><a href="<%=request.getContextPath()%>/review_list.do" class="head-bar">[리뷰관리]</a></li>
 			 <li><a href="<%=request.getContextPath()%>/payment_list.do" class="head-bar">[결제관리]</a></li>
-			 <li><a href="<%=request.getContextPath()%>/acc_list.do" class="head-bar">[숙소관리]</a></li>
-			 <li><a href="<%=request.getContextPath()%>/reserve_list.do" class="head-bar">[예약관리]</a></li>
+			 <li><a href="<%=request.getContextPath()%>/hacc_list.do" class="head-bar">[숙소관리]</a></li>
+			<br>
+			
 			
 			 
 				

@@ -6,13 +6,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/sty.css" />
 </head>
 <body>
-
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/styl.css" />
-
+<div class="wrapper">
+<div class="container0">
 <jsp:include page="main_navi.jsp"/>
 
+
+
+
+<div class="dohyeong">
 	<div align="center">
 		<br>
 
@@ -96,6 +100,9 @@
 			<a href="member_search.do?page=${paging.getAllPage() }">[마지막으로]</a>
 		</c:if>
 		</div>
+	 		</div>
+		</div>
+	</div>
 
 </body>
 </html>

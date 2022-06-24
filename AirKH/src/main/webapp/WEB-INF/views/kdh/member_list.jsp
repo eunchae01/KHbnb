@@ -6,14 +6,88 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/styl.css" />
+
+<style type="text/css">
+
+	.wrapper {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		align-items:center;
+		
+	}
+	
+	.container0 {
+		width:90%;
+	}
+
+	.member_list_search {
+		display: flex;
+    	justify-content: end;
+    	margin-top:10px;
+    	height:33px;
+	}
+	.keyword{
+	height:27px;
+	}
+	
+	.search_bar {
+	    font-size: 1.2em;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+	}
+	
+	.serach{
+	
+	}
+	
+	.member_list_search select {
+	    font-size: 1.2em;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    height:100%;
+	}
+	
+	.dohyeong {
+	
+	    flex-direction: column;
+    align-items: center;
+    display: flex;
+	
+	}
+	
+	.bottom{
+	
+	}
+</style>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/sty.css" />
 
 
-<jsp:include page="main_navi.jsp"/>
+
 </head>
 <body>
-
+<div class="wrapper">
+<div class="container0">
+<jsp:include page="main_navi.jsp"/>
 	<div align="center">
+		 <div class="member_list_search">
+		<form method="post" action="<%=request.getContextPath() %>/member_search.do">
+			<input type="hidden" name="page" value="${paging.page}">
+			<select name="field">
+	         <option value="id">아이디</option>
+	         <option value="name">회원명</option>
+	         
+	      </select>
+	   	
+	      <input class="search_bar keyword" name="keyword">
+	      
+	      <input class="search_bar serach" type="submit" value="검색">
+		
+		</form>
+		</div>
+			<div class="dohyeong">	
 		<br>
 			<h3>회원 전체리스트 페이지</h3>
 		
@@ -28,7 +102,7 @@
 					<div class="each_item">
 					<a href="<%=request.getContextPath() %>/member_content.do?no=${dto.member_num}&page=${paging.page}">
 					
-						<img src="<%=request.getContextPath()%>/resources/member/${dto.member_pic}"  width="70px" height="70px">
+						<img src="<%=request.getContextPath()%>/resources/member/${dto.member_pic}"  width="200px" >
 					<br>
 					
 					
@@ -58,6 +132,7 @@
 	      
 	     
 		<br>
+					<div class="bottom">
 		
 		<c:if test="${paging.getPage() > paging.getBlock() }">
 			<a href="member_list.do?page=1">[처음으로]</a>
@@ -79,20 +154,10 @@
 			<a href="member_list.do?page=${paging.getAllPage() }">[마지막으로]</a>
 		</c:if>
 		<br><br>
-		
-		<form method="post" action="<%=request.getContextPath() %>/member_search.do">
-			<input type="hidden" name="page" value="${paging.page}">
-			<select name="field">
-	         <option value="id">아이디</option>
-	         <option value="name">회원명</option>
-	         
-	      </select>
-	      
-	      <input name="keyword">&nbsp;&nbsp;&nbsp;
-	      <input type="submit" value="검색">
-		
-		</form>
-					
+					</div>
+				</div>			
+			</div>
+		</div>
 	</div>
 
 </body>

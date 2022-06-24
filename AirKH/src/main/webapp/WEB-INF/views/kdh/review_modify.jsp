@@ -20,14 +20,15 @@
 	      action="<%=request.getContextPath() %>/review_modify_ok.do">
 			<input type="hidden" name="review_num" value="${dto.review_num }">
 			<input type="hidden" name="page" value="${Page }">
-			<table border="0" cellspacing="0" width="750">
+			<table border="0" cellspacing="0" width="1000">
 				<tr>
 					<th>숙소코드</th>
-					<td colspan="2"><input name="acc_code" value="${dto.acc_code }"></td>
-					
+					<td><input name="acc_code" value="${dto.acc_code }"></td>
+					<th>호스트번호</th>
+					<td><input name="host_num" value="${dto.host_num }"></td>
 					
 					<th>리뷰아이디</th>
-					<td colspan="2"><input name="member_id" value="${dto.member_id }" readonly></td>
+					<td><input name="member_id" value="${dto.member_id }" readonly></td>
 				</tr>
 				
 				<tr>
@@ -48,7 +49,9 @@
 					</tr>
 				<tr>
 					<th>예약날짜</th>
-					<td colspan="3"><input type="date" name="review_date" id="datepicker"></td>
+					<td><input type="date" name="review_date" id="datepicker"></td>
+					<th>글쓴이사진</th>
+					<td>${dto.member_pic }<input type="file" name="file1">
 					<th>평점</th>
 					<td><input type="number" name="review_sat"min="1" max="5" value="${dto.review_grade }"></td>
 				</tr>

@@ -14,15 +14,18 @@
 			<h2>리뷰 테이블 글쓰기 폼페이지</h2>
 		
 		
-		<form method="post" action="<%=request.getContextPath() %>/review_write_ok.do">
+		<form method="post" enctype="multipart/form-data" action="<%=request.getContextPath() %>/review_write_ok.do">
 		
-			<table border="0" cellspacing="0" width="750">
+			<table border="0" cellspacing="0" width="900">
 				<tr>
 					<th>숙소코드</th>
-					<td colspan="2"><input name="acc_code" ></td>
+					<td><input name="acc_code" ></td>
+					<th>호스트번호</th>
+					<td><input name="host_num"></td>
+					
 					
 					<th>리뷰아이디</th>
-					<td colspan="2"><input name="member_id" ></td>
+					<td><input name="member_id" ></td>
 				</tr>
 				<tr>
 					<th>청결도</th>
@@ -42,7 +45,9 @@
 					</tr>
 				<tr>
 					<th>예약날짜</th>
-					<td colspan="3"><input type="date" name="review_date" id="datepicker"></td>
+					<td><input type="date" name="review_date" id="datepicker"></td>
+					<th>글쓴이사진</th>
+					<td><input type="file" name="file1">
 					<th>평점</th>
 					<td><input type="number" name="review_grade"min="1" max="5" value="5"></td>
 				</tr>

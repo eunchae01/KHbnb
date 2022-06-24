@@ -21,8 +21,8 @@
 	
 	<insert id="rwrite" parameterType="rdto">
 		insert into review_hotel values((select max(review_num) from review_hotel)+1 ,#{acc_code},
-			#{member_id},#{review_cl},#{review_comm},#{review_check},#{review_acc},
-			#{review_loc},#{review_sat},#{review_date},#{review_grade},#{review_content})
+			#{host_num},#{member_id},#{review_cl},#{review_comm},#{review_check},#{review_acc},
+			#{review_loc},#{review_sat},#{review_date},#{member_pic},#{review_grade},#{review_content})
 	
 	
 	</insert>
@@ -33,9 +33,9 @@
 	</select>
 	
 	<update id="rupdate" parameterType="rdto">
-		update review_hotel set acc_code=#{acc_code}, review_cl=#{review_cl},
+		update review_hotel set acc_code=#{acc_code}, review_cl=#{review_cl},host_num=#{host_num},
 		review_comm=#{review_comm},review_check=#{review_check},review_acc=#{review_acc},
-		review_loc=#{review_loc},review_sat=#{review_sat},review_date=#{review_date},
+		review_loc=#{review_loc},review_sat=#{review_sat},member_pic=#{member_pic},review_date=#{review_date},
 		review_grade=#{review_grade},review_content=#{review_content} where review_num=#{review_num}
 		
 	

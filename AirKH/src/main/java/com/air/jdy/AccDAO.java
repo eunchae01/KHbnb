@@ -18,7 +18,9 @@ public interface AccDAO {
 	List<AccDTO> searchAcc(Map<String, Object> map, String id);
 	List<AccDTO> searchByThemeAcc(int no);
 	List<ThemeDTO> getThemeList();
+	public ThemeDTO getThemeCont(int no);
 	List<OfferDTO> getOfferList();
+	
 	String uploadFile(MultipartHttpServletRequest mRequest);
 	WishDTO likeAcc(int no);
 }
