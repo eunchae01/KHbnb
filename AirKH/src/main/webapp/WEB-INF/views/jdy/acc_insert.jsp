@@ -12,8 +12,11 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/insert.css" />
 </head>
 <body>
-<jsp:include page="./include/host_top.jsp" />
-	<section class="insert">
+	<jsp:include page="./include/host_top.jsp" />
+	<div class="progress-container">
+    	<div class="progress-bar" id="myBar"></div>
+	</div>
+	<section class="insert" id="scroller">
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
@@ -249,5 +252,17 @@
 		</div>
 	</section>
 </body>
+<script>
+
+//When the user scrolls the page, execute myFunction
+window.onscroll = function() {myFunction()};
+
+function myFunction() {
+  var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  var scrolled = (winScroll / height) * 100;
+  document.getElementById("myBar").style.width = scrolled + "%";
+}
+</script>
 </html>
 								

@@ -62,7 +62,7 @@
 		insert into acc_hotel values((select max(acc_code) from acc_hotel) + 1, #{acc_host}, #{acc_name},  
 		'0', #{acc_theme}, #{acc_country}, #{acc_city}, #{acc_thumbnail}, #{acc_price}, #{acc_spec},  
 		#{acc_build}, #{acc_type}, #{acc_maxp}, #{acc_bedroom}, #{acc_bed}, #{acc_bath}, #{acc_addr}, 
-		#{acc_mail}, #{acc_detail}, #{acc_phone}, '1', '1', '1', '1', #{acc_offer}, sysdate)
+		#{acc_mail}, #{acc_detail}, #{acc_phone}, #{acc_image1}, #{acc_image2}, #{acc_image3}, #{acc_image4}, #{acc_offer}, sysdate)
 	</insert>
 	
 	<!-- 호스트: 숙소 수정 -->

@@ -107,6 +107,8 @@ h3 {
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: wrap;
+	border-bottom: 1px solid lightgray;
+	margin-bottom: 30px;
 }
 
 .acc-box {
@@ -135,4 +137,9 @@ h3 {
 	width: 15px;
 	height: 15px;
 	margin-right: 5px;
+}
+
+/* review */
+.host-review {
+	padding-left: 40px;
 }

@@ -49,6 +49,21 @@ dd {
 }
 
 /* insert */
+.progress-container {
+	  position: fixed;
+  top: 82.5px;
+  z-index: 1;
+  width: 100%;
+  background-color: #f1f1f1;
+}
+.progress-bar {
+  height: 8px;
+  background: #12d0b4;
+  width: 0%;
+  transition: all .3s ease;
+}
+
+
 .insert {
 	padding-top: 100px;
 }

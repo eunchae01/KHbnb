@@ -38,8 +38,6 @@ $(function () {
 });
 
 </script>
-
-
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/grid.min.css" />
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/cont.css" />
 </head>
@@ -50,6 +48,7 @@ $(function () {
 	<c:set var="list" value="${oList }" />
 	<c:set var="off" value="${offer }" />
 	<c:set var="like" value="${like }" />
+	<c:set var="host" value="${Host }" />
 	
 	<header class="header">
 		<div class="container">
@@ -70,10 +69,10 @@ $(function () {
 								</c:if>
 								<c:if test="${dto.acc_star ne '0' }">
 									<img class="icons" src="<%=request.getContextPath() %>/resources/assets/star.png" alt="" />
-									<strong>&nbsp;4.5&nbsp;&middot;&nbsp;</strong>
+									<strong>&nbsp;<fmt:formatNumber value="${dto.acc_star }" pattern=".0"/>&nbsp;&middot;&nbsp;</strong>
 								</c:if>
 							</li>
-							<li><a href="#">후기 000개</a>&nbsp;&middot;&nbsp;</li>
+							<li><a href="#">후기 ${count }개</a>&nbsp;&middot;&nbsp;</li>
 							<li><a href="#">${dto.acc_city }, ${dto.acc_country }</a></li>
 						</ul>
 						<div class="rate">
@@ -123,7 +122,7 @@ $(function () {
 				<div class="col-8 desc-h2">
 					<div class="desc-head com-box">
 						<div class="desc-title-box">
-							<h2>000님이 호스팅하는 ${dto.acc_name }</h2>
+							<h2>${host.host_name}님이 호스팅하는 <br> ${dto.acc_name }</h2>
 							<ul>
 								<li>최대 인원 ${dto.acc_maxp }명&nbsp;</li>
 								<li>&middot; 침실 ${dto.acc_bedroom }개&nbsp;</li>
@@ -131,8 +130,8 @@ $(function () {
 								<li>&middot; 욕실 ${dto.acc_bath }개</li>
 							</ul>
 						</div>
-						<a href="#">
-							<img src="<%=request.getContextPath() %>/resources/assets/user.png" alt="" class="host-profile" />
+						<a href="#host-top">
+							<img src="<%=request.getContextPath() %>/resources/host/${host.host_pic}" alt="" class="host-profile" />
 						</a>
 					</div>
 					<div class="com-box">
@@ -190,23 +189,32 @@ $(function () {
 					</div>
 				</div>
 				<div class="col-4">
-					<hr color="#FF1111">
-					<br> <font
-						style="font-family: serif; font-size: 30px; font-weight: bold;">
-						₩<fmt:formatNumber value="${dto.acc_price  }" />
-					</font>/박<br> ★${dto.acc_star} · 후기n개 <br> <br>
-					<form method="post"
-						action="<%=request.getContextPath()%>/payment.do?acc_code=${dto.getAcc_code() }">
-						날짜 검색 <input class="btn btn-outline-danger"
-							style="width: 100%; background-color: white; color: red;"
-							min="${minDate }" type="text" id="day" name="day"><br>
-						인원 <input class="btn btn-outline-danger"
-							style="width: 100%; background-color: white; color: red;"
-							type="number" id="guest" name="guest" value="1" min="1"
-							max="${dto.acc_maxp }"> <br> <br>
-						<button type="submit" class="btn btn-danger" style="width: 100%">예약하기</button>
-						<hr color="#FF1111">
-					</form>
+					<div class="bill-container">
+						<div class="bill-top">					
+							<h3 class="bill-price">&#65510;<fmt:formatNumber value="${dto.acc_price  }" />&nbsp;<span>/박</span></h3>
+							<div class="bill-review">
+								<c:if test="${dto.acc_star eq '0' }">
+									<strong>&nbsp;NEW</strong>
+								</c:if>
+								<c:if test="${dto.acc_star ne '0' }">
+									<img class="icons" id="bill-star" src="<%=request.getContextPath() %>/resources/assets/star.png" alt="" />
+									<strong>&nbsp;&middot;&nbsp;&nbsp;<fmt:formatNumber value="${dto.acc_star }" pattern=".0"/>&nbsp;&middot;&nbsp;</strong>
+									<a href="#" id="review-count">후기 ${count }개</a>
+								</c:if>
+							</div>
+						</div>
+						<form method="post"
+							action="<%=request.getContextPath()%>/payment.do?acc_code=${dto.getAcc_code() }">
+							<strong class="bill-label">날짜 검색</strong>
+							<input class="btn btn-outline-danger"
+								min="${minDate }" type="text" id="day" name="day">
+							<strong class="bill-label">인원</strong>
+							<input class="btn btn-outline-danger"
+								type="number" id="guest" name="guest" value="1" min="1"
+								max="${dto.acc_maxp }">
+							<button type="submit" class="btn btn-danger" id="purchase-btn" >예약하기</button>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -215,56 +223,127 @@ $(function () {
 	<c:set var="list" value="${review_list}"/>
 	<c:set var="count" value="${count}"/>
 	<c:set var="vi" value="${re_avg }"/>
-	<section class="bottom">
+	
+	<section class="review-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 review-hr">
+					<ul class="review-head">
+						<li class="rate">
+							<c:if test="${dto.acc_star eq '0' }">
+								<img class="icons" src="<%=request.getContextPath() %>/resources/assets/blank-star.png" alt="" />
+								<h2>&nbsp;NEW&nbsp;&middot;&nbsp;</h2>
+							</c:if>
+							<c:if test="${dto.acc_star ne '0' }">
+								<img class="icons" src="<%=request.getContextPath() %>/resources/assets/star.png" alt="" />
+								<h2>&nbsp;${dto.acc_star }&nbsp;&middot;&nbsp;</h2>
+							</c:if>
+						</li>
+						<li><h2>&nbsp;후기 ${count }개</h2></li>
+					</ul>
+					<div class="score-box">
+						<div class="score-rbox">
+							<dl class="score-dtdd">
+								<dt class="score-dt">청결도</dt>
+								<dd class="score-dd"><fmt:formatNumber value="${vi.cl_avg }" pattern=".0"/></dd>
+							</dl>
+							<dl class="score-dtdd">
+								<dt class="score-dt">의사소통</dt>
+								<dd class="score-dd"><fmt:formatNumber value="${vi.comm_avg }" pattern=".0"/></dd>
+							</dl>
+							<dl class="score-dtdd">
+								<dt class="score-dt">체크인</dt>
+								<dd class="score-dd"><fmt:formatNumber value="${vi.check_avg }" pattern=".0"/></dd>
+							</dl>
+						</div>
+						<div class="score-rbox">
+							<dl class="score-dtdd">
+								<dt class="score-dt">정확성</dt>
+								<dd class="score-dd"><fmt:formatNumber value="${vi.acc_avg}" pattern=".0"/></dd>
+							</dl>
+							<dl class="score-dtdd">
+								<dt class="score-dt">위치</dt>
+								<dd class="score-dd"><fmt:formatNumber value="${vi.loc_avg }" pattern=".0"/></dd>
+							</dl>
+							<dl class="score-dtdd">
+								<dt class="score-dt">가격 대비 만족도</dt>
+								<dd class="score-dd"><fmt:formatNumber value="${vi.sat_avg }" pattern=".0"/></dd>
+							</dl>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row review-bottom">
+			<c:forEach items="${list }" var="mo">
+				<div class="col-6">
+					<div class="review-list">
+						<div class="rlist-top">
+							<img src="<%=request.getContextPath()%>/resources/member/${mo.member_pic }" alt="" />
+							<div class="rlist-title">
+								<div class="rlist-name">${mo.member_id }</div>
+								<div class="rlist-date">
+									${mo.review_date.substring(0,10) }
+								</div>
+							</div>
+						</div>
+						<div class="rlist-cont">${mo.review_content }</div>
+					</div>
+				</div>
+			</c:forEach>
+			</div>
+		</div>
+	</section>
+	
+	
+	<section class="host-section">
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
-					<hr />
-					<ul>
-						<li>
-							<c:if test="${dto.acc_star eq '0' }">
-								<img src="<%=request.getContextPath() %>/resources/assets/blank-star.png" alt="" />
-								<strong>new!</strong>
-							</c:if>
-							<c:if test="${dto.acc_star ne '0' }">
-								<img src="<%=request.getContextPath() %>/resources/assets/star.png" alt="" />
-								<strong>${dto.acc_star }</strong>
-							</c:if>
-						</li>
-						
-						
-						<li>&middot; 후기 ${count }개</li>
-						<ul  class="re_grade">
-							<li><span>청결도</span> <div class="bar clean"></div>${vi.cl_avg }</li>
-							<li><span>의사소통</span> <div class="bar comm"></div>${vi.comm_avg }</li>
-							<li><span>체크인</span> <div class="bar check"></div>${vi.check_avg }</li>
-							<li><span>정확성</span> <div class="bar acc"></div>${vi.acc_avg}</li>
-							<li><span>위치</span> <div class="bar loc"></div>${vi.loc_avg }</li>
-							<li><span>가격 대비 만족도</span> <div class="bar sat"></div>${vi.sat_avg }</li>
-						</ul>
-						
-						<ul class="re_list">
-							<c:forEach items="${list }" var="mo">
-								<li class="memeber_img"><img src="<%=request.getContextPath()%>/resources/member/${mo.member_pic }" width="70"></li>
-								<li class="re_list_name">${mo.member_id }</li>
-								<li class="re_list_date">${mo.review_date.substring(0,10) }</li>
-								<li class="re_list_cont">${mo.review_content }</li>
-							</c:forEach>
-						</ul>
-					</ul>
-					<hr />
-					<div class="host-desc">
-						<h3>호스트 소개란~~~~~~~</h3>
+					<div id="host-top">
+						<img src="<%=request.getContextPath() %>/resources/host/${host.host_pic}" alt="" class="host-profile" />
+						<div class="host-title">
+							<h4>호스트: ${host.host_name }</h4>
+							<p>회원 가입일: ${host.host_date.substring(0, 4) }년 ${host.host_date.substring(5, 7) }월&nbsp;&middot;&nbsp;사업자 정보</p>
+						</div>
 					</div>
-					<hr />
+					<div class="host-spec">
+						<img src="<%=request.getContextPath() %>/resources/assets/star.png" alt="" class="icons" />
+						<p>후기 ${count }개</p>
+						<img src="<%=request.getContextPath() %>/resources/assets/secure.png" alt="" class="icons" />
+						<p>본인 인증 완료</p>
+					</div>
+					<div class="host-intro">${host.host_int }</div>
 				</div>
 			</div>
+		</div>
+	</section>
+	<section class="need-to-know">
+		<div class="container">
 			<div class="row">
-				<div class="col-4">
-					<h3>알아두어야 할 사항</h3>
+				<div class="col-4 know-col">
+					<h2>알아두어야 할 사항</h2>
+					<strong>숙소 이용규칙</strong>
+					<div class="know-row">
+						<img src="<%=request.getContextPath() %>/resources/assets/clock.png" alt="" class="icons" />
+						<p>체크인: 오후 3:00 - 오후 10:00</p>
+					</div>
+					<div class="know-row">
+						<img src="<%=request.getContextPath() %>/resources/assets/clock.png" alt="" class="icons" />
+						<p>체크아웃 시간: 오전 11:00</p>
+					</div>
+					<div class="know-row">
+						<img src="<%=request.getContextPath() %>/resources/assets/no-smoking.png" alt="" class="icons" />
+						<p>흡연 금지</p>
+					</div>
+					<div class="know-row">
+						<img src="<%=request.getContextPath() %>/resources/assets/no-pets-allowed.png" alt="" class="icons" />
+						<p>반려동물 동반 불가</p>
+					</div>
 				</div>
-				<div class="col-4"></div>
-				<div class="col-4"></div>
+				<div class="col-4">
+				</div>
+				<div class="col-4">
+				</div>
 			</div>
 		</div>
 	</section>
