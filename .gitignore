@@ -4,4 +4,7 @@ pom.xml
 
 
 root-context.xml
-/target/
+
+Servers/
+
+**/target/
