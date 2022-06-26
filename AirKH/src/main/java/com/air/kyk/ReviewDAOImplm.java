@@ -24,22 +24,11 @@ public class ReviewDAOImplm implements ReviewDAOm{
 	}
 
 	@Override
-	public int insertReview() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertReview(ReviewDTOm dto) {
+		return this.sqlSession.selectOne("re_add", dto);
 	}
 
-	@Override
-	public int updateReview(ReviewDTOm dto) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int deleteReview(int no) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
 
 	@Override
 	public AvgDTO avgCont(int no) {
@@ -50,6 +39,17 @@ public class ReviewDAOImplm implements ReviewDAOm{
 	@Override
 	public List<ReviewDTOm> hostReviewCont(int no) {
 		return this.sqlSession.selectList("host_re", no);
+	}
+
+	@Override
+	public int reinsert_hostnum(int no) {
+		
+		return this.sqlSession.selectOne("re_hostNum",no);
+	}
+
+	@Override
+	public String reinsert_pic(String member_id) {
+		return this.sqlSession.selectOne("re_pic", member_id);
 	}
 
 

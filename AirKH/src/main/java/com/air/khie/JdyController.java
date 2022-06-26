@@ -54,17 +54,22 @@ public class JdyController {
 	
 	// �궗�슜�옄 �닕�냼 �긽�꽭 �럹�씠吏�
 	@RequestMapping("acc_content.do")
-	public String content(@RequestParam int no, Model model) {
+	public String content(@RequestParam int no, Model model, HttpSession session) {
 
 		AccDTO dto = this.dao.getAccCont(no);
 		List<OfferDTO> olist = this.dao.getOfferList();
 		WishDTO like=this.dao.likeAcc(no);
 		
+		String member_id = (String)session.getAttribute("member_id");
+		String member_pic = this.re_dao.reinsert_pic(member_id);
 		List<ReviewDTOm> re_dto = this.re_dao.reviewCont(no);
 	    int count = this.re_dao.getReivewListCount(no);
 	    AvgDTO re_avg = this.re_dao.avgCont(no);
-
-
+	    int reinsert_hostnum = this.re_dao.reinsert_hostnum(no);
+	    
+	    
+		
+	    
 		String offer_str = dto.getAcc_offer();
 		String[] offer_arr = offer_str.split(",");
 		int[] int_arr = new int[offer_arr.length];
@@ -73,9 +78,12 @@ public class JdyController {
 			int_arr[i] = Integer.parseInt(offer_arr[i]);
 		}
 
+		model.addAttribute("member_pic",member_pic);
+		model.addAttribute("in_host",reinsert_hostnum);
 		model.addAttribute("re_avg",re_avg);
 	    model.addAttribute("review_list", re_dto);
 	    model.addAttribute("count", count);
+	    model.addAttribute("member_id", member_id);
 
 		model.addAttribute("Cont", dto);
 		model.addAttribute("oList", olist);

@@ -35,6 +35,16 @@ $(function () {
     }, function (start, end, label) {
         console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
     });
+    
+    // 글자 수 제한
+    $('#re_textCont').on('keyup', function() {
+        $('#re_text_cnt').html("("+$(this).val().length+" / 200)");
+ 
+        if($(this).val().length > 200) {
+            $(this).val($(this).val().substring(0, 200));
+            $('re_text_cnt').html("(200 / 200)");
+        }
+    });
 });
 
 </script>
@@ -42,14 +52,16 @@ $(function () {
 
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/grid.min.css" />
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/cont.css" />
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/modal.css" />
 </head>
 <body>
-
+	
 	<jsp:include page="./include/main_top.jsp" />
 	<c:set var="dto" value="${Cont }" />
 	<c:set var="list" value="${oList }" />
 	<c:set var="off" value="${offer }" />
 	<c:set var="like" value="${like }" />
+	
 	
 	<header class="header">
 		<div class="container">
@@ -212,7 +224,7 @@ $(function () {
 		</div>
 	</section>
 	
-	<c:set var="list" value="${review_list}"/>
+	<c:set var="re_list" value="${review_list}"/>
 	<c:set var="count" value="${count}"/>
 	<c:set var="vi" value="${re_avg }"/>
 	<section class="bottom">
@@ -244,7 +256,7 @@ $(function () {
 						</ul>
 						
 						<ul class="re_list">
-							<c:forEach items="${list }" var="mo">
+							<c:forEach items="${re_list }" var="mo">
 								<li class="memeber_img"><img src="<%=request.getContextPath()%>/resources/member/${mo.member_pic }" width="70"></li>
 								<li class="re_list_name">${mo.member_id }</li>
 								<li class="re_list_date">${mo.review_date.substring(0,10) }</li>
@@ -252,6 +264,119 @@ $(function () {
 							</c:forEach>
 						</ul>
 					</ul>
+					 <div id="modal_container">
+        <input type="button" value="리뷰 등록하기" id="btn-modal">
+        
+    </div>
+    
+    <div id="modal" class="modal-overlay">
+        <div class="modal-window">
+            <div class="title">
+                <h2>리뷰 등록하기</h2>
+            </div>
+            <div class="close-area">X</div>
+            <c:set var="mem" value="${member_id }" />
+            <c:set var="mem_pic" value="${member_pic }" />
+            <div class="modal_content">
+                <form method="post" action="<%=request.getContextPath() %>/review_insert_ok.do">
+                	<table border="0" cellspacing="0" width="1200px">
+                	<br/>
+                		<tr>
+                			<th>숙소 이름</th>
+                			<td><input type="text" name="acc_name" value="${dto.acc_name }"></td>
+                			<td class="re_hidden"><input type="number" name="acc_code" value="${dto.acc_code }"></td>
+                			<td class="re_hidden"><input type="text" name="member_id" value="${mem }"></td>
+                			<td class="re_hidden"><input type="text" name="member_pic" value="${mem_pic }"></td>
+                			 
+                		</tr>
+                		<tr>
+                			<th>청결한가요?</th>
+                			<td>
+                			<input type="checkbox" name="review_cl" value="1"> 1점
+                			<input type="checkbox" name="review_cl" value="2"> 2점
+                			<input type="checkbox" name="review_cl" value="3"> 3점
+                			<input type="checkbox" name="review_cl" value="4"> 4점
+                			<input type="checkbox" name="review_cl" value="5"> 5점
+                			</td>
+                		</tr>
+                		<tr>
+                			<th>의사소통은 잘 되었나요?</th>
+                			<td>
+                			<input type="checkbox" name="review_comm" value="1"> 1점
+                			<input type="checkbox" name="review_comm" value="2"> 2점
+                			<input type="checkbox" name="review_comm" value="3"> 3점
+                			<input type="checkbox" name="review_comm" value="4"> 4점
+                			<input type="checkbox" name="review_comm" value="5"> 5점
+                			</td>
+                		</tr>
+                		<tr>
+                			<th>체크인 / 아웃 시간은 잘 지켜졌나요?</th>
+                			<td>
+                			<input type="checkbox" name="review_check" value="1"> 1점
+                			<input type="checkbox" name="review_check" value="2"> 2점
+                			<input type="checkbox" name="review_check" value="3"> 3점
+                			<input type="checkbox" name="review_check" value="4"> 4점
+                			<input type="checkbox" name="review_check" value="5"> 5점
+                			</td>
+                		</tr>
+                		<tr>
+                			<th>주소는 정확한가요?</th>
+                			<td>
+                			<input type="checkbox" name="review_acc" value="1"> 1점
+                			<input type="checkbox" name="review_acc" value="2"> 2점
+                			<input type="checkbox" name="review_acc" value="3"> 3점
+                			<input type="checkbox" name="review_acc" value="4"> 4점
+                			<input type="checkbox" name="review_acc" value="5"> 5점
+                			</td>
+                		</tr>
+                		<tr>
+                			<th>교통편의성은 어떤가요?</th>
+                			<td>
+                			<input type="checkbox" name="review_loc" value="1"> 1점
+                			<input type="checkbox" name="review_loc" value="2"> 2점
+                			<input type="checkbox" name="review_loc" value="3"> 3점
+                			<input type="checkbox" name="review_loc" value="4"> 4점
+                			<input type="checkbox" name="review_loc" value="5"> 5점
+                			</td>
+                		</tr>
+                		<tr>
+                			<th>가격대비 만족도는 어떤가요?</th>
+                			<td>
+                			<input type="checkbox" name="review_sat" value="1"> 1점
+                			<input type="checkbox" name="review_sat" value="2"> 2점
+                			<input type="checkbox" name="review_sat" value="3"> 3점
+                			<input type="checkbox" name="review_sat" value="4"> 4점
+                			<input type="checkbox" name="review_sat" value="5"> 5점
+                			</td>
+                		</tr>
+                		<tr>
+                			<th>전체적인 평점은 어떤가요?</th>
+                			<td>
+                			<input type="checkbox" name="review_grade" value="1"> 1점
+                			<input type="checkbox" name="review_grade" value="2"> 2점
+                			<input type="checkbox" name="review_grade" value="3"> 3점
+                			<input type="checkbox" name="review_grade" value="4"> 4점
+                			<input type="checkbox" name="review_grade" value="5"> 5점
+                			</td>
+                		</tr>
+                		<br/>
+                		<tr>
+                			<th>리뷰를 작성해주세요!</th>
+                			<td>
+                				<textarea id="re_textCont" name="review_content" cols="100" rows="3"></textarea>
+                				<div id="re_text_cnt">(0 / 200)</div>
+                			</td>
+                		</tr>
+                		
+                		
+                		
+                	</table>
+                	<input class="submit_btn" type="submit" value="리뷰등록">
+                </form>
+                
+            </div>
+        </div>
+    </div>
 					<hr />
 					<div class="host-desc">
 						<h3>호스트 소개란~~~~~~~</h3>
@@ -261,12 +386,54 @@ $(function () {
 			</div>
 			<div class="row">
 				<div class="col-4">
-					<h3>알아두어야 할 사항</h3>
+					<h3>알아두어야 할 사항</h3> 
 				</div>
 				<div class="col-4"></div>
 				<div class="col-4"></div>
 			</div>
 		</div>
 	</section>
+	 <script>
+  			// 모달 기본 틀
+        	const modal = document.getElementById("modal")
+            
+
+            function modalOn() {
+			    modal.style.display = "flex"
+			}
+			function isModalOn() {
+			    return modal.style.display === "flex"
+			}
+			function modalOff() {
+			    modal.style.display = "none"
+			}
+            
+            // 모달 보이게하기
+			const btnModal = document.getElementById("btn-modal")
+				btnModal.addEventListener("click", e => {
+				    modal.style.display = "flex"
+				})
+			
+			// x 버튼 클릭 시 닫기 
+			const closeBtn = modal.querySelector(".close-area")
+				closeBtn.addEventListener("click", e => {
+				    modal.style.display = "none"
+			})
+			
+			// 모달 바깥부분 클릭 시 닫기
+			modal.addEventListener("click", e => {
+			    const evTarget = e.target
+			    if(evTarget.classList.contains("modal-overlay")) {
+			        modal.style.display = "none"
+			    }
+			})
+	
+			// ESC 버튼 누르면 닫기
+			window.addEventListener("keyup", e => {
+			    if(modal.style.display === "flex" && e.key === "Escape") {
+			        modal.style.display = "none"
+			    }
+			})
+    </script>
 </body>
 </html>
