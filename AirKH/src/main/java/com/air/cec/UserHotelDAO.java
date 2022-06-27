@@ -1,6 +1,11 @@
 package com.air.cec;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.air.cwc.PaymentDTO;
+import com.model.common.MemberDTO;
 
 public interface UserHotelDAO {
 	//회원가입
@@ -31,4 +36,17 @@ public interface UserHotelDAO {
 	public void updateMemberSequence(int no);
 	public void updatHostSequence(int no);
 	public HostHotelDTO getHostByNum(int hostno);
+
+	//메세지
+	public List<PaymentDTO> memReserve(String mem_name);
+	public List<PaymentDTO> hostReserve(String host_name);
+	
+	public List<MsgHotelDTO> msgInfo();
+	
+	
+//	public List<MsgHotelDTO> msgList(String name);
+	public List<MsgHotelDTO> msgList(MsgHotelDTO dto);
+	
+	public int insertMsg(MsgHotelDTO dto);
+	public int insertMsgH(MsgHotelDTO dto);
 }

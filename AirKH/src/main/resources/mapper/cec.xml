@@ -82,4 +82,41 @@
 			update member_hotel member_num = member_num - 1 where member_num > #{num}
 		]]>
 	</update>
+	
+	<!-- 메세지 -->
+	<select id="memMsg" parameterType="String" resultType="com.air.cwc.PaymentDTO">
+		select * from payment_hotel where reserve_info = 1 and member_name = #{member_name} order by check_in desc
+	</select>
+	
+	<select id="hostMsg" parameterType="String" resultType="com.air.cwc.PaymentDTO">
+		select * from payment_hotel where reserve_info = 1 and host_name = #{host_name} order by check_in desc
+	</select>
+	
+	<select id="infoMsg" resultType="com.air.cec.MsgHotelDTO">
+		select * from msg_hotel order by msg_date asc
+	</select>
+	
+	<!-- param을 msgdto로 바꿔서 변수 여러개로 조건 줄 수 있게 수정 -->
+	<!-- <select id="getMsg" parameterType="String" resultType="com.air.cec.MsgHotelDTO">
+		select * from msg_hotel where msg_member = #{name} order by msg_date asc
+	</select> -->
+	<select id="getMsg" parameterType="com.air.cec.MsgHotelDTO" resultType="com.air.cec.MsgHotelDTO">
+		select * from msg_hotel where msg_member = #{name} order by msg_date asc
+	</select>
+	
+	<insert id="insertMsg" parameterType="com.air.cec.MsgHotelDTO">
+		<selectKey resultType="int" keyProperty="msg_num" order="BEFORE">
+			select nvl(max(msg_num), 0) from msg_hotel
+		</selectKey>
+		
+		insert into msg_hotel values(#{msg_num} + 1, #{msg_host}, #{msg_member}, #{msg_cont}, sysdate, #{msg_check}, #{msg_sender})
+	</insert>
+	
+	<insert id="insertMsgH" parameterType="com.air.cec.MsgHotelDTO">
+		<selectKey resultType="int" keyProperty="msg_num" order="BEFORE">
+			select nvl(max(msg_num), 0) from msg_hotel
+		</selectKey>
+		
+		insert into msg_hotel values(#{msg_num} + 1, #{msg_host}, #{msg_member}, #{msg_cont}, sysdate, #{msg_check}, #{msg_sender})
+	</insert>
 </mapper>

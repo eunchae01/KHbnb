@@ -2,12 +2,15 @@ package com.air.cec;
 
 import java.io.File;
 import java.util.Iterator;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.air.cwc.PaymentDTO;
 
 @Repository
 public class UserHotelDAOImpl implements UserHotelDAO{
@@ -197,4 +200,39 @@ public class UserHotelDAOImpl implements UserHotelDAO{
 	public HostHotelDTO getHostByNum(int hostno) {
 		return this.sqlSession.selectOne("hostByNum", hostno);
 	}
+
+	//메세지(왼쪽 바)
+	public List<PaymentDTO> memReserve(String member_name) {
+		return this.sqlSession.selectList("memMsg", member_name);
+	}
+	
+	public List<PaymentDTO> hostReserve(String host_name) {
+		return this.sqlSession.selectList("hostMsg", host_name);
+	}
+
+	@Override
+	public List<MsgHotelDTO> msgInfo() {
+		return this.sqlSession.selectList("infoMsg");
+	}
+
+	/*
+	 * @Override public List<MsgHotelDTO> msgList(String name) { return
+	 * this.sqlSession.selectList("getMsg", name); }
+	 */
+	@Override
+	public List<MsgHotelDTO> msgList(MsgHotelDTO dto) {
+		return this.sqlSession.selectList("getMsg", dto);
+	}
+	
+	
+	@Override
+	public int insertMsg(MsgHotelDTO dto) {
+		return this.sqlSession.insert("insertMsg", dto);
+	}
+	
+	@Override
+	public int insertMsgH(MsgHotelDTO dto) {
+		return this.sqlSession.insert("insertMsgH", dto);
+	}
+
 }

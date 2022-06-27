@@ -29,7 +29,7 @@
 							A reprehenderit eligendi consectetur aspernatur modi tempore
 							asperiores quisquam cum impedit!
 						</p>
-						<a href="#">프로필 수정</a>
+						<a href="<%=request.getContextPath()%>/info-update.do">프로필 수정</a>
 					</div>
 				</div>
 				<div class="col-8">
