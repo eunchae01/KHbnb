@@ -25,7 +25,7 @@ public class ReviewDAOImplm implements ReviewDAOm{
 
 	@Override
 	public int insertReview(ReviewDTOm dto) {
-		return this.sqlSession.selectOne("re_add", dto);
+		return this.sqlSession.insert("re_add", dto);
 	}
 
 	

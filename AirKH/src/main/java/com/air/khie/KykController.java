@@ -48,7 +48,7 @@ public class KykController {
 		if (check > 0) {
 			out.println("<script>");
 			out.println("alert('리뷰 작성 완료!')");
-			out.println("history.back()");
+			out.println("location.href='acc_content.do?no="+dto.getAcc_code() +"'");
 			out.println("</script>");
 		} else {
 			out.println("<script>");
