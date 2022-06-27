@@ -5,3 +5,10 @@ pom.xml
 
 root-context.xml
 /target/
+AirKH/target/classes/com/air/khie/CecController.class
+AirKH/target/classes/com/air/khie/JdyController.class
+AirKH/target/classes/com/air/kyk/AvgDTO.class
+AirKH/target/classes/com/air/kyk/ReviewDAOImplm.class
+AirKH/target/classes/com/air/kyk/ReviewDAOm.class
+AirKH/target/classes/com/air/kyk/ReviewDTOm.class
+AirKH/target/classes/mapper/kyk.xml
