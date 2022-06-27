@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.air.kyk.QA_boardDAO;
 import com.air.kyk.QA_boardDTO;
@@ -37,7 +38,7 @@ public class KykController {
 	}
 	
 	@RequestMapping("review_insert_ok.do")
-	public void re_insertOk(ReviewDTOm dto, HttpServletResponse response) throws IOException {
+	public void re_insertOk(ReviewDTOm dto, @RequestParam("hostno") int hostno, HttpServletResponse response) throws IOException {
 		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
@@ -48,7 +49,7 @@ public class KykController {
 		if (check > 0) {
 			out.println("<script>");
 			out.println("alert('리뷰 작성 완료!')");
-			out.println("history.back()");
+			out.println("location.href='acc_content.do?no="+dto.getAcc_code()+"&hostno="+hostno+"'");
 			out.println("</script>");
 		} else {
 			out.println("<script>");

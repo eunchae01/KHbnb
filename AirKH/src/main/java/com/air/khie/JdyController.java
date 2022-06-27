@@ -57,15 +57,11 @@ public class JdyController {
 	
 	// �궗�슜�옄 �닕�냼 �긽�꽭 �럹�씠吏�
 	@RequestMapping("acc_content.do")
-<<<<<<< HEAD
-	public String content(@RequestParam int no, @RequestParam int hostno, Model model) {
+
+	public String content(@RequestParam int no, @RequestParam int hostno, Model model, HttpSession session) {
 		
 		// 호스트 정보 받아오기
         HostHotelDTO hostDto = this.userDao.getHostByNum(hostno);
-=======
-	public String content(@RequestParam int no, Model model, HttpSession session) {
->>>>>>> 06fdee6 (커밋)
-
 		AccDTO dto = this.dao.getAccCont(no);
 		List<OfferDTO> olist = this.dao.getOfferList();
 		WishDTO like=this.dao.likeAcc(no);
@@ -87,13 +83,9 @@ public class JdyController {
 		for (int i = 0; i < offer_arr.length; i++) {
 			int_arr[i] = Integer.parseInt(offer_arr[i]);
 		}
-<<<<<<< HEAD
 		
-=======
-
 		model.addAttribute("member_pic",member_pic);
 		model.addAttribute("in_host",reinsert_hostnum);
->>>>>>> 06fdee6 (커밋)
 		model.addAttribute("re_avg",re_avg);
 	    model.addAttribute("review_list", re_dto);
 	    model.addAttribute("count", count);
