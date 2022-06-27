@@ -81,7 +81,7 @@
 								<a href="<%=request.getContextPath()%>/signup-host.do">숙소 호스트 되기</a>
 
 								<a href="<%=request.getContextPath()%>/wish.content.do">위시리스트</a>
-								<a href="<%=request.getContextPath()%>/reservation_guest.do">여행</a>
+								<a href="<%=request.getContextPath()%>/reservation_guest.do?member_id=member_id">여행</a>
 
 								<a href="#">계정</a>
 								<a href="#">도움말</a>

@@ -55,7 +55,7 @@ public class JdyController {
 	// �궗�슜�옄 �닕�냼 �긽�꽭 �럹�씠吏�
 	@RequestMapping("acc_content.do")
 	public String content(@RequestParam int no, Model model) {
-
+		
 		AccDTO dto = this.dao.getAccCont(no);
 		List<OfferDTO> olist = this.dao.getOfferList();
 		WishDTO like=this.dao.likeAcc(no);

@@ -3,25 +3,92 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-    
-   
+
+
 <mapper namespace="com.air.cwc.PaymentDAO">
 
 	<insert id="addpayment" parameterType="com.air.cwc.PaymentDTO">
-		<selectKey resultType="int" keyProperty="cart_num" order="BEFORE">
+		<selectKey resultType="int" keyProperty="cart_num"
+			order="BEFORE">
 			select nvl(max(cart_num), 0) from payment_hotel
 		</selectKey>
-		
-		insert into payment_hotel values(#{cart_num} + 1, #{acc_code}, #{acc_name},
-		 #{acc_price}, #{acc_thumbnail},#{acc_addr}, #{check_in}, #{check_out}, #{check_person},
-		 #{member_name}, #{member_phone}, #{member_addr}, #{host_name}, #{host_phone}, #{reserve_info}, 
-		 #{card_num},#{exprie},#{cvv},#{zip_code},#{country},
-		 sysdate
-		 )
+
+		insert into payment_hotel values(#{cart_num} + 1, #{acc_code},
+		#{acc_name},
+		#{acc_price}, #{acc_thumbnail},#{acc_addr}, #{check_in}, #{check_out},
+		#{check_person},
+		#{member_name}, #{member_phone}, #{host_name}, #{host_phone}, #{reserve_info},
+		#{card_num},#{exprie},#{cvv},#{zip_code},#{country},
+		sysdate
+		)
 	</insert>
 
-	<select id="paylist" resultType="com.air.cwc.PaymentDTO">
-		select * from payment_hotel
+	<select id="paylist" parameterType="String"
+		resultType="com.air.cwc.PaymentDTO">
+		select * from payment_hotel where member_name=#{member_id}
+		order by check_in
 	</select>
 
+	<select id="Hpaylist" parameterType="String"
+		resultType="com.air.cwc.PaymentDTO">
+		select * from payment_hotel where host_name=#{host_name}
+		order by check_in
+	</select>
+
+	<select id="out_list" parameterType="String"
+		resultType="com.air.cwc.PaymentDTO">
+		select * from payment_hotel where host_name=#{host_name}
+		order by check_in
+	</select>
+
+	<select id="in_list" parameterType="String"
+		resultType="com.air.cwc.PaymentDTO">
+		select * from payment_hotel where host_name=#{host_name} order by check_in
+
+	</select>
+
+	<select id="pre_list" parameterType="String"
+		resultType="com.air.cwc.PaymentDTO">
+		select * from payment_hotel where host_name=#{host_name}
+		order by check_in
+	</select>
+
+	<select id="update_list" parameterType="String"
+		resultType="com.air.cwc.PaymentDTO">
+		select * from payment_hotel where host_name=#{host_name}
+		AND reserve_info='예약 승인 대기 중' order by check_in
+	</select>
+
+	<select id="approve_list" parameterType="String"
+		resultType="com.air.cwc.PaymentDTO">
+		select * from payment_hotel where host_name=#{host_name}
+		AND reserve_info='예약 승인 대기 중' order by check_in
+	</select>
+
+
+
+	<select id="acc_host" resultType="com.air.cec.HostHotelDTO"
+		parameterType="int">
+		select * from host_hotel where host_num = #{acc_host}
+	</select>
+
+	<delete id="del_cart" parameterType="int">
+		delete from payment_hotel
+		where cart_num=#{cart_num}
+	</delete>
+
+	<select id="cart_cont" parameterType="int"
+		resultType="com.air.cwc.PaymentDTO">
+		select * from payment_hotel where cart_num = #{cart_num}
+	</select>
+
+	<update id="modify" parameterType="com.air.cwc.PaymentDTO">
+		update payment_hotel set
+		acc_price=#{acc_price}, check_in=#{check_in}, cart_num=#{check_out},
+		check_person=#{check_person}, member_phone=#{member_phone},
+		reserve_info=#{reserve_info},
+		card_num=#{card_num},exprie=#{exprie},cvv=#{cvv},zip_code=#{zip_code},
+		country=#{country},
+		where cart_num =#{cart_num}
+	</update>
 </mapper>

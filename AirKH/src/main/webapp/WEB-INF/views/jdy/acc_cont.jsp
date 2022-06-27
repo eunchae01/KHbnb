@@ -16,6 +16,18 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
 <script type="text/javascript">
+$(function() {
+	let today = new Date();   
+	let year = today.getFullYear(); // 년도
+	let month = today.getMonth() + 1;  // 월
+	let date = today.getDate();  // 날짜
+	$("#ck_in").text( year + '-' + month + '-' + date);
+	$("#ck_out").text(year + '-' + month + '-' + date);
+	});
+	</script>
+
+<script type="text/javascript">
+
 $(function () {
     $('#day').daterangepicker({
         "locale": {
@@ -33,7 +45,26 @@ $(function () {
         },
         "drops": "down"
     }, function (start, end, label) {
-        console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+        console.log(start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+    	let ck_in=start.format('YYYY-MM-DD');
+    	let ck_out=end.format('YYYY-MM-DD');
+    	
+    	let date1=new Date(ck_in);
+    	let date2=new Date(ck_out);
+    	let difDate= date1.getTime() - date2.getTime();
+    	let total=Math.abs(difDate / (1000 * 60 * 60 * 24));
+    	$("#ck_in").text( ck_in);
+    	$("#ck_out").text(ck_out);
+    	$("#ck_day").text(total);
+    	$("#ck_day2").text(total);
+    	let pri=$("#totalp").val();
+    	let service=pri*0.1;
+    	let total_price=pri*total
+    	let tomoney=service+total_price;
+    	console.log(total_price);
+    	document.getElementById("totalp").value ="₩"+total_price.toLocaleString()+"원";
+    	document.getElementById("totals").value ="₩"+service.toLocaleString()+"원";
+    	document.getElementById("totalm").value ="₩"+tomoney.toLocaleString()+"원";
     });
 });
 
@@ -78,7 +109,7 @@ $(function () {
 						</ul>
 						<div class="rate">
 							<c:if test="${!empty like }">
-							<img class="icons" src="<%=request.getContextPath() %>/resources/assets/heart.png" alt="" />
+							<img class="icons" src="<%=request.getContextPath() %>/resources/assets/red-heart.png" alt="" />
 							<a href="<%=request.getContextPath() %>/wish_delete.do?acc_code=${dto.acc_code}"><strong>&nbsp;찜하기</strong></a>
 							</c:if>
 
@@ -183,10 +214,9 @@ $(function () {
 						</div>
 					</div>
 					<div>
-						<h3>city에서 0000박</h3>
-						<div>일~일</div>
-						<div>달력</div>
-						<button>날짜 지우기</button>
+						<h3>${dto.acc_country }에서 <span id="ck_day">1</span>박</h3><br>
+						<div>예약 날짜: <span id="ck_in"></span> - <span id="ck_out"></span></div>
+						<br><a href="#day" class="fake-a">날짜 변경 하기</a>
 					</div>
 				</div>
 				<div class="col-4">
@@ -199,7 +229,7 @@ $(function () {
 						action="<%=request.getContextPath()%>/payment.do?acc_code=${dto.getAcc_code() }">
 						날짜 검색 <input class="btn btn-outline-danger"
 							style="width: 100%; background-color: white; color: red;"
-							min="${minDate }" type="text" id="day" name="day"><br>
+							min="${minDate }" type="text" id="day" name="day" value="${minDate }"><br>
 						인원 <input class="btn btn-outline-danger"
 							style="width: 100%; background-color: white; color: red;"
 							type="number" id="guest" name="guest" value="1" min="1"
@@ -207,6 +237,16 @@ $(function () {
 						<button type="submit" class="btn btn-danger" style="width: 100%">예약하기</button>
 						<hr color="#FF1111">
 					</form>
+					
+					<div>
+					<font
+						style="font-family: serif; font-size: 20px; font-weight: bold;">
+						₩<fmt:formatNumber value="${dto.acc_price  }" /></font>X<span id="ck_day2"></span>박
+						<input id="totalp" readonly value="${dto.acc_price  }"><br>
+						서비스 수수료:<input id="totals" readonly>
+						<hr>
+						총 합계: <input id="totalm" readonly>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -133,6 +133,7 @@ public class CecController {
 
 					session.setAttribute("host_num", dto.getHost_num());
 					session.setAttribute("host_id", dto.getHost_id());
+					session.setAttribute("host_name", dto.getHost_name());
 					session.setAttribute("hostORmember", hostORmember);
 					
 				} else {
@@ -184,6 +185,8 @@ public class CecController {
 
 					session.setAttribute("member_num", dto.getMember_num());
 					session.setAttribute("member_id", dto.getMember_id());
+					session.setAttribute("member_name", dto.getMember_name());
+					
 					session.setAttribute("hostORmember", hostORmember);
 				} else {
 					out.println("<script>");

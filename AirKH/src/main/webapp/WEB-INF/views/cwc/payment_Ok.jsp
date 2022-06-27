@@ -23,7 +23,6 @@ margin-bottom: 300px;}
 		</div>
 		
 		<div>
-		[memid로 검색]
 			<h3><a href="reservation_guest.do">예약 내역 확인하기>></a></h3>
 		</div>
 	</div>
