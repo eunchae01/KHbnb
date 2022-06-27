@@ -163,6 +163,17 @@ public class UserHotelDAOImpl implements UserHotelDAO{
 	public MemberHotelDTO getMember(String id) {
 		return this.sqlSession.selectOne("memberInfo", id);
 	}
+	
+	//회원 정보 가져오기 (name으로)
+	@Override
+	public HostHotelDTO getHostName(String name) {
+		return this.sqlSession.selectOne("hostInfoName", name);
+	}
+	
+	@Override
+	public MemberHotelDTO getMemberName(String name) {
+		return this.sqlSession.selectOne("memberInfoName", name);
+	}
 
 	//내정보 수정
 	@Override
@@ -215,15 +226,10 @@ public class UserHotelDAOImpl implements UserHotelDAO{
 		return this.sqlSession.selectList("infoMsg");
 	}
 
-	/*
-	 * @Override public List<MsgHotelDTO> msgList(String name) { return
-	 * this.sqlSession.selectList("getMsg", name); }
-	 */
 	@Override
 	public List<MsgHotelDTO> msgList(MsgHotelDTO dto) {
 		return this.sqlSession.selectList("getMsg", dto);
 	}
-	
 	
 	@Override
 	public int insertMsg(MsgHotelDTO dto) {

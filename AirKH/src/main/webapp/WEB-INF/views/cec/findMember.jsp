@@ -34,7 +34,7 @@
 
 	.nav{
 		width: 30%;
-		padding-left: 8%;
+		padding-left: 8% !important;
 	}
 </style>
 </head>

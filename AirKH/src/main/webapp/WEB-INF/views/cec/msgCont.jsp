@@ -6,6 +6,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+ 	
+</script>
 <title>Insert title here</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -63,8 +67,11 @@
 	
 	.msg_pic{
 		float:left;
-		margin-left: 40%;
-		margin-top: 3%;
+		margin-left: 3%;
+		margin-right: 2%;
+		width:50px;
+		height:50px;
+		border-radius: 25px;
 	}
 
 	.msg_info{
@@ -88,24 +95,23 @@
 		bottom: 0;
 		width: 99%;
 		padding-top: 2%;
-		background-color: white;
 	}
 	
-	.sendMsg{
+	#sendMsg{
 		border: 2px solid #F0F0F0;
 		width: 45%;
 		border-radius: 20px;
-		height: 62% !important; 
+		padding: 0.5% 0;
 		padding-left: 1%;
 	}
 	
-	.sendMsg:focus{
+	#sendMsg:focus{
 		border-color: black;
 	}
 	
 	.sender_info{
 		display: flex;
-		margin-left: 30%;
+		margin-left: 10%;
 	}
 	
 	.sender{
@@ -114,8 +120,15 @@
 	
 	.cont{
 		text-align: left;
-		margin-left: 30%;
 		margin-top: -12px;
+		width: 50%;
+		margin-left: -28%;
+	}
+	
+	.msgCont{
+		width: 50%;
+		height: 55%;
+		overflow:auto;
 	}
 </style>
 </head>
@@ -125,7 +138,12 @@
 	<c:set var="hostORmember" value="${hostORmember }"/>
 	
 	<c:set var="host_name" value="${host_name }"/>
+	<c:set var="member_name" value="${member_name }"/>
 	<c:set var="check_in" value="${check_in }"/>
+	
+	<c:set var="member_pic" value="${member_pic }"/>
+	<c:set var="host_pic" value="${host_pic }"/>
+
 	<div align="center" class="container1">
 		<div class="container2">
 			<c:if test="${hostORmember == 'member'}">
@@ -141,20 +159,34 @@
 			<p class="info-msg">호스트는 예약이 확정된 후에만 프로필 사진을 볼 수 있습니다.</p>
 			<p class="info-msg">체크인 날짜가 ${check_in }인 예약이 확정되었습니다.</p>
 			<c:set var="info" value="${info }"/>
-			<c:if test="${!empty info }">
-				<c:forEach items="${info }" var="dto">
-					<div class="sender_info"><h5 class="sender">${dto.getMsg_sender() }</h5> &nbsp; <p class="time">${dto.getMsg_date().substring(11, 16) }</p></div>
-					<p class="cont">${dto.getMsg_cont() }</p>
-				</c:forEach>
-			</c:if>
-			
+			<div class="msgCont">
+				<c:if test="${!empty info }">
+					<c:forEach items="${info }" var="dto">
+						<div class="getMsg">
+							<div >
+								<c:if test="${dto.getMsg_sender() == host_name }">
+									<img class="msg_pic" src="<%=request.getContextPath() %>/resources/host/${host_pic }">
+								</c:if>
+								<c:if test="${dto.getMsg_sender() == member_name }">
+									<img class="msg_pic" src="<%=request.getContextPath() %>/resources/member/${member_pic }">
+								</c:if>
+							</div>
+							<div class="sender_info">
+								<h5 class="sender">${dto.getMsg_sender() }</h5> &nbsp; 
+								<p class="time">${dto.getMsg_date().substring(11, 16) }</p>
+							</div>
+							<p class="cont">${dto.getMsg_cont() }</p>
+						</div>
+					</c:forEach>
+				</c:if>
+			</div>
 			
 			<c:if test="${hostORmember == 'member'}">
 				<div class="sendCon">
 					<form method="post" action="<%=request.getContextPath() %>/msg-send.do">
 						<input type="hidden" name="msg_host" value="${host_name }">
 						<input type="hidden" name="msg_check" value="${check_in }">
-						<input class="sendMsg" name="msg_cont" placeholder="메시지를 입력하세요.">
+						<input id="sendMsg" name="msg_cont" placeholder="메시지를 입력하세요.">
 						<button class="btn btn-light" type="submit">전송</button>
 					</form>
 				</div>
@@ -165,7 +197,7 @@
 					<form method="post" action="<%=request.getContextPath() %>/msg-sendH.do">
 						<input type="hidden" name="msg_member" value="${member_name }">
 						<input type="hidden" name="msg_check" value="${check_in }">
-						<input class="sendMsg" name="msg_cont" placeholder="메시지를 입력하세요.">
+						<input id="sendMsg" name="msg_cont" placeholder="메시지를 입력하세요.">
 						<button class="btn btn-light" type="submit">전송</button>
 					</form>
 				</div>

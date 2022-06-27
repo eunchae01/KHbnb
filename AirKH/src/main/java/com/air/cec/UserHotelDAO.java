@@ -24,6 +24,8 @@ public interface UserHotelDAO {
 	//회원 정보 가져오기
 	public HostHotelDTO getHost(String id);
 	public MemberHotelDTO getMember(String id);
+	public HostHotelDTO getHostName(String name);
+	public MemberHotelDTO getMemberName(String name);
 	
 	//내정보 수정
 	public int updateMember(MemberHotelDTO dto);
@@ -43,8 +45,6 @@ public interface UserHotelDAO {
 	
 	public List<MsgHotelDTO> msgInfo();
 	
-	
-//	public List<MsgHotelDTO> msgList(String name);
 	public List<MsgHotelDTO> msgList(MsgHotelDTO dto);
 	
 	public int insertMsg(MsgHotelDTO dto);

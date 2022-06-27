@@ -486,11 +486,17 @@ public class CecController {
 	
 	// 메세지 손님일때 / 호스트일때 구분
 	@RequestMapping("message.do")
-	public String memMessage(HttpServletRequest request, Model model) {
+	public String memMessage(HttpServletRequest request, Model model) throws IOException {
 		HttpSession session = request.getSession();
 		String hostORmember = (String) session.getAttribute("hostORmember");
 		
-		if (hostORmember.equals("host")) {	//호스트 로그인
+		//PrintWriter out = response.getWriter();
+		
+		/*
+		 * if (hostORmember.trim().isEmpty()) { out.println("<script>");
+		 * out.println("alert('로그인 후 이용가능합니다.')"); out.println("history.back()");
+		 * out.println("</script>"); } else
+		 */if (hostORmember.equals("host")) {	//호스트 로그인
 			String host_name = (String) session.getAttribute("host_name");
 			
 			List<PaymentDTO> list = this.dao.hostReserve(host_name);
@@ -529,44 +535,48 @@ public class CecController {
 		
 		return "cec/message";
 	}
-	
-	/*
-	 * @RequestMapping("msg-get.do")
-	 * 
-	 * @ResponseBody public Map<String, Object> msgCont(@RequestParam("check_in")
-	 * String check_in, HttpServletRequest request, Model model) { HttpSession
-	 * session = request.getSession(); String name = (String)
-	 * session.getAttribute("member_name");
-	 * 
-	 * List<MsgHotelDTO> info = this.dao.msgInfo(); List<MsgHotelDTO> list =
-	 * this.dao.msgList(name);
-	 * 
-	 * Map<String, Object> map = new HashMap<String, Object>();
-	 * 
-	 * model.addAttribute("info", info);
-	 * 
-	 * System.out.println(info); map.put("msg", list);
-	 * 
-	 * return map; }
-	 */
-	
+
 	@RequestMapping("msg-cont.do")
-	public String msgCont(@RequestParam("name") String name, @RequestParam("check_in") String check_in, HttpServletRequest request, Model model) {
+	public String msgCont(@RequestParam("name") String name, @RequestParam("check_in") String check_in, HttpServletRequest request, Model model) throws IOException {
 		HttpSession session = request.getSession(); 
 		String hostORmember = (String) session.getAttribute("hostORmember");
 		
+		MsgHotelDTO dto = new MsgHotelDTO();
+
 		
 		
-		List<MsgHotelDTO> info = this.dao.msgInfo(); 
-		
-		model.addAttribute("info", info);
-		
-		if (hostORmember.equals("member")) {
+		if (hostORmember.equals("member")) {	//멤버 로그인
+			String member_name = (String) session.getAttribute("member_name");
+			
+			dto.setMsg_member(member_name);
+			dto.setMsg_host(name);
+			dto.setMsg_check(check_in);
+			dto.setMsg_sender(member_name);
+			
+			HostHotelDTO hostDTO = this.dao.getHostName(name);
+			MemberHotelDTO memberDTO = this.dao.getMemberName(member_name);
+			
 			model.addAttribute("host_name", name);
-		} else {
+			model.addAttribute("member_pic", memberDTO.getMember_pic());
+			model.addAttribute("host_pic", hostDTO.getHost_pic());
+		} else {	//호스트 로그인
+			String host_name = (String) session.getAttribute("host_name");
+			
+			dto.setMsg_host(host_name);
+			dto.setMsg_member(name);
+			dto.setMsg_check(check_in);
+			dto.setMsg_sender(host_name);
+			
+			HostHotelDTO hostDTO = this.dao.getHostName(host_name);
+			MemberHotelDTO memberDTO = this.dao.getMemberName(name);
+			
 			model.addAttribute("member_name", name);
+			model.addAttribute("host_pic", hostDTO.getHost_pic());
+			model.addAttribute("member_pic", memberDTO.getMember_pic());
 		}
-		
+		List<MsgHotelDTO> info = this.dao.msgList(dto); 
+
+		model.addAttribute("info", info);
 		model.addAttribute("check_in", check_in);
 		
 		return "cec/msgCont";
@@ -574,12 +584,14 @@ public class CecController {
 	
 	//멤버로 로그인일때 메세지 전송
 	@RequestMapping("msg-send.do")
-	public void msgSend(MsgHotelDTO dto, HttpServletResponse response, HttpServletRequest request) throws IOException {
+	public void msgSend(MsgHotelDTO dto, HttpServletResponse response, HttpServletRequest request, Model model) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 
 		HttpSession session = request.getSession(); 
 		String member_name = (String)session.getAttribute("member_name");
+		String hostORmember = (String) session.getAttribute("hostORmember");
 		
+		model.addAttribute("hostORmember", hostORmember);
 		
 		dto.setMsg_member(member_name);
 		dto.setMsg_sender(member_name);
@@ -600,6 +612,7 @@ public class CecController {
 		}
 	}
 	
+	//호스트로 로그인일때
 	@RequestMapping("msg-sendH.do")
 	public void msgSendH(MsgHotelDTO dto, HttpServletResponse response, HttpServletRequest request, Model model) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
@@ -612,20 +625,29 @@ public class CecController {
 		
 		dto.setMsg_host(host_name);
 		dto.setMsg_sender(host_name);
-		
-	    int check = this.dao.insertMsgH(dto);
 
 		PrintWriter out = response.getWriter();
-		  
-		if (check > 0) { 
+		
+		System.out.println("test" + dto.getMsg_cont());
+		
+		if (dto.getMsg_cont().trim().isEmpty()) {	//input 값 null일 때
 			out.println("<script>");
-		    out.println("location.href='msg-cont.do?name=" + dto.getMsg_member() + "&check_in=" + dto.getMsg_check() + "'"); 
+		    out.println("alert('전송할 메시지를 입력해주세요.')"); 
+		    out.println("history.back()");
 		    out.println("</script>"); 
-		} else {
-		    out.println("<script>"); 
-		    out.println("alert('메시지가 전송되지 못했습니다..')");
-		    out.println("history.back()"); 
-		    out.println("</script>"); 
+		}else {				//input 값 null 아닐 때
+			int check = this.dao.insertMsgH(dto);
+
+			if (check > 0) { 
+				out.println("<script>");
+			    out.println("location.href='msg-cont.do?name=" + dto.getMsg_member() + "&check_in=" + dto.getMsg_check() + "'"); 
+			    out.println("</script>"); 
+			} else {
+			    out.println("<script>"); 
+			    out.println("alert('메시지가 전송되지 못했습니다..')");
+			    out.println("history.back()"); 
+			    out.println("</script>"); 
+			}
 		}
 	}
 }

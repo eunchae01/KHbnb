@@ -30,7 +30,7 @@
 <style>
 	.nav{
 		width: 40%;
-		padding-left: 9%;
+		padding-left: 9% !important;
 		margin-top: 10%;
 	}
 
