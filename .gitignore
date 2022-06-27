@@ -27,3 +27,13 @@
 .metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.wst.server.core.prefs
 .metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.wst.server.discovery.prefs
 .metadata/.plugins/org.eclipse.debug.core/.launches/AirKH.launch
+/.metadata/
+
+pom.xml
+
+
+root-context.xml
+
+Servers/
+
+**/target/

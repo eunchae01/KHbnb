@@ -28,7 +28,6 @@ $(function() {
 	</script>
 
 <script type="text/javascript">
-
 $(function () {
     $('#day').daterangepicker({
         "locale": {
@@ -232,7 +231,6 @@ $(function () {
 					</div>
 				</div>
 				<div class="col-4">
-<<<<<<< HEAD
 					<div class="bill-container">
 						<div class="bill-top">					
 							<h3 class="bill-price">&#65510;<fmt:formatNumber value="${dto.acc_price  }" />&nbsp;<span>/박</span></h3>
@@ -258,25 +256,7 @@ $(function () {
 								max="${dto.acc_maxp }">
 							<button type="submit" class="btn btn-danger" id="purchase-btn" >예약하기</button>
 						</form>
-=======
-					<hr color="#FF1111">
-					<br> <font
-						style="font-family: serif; font-size: 30px; font-weight: bold;">
-						₩<fmt:formatNumber value="${dto.acc_price  }" />
-					</font>/박<br> ★${dto.acc_star} · 후기n개 <br> <br>
-					<form method="post"
-						action="<%=request.getContextPath()%>/payment.do?acc_code=${dto.getAcc_code() }">
-						날짜 검색 <input class="btn btn-outline-danger"
-							style="width: 100%; background-color: white; color: red;"
-							min="${minDate }" type="text" id="day" name="day" value="${minDate }"><br>
-						인원 <input class="btn btn-outline-danger"
-							style="width: 100%; background-color: white; color: red;"
-							type="number" id="guest" name="guest" value="1" min="1"
-							max="${dto.acc_maxp }"> <br> <br>
-						<button type="submit" class="btn btn-danger" style="width: 100%">예약하기</button>
-						<hr color="#FF1111">
-					</form>
-					
+
 					<div>
 					<font
 						style="font-family: serif; font-size: 20px; font-weight: bold;">
@@ -285,7 +265,7 @@ $(function () {
 						서비스 수수료:<input id="totals" readonly>
 						<hr>
 						총 합계: <input id="totalm" readonly>
->>>>>>> ae61c86 (월요일 커밋)
+
 					</div>
 				</div>
 			</div>
