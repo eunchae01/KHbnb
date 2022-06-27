@@ -35,14 +35,12 @@
 					<td colspan="2"><input name="acc_price" value="${dto.acc_price}"></td>
 					
 					<th>숙소 이미지</th>
-					<td colspan="2">${dto.acc_image1 }<input type="file" name="file2" value="" ></td>
+					<td colspan="2">${dto.acc_thumbnail }<input type="file" name="file2" value="" ></td>
 				</tr>
 					<tr>
 					<th>숙소주소</th>
-					<td colspan="2"><input name="acc_addr" value="${dto.acc_addr}"></td>
-					
-					<th>숙소 평점</th>
-					<td colspan="2"><input name="acc_star" value="${dto.acc_star}"> </td>
+					<td colspan="5"><input name="acc_addr" value="${dto.acc_addr}"></td>
+				
 				
 				
 				<tr>
@@ -79,12 +77,9 @@
 					<td><input name="host_name"value="${dto.host_name }"></td>
 					<th>호스트 전화번호</th>
 					<td><input name="host_phone"value="${dto.host_phone }"></td>
-					<th>결제분류</th>
-					<td>
-					<select name="payment_info">
-	        		 <option value="card">카드</option>
-	        		 <option value="cash">계좌이체</option>
-	    		  </select>
+					<th>예약 정보</th>
+					<td><input name="reserve_info"value="${dto.reserve_info }">
+					
 	    		  </td>
 					</tr>
 				<c:if test="${empty dto }">

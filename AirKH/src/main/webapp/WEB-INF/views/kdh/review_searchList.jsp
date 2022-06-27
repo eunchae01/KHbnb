@@ -9,7 +9,7 @@
 
 
 
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/styl.css" />
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/sty.css" />
 
 <jsp:include page="main_navi.jsp"/>
 </head>

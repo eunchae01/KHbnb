@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +20,7 @@
 	<br>
 	
 	<br>
-	<img src="<%=request.getContextPath()%>/resources/hotel_images/${dto.acc_image1}"  width="500px" height="350px">
+	<img src="<%=request.getContextPath()%>/resources/upload/2022-06-13/${dto.acc_thumbnail}"  width="500px" height="350px">
 	<br>
 	<br>
 	<br>
@@ -37,17 +38,16 @@
 					<td>${dto.acc_name }</td>
 				</tr>
 				<tr>
-					<th>숙소가격</th>
-					<td colspan="5">${dto.acc_price}</td>
+					<th>결제 금액</th>
+					<td colspan="5">\<fmt:formatNumber>${dto.acc_price}</fmt:formatNumber>원</td>
 					
 					
 				</tr>
 					<tr>
 					<th>숙소주소</th>
-					<td colspan="2">${dto.acc_addr}</td>
+					<td colspan="5">${dto.acc_addr}</td>
 					
-					<th>숙소 평점</th>
-					<td colspan="2">${dto.acc_star} </td>
+					
 				
 				
 				<tr>
@@ -82,7 +82,7 @@
 					<td>${dto.host_phone }</td>
 					<th>결제분류</th>
 					<td>
-					${dto.payment_info }
+					${dto.reserve_info }
 	    		  </td>
 					</tr>
 				<c:if test="${empty dto }">

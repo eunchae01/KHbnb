@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    
+<mapper namespace="hadao">
+
+	<select id="halist" resultType="hadto">
+		select * from acc_hotel order by acc_code
+	
+	
+	</select>
+	
+	<insert id="hainsert" parameterType="hadto" >
+		insert into acc_hotel values((select max(acc_code) from acc_hotel) + 1, #{acc_host}, #{acc_name},  
+		'0', #{acc_theme}, #{acc_country}, #{acc_city}, #{acc_thumbnail}, #{acc_price}, #{acc_spec},  
+		#{acc_build}, #{acc_type}, #{acc_maxp}, #{acc_bedroom}, #{acc_bed}, #{acc_bath}, #{acc_addr}, 
+		#{acc_mail}, #{acc_detail}, #{acc_phone}, '1', '1', '1', '1', #{acc_offer}, sysdate)
+	
+	</insert>
+	
+	<select id="hacontent" parameterType="int" resultType="hadto">
+		select * from acc_hotel where acc_code=#{num}
+	
+	
+	
+	</select>
+	
+	<update id="hamodify" parameterType="hadto">
+	update acc_hotel set 
+		acc_name = #{acc_name}, acc_theme = #{acc_theme}, acc_country = #{acc_country}, 
+		acc_city = #{acc_city}, acc_addr = #{acc_addr}, 
+		acc_price = #{acc_price}, acc_build = #{acc_build}, acc_type = #{acc_type}, 
+		acc_maxp = #{acc_maxp}, acc_bedroom = #{acc_bedroom}, acc_bed = #{acc_bed}, 
+		acc_bath = #{acc_bath}, acc_mail = #{acc_mail}, acc_detail = #{acc_detail}, 
+		acc_phone = #{acc_phone} where acc_code = #{acc_code}
+	
+	
+	
+	</update>
+	
+	<delete id="hadelete" parameterType="int">
+		delete acc_hotel where acc_code=#{num}
+	
+	</delete>
+	
+	<update id="haseq">
+	<![CDATA[
+			update acc_hotel set acc_code = acc_code-1
+			where acc_code >#{num}
+		
+		]]>
+	
+	</update>
+
+
+</mapper>

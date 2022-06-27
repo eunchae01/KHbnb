@@ -13,8 +13,11 @@
 <div align="center">
 		
 		<c:set var="dto" value="${Cont }"/>
-			<h2>리뷰 테이블 ${dto.member_id}상세내역 페이지</h2>
-		
+			<h2>리뷰 테이블 ${dto.member_id}
+			상세내역 페이지</h2>
+			<br>
+			<img src="<%=request.getContextPath()%>/resources/member/${dto.member_pic}"  width="150px" height="150px">
+		<br>
 		
 		
 		
