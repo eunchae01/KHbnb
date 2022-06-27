@@ -19,6 +19,9 @@
 		<typeAlias type="com.air.common.PaymentDTO" alias="padto" />
 		<typeAlias type="com.air.kdh.PaymentsDAO" alias="padao" />
 		
+		<typeAlias type="com.air.common.HaccDTO" alias="hadto" />
+		<typeAlias type="com.air.kdh.HaccDAO" alias="hadao" />
+		
 		
 		<typeAlias type="com.air.common.PageDTO" alias="pdto" />
 		
@@ -37,7 +40,10 @@
 		<typeAlias type="com.air.kyk.ReviewDAOm" alias="reviewDao"/>
 	    <typeAlias type="com.air.kyk.ReviewDTOm" alias="re_dto"/>
 	    <typeAlias type="com.air.kyk.AvgDTO" alias="avg_dto"/>
+	    
+	    
 		
 	</typeAliases>
+	
 
 </configuration>

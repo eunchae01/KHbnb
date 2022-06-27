@@ -29,6 +29,7 @@ public class AccDAOImpl implements AccDAO{
 	public List<AccDTO> getAccList() {
 		return this.sqlSession.selectList("allAcc");
 	}
+	
 
 	@Override
 	public int insertAcc(AccDTO dto) {
@@ -124,6 +125,8 @@ public class AccDAOImpl implements AccDAO{
 	public List<OfferDTO> getOfferList() {
 		return this.sqlSession.selectList("olist");
 	}
+	
+	
 
 	@Override
 	public List<AccDTO> searchByThemeAcc(int no) {
@@ -138,5 +141,14 @@ public class AccDAOImpl implements AccDAO{
 	public WishDTO likeAcc(int no) {
 		return this.sqlSession.selectOne("like", no);
 	}
+
+
+	@Override
+	public ThemeDTO getThemeCont(int no) {
+		
+			return this.sqlSession.selectOne("tcont",no);
+	
+	}
+
 	
 }

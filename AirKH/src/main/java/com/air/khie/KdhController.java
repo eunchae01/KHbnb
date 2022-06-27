@@ -20,11 +20,17 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.air.common.AdminDTO;
+import com.air.common.HaccDTO;
 import com.air.common.HostDTO;
 import com.air.common.MemberDTO;
 import com.air.common.PageDTO;
 import com.air.common.PaymentDTO;
 import com.air.common.ReviewDTO;
+import com.air.jdy.AccDAO;
+import com.air.jdy.AccDTO;
+import com.air.jdy.OfferDTO;
+import com.air.jdy.ThemeDTO;
+import com.air.kdh.HaccDAO;
 import com.air.kdh.HostDAO;
 import com.air.kdh.MemberDAO;
 import com.air.kdh.PaymentsDAO;
@@ -41,6 +47,12 @@ public class KdhController {
 	MemberDAO mdao;
 	@Autowired
 	ReviewDAO rdao;
+	
+	@Autowired
+	HaccDAO hdao;
+	
+	@Autowired
+	AccDAO tdao;
 	
 	@Autowired
 	PaymentsDAO pdao;
@@ -113,7 +125,7 @@ public class KdhController {
 	public void insertOk(MultipartHttpServletRequest hRequest,HostDTO dto, HttpServletResponse response) throws IOException {
 		
 		
-		String uploadPath = "C:\\Users\\user1\\git\\KHbnb\\AirKH\\src\\main\\webapp\\resources\\host\\";
+		String uploadPath = "C:\\workspace(spring)\\kdh\\AirKH\\src\\main\\webapp\\resources\\host\\";
 		
 		// 업로드된 파일들의 이름 목록을 제공하는 메서드.
 		Iterator<String> iterator = hRequest.getFileNames();
@@ -201,7 +213,7 @@ public class KdhController {
 	@RequestMapping("host_modify_ok.do")
 	public void modifyOk(MultipartHttpServletRequest hRequest,HostDTO dto,@RequestParam("page") int nowPage, HttpServletResponse response) throws IOException	{
 		
-		String uploadPath = "C:\\Users\\user\\git\\KHbnb\\AirKH\\src\\main\\webapp\\resources\\host\\";
+		String uploadPath = "C:\\workspace(spring)\\kdh\\AirKH\\src\\main\\webapp\\resources\\host\\";
 		
 		// 업로드된 파일들의 이름 목록을 제공하는 메서드.
 		Iterator<String> iterator = hRequest.getFileNames();
@@ -335,7 +347,7 @@ public class KdhController {
     public void minsertOk(MultipartHttpServletRequest mRequest,MemberDTO dto,HttpServletResponse response) throws IOException {
 
 			
-		String uploadPath = "C:\\Users\\user1\\git\\KHbnb\\AirKH\\src\\main\\webapp\\resources\\member\\";
+		String uploadPath = "C:\\workspace(spring)\\kdh\\AirKH\\src\\main\\webapp\\resources\\member\\";
 		
 		// 업로드된 파일들의 이름 목록을 제공하는 메서드.
 		Iterator<String> iterator = mRequest.getFileNames();
@@ -427,7 +439,7 @@ public class KdhController {
     @RequestMapping("member_modify_ok.do")
     public void mmodifyOk(MultipartHttpServletRequest mRequest, MemberDTO dto,@RequestParam("page")int nowPage,HttpServletResponse response) throws IOException {
     	
-		String uploadPath = "C:\\Users\\user\\git\\KHbnb\\AirKH\\src\\main\\webapp\\resources\\member\\";
+		String uploadPath = "C:\\workspace(spring)\\kdh\\AirKH\\src\\main\\webapp\\resources\\member\\";
 		
 		// 업로드된 파일들의 이름 목록을 제공하는 메서드.
 		Iterator<String> iterator = mRequest.getFileNames();
@@ -574,7 +586,54 @@ public class KdhController {
     
     
     @RequestMapping("review_write_ok.do")
-    public void rwriteOk(ReviewDTO dto, HttpServletResponse response) throws IOException {
+    public void rwriteOk(MultipartHttpServletRequest mRequest, ReviewDTO dto, HttpServletResponse response) throws IOException {
+    	String uploadPath = "C:\\workspace(spring)\\kdh\\AirKH\\src\\main\\webapp\\resources\\member\\";
+		
+		// 업로드된 파일들의 이름 목록을 제공하는 메서드.
+		Iterator<String> iterator = mRequest.getFileNames();
+		
+		while(iterator.hasNext()) {
+			
+			String uploadFileName = iterator.next();
+			
+			MultipartFile mFile = mRequest.getFile(uploadFileName);
+			
+			// 업로드한 파일의 이름을 구하는 메서드.
+			String originaleFileName = mFile.getOriginalFilename();
+			
+			// 실제 폴더를 만들어 보자.
+			// ........\\resources\\upload\\2022-05-30
+			
+			
+			// 실제 파일을 만들어 보자.
+			
+			String saveFile=uploadPath+originaleFileName;
+			
+				
+				
+				
+				try {
+					//  ........\\resources\\upload\\2022-05-30\\실제 파일
+					// File origin = new File(homedir + "/" + saveFileName);
+					mFile.transferTo(new File(saveFile));
+					
+					dto.setMember_pic(originaleFileName);
+					
+					System.out.println("origin file >>> " + originaleFileName);
+					
+					// transferTo() : 파일 데이터를 지정한 폴더로 실제 저장시키는 메서드. 
+					
+					
+					//isUpload = true;
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					
+				}
+			
+		}  // while문 end
+    	
+    	
+    	
     	int check= this.rdao.insertReview(dto);
     	
     	response.setContentType("text/html; charset=UTF-8");
@@ -614,6 +673,8 @@ public class KdhController {
 			@RequestParam("page") int nowPage, Model model) {
 		
 		
+		
+		
 		// 게시글 상세 내역을 조회하는 메서드 호출
 		ReviewDTO dto = this.rdao.ReviewCont(no);
 		
@@ -625,7 +686,53 @@ public class KdhController {
 	}
 	
 	@RequestMapping("review_modify_ok.do")
-    public void rmodifyOk(ReviewDTO dto,@RequestParam("page")int nowPage,HttpServletResponse response) throws IOException {
+    public void rmodifyOk(MultipartHttpServletRequest mRequest,ReviewDTO dto,@RequestParam("page")int nowPage,HttpServletResponse response) throws IOException {
+		String uploadPath = "C:\\workspace(spring)\\kdh\\AirKH\\src\\main\\webapp\\resources\\member\\";
+		
+		// 업로드된 파일들의 이름 목록을 제공하는 메서드.
+		Iterator<String> iterator = mRequest.getFileNames();
+		
+		while(iterator.hasNext()) {
+			
+			String uploadFileName = iterator.next();
+			
+			MultipartFile mFile = mRequest.getFile(uploadFileName);
+			
+			// 업로드한 파일의 이름을 구하는 메서드.
+			String originaleFileName = mFile.getOriginalFilename();
+			
+			// 실제 폴더를 만들어 보자.
+			// ........\\resources\\upload\\2022-05-30
+			
+			
+			// 실제 파일을 만들어 보자.
+			
+			String saveFile=uploadPath+originaleFileName;
+			
+				
+				
+				
+				try {
+					//  ........\\resources\\upload\\2022-05-30\\실제 파일
+					// File origin = new File(homedir + "/" + saveFileName);
+					mFile.transferTo(new File(saveFile));
+					
+					dto.setMember_pic(originaleFileName);
+					
+					System.out.println("origin file >>> " + originaleFileName);
+					
+					// transferTo() : 파일 데이터를 지정한 폴더로 실제 저장시키는 메서드. 
+					
+					
+					//isUpload = true;
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					
+				}
+			
+		}  // while문 end
+		
+		
     	int check =this.rdao.updateReview(dto);
     	
     	response.setContentType("text/html;charset=UTF-8");
@@ -726,7 +833,7 @@ public class KdhController {
     @RequestMapping("payment_insert_ok.do")
     public void rwriteOk(MultipartHttpServletRequest pRequest, PaymentDTO dto, HttpServletResponse response) throws IOException {
     	
-    	String uploadPath = "C:\\Users\\user1\\git\\KHbnb\\AirKH\\src\\main\\webapp\\resources\\hotel_images\\";
+    	String uploadPath = "C:\\workspace(spring)\\kdh\\AirKH\\src\\main\\webapp\\resources\\upload\\2022-06-13\\";
 		
 		// 업로드된 파일들의 이름 목록을 제공하는 메서드.
 		Iterator<String> iterator = pRequest.getFileNames();
@@ -756,7 +863,7 @@ public class KdhController {
 					// File origin = new File(homedir + "/" + saveFileName);
 					mFile.transferTo(new File(saveFile));
 					
-					dto.setAcc_image1(originaleFileName);
+					dto.setAcc_thumbnail(originaleFileName);
 					
 					System.out.println("origin file >>> " + originaleFileName);
 					
@@ -812,7 +919,7 @@ public class KdhController {
     @RequestMapping("payment_modify_ok.do")
   public void pmodifyOk(MultipartHttpServletRequest pRequest, PaymentDTO dto,@RequestParam("page")int nowPage, HttpServletResponse response) throws IOException {
     	
-    	String uploadPath = "C:\\Users\\user1\\git\\KHbnb\\AirKH\\src\\main\\webapp\\resources\\hotel_images\\";
+    	String uploadPath = "C:\\workspace(spring)\\kdh\\AirKH\\src\\main\\webapp\\resources\\upload\\2022-06-13\\";
 		
 		// 업로드된 파일들의 이름 목록을 제공하는 메서드.
 		Iterator<String> iterator = pRequest.getFileNames();
@@ -842,7 +949,7 @@ public class KdhController {
 					// File origin = new File(homedir + "/" + saveFileName);
 					mFile.transferTo(new File(saveFile));
 					
-					dto.setAcc_image1(originaleFileName);
+					dto.setAcc_thumbnail(originaleFileName);
 					
 					System.out.println("origin file >>> " + originaleFileName);
 					
@@ -922,7 +1029,245 @@ public class KdhController {
   		return "kdh/payment_tolist";
   		
   	}
+    
+    
+    @RequestMapping("hacc_list.do")
+    public String alist(HttpServletRequest request, Model model) {
+    	List<HaccDTO> list=this.hdao.getHaccList();
+    	
+    	model.addAttribute("halist",list);
+    	return"kdh/hacc_list";
+    	
+    }
+    
+    
+    @RequestMapping("hacc_insert.do")
+	public String hainsert(Model model) {
+    	List<ThemeDTO> tlist = this.tdao.getThemeList();
+		model.addAttribute("tList", tlist);
+		return "kdh/hacc_insert";
+		
+	}
+    
+    
+    @RequestMapping("hacc_insert_ok.do")
+    
+    public void hinsertOk(MultipartHttpServletRequest pRequest, HaccDTO dto, HttpServletResponse response) throws IOException {
+    	
+    	String uploadPath = "C:\\workspace(spring)\\kdh\\AirKH\\src\\main\\webapp\\resources\\upload\\2022-06-13\\";
+		
+		// 업로드된 파일들의 이름 목록을 제공하는 메서드.
+		Iterator<String> iterator = pRequest.getFileNames();
+		
+		while(iterator.hasNext()) {
+			
+			String uploadFileName = iterator.next();
+			
+			MultipartFile mFile = pRequest.getFile(uploadFileName);
+			
+			// 업로드한 파일의 이름을 구하는 메서드.
+			String originaleFileName = mFile.getOriginalFilename();
+			
+			// 실제 폴더를 만들어 보자.
+			// ........\\resources\\upload\\2022-05-30
+			
+			
+			// 실제 파일을 만들어 보자.
+			
+			String saveFile=uploadPath+originaleFileName;
+			System.out.println("saveFile"+saveFile);
+			
+				
+				
+				
+				try {
+					//  ........\\resources\\upload\\2022-05-30\\실제 파일
+					// File origin = new File(homedir + "/" + saveFileName);
+					mFile.transferTo(new File(saveFile));
+					
+					dto.setAcc_thumbnail(originaleFileName);
+					
+					System.out.println("origin file >>> " + originaleFileName);
+					
+					// transferTo() : 파일 데이터를 지정한 폴더로 실제 저장시키는 메서드. 
+					
+					
+					//isUpload = true;
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					
+				}
+			
+		}  // while문 end
+    	int check= this.hdao.insertHacc(dto);
+    	
+    	response.setContentType("text/html; charset=UTF-8");
+    	PrintWriter out = response.getWriter();
+    	
+    	if(check > 0) {
+			out.println("<script>");
+			out.println("alert('숙소칼럼추가 성공!!!')");
+			out.println("location.href='hacc_list.do'");
+			out.println("</script>");
+		}else {
+			out.println("<script>");
+			out.println("alert('숙소컬럼추가 실패')");
+			out.println("history.back()");
+			out.println("</script>");
+		}
+    	
+    }
+    
+    @RequestMapping("hacc_content.do")
+    public String hacontent(@RequestParam("no")int no, Model model) {
+    	
+    	HaccDTO dto=this.hdao.getHacc(no);
+    	
+    	ThemeDTO tcont = this.tdao.getThemeCont(dto.getAcc_theme());
+    	
+    	List<OfferDTO> olist = this.tdao.getOfferList();
+    	
+    	String offer_str = dto.getAcc_offer();
+		String[] offer_arr = offer_str.split(",");
+		int[] int_arr = new int[offer_arr.length];
+		
+		
+		
+		for (int i = 0; i < offer_arr.length; i++) {
+			
+			int_arr[i] = Integer.parseInt(offer_arr[i]);
+			System.out.println("int_arr["+int_arr[i]+"]");
+				
+		}
+    	
+    	model.addAttribute("Cont",dto);
+    	model.addAttribute("Olist",olist);
+    	model.addAttribute("tcont", tcont);
+		model.addAttribute("offer", int_arr);
+    	
+    	return "kdh/hacc_content";
+    }
+    
 
+    @RequestMapping("hacc_modify.do")
+    public String hamodify(@RequestParam("no")int no, Model model) {
+    	
+    	HaccDTO dto=this.hdao.getHacc(no);
+    	
+    	List<ThemeDTO> tlist = this.tdao.getThemeList();
+		
+    	
+    	ThemeDTO tcont = this.tdao.getThemeCont(dto.getAcc_theme());
+    	
+    	List<OfferDTO> olist = this.tdao.getOfferList();
+    	
+    	
+		model.addAttribute("tList", tlist);
+    	model.addAttribute("Modi",dto);
+    	model.addAttribute("Olist",olist);
+    	model.addAttribute("tcont", tcont);
+		
+    	
+    	return "kdh/hacc_modify";
+    }
+    
+    @RequestMapping("hacc_modify_ok.do")
+    public void hmodifyOk(MultipartHttpServletRequest pRequest,HaccDTO dto,HttpServletResponse response) throws IOException {
+    	String uploadPath = "C:\\workspace(spring)\\kdh\\AirKH\\src\\main\\webapp\\resources\\upload\\2022-06-13\\";
+		
+		// 업로드된 파일들의 이름 목록을 제공하는 메서드.
+		Iterator<String> iterator = pRequest.getFileNames();
+		
+		while(iterator.hasNext()) {
+			
+			String uploadFileName = iterator.next();
+			
+			MultipartFile mFile = pRequest.getFile(uploadFileName);
+			
+			// 업로드한 파일의 이름을 구하는 메서드.
+			String originaleFileName = mFile.getOriginalFilename();
+			
+			// 실제 폴더를 만들어 보자.
+			// ........\\resources\\upload\\2022-05-30
+			
+			
+			// 실제 파일을 만들어 보자.
+			
+			String saveFile=uploadPath+originaleFileName;
+			System.out.println("saveFile"+saveFile);
+			
+				
+				
+				
+				try {
+					//  ........\\resources\\upload\\2022-05-30\\실제 파일
+					// File origin = new File(homedir + "/" + saveFileName);
+					mFile.transferTo(new File(saveFile));
+					
+					dto.setAcc_thumbnail(originaleFileName);
+					
+					System.out.println("origin file >>> " + originaleFileName);
+					
+					// transferTo() : 파일 데이터를 지정한 폴더로 실제 저장시키는 메서드. 
+					
+					
+					//isUpload = true;
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					
+				}
+			
+		}  // while문 end
+    	
+    	int check =this.hdao.updateHacc(dto);
+    	
+    	response.setContentType("text/html;charset=UTF-8");
+    	
+    	PrintWriter out=response.getWriter();
+    	
+    	if(check>0) {
+    		out.println("<script>");
+    		out.println("alert('숙소수정 성공')");
+    		out.println("location.href='hacc_content.do?no="+dto.getAcc_code()+"'");
+    		out.println("</script>");
+    		
+    	}else {
+    		
+    		out.println("<script>");
+    		out.println("alert('숙소수정 실패')");
+    		out.println("history.back()");
+    		out.println("</script>");
+    	}
+    	
+    	
+    }
+    
+    @RequestMapping("hacc_delete.do")
+    public void hadelete(@RequestParam("no")int no, HttpServletResponse response) throws IOException {
+    	int check=this.hdao.deleteHacc(no);
+    	
+    	response.setContentType("text/html;charset=UTF-8");
+    	PrintWriter out=response.getWriter();
+    	
+    	if(check>0){
+    		this.hdao.updateSequence(no);
+    		
+    		out.println("<script>");
+			out.println("alert('숙소내역 삭제 성공!!!')");
+			out.println("location.href='hacc_list.do'");
+			out.println("</script>");
+    		
+    		
+    	}else {
+			out.println("<script>");
+			out.println("alert('숙소내역 삭제 실패~~~')");
+			out.println("history.back()");
+			out.println("</script>");
+		}
+		
+    	
+    	
+    }
     
    
     

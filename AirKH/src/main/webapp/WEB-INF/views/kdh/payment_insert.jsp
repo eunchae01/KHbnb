@@ -31,15 +31,15 @@
 					<td colspan="2"><input name="acc_price" ></td>
 					
 					<th>숙소 이미지</th>
-					<td colspan="2"><input type="file" name="file2"> </td>
+					<td colspan="2"><input type="file" name="file"> </td>
 				</tr>
 					<tr>
 					<th>숙소주소</th>
-					<td colspan="2"><input name="acc_addr" ></td>
+					<td colspan="5"><input name="acc_addr" ></td>
 					
-					<th>숙소 평점</th>
-					<td colspan="2"><input type="number" min="1" max="5" value="5" name="acc_star"> </td>
+					
 				</tr>
+				<tr>
 					<th>체크인 체크아웃 날짜</th>
 					<td colspan="2"><input type="date" name="check_in" id="datepicker"> <input type="date" name="check_out" id="datepicker"></td>
 					<th>숙박 인원</th>
@@ -66,12 +66,8 @@
 					<td><input name="host_name"></td>
 					<th>호스트 전화번호</th>
 					<td><input name="host_phone"></td>
-					<th>결제분류</th>
-					<td>
-					<select name="payment_info">
-	        		 <option value="card">카드</option>
-	        		 <option value="cash">계좌이체</option>
-	    		  </select>
+					<th>예약 정보</th>
+					<td><input name="reserve_info">
 	    		  </td>
 					</tr>
 				

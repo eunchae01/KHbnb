@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <mapper namespace="reviewDao">
+
+
+   	<select id="re_select" parameterType="int" resultType="re_dto">
+   		select * from review_hotel where acc_code = #{no }
+   	</select>
+
+   	<select id="re_count" parameterType="int" resultType="int">
+		select count(*) from review_hotel where acc_code = #{no}
+	</select>
+
+   <insert id="re_add" parameterType="re_dto">
+		<selectKey resultType="int" keyProperty="review_num" order="BEFORE">
+			select max(review_num) from review_hotel
+		</selectKey>
+		insert into board values(#{review_no} + 1, #{acc_code}, 
+				#{member_id}, #{review_cl}, #{review_comm},#{review_check}, #{review_acc}, #{review_loc}, #{review_sat},
+				sysdate,#{review_grade},#{review_content})
+	</insert>
+
+	<update id="re_modify" parameterType="re_dto">
+		update review_hotel set review_cl = #{review_cl},
+			review_comm=#{review_comm}, review_check = #{review_check}, review_acc = #{review_acc}, review_loc = #{review_loc},
+			review_sat = #{review_sat}, review_date = sysdate, review_grade = #{review_grade}, review_cont = #{review_cont}
+			where review_num = #{review_num}
+	</update>
+
+	<delete id="re_del" parameterType="int">
+		delete from review_hotel where review_num = #{no}
+	</delete>
+
+	<select id="re_avg" parameterType="int" resultType="avg_dto">
+		select * from review_avg where acc_code = #{no}
+	</select>
+
+	<select id="host_re" parameterType="int" resultType="re_dto">
+		select * from review_hotel where host_num =#{no}
+	</select>
+
+
+
+</mapper>

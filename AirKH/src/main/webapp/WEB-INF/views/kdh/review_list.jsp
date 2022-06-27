@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/styl.css" />
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/sty.css" />
 
 <jsp:include page="main_navi.jsp"/>
 </head>
@@ -39,6 +39,8 @@
 					
 					
 					<a href="<%=request.getContextPath() %>/review_content.do?no=${i.review_num }&page=${paging.page }">
+					<img src="<%=request.getContextPath()%>/resources/member/${i.member_pic}"  width="100px" >
+					<br>
 					${i.member_id }
 					
 					${i.review_date.substring(0,7) }
