@@ -51,6 +51,7 @@
 	<!-- 번호로 DTO 가져오기 -->
 	<select id="hostByNum" parameterType="int" resultType="com.air.cec.HostHotelDTO">
 		select * from host_hotel where host_num = #{hostno}
+	</select>
 	<!-- 이름으로 DTO 가져오기 -->
 	<select id="hostInfoName" parameterType="String" resultType="com.air.cec.HostHotelDTO">
 		select * from host_hotel where host_name = #{name}
@@ -108,7 +109,6 @@
 		select * from msg_hotel where msg_member = #{name} order by msg_date asc
 	</select> -->
 	<select id="getMsg" parameterType="com.air.cec.MsgHotelDTO" resultType="com.air.cec.MsgHotelDTO">
-		select * from msg_hotel where msg_member = #{name} order by msg_date asc
 		select * from msg_hotel where msg_host = #{msg_host} and msg_member = #{msg_member} and msg_check = #{msg_check} order by msg_date asc
 	</select>
 	
