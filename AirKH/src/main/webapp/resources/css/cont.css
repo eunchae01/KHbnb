@@ -297,9 +297,10 @@ img {
 	color: black;
 }
 
-.bill-container #day:active, 
-.bill-container #guest:active{
+.bill-container #day:focus, 
+.bill-container #guest:focus{
 	box-shadow: none;
+	border: 2px solid black;
 }
 
 #purchase-btn {
