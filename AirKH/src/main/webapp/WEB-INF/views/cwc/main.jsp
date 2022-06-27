@@ -1,16 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<a href="<%=request.getContextPath()%>/wish_list.do">À§½Ã¸®½ºÆ®</a>
-<a href="<%=request.getContextPath()%>/wish.content.do">À§½Ã¸ñ·Ï</a>
-<a href="<%=request.getContextPath()%>/4.do">¿¹¾à°ü¸®</a>
-<a href="<%=request.getContextPath()%>/list.do">¼÷¼Ò</a>
+<a href="<%=request.getContextPath()%>/wish_list.do">ìœ„ì‹œë¦¬ìŠ¤íŠ¸</a>
+<a href="<%=request.getContextPath()%>/wish.content.do">ìœ„ì‹œëª©ë¡</a>
+<a href="<%=request.getContextPath()%>/4.do">ì˜ˆì•½ê´€ë¦¬</a>
+<a href="<%=request.getContextPath()%>/list.do">ìˆ™ì†Œ</a>
 </body>
 </html>

@@ -14,26 +14,19 @@
 		select count(*) from review_hotel where acc_code = #{no}
 	</select>
 
+	<select id="re_hostNum" parameterType="int" resultType="int">
+		select acc_host from acc_hotel where acc_code=#{no}
+	</select>
    <insert id="re_add" parameterType="re_dto">
-		<selectKey resultType="int" keyProperty="review_num" order="BEFORE">
-			select max(review_num) from review_hotel
-		</selectKey>
-		insert into board values(#{review_no} + 1, #{acc_code}, 
-				#{member_id}, #{review_cl}, #{review_comm},#{review_check}, #{review_acc}, #{review_loc}, #{review_sat},
-				sysdate,#{review_grade},#{review_content})
+		
+		insert into review_hotel values((select max(review_num) from review_hotel) + 1, #{acc_code},#{member_id},
+		#{review_cl}, #{review_comm},#{review_check}, #{review_acc}, #{review_loc}, #{review_sat},
+				#{member_pic},sysdate,#{review_grade},#{review_content})
 	</insert>
 
-	<update id="re_modify" parameterType="re_dto">
-		update review_hotel set review_cl = #{review_cl},
-			review_comm=#{review_comm}, review_check = #{review_check}, review_acc = #{review_acc}, review_loc = #{review_loc},
-			review_sat = #{review_sat}, review_date = sysdate, review_grade = #{review_grade}, review_cont = #{review_cont}
-			where review_num = #{review_num}
-	</update>
+	
 
-	<delete id="re_del" parameterType="int">
-		delete from review_hotel where review_num = #{no}
-	</delete>
-
+	
 	<select id="re_avg" parameterType="int" resultType="avg_dto">
 		select * from review_avg where acc_code = #{no}
 	</select>
@@ -42,6 +35,9 @@
 		select * from review_hotel where host_num =#{no}
 	</select>
 
+	<select id="re_pic" parameterType="String" resultType="String">
+		select member_pic from member_hotel where member_id = #{member_id}
+	</select>
 
 
 </mapper>

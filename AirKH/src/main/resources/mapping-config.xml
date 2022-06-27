@@ -43,6 +43,9 @@
 	    
 	    
 		
+		<typeAlias type="com.air.kyk.QA_boardDAO" alias="QADao"/>
+		<typeAlias type="com.air.kyk.QA_boardDTO" alias="QA_dto"/>
+		
 	</typeAliases>
 	
 
