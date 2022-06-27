@@ -39,10 +39,10 @@ public class JdyController {
 	@Autowired
 	private UserHotelDAO userDao;
 	
-	// user 愿��젴 (寃뚯뒪�듃, �샇�뒪�듃)
+	// user 愿  젴 (寃뚯뒪 듃,  샇 뒪 듃)
 	
-	// 寃뚯뒪�듃
-	// 硫붿씤�럹�씠吏�
+	// 寃뚯뒪 듃
+	// 硫붿씤 럹 씠吏 
 	@RequestMapping("jdy.do")
 	public String list(Model model) {
 
@@ -55,8 +55,9 @@ public class JdyController {
 		return "jdy/main";
 	}
 	
-	// �궗�슜�옄 �닕�냼 �긽�꽭 �럹�씠吏�
+	//  궗 슜 옄  닕 냼  긽 꽭  럹 씠吏 
 	@RequestMapping("acc_content.do")
+
 
 	public String content(@RequestParam int no, @RequestParam int hostno, Model model, HttpSession session) {
 		
@@ -100,7 +101,7 @@ public class JdyController {
 		return "jdy/acc_cont";
 	}
 
-	// �궗�슜�옄 nav-bar �뀒留� 寃��깋
+	//  궗 슜 옄 nav-bar  뀒留  寃  깋
 	@RequestMapping("search_theme.do")
 	public String searchT(@RequestParam int no, Model model) {
 
@@ -113,7 +114,7 @@ public class JdyController {
 		return "jdy/acc_search_result";
 	}
 
-	// �궗�슜�옄 : �닕�냼 寃��깋
+	//  궗 슜 옄 :  닕 냼 寃  깋
 	@RequestMapping("acc_search.do")
 	public String searchAcc(@RequestParam("where") String where, 
 			@RequestParam("howMany") String howMany, Model model,
@@ -147,7 +148,7 @@ public class JdyController {
 			
 			if(list.isEmpty()) {
 				out.println("<script>");
-				out.println("alert('寃��깋 寃곌낵媛� �뾾�뒿�땲�떎.')");
+				out.println("alert('寃  깋 寃곌낵媛   뾾 뒿 땲 떎.')");
 				out.println("location.href='jdy.do'");
 				out.println("</script>");
 				return null;
@@ -161,9 +162,9 @@ public class JdyController {
 	}
 	
 	// =============================================================
-	// �샇�뒪�듃
+	//  샇 뒪 듃
 
-	// �샇�뒪�듃 硫붿씤�럹�씠吏�
+	//  샇 뒪 듃 硫붿씤 럹 씠吏 
 	@RequestMapping("host_main.do")
 	public String hostMain(Model model, HttpSession session) {
 
@@ -177,7 +178,7 @@ public class JdyController {
 		return "jdy/host_main";
 	}
 
-	// �샇�뒪�듃 湲곕뒫 : �닕�냼 �벑濡� �럹�씠吏�
+	//  샇 뒪 듃 湲곕뒫 :  닕 냼  벑濡   럹 씠吏 
 	@RequestMapping("acc_insert.do")
 	public String insert(@RequestParam int no, Model model) {
 
@@ -187,7 +188,7 @@ public class JdyController {
 		return "jdy/acc_insert";
 	}
 
-	// �샇�뒪�듃 湲곕뒫 : �닕�냼 �벑濡�
+	//  샇 뒪 듃 湲곕뒫 :  닕 냼  벑濡 
 	@RequestMapping("acc_insert_ok.do")
 	public String insertOk(AccDTO dto, HttpServletResponse response, MultipartHttpServletRequest mRequest)
 			throws IOException {
@@ -220,7 +221,7 @@ public class JdyController {
 		}
 	}
 
-	// �샇�뒪�듃: �닕�냼 �긽�꽭 �럹�씠吏�
+	//  샇 뒪 듃:  닕 냼  긽 꽭  럹 씠吏 
 	@RequestMapping("host_acc_cont.do")
 	public String hostACont(@RequestParam int no, Model model) {
 
@@ -242,7 +243,7 @@ public class JdyController {
 		return "jdy/host_acc_cont";
 	}
 
-	// �샇�뒪�듃: �닕�냼 �닔�젙 踰꾪듉 �겢由� -> �닔�젙 �럹�씠吏�濡� �씠�룞
+	//  샇 뒪 듃:  닕 냼  닔 젙 踰꾪듉  겢由  ->  닔 젙  럹 씠吏 濡   씠 룞
 	@RequestMapping("host_acc_modify.do")
 	public String hostAModify(@RequestParam int no, Model model) {
 

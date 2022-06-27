@@ -9,6 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link
@@ -71,13 +72,101 @@ input {
 	height: 35px;
 }
 </style>
+
+<script src="//code.jquery.com/jquery.min.js"></script>
+
+
+<script type="text/javascript">
+function check() {
+	let check;
+	if(document.getElementById("coupon").value==12345){
+		check=1;
+		alert("쿠폰 적용 완료!!");
+		console.log("check");
+		$("#cout").text("₩-<fmt:formatNumber value="${cprice }" />");
+		$("#cout").css("color","red");
+		$("#tp").text("<fmt:formatNumber value="${coupon }" />");
+	}else{
+		check=0;
+		alert("번호가 틀립니다..");
+		console.log("check");
+	}
+}
+
+function change_person() {
+	$("#guest").attr("readonly", false);
+	$("#guest").css("color","blue");
+}
+
+function change_day() {
+	$("#day").attr("disabled", false);
+	$("#day").trigger('click');
+}
+
+function count(type)  {
+	  const resultElement = document.getElementById('result');
+	  
+	  let number = resultElement.innerText;
+	  if(type === 'plus') {
+		  if(number< ${maxp }){
+	    number = parseInt(number) + 1;
+		  }
+	  }else if(type === 'minus')  {
+		  if(number>1){
+			  number = parseInt(number) - 1;  
+		  }
+	  }
+	  resultElement.innerText = number;
+	}
+
+function check_per() {
+	alert("변경완료");
+	$("#guest").val((document.getElementById('result').innerText)+"명");
+	
+}
+	
+</script>
+
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+
+<script type="text/javascript">
+
+$(function () {
+    $('#day').daterangepicker({
+        "locale": {
+            "format": "YYYY-MM-DD",
+            "separator": " ~ ",
+            "applyLabel": "확인",
+            "cancelLabel": "취소",
+            "fromLabel": "From",
+            "toLabel": "To",
+            "customRangeLabel": "Custom",
+            "weekLabel": "W",
+            "daysOfWeek": ["월", "화", "수", "목", "금", "토", "일"],
+            "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+            "firstDay": 1
+        },
+        "drops": "down"
+    }, function (start, end, label) {
+        console.log(start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+    });
+});
+
+</script>
+
 </head>
 <body>
 	<jsp:include page="../jdy/include/main_top.jsp"></jsp:include>
 
 	<div class="con2">
-	
 		<c:set var="dto" value="${pCont }" />
+		<c:set var="member" value="${member }" />
+		<c:set var="host" value="${host }" />
 		
 		<form method="post" action="<%=request.getContextPath()%>/add_pay.do">
 		<div class="left">
@@ -94,12 +183,18 @@ input {
 
 				<div>
 					<div class="left">
-						<strong> 날짜 </strong><br> <input type="text" width="200px"
-							readonly="readonly" value="${day }" name="day">
+						<strong> 날짜 </strong><br> 
+						
+						 <input
+							style="width: 100%; background-color: white;"
+							min="${minDate }" type="text" value="${day }" disabled="disabled" id="day" name="day">
 					</div>
 					
 					<div class="right">
-						<label><br> <a href="#">수정</a></label>
+
+						<label><br><a href="javascript:void(0);" onclick="change_day();">수정</a></label>
+										
+						
 					</div>
 				</div>
 
@@ -109,12 +204,37 @@ input {
 
 					<div class="left">
 						<strong> 게스트 </strong><br> <input type="text"
-							readonly="readonly" value="${guest }명" name="guest">
+							readonly="readonly" value="${guest }명" id="guest" name="guest">
 					</div>
 
 
 					<div class="right">
-						<label><br> <br> <a href="#">수정</a><br></label>
+						<label><br> <br><button type="button" data-bs-toggle="modal"
+						data-bs-target="#exampleModal3">수정</button><br></label>
+					
+					<div class="modal fade" id="exampleModal3" tabindex="-1"
+						aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<p><font>게스트</font><br> 이 숙소의 최대 숙박 인원은 2명(유아 포함)입니다. 반려동물 동반은 허용되지 않습니다.<br><br>
+									해당숙소의 최대 인원은 ${maxp }입니다!</p>
+									<button type="button" class="btn-close" data-bs-dismiss="modal"
+										aria-label="Close"></button>
+								</div>
+								<div class="modal-body" align="center">
+								<label style="float: left">인원</label> <a></a><input type='button' onclick='count("plus")'
+												value='+' /> <span id='result'>${guest }</span> <input type='button' onclick='count("minus")'
+												value='-' />
+										</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary"
+										data-bs-dismiss="modal">취소</button>
+									<button name="cou" type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="check_per()">변경</button>
+								</div>
+							</div>
+						</div>
+					</div>
 					</div>
 				</div>
 
@@ -181,7 +301,7 @@ input {
 					</div>
 					<select class="form-select form-select-md"
 						aria-label=".form-select-sm example" name="country">
-						<option selected>국가/지역</option>
+						<option value="">국가/지역</option>
 						<option value="1">대한민국</option>
 						<option value="2">일본</option>
 						<option value="3">미국</option>
@@ -190,11 +310,34 @@ input {
 						<option value="6">독일</option>
 						<option value="7">etc</option>
 					</select>
+					
+					<br>
+					<button type="button" data-bs-toggle="modal"
+						data-bs-target="#exampleModal">쿠폰 입력하기</button>
 
+					<div class="modal fade" id="exampleModal" tabindex="-1"
+						aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">쿠폰 적용 시 30%</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal"
+										aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+								<input type="text" placeholder="쿠폰 번호 5자리를 입력해 주세여" id="coupon">
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary"
+										data-bs-dismiss="modal">취소</button>
+									<button name="cou" type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="check()">등록</button>
+								</div>
+							</div>
+						</div>
+					</div>
 
-
-			</div>
-			<br> <br>
+				</div>
+			<br>
 			<div>
 				<span style="font-size: 25px; font-weight: 700">환불정책</span> <br>
 				<div>
@@ -232,6 +375,8 @@ input {
 							</div>
 						</div>
 					</div>
+					
+					
 				</div>
 				<br> <br>
 			</div>
@@ -284,23 +429,25 @@ input {
 								value="₩<fmt:formatNumber
 						value="${dto.getAcc_price() }" />x${date}박">
 							</td>
-							<td align="right"></td>
+							<td align="right">
+								₩<fmt:formatNumber value="${price }" />
+							</td>
 						</tr>
-
+<tr>
+							<td><label>서비스 수수료</label></td>
+							<td align="right">₩<fmt:formatNumber value="${commission }" /></td>
+						</tr>
 						<tr>
 							<td><label>특별가 제안</label></td>
-							<td align="right">0₩</td>
+							<td align="right"><span id="cout">쿠폰 적용 전</span></td>
 						</tr>
-						<tr>
-							<td><label>서비스 수수료</label></td>
-							<td align="right">0₩</td>
-						</tr>
+						
 					</table>
 					<div>
 						<table width="100%">
 							<tr>
 								<td><label>총 합계(KRW)</label></td>
-								<td align="right">₩<fmt:formatNumber value="${price }" />
+								<td align="right">₩<span id="tp"><fmt:formatNumber value="${total_price }" /></span>
 								</td>
 							</tr>
 						</table>
@@ -314,14 +461,13 @@ input {
 		<input type="hidden" name="acc_price" value="${price }">
 		<input type="hidden" name="acc_thumbnail" value="${dto.getAcc_thumbnail()}">
 		<input type="hidden" name="acc_addr" value="${dto.getAcc_addr() }">
-		<input type="hidden" name="check_in" value="${date1}">
-		<input type="hidden" name="check_out" value="${date2}">
-		<input type="hidden" name="member_name" value="">
-		<input type="hidden" name="member_phone" value="">
-		<input type="hidden" name="member_addr" value="">
-		<input type="hidden" name="host_name" value="">
-		<input type="hidden" name="host_phone" value="">
-		<input type="hidden" name="reserve_info" value="">
+		<input type="hidden" name="check_in" value="${check_in}">
+		<input type="hidden" name="check_out" value="${check_out}">
+		<input type="hidden" name="member_name" value="${member.getMember_name() }">
+		<input type="hidden" name="member_phone" value="${member.getMember_phone() }">
+		<input type="hidden" name="host_name" value="${host.getHost_name() }">
+		<input type="hidden" name="host_phone" value="${host.getHost_phone() }">
+		<input type="hidden" name="reserve_info" value="0">
 		
 		
 		</form>

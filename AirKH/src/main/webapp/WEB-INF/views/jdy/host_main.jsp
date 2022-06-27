@@ -36,6 +36,7 @@
 					<div class="host-acc">
 						<div class="host-acc-title">
 							<h2>000님의 숙소</h2>
+							<a href="<%=request.getContextPath()%>/reservation_host.do">예약 관리</a>
 							<a href="<%=request.getContextPath()%>/acc_insert.do?no=${host_num}">새로운 숙소 등록하기</a>
 						</div>
 						<c:if test="${!empty list }">

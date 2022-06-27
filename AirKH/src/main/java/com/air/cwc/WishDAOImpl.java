@@ -16,8 +16,8 @@ public class WishDAOImpl implements WishDAO{
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<WishDTO> getWishList() {
-	return this.sqlSession.selectList("allwish");
+	public List<WishDTO> getWishList(String member_name) {
+	return this.sqlSession.selectList("allwish",member_name);
 	}
 	
 	@Override

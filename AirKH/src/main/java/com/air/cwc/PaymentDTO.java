@@ -16,7 +16,6 @@ public class PaymentDTO {
 	private int check_person;
 	private String member_name;
 	private String member_phone;
-	private String member_addr;
 	private String host_name;
 	private String host_phone;
 	private String reserve_info;
