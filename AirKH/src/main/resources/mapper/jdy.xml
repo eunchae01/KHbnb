@@ -73,8 +73,11 @@
 		acc_price = #{acc_price}, acc_build = #{acc_build}, acc_type = #{acc_type}, 
 		acc_maxp = #{acc_maxp}, acc_bedroom = #{acc_bedroom}, acc_bed = #{acc_bed}, 
 		acc_bath = #{acc_bath}, acc_mail = #{acc_mail}, acc_detail = #{acc_detail}, 
-		acc_phone = #{acc_phone} where acc_code = #{acc_code}
-		<!-- 나머지 사진들 -->
+		acc_phone = #{acc_phone}, 
+		acc_thumbnail = #{acc_thumbnail}, acc_image1 = #{acc_image1}, acc_image2 = #{acc_image2}, 
+		acc_image3 = #{acc_image3}, acc_image4 = #{acc_image4}, 
+		acc_date = sysdate
+		where acc_code = #{acc_code}
 	</update>
 	
 	<!-- 호스트: 숙소 삭제 -->

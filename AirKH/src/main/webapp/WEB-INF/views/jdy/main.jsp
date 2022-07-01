@@ -85,14 +85,6 @@
 		</div>
 	</section>
 	
-	<div>
-		<h1>BOTTOM</h1>
-		<p>footer~~~~ top버튼</p>
-	</div>
-	<h1>호스트메뉴</h1>
-	<a href="<%=request.getContextPath()%>/host_main.do">숙소 리스트 메인페이지</a>
-	
-	
-	
+	<jsp:include page="./include/footer.jsp"></jsp:include>
 </body>
 </html>

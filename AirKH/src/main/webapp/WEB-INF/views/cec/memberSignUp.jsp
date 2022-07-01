@@ -42,6 +42,11 @@
 		height: 200px;
 		margin-left: 15%;
 	}
+	
+	button {
+		background-color: white;
+	}
+	
 </style>
 </head>
 <body>

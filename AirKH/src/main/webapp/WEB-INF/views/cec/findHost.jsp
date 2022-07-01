@@ -36,6 +36,11 @@
 		width: 30%;
 		padding-left: 8% !important;
 	}
+	
+	button {
+		background-color: white;
+	}
+	
 </style>
 </head>
 <body>

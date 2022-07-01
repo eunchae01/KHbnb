@@ -46,6 +46,11 @@ font {
 a {
 	text-decoration: none;
 }
+
+button {
+	background-color: white;
+}
+
 </style>
 </head>
 <body>

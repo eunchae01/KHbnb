@@ -49,6 +49,10 @@
 	.tab-content{
 		margin-top: 1%;
 	}
+	
+	button {
+		background-color: white;
+	}
 
 </style>
 </head>

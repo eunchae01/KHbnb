@@ -52,7 +52,7 @@
 				<c:if test="${!empty list }">
 					<c:forEach items="${list }" var="adto">
 						<div class="col-3">
-							<a href="<%=request.getContextPath()%>/acc_content.do?no=${adto.acc_code}" class="link-to-acc">
+							<a href="<%=request.getContextPath()%>/acc_content.do?no=${adto.acc_code}&hostno=${adto.acc_host}" class="link-to-acc">
 								<img class="acc-image" src="<%=request.getContextPath() %>/resources/upload/${adto.acc_date.substring(0, 10) }/${adto.acc_thumbnail }" alt="" />
 								<div class="acc-list">
 									<div class="acc-info">
@@ -85,6 +85,8 @@
 			</div>
 		</div>
 	</section>
+	
+	<jsp:include page="./include/footer.jsp"></jsp:include>
 
 </body>
 </html>

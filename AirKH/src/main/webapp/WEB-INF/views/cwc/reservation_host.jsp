@@ -67,6 +67,10 @@ function check_out() {
 	background-color: #eeeeee;
 	width: 100%;
 }
+
+button {
+	background-color: white;
+}
 </style>
 
 <script type="text/javascript">

@@ -90,7 +90,7 @@ public class AccDAOImpl implements AccDAO{
 	           
 	        	// 업로드한 파일의 이름을 구하는 메서드
 	            String originFileName = mFile.getOriginalFilename(); // 원본 파일 명
-	                  
+	            
 	            // 저장할 폴더 만들기
 	            String homedir = uploadPath + date1;
 	            File path1 = new File(homedir);
@@ -100,7 +100,6 @@ public class AccDAOImpl implements AccDAO{
 	            
 	            saveFileName = System.currentTimeMillis() + originFileName;
 	            System.out.println(saveFileName);
-	            
 	            
 	            dbFileName += saveFileName + ",";
 	            System.out.println(dbFileName);
@@ -118,8 +117,13 @@ public class AccDAOImpl implements AccDAO{
 	                e.printStackTrace();
 	            }
             }
-	        
 		}
+		
+		if(dbFileName.length() < 15) {
+			isUpload = false;
+			System.out.println(isUpload);
+		}
+		
 		if(isUpload) { return dbFileName; }else { return null; }
 	}
 		

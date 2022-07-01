@@ -130,6 +130,11 @@
 		height: 55%;
 		overflow:auto;
 	}
+	
+	button {
+		background-color: white;
+	}
+	
 </style>
 </head>
 <body>
