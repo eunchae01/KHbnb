@@ -7,9 +7,32 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<jsp:include page="main_navi.jsp"/>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+<style type="text/css">
+
+.wrapper {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		align-items:center;
+		
+		
+	}
+	
+	.container0 {
+		width:90%;
+	}
+
+
+</style>
+
 </head>
 <body>
+	<div class="wrapper">
+		<div class="container0">
+	<jsp:include page="main_navi.jsp"/>
 	
 	<div align="center">
 	<c:set var="dto" value="${Cont }"/>
@@ -59,31 +82,28 @@
 				</tr>
 				
 				<tr>
-					<th>고객주소</th>
-					<td colspan="2">${dto.member_addr }</td>
+					
+					
 					<th>결제날짜</th>
 					<td colspan="2">${dto.cart_date.substring(0,10) }</td>
-					
+					<th>숙박 인원</th>
+					<td colspan="2">${dto.check_person }</td>
 					
 				</tr>
 				
 				<tr>
 					<th>체크인 </th>
-					<td>${dto.check_in} </td>
+					<td colspan="2">${dto.check_in} </td>
 					<th> 체크아웃</th>
-					<td>${dto.check_out}</td>
-					<th>숙박 인원</th>
-					<td>${dto.check_person }</td>
+					<td colspan="2">${dto.check_out}</td>
+					
 				</tr>
 					<tr>
 					<th>호스트 이름</th>
-					<td>${dto.host_name }</td>
+					<td colspan="2">${dto.host_name }</td>
 					<th>호스트 연락처</th>
-					<td>${dto.host_phone }</td>
-					<th>결제분류</th>
-					<td>
-					${dto.reserve_info }
-	    		  </td>
+					<td colspan="2">${dto.host_phone }</td>
+					
 					</tr>
 				<c:if test="${empty dto }">
 			         <tr>
@@ -101,25 +121,25 @@
 				
 				<tr>
 					<td colspan="6" align="center">
-					<input type="button" value="숙소별 매출액"
-			               onclick="location.href='payment_tolist.do?no=${dto.cart_num}&page=${Page }'">
+					<input type="button" class="btn btn-primary" value="숙소별 매출액"
+			               onclick="location.href='payment_tolist.do?no=${dto.acc_code}&page=${Page }'">
 			               &nbsp;
-						<input type="button" value="결제내역수정"
+						<input type="button" class="btn btn-primary" value="결제내역수정"
 			               onclick="location.href='payment_modify.do?no=${dto.cart_num}&page=${Page }'">
 			               &nbsp;
-			            <input type="button" value="결제내역삭제"
+			            <input type="button" class="btn btn-primary" value="결제내역삭제"
 			               onclick="if(confirm('정말로 결제내역을 삭제하겠습니까?')) {
 			               				location.href='payment_delete.do?no=${dto.cart_num}&page=${Page }'
 			               		    }else {  return; }">
 			               &nbsp;
-			            <input type="button" value="결제목록"
+			            <input type="button" class="btn btn-primary" value="결제목록"
 			               onclick="location.href='payment_list.do?page=${Page }'">
 				</table>
 				
 		
-	
-	
-	
+			</div>
+		</div>
+		
 	</div>
 
 </body>

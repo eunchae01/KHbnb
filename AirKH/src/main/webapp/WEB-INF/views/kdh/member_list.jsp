@@ -6,10 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 <style type="text/css">
 
-	.wrapper {
+.wrapper {
 		display: flex;
 		flex-direction: column;
 		height: 100%;
@@ -21,6 +22,7 @@
 		width:90%;
 	}
 
+	
 	.member_list_search {
 		display: flex;
     	justify-content: end;
@@ -33,8 +35,7 @@
 	
 	.search_bar {
 	    font-size: 1.2em;
-    background-color: black;
-    color: white;
+    
     cursor: pointer;
 	}
 	
@@ -44,8 +45,7 @@
 	
 	.member_list_search select {
 	    font-size: 1.2em;
-    background-color: black;
-    color: white;
+   
     cursor: pointer;
     height:100%;
 	}
@@ -55,12 +55,17 @@
 	    flex-direction: column;
     align-items: center;
     display: flex;
+	text-transform: uppercase;
 	
 	}
 	
-	.bottom{
-	
+	.dohyeong a {
+	text-decoration:none;
+	color:black;
 	}
+	
+	
+	
 </style>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/sty.css" />
 
@@ -73,7 +78,9 @@
 <jsp:include page="main_navi.jsp"/>
 	<div align="center">
 		 <div class="member_list_search">
-		<form method="post" action="<%=request.getContextPath() %>/member_search.do">
+		 <c:set var="list" value="${mlist }"/>
+			<c:set var="paging" value="${mpage }"/>
+		<form method="post" action="<%=request.getContextPath() %>/member_search.do?page=${paging.page}">
 			<input type="hidden" name="page" value="${paging.page}">
 			<select name="field">
 	         <option value="id">아이디</option>
@@ -81,21 +88,20 @@
 	         
 	      </select>
 	   	
-	      <input class="search_bar keyword" name="keyword">
+	      <input class="search_bar keyword"  name="keyword">
 	      
-	      <input class="search_bar serach" type="submit" value="검색">
+	      <input  class="btn btn-primary" type="submit" value="검색">
 		
 		</form>
 		</div>
 			<div class="dohyeong">	
 		<br>
-			<h3>회원 전체리스트 페이지</h3>
+			<h2>회원 전체리스트 페이지</h2>
 		
 		<br>
 		<div class="flex">
 		
-			<c:set var="list" value="${mlist }"/>
-			<c:set var="paging" value="${mpage }"/>
+			
 			
 			<c:if test="${!empty list }">
 				<c:forEach items="${list }" var="dto">
@@ -118,7 +124,7 @@
 			</c:if>
 			
 			 <div class="each_items">
-	            <input type="button" value="회원등록"
+	            <input type="button" class="btn btn-primary"  value="회원등록"
 	                 onclick="location.href='member_insert.do'">
 	      </div>
 	         </div>

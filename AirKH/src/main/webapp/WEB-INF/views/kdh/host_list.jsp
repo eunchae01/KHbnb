@@ -8,10 +8,12 @@
 <title>Insert title here</title>
 
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/sty.css" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 <style type="text/css">
 
-	.wrapper {
+
+.wrapper {
 		display: flex;
 		flex-direction: column;
 		height: 100%;
@@ -22,8 +24,9 @@
 	.container0 {
 		width:90%;
 	}
+	
 
-	.member_list_search {
+	.host_list_search {
 		display: flex;
     	justify-content: end;
     	margin-top:10px;
@@ -35,19 +38,15 @@
 	
 	.search_bar {
 	    font-size: 1.2em;
-    background-color: black;
-    color: white;
+   
     cursor: pointer;
 	}
 	
-	.serach{
+
 	
-	}
-	
-	.member_list_search select {
+	.host_list_search select {
 	    font-size: 1.2em;
-    background-color: black;
-    color: white;
+   
     cursor: pointer;
     height:100%;
 	}
@@ -57,12 +56,15 @@
 	    flex-direction: column;
     align-items: center;
     display: flex;
+    text-transform: uppercase;
 	
 	}
 	
-	.bottom{
-	
+	.dohyeong a {
+	text-decoration:none;
+	color:black;
 	}
+
 </style>
 
 
@@ -73,16 +75,31 @@
 <div class="container0">
 <jsp:include page="main_navi.jsp"/>
 
+	
+		<div class="host_list_search">
+		<c:set var="list" value="${hlist }"/>
+			<c:set var="paging" value="${Paging }"/>
+	<form method="post" action="<%=request.getContextPath() %>/host_search.do?page=${paging.page}">
+		<input type="hidden" name="page" value="${paging.page}">
+			<select name="field">
+	         <option value="ido">아이디</option>
+	         <option value="nameo">호스트명</option>
+	      </select>
+	      
+	      <input name="keyword">&nbsp;&nbsp;&nbsp;
+	      <input class="btn btn-primary" type="submit" value="검색">
+		
+		</form>
+	</div>
 	<div align="center">
 	<div class="dohyeong">
 		<br>
-			<h3>호스트 전체리스트 페이지</h3>
+			<h2>호스트 전체리스트 페이지</h2>
 		
 		<br>
 		<div class="flex">
 		
-			<c:set var="list" value="${hlist }"/>
-			<c:set var="paging" value="${Paging }"/>
+			
 			
 			<c:if test="${!empty list }">
 				<c:forEach items="${list }" var="dto">
@@ -105,7 +122,7 @@
 			</c:if>
 			
 			 <div class="each_items">
-	            <input type="button" value="호스트등록"
+	            <input type="button" class="btn btn-primary" value="호스트등록"
 	                 onclick="location.href='host_insert.do'">
 	      </div>
 	         </div>
@@ -138,17 +155,7 @@
 	   <br> <br>
 		
 		
-		<form method="post" action="<%=request.getContextPath() %>/host_search.do">
-		<input type="hidden" name="page" value="${paging.page}">
-			<select name="field">
-	         <option value="ido">아이디</option>
-	         <option value="nameo">호스트명</option>
-	      </select>
-	      
-	      <input name="keyword">&nbsp;&nbsp;&nbsp;
-	      <input type="submit" value="검색">
 		
-		</form>
 		</div>
 		</div>
 			</div>

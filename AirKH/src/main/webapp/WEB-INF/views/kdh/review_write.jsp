@@ -5,14 +5,35 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<jsp:include page="main_navi.jsp"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<style type="text/css">
+
+.wrapper {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		align-items:center;
+		
+	}
+	
+	.container0 {
+		width:90%;
+	}
+
+
+</style>
+
+
 </head>
 <body>
-
+<div class="wrapper">
+	<div class="container0">
+		<jsp:include page="main_navi.jsp"/>
 	<div align="center">
 		
+		<br>
 			<h2>리뷰 테이블 글쓰기 폼페이지</h2>
-		
+		<br>
 		
 		<form method="post" enctype="multipart/form-data" action="<%=request.getContextPath() %>/review_write_ok.do">
 		
@@ -59,14 +80,14 @@
 				
 				<tr>
 					<td colspan="6" align="center">
-						<input type="submit" value="리뷰작성">&nbsp;&nbsp;&nbsp;
-						<input type="reset" value="다시작성">
+						<input type="submit" class="btn btn-primary" value="리뷰작성">&nbsp;&nbsp;&nbsp;
+						<input type="reset" class="btn btn-primary" value="다시작성">
 				</table>
 				
 		</form>
 	
-	
-	
+			</div>
+		</div>
 	</div>
 
 </body>

@@ -7,9 +7,38 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/host-cont.css" />
+<style type="text/css">
+
+.wrapper {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		align-items:center;
+		
+	}
+	
+	.container0 {
+		width:90%;
+	}
+
+.lin a{
+color:black;
+	text-decoration: none;
+}
+
+#li{
+	margin-left:700px;
+}
+
+</style>
+
 </head>
 <body>
-
+<div class="wrapper">
+<div class="container0">
 <jsp:include page="main_navi.jsp"/>
 
 	<div align="center">
@@ -18,12 +47,10 @@
 			<h3>결제 테이블 전체 목록 페이지</h3>
 		
 		<br>
-		
-		<table border="0" cellspacing="0" width="450">
-			<tr>
-				<th>숙소 이름</th>
-				<th>결제 금액</th> <th>숙소 결제일</th>
-			</tr>
+		<div class="lin">
+		<div class="cont-hotel">
+		<table border="0" cellspacing="0" width="850">
+			
 			<c:set var="list" value="${palist }"/>
 			<c:set var="paging" value="${Paging }" />
 			<c:if test="${!empty list }">
@@ -32,7 +59,8 @@
 					
 					<td><a href="<%=request.getContextPath() %>/payment_content.do?num=${dto.cart_num}&page=${paging.page }">
 					${dto.acc_name }</a></td>
-					<td>\<fmt:formatNumber>${dto.acc_price }</fmt:formatNumber>원</td>
+					<td><a href="<%=request.getContextPath() %>/payment_content.do?num=${dto.cart_num}&page=${paging.page }">
+					\<fmt:formatNumber>${dto.acc_price }</fmt:formatNumber>원 </a></td>
 					<td> ${dto.cart_date.substring(0,10) }</td>
 				</tr>
 				
@@ -50,14 +78,16 @@
 				</tr>
 			</c:if>
 			
-			<tr>
-				<td colspan="3" align="right">
-					<input type="button" value="결제등록" onclick="location.href='payment_insert.do'">
-				</td>
-			</tr>
+			
 			
 		
 		</table>
+		</div>
+		
+		<br>
+		<input type="button" class="btn btn-primary" id="li" value="결제등록" onclick="location.href='payment_insert.do'">
+		
+		
 		<br>
 		
 		<c:if test="${paging.getPage() > paging.getBlock() }">
@@ -84,21 +114,11 @@
 	   <br> <br>
 		
 		
-		<form method="post" action="<%=request.getContextPath() %>/payment_search.do">
-		<input type="hidden" name="page" value="${paging.page}">
-			<select name="field">
-	        
-	         <option value="namem">이름별</option>
-	         <option value="paym">월별</option>
-	      </select>
-	      
-	      <input name="keyword">&nbsp;&nbsp;&nbsp;
-	      <input type="submit" value="검색">
 		
-		</form>
 		
-	
+				</div>
+			</div>
+		</div>
 	</div>
-
 </body>
 </html>

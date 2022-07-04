@@ -7,10 +7,32 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<jsp:include page="main_navi.jsp"/>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+<style type="text/css">
+
+.wrapper {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		align-items:center;
+		
+	}
+	
+	.container0 {
+		width:90%;
+	}
+
+
+</style>
+
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/sty.css" />
 </head>
 <body>
+	<div class="wrapper">
+		<div class="container0">		
+			<jsp:include page="main_navi.jsp"/>
 
 <div align="center">
 	<c:set var="dto" value="${Modi}" />
@@ -25,7 +47,7 @@
 	<br>
 	
 		<form method="post" enctype="multipart/form-data" action="<%=request.getContextPath() %>/hacc_modify_ok.do">
-		
+			<input type="hidden" name="acc_thumbnail" value="${dto.acc_thumbnail}">
 			<table border="0" cellspacing="0" width="1500">
 				<tr>
 					<th>숙소코드</th>
@@ -42,7 +64,8 @@
 				<c:set var="list" value="${tList }"/>
 				<td>
 							<select name="acc_theme" required>
-								<option value="${th.theme_name }" selected>${th.theme_name }</option>
+								
+								<option value="${th.theme_code }"selected>${th.theme_name }</option>
 								<c:if test="${!empty list }">
 									<c:forEach items="${list }" var="dt">
 										<c:if test="${th.theme_name ne dt.theme_name }">
@@ -176,14 +199,14 @@
 				
 				<tr>
 					<td colspan="8" align="center">
-						<input type="submit" value="숙소입력">&nbsp;&nbsp;&nbsp;
+						<input type="submit" value="숙소수정">&nbsp;&nbsp;&nbsp;
 						<input type="reset" value="다시작성">
 				</table>
 				
 		</form>
 	
-	
-	
+			</div>
+		</div>
 	</div>
 
 

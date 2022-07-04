@@ -6,40 +6,83 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/sty.css" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+<style type="text/css">
+
+.wrapper {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		align-items:center;
+		
+	}
+	
+	.container0 {
+		width:90%;
+	}
+	
+	.dohyeong {
+	
+	    flex-direction: column;
+    align-items: center;
+    display: flex;
+	
+	}
+	
+	.dohyeong a {
+	text-decoration:none;
+	color:black;
+	}
+
+
+</style>
 </head>
 <body>
-
-<jsp:include page="main_navi.jsp"/>
-
+	<div class="wrapper">
+		<div class="container0">		
+			<jsp:include page="main_navi.jsp"/>
+<div class="dohyeong">
 	<div align="center">
-		<hr width="50%" color="red">
-
+		
+		<Br>
 			<h3>호스트 테이블 검색 페이지</h3>
-		<hr width="50%" color="red">
+
 		<br>
 		
-		<table border="1" cellspacing="0" width="450">
-			<tr>
-				<th>호스트 번호</th> <th>호스트 아이디</th>
-				<th>호스트  사진</th> <th>호스트 가입일</th>
-			</tr>
-			<c:set var="list" value="${search }"/>
+		
+		<div class="flex">
+		
+		
+		<c:set var="list" value="${search }"/>
+		
+		<c:set var="paging" value="${page }"/>
+			
+			
 			<c:if test="${!empty list }">
 				<c:forEach items="${list }" var="dto">
-				<tr>
-					<td>${dto.getHost_num() }</td>
-					<td>
-					${dto.getHost_id() }</td>
-					<td>${dto.getHost_pic() }</td>
-					<td> ${dto.getHost_date().substring(0,10) }</td>
-				</tr>
-				
-				
+				<div class="each_item">
+					<img src="<%=request.getContextPath() %>/resources/host/${dto.host_pic}"width="200px">
+					<br>
 					
+					<br>
+					${dto.getHost_id() }
+					<br>
+					
+					 ${dto.getHost_date().substring(0,10) }
+				</div>
+				
 				
 				</c:forEach>
 			</c:if>
+			<br>
+			<div class="each_items">
+					<input type="button" class="btn btn-primary" value="회원목록" onclick="location.href='host_list.do'">
+				</div>
 			
+			</div>
+			<br>
 			<c:if test="${empty list }">
 				<tr>
 					<td colspan="4" align="center">
@@ -48,14 +91,12 @@
 				</tr>
 			</c:if>
 			
-			<tr>
-				<td colspan="4" align="right">
-					<input type="button" value="호스트목록" onclick="location.href='host_list.do'">
-				</td>
-			</tr>
+			
+				
+			
 			
 		
-		</table>
+	
 		<br>
 		<c:if test="${paging.getPage() > paging.getBlock() }">
 			<a href="host_search.do?page=1">[처음으로]</a>
@@ -76,7 +117,9 @@
 			<a href="host_search.do?page=${paging.getEndBlock() + 1 }">▶</a>
 			<a href="host_search.do?page=${paging.getAllPage() }">[마지막으로]</a>
 		</c:if>
-		
+			</div>
+				</div>
+			</div>
 		</div>
 
 </body>

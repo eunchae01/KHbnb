@@ -25,6 +25,7 @@ import com.air.common.HostDTO;
 import com.air.common.MemberDTO;
 import com.air.common.PageDTO;
 import com.air.common.PaymentDTO;
+import com.air.common.QaDTO;
 import com.air.common.ReviewDTO;
 import com.air.jdy.AccDAO;
 import com.air.jdy.AccDTO;
@@ -34,7 +35,10 @@ import com.air.kdh.HaccDAO;
 import com.air.kdh.HostDAO;
 import com.air.kdh.MemberDAO;
 import com.air.kdh.PaymentsDAO;
+import com.air.kdh.QaDAO;
 import com.air.kdh.ReviewDAO;
+
+
 
 
 @Controller
@@ -56,6 +60,9 @@ public class KdhController {
 	
 	@Autowired
 	PaymentsDAO pdao;
+	
+	@Autowired
+	QaDAO qdao;
 	
 	
 	private final int rowsize = 6;
@@ -84,7 +91,55 @@ public class KdhController {
 	  }
 	  
 	 @RequestMapping("admin_loginOk.do") 
-	 public String loginOk() {
+	 public String loginOk(HttpServletRequest request,Model model) {
+		
+		 int page;
+			if(request.getParameter("page") != null) {
+				page = Integer.parseInt(request.getParameter("page"));
+			}else {
+				page = 1;    // 처음으로 게시물 전체 목록 태그를 선택한 경우
+			}
+			
+			totalRecord = this.dao.getListCount();
+			
+			PageDTO dto = new PageDTO(page, rowsize, totalRecord);
+			
+			List<HostDTO> list= this.dao.getHostList(dto);
+			
+			int totalRecords=this.mdao.getListCount();
+			
+			PageDTO dtos = new PageDTO(page, rowsize, totalRecords);
+			
+			
+			List<MemberDTO> lists= this.mdao.getMemberList(dtos);
+			
+			int totalRecord1=this.rdao.getListCont();
+	    	
+	    	PageDTO dto1 =new PageDTO(page,rowsize,totalRecord1);
+	    	System.out.println(dto1.getEndNo());
+	    	
+	    	
+	    	List<ReviewDTO> list1 = this.rdao.getReviewList(dto1);
+	    	System.out.println(dto.getEndNo());
+	    	
+	    	
+	    	List<HaccDTO> list2=this.hdao.getHaccList();
+	    	
+	    	model.addAttribute("halist",list2);
+	    	
+	    	
+	    	model.addAttribute("Page",dto1);
+	    	model.addAttribute("Rlist",list1);
+			
+			
+			model.addAttribute("mlist", lists);
+			model.addAttribute("mpage", dtos);
+			
+			
+			
+		 
+		 model.addAttribute("hlist", list);
+		 model.addAttribute("Paging", dto);
 		 return "kdh/main";
 		 
 	 }
@@ -92,6 +147,7 @@ public class KdhController {
 	
 	@RequestMapping("kdh.do")
 	public String main() {
+		
 		return "kdh/admin_login";
 	}
 	
@@ -104,6 +160,8 @@ public class KdhController {
 		}else {
 			page = 1;    // 처음으로 게시물 전체 목록 태그를 선택한 경우
 		}
+		
+		
 		
 		totalRecord = this.dao.getListCount();
 		
@@ -125,7 +183,7 @@ public class KdhController {
 	public void insertOk(MultipartHttpServletRequest hRequest,HostDTO dto, HttpServletResponse response) throws IOException {
 		
 		
-		String uploadPath = "C:\\workspace(spring)\\kdh\\AirKH\\src\\main\\webapp\\resources\\host\\";
+		String uploadPath = "C:\\ncs\\workspace(spring)\\kdh\\AirKH\\src\\main\\webapp\\resources\\host\\";
 		
 		// 업로드된 파일들의 이름 목록을 제공하는 메서드.
 		Iterator<String> iterator = hRequest.getFileNames();
@@ -213,7 +271,9 @@ public class KdhController {
 	@RequestMapping("host_modify_ok.do")
 	public void modifyOk(MultipartHttpServletRequest hRequest,HostDTO dto,@RequestParam("page") int nowPage, HttpServletResponse response) throws IOException	{
 		
-		String uploadPath = "C:\\workspace(spring)\\kdh\\AirKH\\src\\main\\webapp\\resources\\host\\";
+		
+		
+		String uploadPath = "C:\\ncs\\workspace(spring)\\kdh\\AirKH\\src\\main\\webapp\\resources\\host\\";
 		
 		// 업로드된 파일들의 이름 목록을 제공하는 메서드.
 		Iterator<String> iterator = hRequest.getFileNames();
@@ -268,7 +328,7 @@ public class KdhController {
 		if(check > 0) {
 			out.println("<script>");
 			out.println("alert('사업주 수정 성공!!!')");
-			out.println("location.href='host_content.do?num="+dto.getHost_num()+"&page="+nowPage+"'");
+			out.println("location.href='host_content.do?no="+dto.getHost_num()+"&page="+nowPage+"'");
 			out.println("</script>");
 		}else {
 			out.println("<script>");
@@ -311,6 +371,7 @@ public class KdhController {
 		List<HostDTO> searchList = this.dao.searchHostList(dto);
 		
 		model.addAttribute("search", searchList);
+		model.addAttribute("page", dto);
 		
 		return "kdh/host_searchList";
 	}
@@ -347,7 +408,7 @@ public class KdhController {
     public void minsertOk(MultipartHttpServletRequest mRequest,MemberDTO dto,HttpServletResponse response) throws IOException {
 
 			
-		String uploadPath = "C:\\workspace(spring)\\kdh\\AirKH\\src\\main\\webapp\\resources\\member\\";
+		String uploadPath = "C:\\ncs\\workspace(spring)\\kdh\\AirKH\\src\\main\\webapp\\resources\\member\\";
 		
 		// 업로드된 파일들의 이름 목록을 제공하는 메서드.
 		Iterator<String> iterator = mRequest.getFileNames();
@@ -439,7 +500,7 @@ public class KdhController {
     @RequestMapping("member_modify_ok.do")
     public void mmodifyOk(MultipartHttpServletRequest mRequest, MemberDTO dto,@RequestParam("page")int nowPage,HttpServletResponse response) throws IOException {
     	
-		String uploadPath = "C:\\workspace(spring)\\kdh\\AirKH\\src\\main\\webapp\\resources\\member\\";
+		String uploadPath = "C:\\ncs\\workspace(spring)\\kdh\\AirKH\\src\\main\\webapp\\resources\\member\\";
 		
 		// 업로드된 파일들의 이름 목록을 제공하는 메서드.
 		Iterator<String> iterator = mRequest.getFileNames();
@@ -587,7 +648,7 @@ public class KdhController {
     
     @RequestMapping("review_write_ok.do")
     public void rwriteOk(MultipartHttpServletRequest mRequest, ReviewDTO dto, HttpServletResponse response) throws IOException {
-    	String uploadPath = "C:\\workspace(spring)\\kdh\\AirKH\\src\\main\\webapp\\resources\\member\\";
+    	String uploadPath = "C:\\ncs\\workspace(spring)\\kdh\\AirKH\\src\\main\\webapp\\resources\\member\\";
 		
 		// 업로드된 파일들의 이름 목록을 제공하는 메서드.
 		Iterator<String> iterator = mRequest.getFileNames();
@@ -687,7 +748,7 @@ public class KdhController {
 	
 	@RequestMapping("review_modify_ok.do")
     public void rmodifyOk(MultipartHttpServletRequest mRequest,ReviewDTO dto,@RequestParam("page")int nowPage,HttpServletResponse response) throws IOException {
-		String uploadPath = "C:\\workspace(spring)\\kdh\\AirKH\\src\\main\\webapp\\resources\\member\\";
+		String uploadPath = "C:\\ncs\\workspace(spring)\\kdh\\AirKH\\src\\main\\webapp\\resources\\member\\";
 		
 		// 업로드된 파일들의 이름 목록을 제공하는 메서드.
 		Iterator<String> iterator = mRequest.getFileNames();
@@ -812,9 +873,10 @@ public class KdhController {
 			page = 1;    // 처음으로 게시물 전체 목록 태그를 선택한 경우
 		}
 		
+		int rowsizes =10;
 		totalRecord = this.pdao.getListCount();
 		
-		PageDTO dto = new PageDTO(page, rowsize, totalRecord);
+		PageDTO dto = new PageDTO(page, rowsizes, totalRecord);
 		
 		List<PaymentDTO> list= this.pdao.getPaymentsList(dto);
 		model.addAttribute("palist", list);
@@ -833,7 +895,7 @@ public class KdhController {
     @RequestMapping("payment_insert_ok.do")
     public void rwriteOk(MultipartHttpServletRequest pRequest, PaymentDTO dto, HttpServletResponse response) throws IOException {
     	
-    	String uploadPath = "C:\\workspace(spring)\\kdh\\AirKH\\src\\main\\webapp\\resources\\upload\\2022-06-13\\";
+    	String uploadPath = "C:\\ncs\\workspace(spring)\\kdh\\AirKH\\src\\main\\webapp\\resources\\upload\\2022-06-13\\";
 		
 		// 업로드된 파일들의 이름 목록을 제공하는 메서드.
 		Iterator<String> iterator = pRequest.getFileNames();
@@ -919,7 +981,7 @@ public class KdhController {
     @RequestMapping("payment_modify_ok.do")
   public void pmodifyOk(MultipartHttpServletRequest pRequest, PaymentDTO dto,@RequestParam("page")int nowPage, HttpServletResponse response) throws IOException {
     	
-    	String uploadPath = "C:\\workspace(spring)\\kdh\\AirKH\\src\\main\\webapp\\resources\\upload\\2022-06-13\\";
+    	String uploadPath = "C:\\ncs\\workspace(spring)\\kdh\\AirKH\\src\\main\\webapp\\resources\\upload\\2022-06-13\\";
 		
 		// 업로드된 파일들의 이름 목록을 제공하는 메서드.
 		Iterator<String> iterator = pRequest.getFileNames();
@@ -1054,7 +1116,7 @@ public class KdhController {
     
     public void hinsertOk(MultipartHttpServletRequest pRequest, HaccDTO dto, HttpServletResponse response) throws IOException {
     	
-    	String uploadPath = "C:\\workspace(spring)\\kdh\\AirKH\\src\\main\\webapp\\resources\\upload\\2022-06-13\\";
+    	String uploadPath = "C:\\ncs\\workspace(spring)\\kdh\\AirKH\\src\\main\\webapp\\resources\\upload\\2022-06-13\\";
 		
 		// 업로드된 파일들의 이름 목록을 제공하는 메서드.
 		Iterator<String> iterator = pRequest.getFileNames();
@@ -1173,7 +1235,7 @@ public class KdhController {
     
     @RequestMapping("hacc_modify_ok.do")
     public void hmodifyOk(MultipartHttpServletRequest pRequest,HaccDTO dto,HttpServletResponse response) throws IOException {
-    	String uploadPath = "C:\\workspace(spring)\\kdh\\AirKH\\src\\main\\webapp\\resources\\upload\\2022-06-13\\";
+    	String uploadPath = "C:\\ncs\\workspace(spring)\\kdh\\AirKH\\src\\main\\webapp\\resources\\upload\\2022-06-13\\";
 		
 		// 업로드된 파일들의 이름 목록을 제공하는 메서드.
 		Iterator<String> iterator = pRequest.getFileNames();
@@ -1269,7 +1331,175 @@ public class KdhController {
     	
     }
     
+    @RequestMapping("qa_list.do")
+	public String clist(HttpServletRequest request,Model model) {
+		int page;
+		if(request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		}else {
+			page = 1;    // 처음으로 게시물 전체 목록 태그를 선택한 경우
+		}
+		
+		
+		
+		totalRecord = this.qdao.getListCont();
+		int rowsizes=10;
+		
+		PageDTO dto = new PageDTO(page, rowsizes, totalRecord);
+		
+		List<QaDTO> list= this.qdao.getQaList(dto);
+		model.addAttribute("qlist", list);
+		model.addAttribute("Paging", dto);
+		return "kdh/qa_list";
+		
+	}
+    
+    
+    @RequestMapping("qa_write.do")
+    public String qwrite() {
+    	return "kdh/qa_write";
+    }
+    
+    
+    @RequestMapping("qa_writeOk.do")
+    public void qwriteOk(QaDTO dto,HttpServletResponse response) throws IOException{
+		int check=this.qdao.insertQa(dto);
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out=response.getWriter();
+		
+		if (check>0){
+			out.println("<script>");
+			out.println("alert('게시물 입력성공!')");
+			out.println("location.href='qa_list.do'");
+			out.println("</script>");
+			
+		}else {
+			out.println("<script>");
+			out.println("alert('게시물 입력실패~~~')");
+			out.println("history.back()");
+			out.println("</script>");
+
+		}
+			
+	}
+    
+    @RequestMapping("qa_content.do")
+    
+    public String qcontent(@RequestParam("no")int no,@RequestParam("page")int nowPage, Model model) {
+    	QaDTO dto=this.qdao.QaCont(no);
+    	
+    	model.addAttribute("Page",nowPage);
+    	model.addAttribute("Cont",dto);
+    	
+    	return "kdh/qa_content";
+    }
+	
+    @RequestMapping("qa_reply.do")
+    public String qreply(@RequestParam("no") int no,
+			@RequestParam("page") int nowPage, Model model) {
+		
+		
+		
+		
+		// 게시글 상세 내역을 조회하는 메서드 호출
+    	QaDTO dto=this.qdao.QaCont(no);
+		
+		model.addAttribute("re", dto);
+		
+		model.addAttribute("Page", nowPage);
+		
+		return "kdh/qa_reply";
+    }
    
+    
+    @RequestMapping("reply_ok.do")
+    public void rwriteOk(QaDTO dto,@RequestParam("page") int nowPage, HttpServletResponse response) throws IOException{
+    	this.qdao.insertSt(dto);
+    	int check=this.qdao.insertRe(dto);
+		
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out=response.getWriter();
+		
+		if (check>0){
+			out.println("<script>");
+			out.println("alert('댓글 입력성공!')");
+			out.println("location.href='qa_list.do?page="+nowPage+"'");
+			out.println("</script>");
+			
+		}else {
+			out.println("<script>");
+			out.println("alert('댓글 입력실패~~~')");
+			out.println("history.back()");
+			out.println("</script>");
+
+		}
+			
+    }
+    
+    
+    @RequestMapping("qa_delete.do")
+    public void qadelete(@RequestParam("no")int num, @RequestParam("page") int nowPage, HttpServletResponse response) throws IOException {
+		int check=this.qdao.deleteQa(num);
+		
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		
+		if(check > 0) {
+			
+			this.qdao.updateSequence(num);
+			
+			out.println("<script>");
+			out.println("alert('고객문의 삭제 성공!!!')");
+			out.println("location.href='qa_list.do?page="+nowPage+"'");
+			out.println("</script>");
+		}else {
+			out.println("<script>");
+			out.println("alert('고객문의 삭제 실패~~~')");
+			out.println("history.back()");
+			out.println("</script>");
+		}
+		
+	}
+    
+    @RequestMapping("qa_modify.do")
+    public String qamodify(@RequestParam("no") int no,
+			@RequestParam("page") int nowPage, Model model) {
+		
+		
+		
+		
+		// 게시글 상세 내역을 조회하는 메서드 호출
+		QaDTO dto = this.qdao.QaCont(no);
+		
+		model.addAttribute("Modify", dto);
+		
+		model.addAttribute("Page", nowPage);
+		
+		return "kdh/qa_modify";
+	}
+    
+    @RequestMapping("qa_modify_ok.do")
+    public void qamodifyOk(QaDTO dto,@RequestParam("page")int nowPage, HttpServletResponse response) throws IOException {
+      
+      	int check= this.qdao.updateQa(dto);
+      	
+      	response.setContentType("text/html; charset=UTF-8");
+      	PrintWriter out = response.getWriter();
+      	
+      	if(check > 0) {
+  			out.println("<script>");
+  			out.println("alert('고객센터글수정 성공!!!')");
+  			out.println("location.href='qa_content.do?no="+dto.getQa_num()+"&page="+nowPage +"'");
+  			
+  			out.println("</script>");
+  		}else {
+  			out.println("<script>");
+  			out.println("alert('고객센터글수정 실패')");
+  			out.println("history.back()");
+  			out.println("</script>");
+  		}
+      	
+      }
     
     
     

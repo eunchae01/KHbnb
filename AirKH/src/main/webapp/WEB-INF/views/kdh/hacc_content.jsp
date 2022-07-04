@@ -7,10 +7,33 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<jsp:include page="main_navi.jsp"/>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+<style type="text/css">
+
+.wrapper {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		align-items:center;
+		
+	}
+	
+	.container0 {
+		width:90%;
+	}
+
+
+</style>
+
+
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/sty.css" />
 </head>
 <body>
+	<div class="wrapper">
+		<div class="container0">
+			<jsp:include page="main_navi.jsp"/>
 
 <div align="center">
 	<c:set var="dto" value="${Cont}" />
@@ -127,20 +150,20 @@
 				
 				<tr>
 	      	<td colspan="6" align="center">
-	      		<input type="button" value="숙소정보수정" onclick="location.href='hacc_modify.do?no=${dto.acc_code}'">
+	      		<input type="button" value="숙소정보수정" class="btn btn-primary"  onclick="location.href='hacc_modify.do?no=${dto.acc_code}'">
 	      		&nbsp;
-	      		<input type="button" value="숙소정보삭제" onclick="if(confirm('정말로 글을 삭제하시겟습니까')){
+	      		<input type="button" value="숙소정보삭제" class="btn btn-primary" onclick="if(confirm('정말로 글을 삭제하시겟습니까')){
 	      			location.href='hacc_delete.do?no=${dto.acc_code}'
 	      		}else{return;}">&nbsp;
-	      		<input type="button" value="숙소목록" onclick="location.href='hacc_list.do'">
+	      		<input type="button" value="숙소목록" class="btn btn-primary" onclick="location.href='hacc_list.do'">
 	      		</td>
 	      	</tr>
 				</table>
 				
 		
 	
-	
-	
+			</div>
+		</div>
 	</div>
 
 

@@ -6,13 +6,37 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+<style type="text/css">
+
+.wrapper {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		align-items:center;
+		
+		
+	}
+	
+	.container0 {
+		width:90%;
+		text-transform: uppercase;
+	}
+
+
+</style>
 </head>
 <body>
-<jsp:include page="main_navi.jsp"/>
+
+	<div class="wrapper">
+		<div class="container0">	
+			<jsp:include page="main_navi.jsp"/>
 
 	<div align="center">
 		<c:set var="dto" value="${cont }"/>
-		
+		<br>
 			<h3>호스트 테이블 ${dto.getHost_name() } 회원 정보 상세내역 페이지</h3>
 		
 		<br>
@@ -81,15 +105,15 @@
 	      
 	      <tr>
 	      	<td colspan="2" align="center">
-	      		<input type="button" value="호스트 수정"
+	      		<input type="button" class="btn btn-primary" value="호스트 수정"
 	      		onclick="location.href='host_modify.do?num=${dto.getHost_num()}&page=${Page }'">
 	      		&nbsp;
-	      		<input type="button" value="호스트 삭제"
+	      		<input type="button" class="btn btn-primary" value="호스트 삭제"
 	      		onclick="if(confirm('정말로 호스트를 삭제하시겠습니까?')){
 	      					location.href='host_delete.do?num=${dto.getHost_num()}&page=${Page }'
 	      					}else{ return;}">
 	      					&nbsp;
-	      		<input type="button" value="목록으로"
+	      		<input type="button" class="btn btn-primary" value="목록으로"
 	      			onclick="location.href='host_list.do?page=${Page }'">
 	      		</td>
 	      	</tr>
@@ -97,8 +121,8 @@
 	        
 		
 		</table>
-	
-	
+			</div>
+		</div>
 	</div>
 
 

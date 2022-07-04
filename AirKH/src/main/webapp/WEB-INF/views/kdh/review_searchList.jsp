@@ -6,19 +6,44 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<style type="text/css">
+
+.wrapper {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		align-items:center;
+		
+	}
+	
+	.container0 {
+		width:90%;
+	}
+
+
+.dohyeong a {
+	text-decoration:none;
+	color:black;
+	}
+
+</style>
 
 
 
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/sty.css" />
 
-<jsp:include page="main_navi.jsp"/>
+
 </head>
 <body>
-<div align="center">
-
-
+<div class="wrapper">
+	<div class="container0">
+		<jsp:include page="main_navi.jsp"/>
+<div class="dohyeong" align="center">
+	
+		<br>
 		<h2>리뷰 검색 리스트</h2>
-
+		<br>
 	
 	<div class="flex_r">
 		<c:set var="list" value="${Search }"/>
@@ -28,10 +53,9 @@
 			<c:if test="${!empty list }">
 				<c:forEach items="${list }" var="i">
 					<div class="each_item_r">
+					<img src="<%=request.getContextPath()%>/resources/member/${i.member_pic}"  width="100px">
 					
 					
-					
-					${i.review_num }
 					${i.member_id }
 					
 					${i.review_date.substring(0,7) }
@@ -45,7 +69,7 @@
 			</c:if>
 			
 			 <div class="each_items_r">
-	            <input type="button" value="리뷰목록" onclick="location.href='review_list.do'">
+	            <input type="button" class="btn btn-primary" value="리뷰목록" onclick="location.href='review_list.do'">
 	      </div>
 	         </div>
 		<!-- <tr>
@@ -101,9 +125,9 @@
 			
 		
 		
-		
-		
 		</div>
+		</div>
+	</div>
 		
 		
 		

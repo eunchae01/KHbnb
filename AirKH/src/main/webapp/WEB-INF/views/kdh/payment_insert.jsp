@@ -6,9 +6,32 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<jsp:include page="main_navi.jsp"/>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+<style type="text/css">
+
+.wrapper {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		align-items:center;
+		
+	}
+	
+	.container0 {
+		width:90%;
+	}
+
+
+</style>
+
 </head>
 <body>
+	<div class="wrapper">
+		<div class="container0">
+
+	<jsp:include page="main_navi.jsp"/>
 	
 	<div align="center">
 
@@ -29,21 +52,24 @@
 				<tr>
 					<th>숙소가격</th>
 					<td colspan="2"><input name="acc_price" ></td>
+					<th>숙소주소</th>
+					<td colspan="2"><input name="acc_addr" ></td>
+					
+				</tr>
+					<tr>
 					
 					<th>숙소 이미지</th>
 					<td colspan="2"><input type="file" name="file"> </td>
-				</tr>
-					<tr>
-					<th>숙소주소</th>
-					<td colspan="5"><input name="acc_addr" ></td>
-					
+					<th>숙박 인원</th>
+					<td colspan="2"><input type="number" name="check_person" min="1" max="14" value="4"></td>
 					
 				</tr>
 				<tr>
-					<th>체크인 체크아웃 날짜</th>
-					<td colspan="2"><input type="date" name="check_in" id="datepicker"> <input type="date" name="check_out" id="datepicker"></td>
-					<th>숙박 인원</th>
-					<td colspan="2"><input type="number" name="check_person" min="1" max="14" value="4"></td>
+					<th>체크인 </th>
+					<td colspan="2"><input type="date" name="check_in" id="datepicker">
+					<th>체크아웃 날짜</th>
+					 <th><input type="date" name="check_out" id="datepicker"></td>
+					
 				</tr>
 				
 				<tr>
@@ -54,21 +80,15 @@
 					<td colspan="2"><input name="member_phone"> </td>
 				</tr>
 				
-				<tr>
-					<th>고객주소</th>
-					<td colspan="5"><input name="member_addr" size="100"></td>
-					
-					
-				</tr>
+				
 				
 					<tr>
 					<th>호스트 이름</th>
-					<td><input name="host_name"></td>
+					<td colspan="2"><input name="host_name"></td>
 					<th>호스트 전화번호</th>
-					<td><input name="host_phone"></td>
-					<th>예약 정보</th>
-					<td><input name="reserve_info">
-	    		  </td>
+					<td colspan="2"><input name="host_phone"></td>
+					
+	    		  
 					</tr>
 				
 				
@@ -76,14 +96,14 @@
 				
 				<tr>
 					<td colspan="6" align="center">
-						<input type="submit" value="결제완료">&nbsp;&nbsp;&nbsp;
-						<input type="reset" value="다시작성">
+						<input type="submit" class="btn btn-primary" value="결제완료">&nbsp;&nbsp;&nbsp;
+						<input type="reset" class="btn btn-primary" value="다시작성">
 				</table>
 				
 		</form>
 	
-	
-	
+			</div>
+		</div>
 	</div>
 
 </body>

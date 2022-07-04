@@ -6,14 +6,34 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+<style type="text/css">
+
+.wrapper {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		align-items:center;
+		
+	}
+	
+	.container0 {
+		width:90%;
+	}
+
+
+</style>
 </head>
 <body>
-
-<jsp:include page="main_navi.jsp"/>
+	<div class="wrapper">
+		<div class="container0">
+			<jsp:include page="main_navi.jsp"/>
 
 	<div align="center">
 		<c:set var="dto" value="${modify }"/>
-		
+		<br>
 			<h3>회원 테이블 ${dto.getMember_id() } 회원 정보 수정폼 페이지</h3>
 		
 		<br>
@@ -23,6 +43,7 @@
 	      action="<%=request.getContextPath() %>/member_modify_ok.do">
 		<input type="hidden" name="member_num" value="${dto.getMember_num() }">
 		<input type="hidden" name="page" value="${Page }"> 
+		<input type="hidden" name="member_pic" value="${dto.member_pic}">
 		<table border="0" cellspacing="0" width="450">
 			<tr>
 				<th>회원 아이디</th>
@@ -48,7 +69,7 @@
 	        
 	        <tr>
 	        	<th>회원 사진</th>
-	        	<td><input type="file" name="file2" value="${dto.getMember_pic() }">
+	        	<td><input type="file"  name="file2" value="${dto.getMember_pic() }">
 	        	</td>
 	        </tr>
 	        
@@ -59,8 +80,8 @@
 	        
 	      	<tr>
 	      		<td colspan="2" align="center">
-	      		<input type="submit" value="회원수정">&nbsp;&nbsp;
-	      		<input type="reset" value="다시작성">
+	      		<input type="submit" class="btn btn-primary" value="회원수정">&nbsp;&nbsp;
+	      		<input type="reset" class="btn btn-primary" value="다시작성">
 	      		</td>
 	      	</tr>
 	        
@@ -69,7 +90,8 @@
 		
 		</table>
 	</form>
-	
+			</div>
+		</div>
 	</div>
 
 </body>

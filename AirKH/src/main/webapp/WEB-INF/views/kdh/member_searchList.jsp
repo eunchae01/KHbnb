@@ -7,11 +7,43 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/sty.css" />
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+<style type="text/css">
+
+.wrapper {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		align-items:center;
+		
+	}
+	
+	.container0 {
+		width:90%;
+	}
+	
+	.dohyeong {
+	
+	    flex-direction: column;
+    align-items: center;
+    display: flex;
+	
+	}
+	
+	.dohyeong a {
+	text-decoration:none;
+	color:black;
+	}
+
+
+</style>
 </head>
 <body>
-<div class="wrapper">
-<div class="container0">
-<jsp:include page="main_navi.jsp"/>
+	<div class="wrapper">
+		<div class="container0">
+			<jsp:include page="main_navi.jsp"/>
 
 
 
@@ -33,12 +65,12 @@
 				<c:forEach items="${list }" var="dto">
 					<div class="each_item">
 					
-						<img src="<%=request.getContextPath()%>/resources/member/${dto.member_pic}"  width="110px">
+						<img src="<%=request.getContextPath()%>/resources/member/${dto.member_pic}"  width="200px">
 					<br>
-					${dto.member_num}
 					
-						<a href="<%=request.getContextPath() %>/member_content.do?no=${dto.member_num}&page=${paging.page}">
-						${dto.member_id}</a>
+					
+						
+						${dto.member_id}
 					 <%-- ${dto.member_pic } --%>
 					 <br>
 					 ${dto.member_date.substring(0,10) }
@@ -52,7 +84,7 @@
 		
 			
 				<div class="each_items">
-					<input type="button" value="회원목록" onclick="location.href='member_list.do'">
+					<input type="button" class="btn btn-primary" value="회원목록" onclick="location.href='member_list.do'">
 				</div>
 				
 					

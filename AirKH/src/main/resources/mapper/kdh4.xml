@@ -14,7 +14,7 @@
 	</select>
 	
 	<select id="ptcount" resultType="int">
-		select count(*) from payment_hotel where cart_num=#{no}
+		select count(*) from payment_hotel where acc_code=#{no}
 	
 	
 	</select>
@@ -37,7 +37,7 @@
 
 	<![CDATA[
 		select * from (select b.*, row_number() over(order by cart_num desc)
-		rnum from payment_hotel b where cart_num=#{num}) where rnum>=#{startNo} and rnum<=#{endNo}
+		rnum from payment_hotel b where acc_code=#{num}) where rnum>=#{startNo} and rnum<=#{endNo}
 	]]>
 
 	
@@ -54,7 +54,7 @@
 		insert into payment_hotel values(#{cart_num}+1 ,#{acc_code},
 			#{acc_name},#{acc_price},#{acc_thumbnail},#{acc_addr},	
 			#{check_in},#{check_out},#{check_person},#{member_name},#{member_phone},
-			#{member_addr},#{host_name},#{host_phone},#{reserve_info},'','','','','',sysdate)
+			#{host_name},#{host_phone},'0','','','','','',sysdate)
 	
 	
 
@@ -71,8 +71,8 @@
 		update payment_hotel set acc_code=#{acc_code}, acc_name=#{acc_name}, acc_price=#{acc_price},
 		acc_thumbnail=#{acc_thumbnail},acc_addr=#{acc_addr},
 		check_in=#{check_in},check_out=#{check_out},check_person=#{check_person},member_name=#{member_name},
-		member_phone=#{member_phone},member_addr=#{member_addr},host_name=#{host_name},host_phone=#{host_phone},
-		reserve_info=#{reserve_info},cart_date=#{cart_date} where cart_num=#{cart_num}
+		member_phone=#{member_phone},host_name=#{host_name},host_phone=#{host_phone},
+		cart_date=#{cart_date} where cart_num=#{cart_num}
 	
 	</update>
 	

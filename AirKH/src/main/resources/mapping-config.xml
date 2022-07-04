@@ -22,6 +22,9 @@
 		<typeAlias type="com.air.common.HaccDTO" alias="hadto" />
 		<typeAlias type="com.air.kdh.HaccDAO" alias="hadao" />
 		
+		<typeAlias type="com.air.common.QaDTO" alias="qdto" />
+		<typeAlias type="com.air.kdh.QaDAO" alias="qdao" />
+		
 		
 		<typeAlias type="com.air.common.PageDTO" alias="pdto" />
 		

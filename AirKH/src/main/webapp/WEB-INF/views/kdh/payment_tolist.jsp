@@ -7,17 +7,51 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <style type="text/css">
-#navi-next{
-margin-right:300px;
+#lis{
+	margin-left:500px;
 }
+.wrapper {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		align-items:center;
+		
+	}
+	
+	.container0 {
+		width:90%;
+	}
+
+
+.cont-table table th,
+td {
+	border-bottom: 1px solid lightgray;
+}
+
+.cont-table table td {
+	padding: 20px 0;
+}
+
+.cont-table table th {
+	width: 200px;
+}
+
+.cont-table table td img {
+	width: 160px;
+}
+
+
 </style>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 
 </head>
 <body>
-
-<jsp:include page="main_navi.jsp"/>
+	<div class="wrapper">
+		<div class="container0">	
+		<jsp:include page="main_navi.jsp"/>
 <c:set var="list" value="${palist }"/>
 	
 	
@@ -28,22 +62,19 @@ margin-right:300px;
 			<h3>결제 매출액 목록 페이지</h3>
 		
 		<br>
+		<div class="cont-hotel">
+		<table border="0" cellspacing="0" width="850">
 		
-		<table border="0" cellspacing="0" width="450">
-			<tr>
-				<th>숙소 이름</th>
-				<th>결제 금액</th> <th>숙소 결제일</th>
-			</tr>
 			
 			<c:set var="paging" value="${Paging }" />
 			<c:if test="${!empty list }">
 				<c:forEach items="${list }" var="dto">
 				<tr>
 					
-					<td>
+					<td align ="center">
 					${dto.acc_name }</a></td>
-					<td>\<fmt:formatNumber>${dto.acc_price }</fmt:formatNumber>원</td>
-					<td> ${dto.cart_date.substring(0,10) }</td>
+					<td align ="center">\<fmt:formatNumber>${dto.acc_price }</fmt:formatNumber>원</td>
+					<td align ="center"> ${dto.cart_date.substring(0,10) }</td>
 				</tr>
 				
 				
@@ -61,25 +92,26 @@ margin-right:300px;
 				</tr>
 			</c:if>
 			
-			<tr>
-				<td colspan="3" align="right">
-					<input type="button" value="결제목록"
-			               onclick="location.href='payment_list.do?page=${paging }'">
-				</td>
-			</tr>
+			
 			
 		
 		</table>
+		
+		</div>
 		<br>
 		
-		<div align="right" id="navi-next">
-		<h2>${name } 숙소별 매출액: ${tot }원</h2>
+		<input type="button" class="btn btn-primary" id="lis" value="결제목록"
+			               onclick="location.href='payment_list.do?page=${paging }'">
+		
+	<br>	
+		<div align="center" id="navi-next">
+		<h2>총숙소의 매출액: \<fmt:formatNumber>${tot}</fmt:formatNumber>원</h2>
 	
 	</div>
 		
 		
-		
-	
+			</div>
+		</div>
 	</div>
 
 </body>

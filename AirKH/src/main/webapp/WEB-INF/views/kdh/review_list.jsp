@@ -7,14 +7,67 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/sty.css" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<style type="text/css">
 
-<jsp:include page="main_navi.jsp"/>
+.wrapper {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		align-items:center;
+		
+	}
+	
+	.container0 {
+		width:90%;
+		
+	}
+.review_list_search {
+		display: flex;
+    	justify-content: end;
+    	margin-top:10px;
+    	height:33px;
+	}
+
+.flex_r{
+text-transform: uppercase;
+
+}
+
+
+.dohyeong a {
+	text-decoration:none;
+	color:black;
+	}
+</style>
+
+
 </head>
 <body>
-<div align="center">
-	
+<div class="wrapper">
+	<div class="container0">
+<jsp:include page="main_navi.jsp"/>
+
+ 	<div class="review_list_search">
+ 	<c:set var="list" value="${Rlist }"/>
+		<c:set var="paging" value="${Page }"/>
+	   <form method="post"	
+	      action="<%=request.getContextPath()%>/review_search.do?page=${paging.page}">
+	   <input type="hidden" name="page" value="${paging.page}">
+	      <select name="field">
+	         <option value="cont">내용</option>
+	         <option value="writer">작성자</option>
+	      </select>
+	      
+	      <input name="keyword">&nbsp;&nbsp;
+	      <input class="btn btn-primary" type="submit" value="검색">
+	   </form>
+	</div>			
+
+		<div class="dohyeong" align="center">
+	<br>		
 		<h2>리뷰 리스트</h2>
-	
+	<br>
 	
 
 		<!-- <tr>
@@ -25,8 +78,7 @@
 		</tr>
 		 -->
 		
-		<c:set var="list" value="${Rlist }"/>
-		<c:set var="paging" value="${Page }"/>
+		
 		
 		<div class="flex_r">
 		
@@ -55,7 +107,7 @@
 			</c:if>
 			
 			 <div class="each_items_r">
-	            <input type="button" value="리뷰작성"
+	            <input type="button" class="btn btn-primary" value="리뷰작성"
 	                 onclick="location.href='review_write.do'">
 	      </div>
 	         </div>
@@ -96,19 +148,7 @@
 	   </c:if>
 	   
 	   <br> <br>
-	   
-	   <form method="post"	
-	      action="<%=request.getContextPath()%>/review_search.do">
-	   <input type="hidden" name="page" value="${paging.page}">
-	      <select name="field">
-	         <option value="cont">내용</option>
-	         <option value="writer">작성자</option>
-	      </select>
-	      
-	      <input name="keyword">&nbsp;&nbsp;
-	      <input type="submit" value="검색">
-	   </form>
-			
+	  
 			
 			
 						
@@ -118,7 +158,9 @@
 		
 		
 		</div>
-		
+	</div>
+</div>
+	
 		
 		
 		

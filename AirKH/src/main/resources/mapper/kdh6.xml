@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+
+<mapper namespace="qdao">
+
+<select id="Qacount" resultType="int">
+	select count(*) from qa_hotel
+
+</select>
+
+
+<select id="qalist" parameterType="pdto" resultType="qdto">
+		<![CDATA[
+		select * from (select b.*, row_number() over(order by qa_index desc, qa_num)
+		rnum from qa_hotel b) where rnum>=#{startNo} and rnum<=#{endNo}
+	]]>
+	
+	
+	</select>
+	
+	<insert id="qainsert" parameterType="qdto">
+		<selectKey resultType="int" keyProperty="qa_num" order="BEFORE">
+         select nvl(max(qa_num), 0) from qa_hotel
+      </selectKey>
+	
+	
+	
+		insert into qa_hotel values(#{qa_num}+1 ,#{qa_num}+1,
+			#{qa_type},#{qa_id},#{qa_title},#{qa_cont},'0')
+			
+	
+	
+	
+	
+	</insert>
+	
+	<select id="qaco" parameterType="int" resultType="qdto">
+		select * from qa_hotel where qa_num=#{no}
+	
+	</select>
+	<update id="qaste">
+	         update qa_hotel set qa_state=1 where qa_num=#{qa_num}
+	         </update>
+	
+	<insert id="reinsert" parameterType="qdto">
+		<selectKey resultType="int" keyProperty="qa_num" order="BEFORE">
+         select nvl(max(qa_num), 0) from qa_hotel
+      </selectKey>
+	
+	
+	
+		insert into qa_hotel values(#{qa_num}+1 ,#{qa_index},
+			#{qa_type},'admin',#{qa_title},#{qa_cont},'1')
+			
+			
+
+      
+			
+	
+	
+	
+	
+	</insert>
+	
+	<update id="updateqa" parameterType="qdto">
+		update qa_hotel set qa_type=#{qa_type}, qa_title=#{qa_title},qa_cont=#{qa_cont}
+		where qa_num=#{qa_num}
+	</update>
+	
+	<delete id="delqa" parameterType="int">
+		delete qa_hotel where qa_num=#{no}
+	</delete>
+	
+	<update id="qaseq" parameterType="int">
+		<![CDATA[
+			update qa_hotel set qa_num = qa_num-1, qa_index=qa_index-1
+			where qa_num >#{no}
+		
+		]]>
+	</update>
+
+
+
+
+</mapper>
