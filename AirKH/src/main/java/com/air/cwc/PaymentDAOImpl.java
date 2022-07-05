@@ -39,15 +39,9 @@ public class PaymentDAOImpl implements PaymentDAO {
 	}
 	
 	@Override
-	public List<PaymentDTO> getPayList_update(String host_name) {
-		return this.sqlSession.selectList("update_list",host_name);
-	}
-	@Override
 	public List<PaymentDTO> getPayList_approve(String host_name) {
 		return this.sqlSession.selectList("approve_list",host_name);
-
 	}
-	
 	
 	@Override
 	public int insertPay(PaymentDTO dto) {
@@ -72,4 +66,8 @@ public class PaymentDAOImpl implements PaymentDAO {
 	public int update_cart(PaymentDTO dto) {
 		return this.sqlSession.update("modify", dto);
 }
+	@Override
+	public int approve_guest(int cart_num) {
+		return this.sqlSession.update("approve",cart_num);
+	}
 }
