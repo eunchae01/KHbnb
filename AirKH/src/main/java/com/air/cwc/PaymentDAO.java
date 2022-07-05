@@ -9,6 +9,7 @@ public interface PaymentDAO {
 	public List<PaymentDTO> getPayList(String member_id);
 	public List<PaymentDTO> getPayList_H(String host_name);
 	public List<PaymentDTO> getPayList_out(String host_name);
+	public List<PaymentDTO> getPayList_play(String host_name);
 	public List<PaymentDTO> getPayList_in(String host_name);
 	public List<PaymentDTO> getPayList_pre(String host_name);
 	public List<PaymentDTO> getPayList_approve(String host_name);
