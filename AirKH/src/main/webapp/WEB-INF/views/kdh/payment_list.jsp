@@ -102,7 +102,7 @@ padding-top:0px;
 		</div>
 		
 		<br>
-		<input type="button" class="btn btn-primary" id="li" value="결제등록" onclick="location.href='payment_insert.do'">
+		
 		
 		
 		<br>

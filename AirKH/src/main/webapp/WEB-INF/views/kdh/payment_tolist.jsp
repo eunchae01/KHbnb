@@ -103,7 +103,7 @@ border-top: 1px solid lightgray;
 		
 	<br>	
 		<div align="center" id="navi-next">
-		<h2>총숙소의 매출액: \<fmt:formatNumber>${tot}</fmt:formatNumber>원</h2>
+		<h2>총숙소의 매출액:&#65510;<fmt:formatNumber>${tot}</fmt:formatNumber>원</h2>
 	
 	</div>
 		

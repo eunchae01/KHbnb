@@ -54,8 +54,9 @@
 				<c:forEach items="${list }" var="i">
 					<div class="each_item_r">
 					<img src="<%=request.getContextPath()%>/resources/member/${i.member_pic}"  width="100px">
-					
+					<br>
 					${i.acc_name }
+					<br>
 					${i.member_id }
 					
 					${i.review_date.substring(0,7) }

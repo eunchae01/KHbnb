@@ -66,7 +66,7 @@ padding-top:0px;
 		
 		<div class="lin">
 		<div class="cont-table">
-		<table border="0" cellspacing="0" width="700">
+		<table border="0" cellspacing="0" width="1000">
 			<tr>
 				<th>게시글 종류</th> <th>글 제목</th>
 				<th>작성자</th> <th>처리상태</th>
@@ -91,7 +91,7 @@ padding-top:0px;
 						☞
 						</c:if>
 						 
-						<a href="<%=request.getContextPath() %>/qa_content.do?no=${dto.qa_num}&page=${paging.getPage()}">	${dto.qa_title}</a></td>
+						<a href="<%=request.getContextPath() %>/qa_content.do?no=${dto.qa_num}&page=${paging.getPage()}">${dto.qa_title}</a></td>
 						<td>${dto.qa_id}</td>
 						<td><c:if test="${dto.qa_state eq'0'}">처리중</c:if>
 							<c:if test="${dto.qa_state eq'1'}">답변완료</c:if>
@@ -122,8 +122,7 @@ padding-top:0px;
 		
 		</div>
 		<br>
-		<input type="button" class="btn btn-primary" id="l" value="글쓰기"
-							onclick="location.href='qa_write.do'">
+		
 		
 		
 		<br>

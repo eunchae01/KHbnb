@@ -119,10 +119,7 @@ text-transform: uppercase;
 				</c:forEach>
 			</c:if>
 			
-			 <div class="each_items_r">
-	            <input type="button" class="btn btn-primary" value="리뷰작성"
-	                 onclick="location.href='review_write.do'">
-	      </div>
+			
 	         </div>
 		
 		
