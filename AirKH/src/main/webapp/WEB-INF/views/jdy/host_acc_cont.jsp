@@ -60,7 +60,7 @@
 							<tr>
 								<th>숙소 가격</th>
 								<td>
-									<fmt:formatNumber value="${dto.acc_price }" />&nbsp;&bsol;
+									<fmt:formatNumber value="${dto.acc_price }" />&nbsp;&#65510;
 								</td>
 							</tr>
 							

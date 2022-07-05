@@ -88,7 +88,7 @@
 								<tr>
 									<th>숙소 가격</th>
 									<td>
-										<input name="acc_price" id="price" value="${dto.acc_price }" />&nbsp;&bsol;
+										<input name="acc_price" id="price" value="${dto.acc_price }" />&nbsp;&#65510;
 									</td>
 								</tr>
 								
