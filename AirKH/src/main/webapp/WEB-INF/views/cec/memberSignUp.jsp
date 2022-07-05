@@ -72,7 +72,7 @@
 			
 			<div class="contaniner2">
 				<div class="imgCon">
-					<img id="preview">
+					<img id="preview" src="<%=request.getContextPath() %>/resources/assets/avatar.png">
 				</div>
 				<br>
 				<label for="input-image" class="col-sm-2 col-form-label">프로필 사진</label>
