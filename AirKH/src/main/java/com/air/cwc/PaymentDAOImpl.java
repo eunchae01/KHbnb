@@ -22,7 +22,10 @@ public class PaymentDAOImpl implements PaymentDAO {
 	public List<PaymentDTO> getPayList_H(String host_name) {
 		return this.sqlSession.selectList("Hpaylist",host_name);
 	}
-	
+		@Override
+	public List<PaymentDTO> getPayList_play(String host_name) {
+		return this.sqlSession.selectList("playlist",host_name);
+	}
 	@Override
 	public List<PaymentDTO> getPayList_out(String host_name) {
 		return this.sqlSession.selectList("out_list",host_name);
