@@ -91,4 +91,8 @@
 	<select id="like" parameterType="int" resultType="com.air.cwc.WishDTO">
 		select *from wish_hotel where acc_code= #{acc_code}
 	</select>
+	
+	<select id="cwish" parameterType="String" resultType="com.air.cwc.WishCategoryDTO">
+		select*from wish_category_hotel where member_id=#{member_id}
+	</select>
 </mapper>
