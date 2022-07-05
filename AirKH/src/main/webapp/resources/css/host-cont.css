@@ -131,3 +131,7 @@ td {
 #submit-btn:hover {
 	opacity: 0.6;
 }
+
+#name {
+	width: 300px;
+}

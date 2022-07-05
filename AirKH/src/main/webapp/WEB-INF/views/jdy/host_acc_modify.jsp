@@ -43,7 +43,7 @@
 									<td><input name="acc_name" id="name" value="${dto.acc_name }" /></td>
 								</tr>
 								
-								<tr>
+								<%-- <tr>
 									<th>숙소 테마</th>
 									<td>
 										<c:set var="tlist" value="${tList }"/>
@@ -56,7 +56,7 @@
 											</c:if>
 										</select>
 									</td>
-								</tr>
+								</tr> --%>
 								
 								<tr>
 									<th>숙소 설명</th>
@@ -156,6 +156,6 @@
 			</div>
 		</div>
 	</section>
-	
+	<jsp:include page="./include/footer.jsp"/>
 </body>
 </html>

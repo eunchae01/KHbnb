@@ -151,6 +151,7 @@ h3 {
 .host-review h2{
 	display: flex;
 	align-items: center;
+	margin-bottom: 30px;
 }
 
 .host-review h2 img {
@@ -158,13 +159,22 @@ h3 {
 }
 
 .review-list {
-	margin-bottom: 30px;
+	margin-bottom: 40px;
+}
+
+.acc-name {
+	font-size: 18px;
+	font-weight: 700;
+	margin-bottom: 15px;
+}
+
+.rlist-cont {
+	margin-bottom: 10px;
 }
 
 .rlist-top {
 	display: flex;
-	align-items: flex-end;
-	margin-bottom: 10px;
+	align-items: center;
 }
 
 .rlist-top img {

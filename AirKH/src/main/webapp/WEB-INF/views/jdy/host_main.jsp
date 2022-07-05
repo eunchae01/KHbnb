@@ -73,18 +73,21 @@
 							&nbsp;후기 000개
 						</h2>
 						<c:forEach items="${ho_list }" var="ho">
-							<div class="review-list">
-								<div class="rlist-top">
-									<img src="<%=request.getContextPath()%>/resources/member/${ho.member_pic }" alt="" />
-									<div class="rlist-title">
-										<div class="rlist-name">${ho.member_id }</div>
-										<div class="rlist-date">
-											${ho.review_date.substring(0,4) }년 ${ho.review_date.substring(5,7) }월 
+							<a href="<%=request.getContextPath()%>/host_acc_cont.do?no=${ho.acc_code}">
+								<div class="review-list">
+									<div class="acc-name">숙소 이름~~~~~~~~~~~</div>
+									<div class="rlist-cont">${ho.review_content }</div>
+									<div class="rlist-top">
+										<img src="<%=request.getContextPath()%>/resources/member/${ho.member_pic }" alt="" />
+										<div class="rlist-title">
+											<div class="rlist-name">${ho.member_id }</div>
+											<div class="rlist-date">
+												${ho.review_date.substring(0,4) }년 ${ho.review_date.substring(5,7) }월 
+											</div>				
 										</div>
 									</div>
 								</div>
-								<div class="rlist-cont">${ho.review_content }</div>
-							</div>
+							</a>
 						</c:forEach>
 					</div>
 				</div>
@@ -92,7 +95,7 @@
 		</div>
 	</section>
 	
-	<jsp:include page="./include/footer.jsp"></jsp:include>
+	<jsp:include page="./include/footer.jsp"/>
 
 </body>
 </html>

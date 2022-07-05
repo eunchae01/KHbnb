@@ -200,5 +200,11 @@ public class AccDAOImpl implements AccDAO{
 	
 	}
 
+
+	@Override
+	public void updateAccDate(int no) {
+		this.sqlSession.update("update_date", no);
+	}
+
 	
 }

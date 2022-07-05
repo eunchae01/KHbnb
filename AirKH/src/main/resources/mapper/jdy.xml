@@ -75,9 +75,12 @@
 		acc_bath = #{acc_bath}, acc_mail = #{acc_mail}, acc_detail = #{acc_detail}, 
 		acc_phone = #{acc_phone}, 
 		acc_thumbnail = #{acc_thumbnail}, acc_image1 = #{acc_image1}, acc_image2 = #{acc_image2}, 
-		acc_image3 = #{acc_image3}, acc_image4 = #{acc_image4}, 
-		acc_date = sysdate
+		acc_image3 = #{acc_image3}, acc_image4 = #{acc_image4}
 		where acc_code = #{acc_code}
+	</update>
+	
+	<update id="update_date" parameterType="int">
+		update acc_hotel set acc_date = sysdate where acc_code = #{no}
 	</update>
 	
 	<!-- 호스트: 숙소 삭제 -->

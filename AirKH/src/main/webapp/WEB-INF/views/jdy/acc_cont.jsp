@@ -256,16 +256,22 @@ $(function () {
 								max="${dto.acc_maxp }">
 							<button type="submit" class="btn btn-danger" id="purchase-btn" >예약하기</button>
 						</form>
-
-					<div>
-					<font
-						style="font-family: serif; font-size: 20px; font-weight: bold;">
-						₩<fmt:formatNumber value="${dto.acc_price  }" /></font>X<span id="ck_day2"></span>박
-						<input id="totalp" readonly value="${dto.acc_price  }"><br>
-						서비스 수수료:<input id="totals" readonly>
-						<hr>
-						총 합계: <input id="totalm" readonly>
-
+						<div class="bill-dldd">
+							<dl class="bill-dl">
+							<dt>&#65510;<fmt:formatNumber value="${dto.acc_price  }" />&nbsp;X&nbsp;<span id="ck_day2"></span>박</dt>
+							<dd><input id="totalp" readonly value="${dto.acc_price  }"></dd>
+							</dl>
+							
+							<dl class="bill-dl">
+								<dt>서비스 수수료</dt>
+								<dd><input id="totals" readonly></dd>
+							</dl>
+							<hr>
+							<dl class="bill-dl bill-total">
+								<dt>총 합계</dt>
+								<dd><input id="totalm" readonly></dd>
+							</dl>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -369,128 +375,15 @@ $(function () {
 		</div>		
 	</section>
 	
-	<section class="modal-section">
-		<div class="container">
-			<div class="row">
-				<div class="col-12">
-					<div id="modal_container">
-					      <input type="button" value="리뷰 등록하기" id="btn-modal">
-					</div>
-				
-				    <div id="modal" class="modal-overlay">
-				        <div class="modal-window">
-				            <div class="title">
-				                <h2>리뷰 등록하기</h2>
-				            </div>
-				            <div class="close-area">X</div>
-				            <c:set var="mem" value="${member_id }" />
-				            <c:set var="mem_pic" value="${member_pic }" />
-				            <div class="modal_content">
-				                <form method="post" action="<%=request.getContextPath() %>/review_insert_ok.do?hostno=${host.host_num}">
-				                	<table border="0" cellspacing="0" width="1200px">
-				                	<br/>
-				                		<tr>
-				                			<th>숙소 이름</th>
-				                			<td><input type="text" name="acc_name" value="${dto.acc_name }"></td>
-				                			<td class="re_hidden"><input type="number" name="acc_code" value="${dto.acc_code }"></td>
-				                			<td class="re_hidden"><input type="text" name="member_id" value="${mem }"></td>
-				                			<td class="re_hidden"><input type="text" name="member_pic" value="${mem_pic }"></td>
-				                			 
-				                		</tr>
-				                		<tr>
-				                			<th>청결한가요?</th>
-				                			<td>
-				                			<input type="checkbox" name="review_cl" value="1"> 1점
-				                			<input type="checkbox" name="review_cl" value="2"> 2점
-				                			<input type="checkbox" name="review_cl" value="3"> 3점
-				                			<input type="checkbox" name="review_cl" value="4"> 4점
-				                			<input type="checkbox" name="review_cl" value="5"> 5점
-				                			</td>
-				                		</tr>
-				                		<tr>
-				                			<th>의사소통은 잘 되었나요?</th>
-				                			<td>
-				                			<input type="checkbox" name="review_comm" value="1"> 1점
-				                			<input type="checkbox" name="review_comm" value="2"> 2점
-				                			<input type="checkbox" name="review_comm" value="3"> 3점
-				                			<input type="checkbox" name="review_comm" value="4"> 4점
-				                			<input type="checkbox" name="review_comm" value="5"> 5점
-				                			</td>
-				                		</tr>
-				                		<tr>
-				                			<th>체크인 / 아웃 시간은 잘 지켜졌나요?</th>
-				                			<td>
-				                			<input type="checkbox" name="review_check" value="1"> 1점
-				                			<input type="checkbox" name="review_check" value="2"> 2점
-				                			<input type="checkbox" name="review_check" value="3"> 3점
-				                			<input type="checkbox" name="review_check" value="4"> 4점
-				                			<input type="checkbox" name="review_check" value="5"> 5점
-				                			</td>
-				                		</tr>
-				                		<tr>
-				                			<th>주소는 정확한가요?</th>
-				                			<td>
-				                			<input type="checkbox" name="review_acc" value="1"> 1점
-				                			<input type="checkbox" name="review_acc" value="2"> 2점
-				                			<input type="checkbox" name="review_acc" value="3"> 3점
-				                			<input type="checkbox" name="review_acc" value="4"> 4점
-				                			<input type="checkbox" name="review_acc" value="5"> 5점
-				                			</td>
-				                		</tr>
-				                		<tr>
-				                			<th>교통편의성은 어떤가요?</th>
-				                			<td>
-				                			<input type="checkbox" name="review_loc" value="1"> 1점
-				                			<input type="checkbox" name="review_loc" value="2"> 2점
-				                			<input type="checkbox" name="review_loc" value="3"> 3점
-				                			<input type="checkbox" name="review_loc" value="4"> 4점
-				                			<input type="checkbox" name="review_loc" value="5"> 5점
-				                			</td>
-				                		</tr>
-				                		<tr>
-				                			<th>가격대비 만족도는 어떤가요?</th>
-				                			<td>
-				                			<input type="checkbox" name="review_sat" value="1"> 1점
-				                			<input type="checkbox" name="review_sat" value="2"> 2점
-				                			<input type="checkbox" name="review_sat" value="3"> 3점
-				                			<input type="checkbox" name="review_sat" value="4"> 4점
-				                			<input type="checkbox" name="review_sat" value="5"> 5점
-				                			</td>
-				                		</tr>
-				                		<tr>
-				                			<th>전체적인 평점은 어떤가요?</th>
-				                			<td>
-				                			<input type="checkbox" name="review_grade" value="1"> 1점
-				                			<input type="checkbox" name="review_grade" value="2"> 2점
-				                			<input type="checkbox" name="review_grade" value="3"> 3점
-				                			<input type="checkbox" name="review_grade" value="4"> 4점
-				                			<input type="checkbox" name="review_grade" value="5"> 5점
-				                			</td>
-				                		</tr>
-				                		<br/>
-				                		<tr>
-				                			<th>리뷰를 작성해주세요!</th>
-				                			<td>
-				                				<textarea id="re_textCont" name="review_content" cols="100" rows="3"></textarea>
-				                				<div id="re_text_cnt">(0 / 200)</div>
-				                			</td>
-				                		</tr>
-				                	</table>
-				                	<input class="submit_btn" type="submit" value="리뷰등록">
-				                </form>
-				            </div>
-				        </div>
-				    </div>
-				</div>
-			</div>
-		</div>
-	</section>
-	
 	<section class="need-to-know">
 		<div class="container">
 			<div class="row">
-				<div class="col-4 know-col">
+				<div class="col-12">
 					<h2>알아두어야 할 사항</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-4 know-col">
 					<strong>숙소 이용규칙</strong>
 					<div class="know-row">
 						<img src="<%=request.getContextPath() %>/resources/assets/clock.png" alt="" class="icons" />
@@ -509,51 +402,32 @@ $(function () {
 						<p>반려동물 동반 불가</p>
 					</div>
 				</div>
+				<div class="col-4 know-col">
+					<strong>건강과 안전</strong>
+					<div class="know-row">
+						<img src="<%=request.getContextPath() %>/resources/assets/shines.png" alt="" class="icons" />
+						<p>에어비앤비 코로나19 방역 수칙을 준수하셔야 합니다.</p>
+					</div>
+					<div class="know-row">
+						<img src="<%=request.getContextPath() %>/resources/assets/exclamation-mark.png" alt="" class="icons" />
+						<p>근처에 호수, 강, 바다 등이 있음</p>
+					</div>
+					<div class="know-row">
+						<img src="<%=request.getContextPath() %>/resources/assets/cctv.png" alt="" class="icons" />
+						<p>보안 카메라/녹화 장치</p>
+					</div>
+				</div>
+				<div class="col-4 know-col">
+					<strong>환불 정책</strong>
+					<div class="know-row">
+						<p>체크인 날짜 전에 취소하면 부분 환불을 받으실 수 있습니다.</p>
+					</div>
+				</div>
 			</div>
 		</div>
 	</section>
 	
-	 <script>
-  			// 모달 기본 틀
-        	const modal = document.getElementById("modal")
-            
-
-            function modalOn() {
-			    modal.style.display = "flex"
-			}
-			function isModalOn() {
-			    return modal.style.display === "flex"
-			}
-			function modalOff() {
-			    modal.style.display = "none"
-			}
-            
-            // 모달 보이게하기
-			const btnModal = document.getElementById("btn-modal")
-				btnModal.addEventListener("click", e => {
-				    modal.style.display = "flex"
-				})
-			
-			// x 버튼 클릭 시 닫기 
-			const closeBtn = modal.querySelector(".close-area")
-				closeBtn.addEventListener("click", e => {
-				    modal.style.display = "none"
-			})
-			
-			// 모달 바깥부분 클릭 시 닫기
-			modal.addEventListener("click", e => {
-			    const evTarget = e.target
-			    if(evTarget.classList.contains("modal-overlay")) {
-			        modal.style.display = "none"
-			    }
-			})
+	<jsp:include page="./include/footer.jsp"></jsp:include>
 	
-			// ESC 버튼 누르면 닫기
-			window.addEventListener("keyup", e => {
-			    if(modal.style.display === "flex" && e.key === "Escape") {
-			        modal.style.display = "none"
-			    }
-			})
-    </script>
 </body>
 </html>

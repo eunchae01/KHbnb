@@ -75,7 +75,6 @@ public class JdyController {
 	    int reinsert_hostnum = this.re_dao.reinsert_hostnum(no);
 	    
 	    
-		
 	    
 		String offer_str = dto.getAcc_offer();
 		String[] offer_arr = offer_str.split(",");
@@ -178,7 +177,7 @@ public class JdyController {
 		
 		List<ReviewDTOm> host_list = this.re_dao.hostReviewCont(host_num);
 		model.addAttribute("host_list",host_list);
-
+		
 		return "jdy/host_main";
 	}
 
@@ -298,6 +297,9 @@ public class JdyController {
 			dto.setAcc_image2(fileArr[2]);
 			dto.setAcc_image3(fileArr[3]);
 			dto.setAcc_image4(fileArr[4]);
+			
+			// 수정일 업데이트
+			this.dao.updateAccDate(dto.getAcc_code());
 		}
 		
 		int check = this.dao.updateAcc(dto);

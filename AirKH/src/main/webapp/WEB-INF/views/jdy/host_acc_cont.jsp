@@ -34,10 +34,10 @@
 								<td>${dto.acc_name }</td>
 							</tr>
 							
-							<tr>
+							<%-- <tr>
 								<th>숙소 테마</th>
 								<td>${dto.acc_theme }</td>
-							</tr>
+							</tr> --%>
 							
 							<tr>
 								<th>숙소 설명</th>
@@ -88,7 +88,7 @@
 								</td>
 							</tr>
 							
-							<tr>
+							<%-- <tr>
 								<th>편의 시설</th>
 								<td>
 									<c:forEach items="${off }" var="arr">
@@ -99,7 +99,7 @@
 										</c:forEach>
 									</c:forEach>
 								</td>
-							</tr>
+							</tr> --%>
 							
 							<tr>
 								<th>숙소 사진</th>
@@ -123,6 +123,8 @@
 			</div>
 		</div>
 	</section>
+	
+	<jsp:include page="./include/footer.jsp"/>
 						
 </body>
 </html>
