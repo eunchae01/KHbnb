@@ -3,22 +3,17 @@ package com.air.khie;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.javassist.expr.NewArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.air.cec.HostHotelDTO;
@@ -26,7 +21,6 @@ import com.air.cec.MemberHotelDTO;
 import com.air.cec.MsgHotelDTO;
 import com.air.cec.UserHotelDAO;
 import com.air.cwc.PaymentDTO;
-import com.model.common.MemberDTO;
 
 @Controller
 public class CecController {
@@ -140,6 +134,7 @@ public class CecController {
 					session.setAttribute("host_num", dto.getHost_num());
 					session.setAttribute("host_name", dto.getHost_name());
 					session.setAttribute("host_id", dto.getHost_id());
+					session.setAttribute("host_pic", dto.getHost_pic());
 					session.setAttribute("hostORmember", hostORmember);
 					
 				} else {
@@ -596,19 +591,27 @@ public class CecController {
 		dto.setMsg_member(member_name);
 		dto.setMsg_sender(member_name);
 		
-	    int check = this.dao.insertMsg(dto);
 
 		PrintWriter out = response.getWriter();
-		  
-		if (check > 0) { 
+		
+		if (dto.getMsg_cont().trim().isEmpty()) {	//input 값 null일 때
 			out.println("<script>");
-		    out.println("location.href='msg-cont.do?name=" + dto.getMsg_host() + "&check_in=" + dto.getMsg_check() + "'"); 
+		    out.println("alert('전송할 메시지를 입력해주세요.')"); 
+		    out.println("history.back()");
 		    out.println("</script>"); 
-		} else {
-		    out.println("<script>"); 
-		    out.println("alert('메시지가 전송되지 못했습니다..')");
-		    out.println("history.back()"); 
-		    out.println("</script>"); 
+		}else {				//input 값 null 아닐 때
+			int check = this.dao.insertMsgH(dto);
+		
+			if (check > 0) { 
+				out.println("<script>");
+			    out.println("location.href='msg-cont.do?name=" + dto.getMsg_host() + "&check_in=" + dto.getMsg_check() + "'"); 
+			    out.println("</script>"); 
+			} else {
+			    out.println("<script>"); 
+			    out.println("alert('메시지가 전송되지 못했습니다..')");
+			    out.println("history.back()"); 
+			    out.println("</script>"); 
+			}
 		}
 	}
 	
@@ -627,8 +630,6 @@ public class CecController {
 		dto.setMsg_sender(host_name);
 
 		PrintWriter out = response.getWriter();
-		
-		System.out.println("test" + dto.getMsg_cont());
 		
 		if (dto.getMsg_cont().trim().isEmpty()) {	//input 값 null일 때
 			out.println("<script>");

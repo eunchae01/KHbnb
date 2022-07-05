@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/top.style.css" />
 </head>
 <body>
-
+	<c:set var="hostORmember" value="${hostORmember }"/>
 	<section class="top-nav">
 		<div class="container">
 			<div class="row align-items-center">
@@ -47,9 +48,16 @@
 				<div class="col-3">
 					<div class="join-bar">
 						<div class="join-box">
-							<a href="<%=request.getContextPath()%>/login.do">
-								로그인
-							</a>
+							<c:if test="${empty hostORmember }">
+								<a href="<%=request.getContextPath()%>/login.do">
+									로그인
+								</a>
+							</c:if>
+							<c:if test="${!empty hostORmember }">
+								<a href="<%=request.getContextPath()%>/log-out.do">
+									로그아웃
+								</a>
+							</c:if>
 						</div>
 						<div class="round-box img-box dropdown">
 							<a

@@ -14,6 +14,7 @@
 	<jsp:include page="./include/host_top.jsp" />
 	<c:set var="list" value="${List }" />
 	<c:set var="ho_list" value="${host_list }" />
+
 	<c:set var="host" value="${Host }" />
 
 	<section class="host-main">
@@ -21,20 +22,27 @@
 			<div class="row">
 				<div class="col-4">
 					<div class="profile">
+
 						<img class="profile-img" src="<%=request.getContextPath() %>/resources/host/${host.host_pic}" alt="" />
 						<h3>안녕하세요. 저는 ${host.host_name }입니다.</h3>
+
+
+
 						<h3>소개</h3>
 						<p>
 							${host.host_int }
 						</p>
 						<br>
 						<a href="<%=request.getContextPath()%>/info-update.do">프로필 수정</a>
+						<br><br>
+						<a href="<%=request.getContextPath()%>/delete-user.do">회원탈퇴</a>
 					</div>
 				</div>
 				<div class="col-8">
 					<div class="host-acc">
 						<h2>${host.host_name }님의 숙소 관리</h2>
 						<div class="host-acc-title">
+
 							<a href="<%=request.getContextPath()%>/reservation_host.do">예약 관리</a>
 							<a href="<%=request.getContextPath()%>/acc_insert.do?no=${host_num}">새로운 숙소 등록하기</a>
 						</div>

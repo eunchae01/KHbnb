@@ -15,13 +15,13 @@
 	
 	.delete1{
 		float:left;
-		margin-left: 10%;
+		margin-left: 20%;
 		margin-top: 10%;
 	}
 	
 	.delete2{
 		float:right;
-		margin-right: 10%;
+		margin-right: 15%;
 	}
 	
 	button {
@@ -36,6 +36,7 @@
 	<div class="container1">
 		<div class="delete1">
 			<h2>회원탈퇴 안내</h2>
+			<br>
 			<h5>지금까지 저희 사이트를 이용해주셔서 감사합니다.</h5>
 			<h5>회원을 탈퇴하면 나의 계정 정보 및</h5>
 			<h5>모든 내역이 삭제되고 복구 할 수 없습니다.</h5>
