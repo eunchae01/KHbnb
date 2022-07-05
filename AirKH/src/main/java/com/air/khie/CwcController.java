@@ -305,11 +305,15 @@ public class CwcController {
 		List<PaymentDTO> in = this.dao3.getPayList_in(host_name);
 		List<PaymentDTO> pre = this.dao3.getPayList_pre(host_name);
 		List<PaymentDTO> approve = this.dao3.getPayList_approve(host_name);
+		List<PaymentDTO> play = this.dao3.getPayList_play(host_name);
+		
 		model.addAttribute("List", list);
 		model.addAttribute("out", out);
 		model.addAttribute("in", in);
 		model.addAttribute("pre", pre);
 		model.addAttribute("approve", approve);
+		model.addAttribute("play", play);
+
 		return "cwc/reservation_host";
 	}	
 	
