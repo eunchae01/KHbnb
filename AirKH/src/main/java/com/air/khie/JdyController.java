@@ -70,11 +70,18 @@ public class JdyController {
 		
 		String member_id = (String)session.getAttribute("member_id");
 		
-		double avg = this.re_dao.avgSelect(no);
+		
+		
 		List<ReviewDTOm> re_dto = this.re_dao.reviewCont(no);
 	    int count = this.re_dao.getReivewListCount(no);
 	    AvgDTO re_avg = this.re_dao.avgCont(no);
 	    int reinsert_hostnum = this.re_dao.reinsert_hostnum(no);
+	    
+	    if(count > 0) {
+	    	double avg = this.re_dao.avgSelect(no);
+	    	
+	    	model.addAttribute("re_avg", avg);
+	    }
 	    
 	    
 	    
@@ -86,7 +93,7 @@ public class JdyController {
 			int_arr[i] = Integer.parseInt(offer_arr[i]);
 		}
 		
-		model.addAttribute("re_avg", avg);
+		
 		model.addAttribute("id_check", member_id);
 		model.addAttribute("in_host",reinsert_hostnum);
 		model.addAttribute("re_avg",re_avg);
