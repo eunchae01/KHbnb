@@ -214,7 +214,7 @@
 							<h2>휴대폰 번호 추가하기</h2>
 							<input type="text" name="acc_phone" />
 							<h2>숙소 요금 설정하기</h2>
-							<input type="text" name="acc_price" />&nbsp;&bsol;
+							<input type="text" name="acc_price" />&nbsp;&#65510;
 							<h2>첫 게스트를 위한 특별가 제안</h2>
 							<div class="event">
 								<input
