@@ -30,14 +30,14 @@ $(function(){
 </script>
 <style type="text/css">
  #QA_header{
- 	position:absolute;
- 	top:150px; width:1200px;
- 	left:calc(50% - 600px);
+ 	margin: 150px auto;
+ 	width:1200px;
+ 	
  	text-align: center;
  } 
  .QA_q{ font-size : 45px; }
  #QA_box{
- 	position:absolute;
+ 	
  	top:100px;  
  	text-align: center;
  }
@@ -134,6 +134,6 @@ $(function(){
 		</div>
 	</div>
 	
-	
+	<jsp:include page="../jdy/include/footer.jsp"/>
 </body>
 </html>
