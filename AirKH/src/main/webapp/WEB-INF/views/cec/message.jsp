@@ -27,7 +27,7 @@
 	.container2{
 		padding-top: 110px;
 		padding-bottom: 20px;
-		border-style: solid;
+/* 		border-style: solid; */
 		border-width: 1px;
 		border-color: black;
 		height:100vh;
@@ -43,6 +43,7 @@
 	#line1{
 		color: black;
 		opacity: 1;
+		
 	}
 
 	.container3{
@@ -143,5 +144,7 @@
 				</c:if>
 		</div>
 	</div>
+	
+	<jsp:include page="../jdy/include/footer.jsp"/>
 </body>
 </html>

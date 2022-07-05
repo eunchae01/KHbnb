@@ -50,5 +50,7 @@
 			<img src="<%=request.getContextPath() %>/resources/assets/architecture-and-city.png">
 		</div>
 	</div>
+	
+	<jsp:include page="../jdy/include/footer.jsp"/>
 </body>
 </html>

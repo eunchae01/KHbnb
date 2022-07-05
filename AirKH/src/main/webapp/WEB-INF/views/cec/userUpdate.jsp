@@ -168,5 +168,7 @@
 		</form>
 		</c:if>
 	</div>
+	
+	<jsp:include page="../jdy/include/footer.jsp"/>
 </body>
 </html>

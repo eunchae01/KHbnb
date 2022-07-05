@@ -106,5 +106,7 @@
 			</form>
 		</div>
 	</div>
+	
+	<jsp:include page="../jdy/include/footer.jsp"/>
 </body>
 </html>

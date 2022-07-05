@@ -32,18 +32,20 @@
 <body>
 	<jsp:include page="../jdy/include/main_top.jsp"/>
 
-		<div align="center" class="container1">
-			<div class="sign-up1">
-				<img width="200" src="<%=request.getContextPath() %>/resources/assets/avatar.png">
-				<br><br>
-				<button class="btn btn-outline-secondary" onclick="location.href='signup-member.do'">사용자로 회원가입</button>
-			</div>
-			
-			<div class="sign-up2">
-				<img width="200" src="<%=request.getContextPath() %>/resources/assets/house.png">
-				<br><br>
-				<button class="btn btn-outline-secondary" onclick="location.href='signup-host.do'">호스트로 회원가입</button>
-			</div>	
+	<div align="center" class="container1">
+		<div class="sign-up1">
+			<img width="200" src="<%=request.getContextPath() %>/resources/assets/avatar.png">
+			<br><br>
+			<button class="btn btn-outline-secondary" onclick="location.href='signup-member.do'">사용자로 회원가입</button>
 		</div>
+		
+		<div class="sign-up2">
+			<img width="200" src="<%=request.getContextPath() %>/resources/assets/house.png">
+			<br><br>
+			<button class="btn btn-outline-secondary" onclick="location.href='signup-host.do'">호스트로 회원가입</button>
+		</div>	
+	</div>
+	
+	<jsp:include page="../jdy/include/footer.jsp"/>
 </body>
 </html>

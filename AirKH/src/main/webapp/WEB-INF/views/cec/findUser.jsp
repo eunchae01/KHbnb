@@ -45,5 +45,7 @@
 			<button class="btn btn-outline-secondary" onclick="location.href='find-host.do'">호스트 아이디 / 비밀번호 찾기</button>
 		</div>
 	</div>
+	
+	<jsp:include page="../jdy/include/footer.jsp"/>
 </body>
 </html>
