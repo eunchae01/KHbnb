@@ -11,30 +11,30 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <style>
 	.containerMaster{
-		margin: 0 auto;
-		padding-top: 125px;
+		margin: 125px auto;
 	}
 
 	.contaniner1{
 		float: left;
-		width: 60%;
+		width: 50%;
+		margin-left: 10%;
 	}
 	
 	.contaniner2{
 		display: inline-block;
-		width: 42%;
-		height: 607px;
+		width: 50%;
+		height: 500px;
 		margin-left: -40%;
 		margin-top: 1%;
 	}
 	
 	.contaniner3{
 		display: inline-block;
-		width: 40%;
+		width: 50%;
 		height: 380px;
 		margin-left: -40%;
 		margin-top: 1%;
-	}
+	} 
 
 	.form-control{
 		width: 40% !important;
@@ -44,7 +44,7 @@
 	label{
 		margin-left: -13%;
 		text-align: left;
-		margin-right: 1px;
+		
 	}
 	
 	.imgCon img{
@@ -60,6 +60,10 @@
 	
 	button {
 		background-color: white;
+	}
+	
+	#host_btn{
+		margin-left: -35%;
 	}
 	
 </style>
@@ -80,6 +84,8 @@
 			<form method="post" enctype="multipart/form-data" action="<%=request.getContextPath() %>/info-update-form.do">
 			<input type="hidden" name="host_num" value="${dtoHost.getHost_num() }">
 			<div class="contaniner1">
+				<label for="input5" class="col-sm-2 col-form-label" >이름</label>
+				<input name="host_name" class="form-control" value="${dtoHost.getHost_name() }" disabled>
 				<label for="input1" class="col-sm-2 col-form-label">아이디</label>	
 				<input name="host_id" class="form-control"  value="${dtoHost.getHost_id() }" disabled>
 				<label for="input2" class="col-sm-2 col-form-label">비밀번호</label>
@@ -88,8 +94,6 @@
 				<input name="host_nickname" class="form-control" value="${dtoHost.getHost_nickname() }">
 				<label for="input4" class="col-sm-2 col-form-label">자기소개</label>
 				<textarea name="host_int" class="form-control" rows="7">${dtoHost.getHost_int() }</textarea>
-				<label for="input5" class="col-sm-2 col-form-label" >이름</label>
-				<input name="host_name" class="form-control" value="${dtoHost.getHost_name() }" disabled>
 				<label for="input6" class="col-sm-2 col-form-label">핸드폰 번호</label>
 				<input name="host_phone" class="form-control" value="${dtoHost.getHost_phone() }">
 			</div>
@@ -102,10 +106,9 @@
 				<label for="input-image" class="col-sm-2 col-form-label">프로필 사진</label>
 				<input name="file" type="file"  class="form-control" id="input-image" style="display: block">
 			</div>
-			<br><br>
 			
 			<div>
-				<input type="submit"  class="btn btn-primary" value="수정하기">
+				<input type="submit" id="host_btn" class="btn btn-primary" value="수정하기">
 			</div>
 			<br>
 		</form>
@@ -140,7 +143,7 @@
 			<input type="hidden" name="member_num" value="${dtoMember.getMember_num() }">
 			<div class="contaniner1">	
 				<label for="input1" class="col-sm-2 col-form-label">이름</label>
-				<input name="member_name" class="form-control" id="input1" value="${dtoMember.getMember_id() }" disabled>
+				<input name="member_name" class="form-control" id="input1" value="${dtoMember.getMember_name() }" disabled>
 				<label for="input2" class="col-sm-2 col-form-label">아이디</label>
 				<input name="member_id" class="form-control" id="input2" value="${dtoMember.getMember_id() }" disabled>
 				<label for="input3" class="col-sm-2 col-form-label">비밀번호</label>
@@ -153,7 +156,7 @@
 			
 			<div class="contaniner3">
 				<div class="imgCon">
-					<img id="preview" src="<%=request.getContextPath() %>/resources/host/${dtoMember.getMember_pic() }">
+					<img id="preview" src="<%=request.getContextPath() %>/resources/member/${dtoMember.getMember_pic() }">
 				</div>
 				<br>
 				<label for="input-image" class="col-sm-2 col-form-label">프로필 사진</label>

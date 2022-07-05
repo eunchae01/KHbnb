@@ -70,7 +70,7 @@
 	
 	.msg_pic{
 		float:left;
-		margin-left: 40%;
+		margin-left: 33%;
 		margin-top: 3%;
 	}
 
