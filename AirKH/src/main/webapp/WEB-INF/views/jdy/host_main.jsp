@@ -9,6 +9,7 @@
 <title>호스트 메인</title>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/grid.min.css" />
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/host_main.css" />
+
 </head>
 <body>
 	<jsp:include page="./include/host_top.jsp" />
@@ -16,6 +17,7 @@
 	<c:set var="ho_list" value="${host_list }" />
 
 	<c:set var="host" value="${Host }" />
+	<c:set var="count" value="${count }" />
 
 	<section class="host-main">
 		<div class="container">
@@ -75,26 +77,27 @@
 							<h3>숙소 정보 없음!</h3>
 						</c:if>
 					</div>
+					
 					<div class="host-review">
 						<h2>
 							<img class="star-icon" src="<%=request.getContextPath() %>/resources/assets/star.png" alt="" />
-							&nbsp;후기 000개
+							&nbsp;후기 ${count }개
 						</h2>
 						<c:forEach items="${ho_list }" var="ho">
-							<a href="<%=request.getContextPath()%>/host_acc_cont.do?no=${ho.acc_code}">
+							<a href="<%=request.getContextPath()%>/acc_content.do?no=${ho.acc_code}&hostno=${host_num}">
 								<div class="review-list">
-									<div class="acc-name">숙소 이름~~~~~~~~~~~</div>
-									<div class="rlist-cont">${ho.review_content }</div>
-									<div class="rlist-top">
-										<img src="<%=request.getContextPath()%>/resources/member/${ho.member_pic }" alt="" />
-										<div class="rlist-title">
-											<div class="rlist-name">${ho.member_id }</div>
-											<div class="rlist-date">
-												${ho.review_date.substring(0,4) }년 ${ho.review_date.substring(5,7) }월 
-											</div>				
-										</div>
-									</div>
-								</div>
+			                           <div class="acc-name">${ho.acc_name }</div>
+			                           <div class="rlist-cont">${ho.review_content }</div>
+			                           <div class="rlist-top">
+			                              <img src="<%=request.getContextPath()%>/resources/member/${ho.member_pic }" alt="" />
+			                              <div class="rlist-title">
+			                                 <div class="rlist-name">${ho.member_id }</div>
+			                                 <div class="rlist-date">
+			                                    ${ho.review_date.substring(0,4) }년 ${ho.review_date.substring(5,7) }월 
+			                                 </div>            
+			                              </div>
+		                           </div>
+		                        </div>
 							</a>
 						</c:forEach>
 					</div>

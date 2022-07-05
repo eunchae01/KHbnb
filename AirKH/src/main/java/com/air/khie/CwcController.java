@@ -29,6 +29,7 @@ import com.air.cwc.WishDTO;
 import com.air.jdy.AccDAO;
 import com.air.jdy.AccDTO;
 import com.air.jdy.ThemeDTO;
+import com.air.kyk.ReviewDAOm;
 
 @Controller
 public class CwcController {
@@ -44,6 +45,9 @@ public class CwcController {
 	
 	@Autowired
 	private UserHotelDAO dao4;
+	
+	@Autowired
+	private ReviewDAOm re_dao;
 
 	// (�� ������� �˻��� �ؾ���)
 	@RequestMapping("wish.content.do")
@@ -187,10 +191,10 @@ public class CwcController {
 		return "cwc/payment";
 	}
 	@RequestMapping("add_pay.do")
-	public void add_pay(@RequestParam("acc_code") int acc_code,PaymentDTO dto, HttpServletResponse res,HttpServletRequest req) throws IOException {
+	public void add_pay(@RequestParam("acc_code") int acc_code,PaymentDTO dto, HttpServletResponse res,HttpServletRequest req,HttpSession session) throws IOException {
 		res.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = res.getWriter();
-		
+		session.setAttribute("acc_code", acc_code);
 		if(dto.getCard_num()==""||dto.getExprie()==""||dto.getCvv()==""||dto.getZip_code() ==""||dto.getCountry() =="") {
 			out.println("<script>");
 			out.println("alert('결재 수단에 누락이 존재합니다..')");
@@ -219,16 +223,25 @@ public class CwcController {
 	@RequestMapping("reservation_guest.do")
 	public String payList(PaymentDTO dto, Model model, HttpServletRequest req) {
 		HttpSession session = req.getSession();
-		String member_name;
+		String member_name=null;
 		if((String) session.getAttribute("member_id")!=null) {
 			member_name = (String) session.getAttribute("member_name");
 		}else {
 			System.out.println("로그인 먼저 진행하십셔");
 			return "cec/login";
 		}
+		int no= (Integer) session.getAttribute("acc_code");
+		int hostNum = this.re_dao.reinsert_hostnum(no);
+		String member_id = (String) session.getAttribute("member_id");
+		String mpic= this.re_dao.reinsert_pic(member_id);
+		
+		
 		
 		List<PaymentDTO> list = this.dao3.getPayList(member_name);
 		model.addAttribute("List", list);
+		model.addAttribute("mem",member_name);
+		model.addAttribute("mem_pic",mpic);
+		model.addAttribute("host_num",hostNum);
 		return "cwc/reservation_guest";
 	}
 	@RequestMapping("cart_delete.do")

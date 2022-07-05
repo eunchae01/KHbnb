@@ -5,15 +5,33 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
     <mapper namespace="QAdao">
-    	<select id="QA_select" resultType="QA_dto">
-    		select * from QA_hotel
+    	
+    	
+    
+    	<select id="qa_select" parameterType="String" resultType="QA_dto">
+	    		select e2.* from qa_hotel e1 join qa_hotel e2
+				on e1.qa_index = e2.qa_index
+				where e1.qa_id=#{qa_id} order by e2.qa_index desc, e2.qa_num
+				
     	</select>
+    	
+    	
     	<insert id="QA_insert" parameterType="QA_dto">
-    		insert into QA_hotel values((select max(qa_num) from qa_hotel)+1,#{QA_id}, #{QA_title}
-    		,#{QA_cont}, #{QA_type})
+    		insert into QA_hotel values((select max(qa_num) from qa_hotel)+1,(select max(qa_num) from qa_hotel)+1,
+    		#{qa_type},#{qa_id},#{qa_title},#{qa_cont},0)
     	</insert>
+    	
+    	<select id="qa_cont" parameterType="int" resultType="QA_dto" >
+    		select * from QA_hotel where qa_num = #{qa_num}
+    	</select>
+    	 
+    	
+    	
     	<update id="QA_update" parameterType="QA_dto">
     		update QA_hotel set 
+    		qa_num = #{qa_num}, qa_index = #{qa_index}, qa_type = #{qa_type},
+    		qa_id = #{qa_id}, qa_title = #{qa_title}, qa_cont =#{qa_cont},
+    		qa_state=#{qa_state} where qa_num = #{qa_num}
     	</update>
     	<delete id="QA_delete" parameterType="int">
     		delete from QA_hotel where qa_num = #{qa_num}

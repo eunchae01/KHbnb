@@ -67,15 +67,7 @@ $(function () {
     	document.getElementById("totalm").value ="₩"+tomoney.toLocaleString()+"원";
     });
     
-    // 글자 수 제한
-    $('#re_textCont').on('keyup', function() {
-        $('#re_text_cnt').html("("+$(this).val().length+" / 200)");
- 
-        if($(this).val().length > 200) {
-            $(this).val($(this).val().substring(0, 200));
-            $('re_text_cnt').html("(200 / 200)");
-        }
-    });
+   
 });
 
 </script>
@@ -91,7 +83,7 @@ $(function () {
 	<c:set var="off" value="${offer }" />
 	<c:set var="like" value="${like }" />
 	<c:set var="host" value="${Host }" />
-	
+	<c:set var="id_check" value="${id_check }" />
 	
 	<header class="header">
 		<div class="container">

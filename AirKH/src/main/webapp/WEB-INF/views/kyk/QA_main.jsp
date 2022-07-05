@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,54 +31,107 @@ $(function(){
 <style type="text/css">
  #QA_header{
  	position:absolute;
- 	top:200px; width:1200px;
+ 	top:150px; width:1200px;
  	left:calc(50% - 600px);
  	text-align: center;
  } 
- #QA_header p{ font-size : 45px;}
+ .QA_q{ font-size : 45px; }
  #QA_box{
  	position:absolute;
  	top:100px;  
- 	text-align: left;
+ 	text-align: center;
  }
 
-#QA_title{border: 1px solid #000; margin:15px 3px;}
- #QA_text, #QA_memid{border: 1px solid #000;}
- 
-.QA-btn{border : 1px solid #000;}
-#QA_text_cnt{magin:10px auto;}
 
+ .qa_mt{margin-bottom:20px;  background:#ff3e5c; color:#fff;}
 
+.qa_title{padding:5px 15px; margin-bottom:20px; text-align: center; width:20%; border:1px solid #000;}
+.qa_title.mid{width:60%;}
+.qa_list{background:#fed0d8;}
+.qa_btn{ border : 5px solid #ff3e5c; margin:10px; background: #ff3e5c; color:#fff; width:90px; height:40px; border-radius: 10%;}
+.qa_bottom{border-top : 1px solid #000; background: #fed0d8;}
+.p_margin{margin:15px auto;}
 </style>
 </head>
 <body>
 	<jsp:include page="../jdy/include/main_top.jsp" />
 	
 	<div id="QA_header">
-		<p>무엇이든 물어보세요</p>
+		<p class="QA_q">무엇이든 물어보세요</p>
 		<br/>
 		<div id="QA_box">
-		<form method="post" action="<%=request.getContextPath()%>/QA_insert.do">
-		
-			<select name="QA_type">
-				<option value="" selected>문의 글 종류</option>
-				<option value="여행">여행</option>
-				<option value="예약">예약</option>
-				<option value="환불">환불</option>
-				<option value="결제">결제</option>
-				<option value="기타">기타</option>
-			</select>
-			<span>글 제목 : </span>
-			<input id="QA_title" type="text" name="QA_title">
-			<span> 작성자 : </span>
-			<input id="QA_memid" type="text" name="QA_id">
-			<textarea id="QA_text" name="QA_cont" rows="5" cols="160"></textarea>
-			<div id="QA_text_cnt">(0 / 1000)</div>
-			<input class="QA-btn" type="submit" value="작성완료">
-			<input class="QA-btn" type="reset" value="취소">
-		
-	</form>
-	</div>
+			<p> 나의 문의 목록</p>
+			<table border="1" cellspacing="0" width="1200">
+				<tr class="qa_mt">
+					<th class="qa_title">문의 종류</th> <th class="qa_title mid">문의글 제목</th> <th class="qa_title">문의글 상태</th>
+				</tr>
+				
+				
+				<c:set var="list" value="${qa_list }" />
+				
+				
+				  <c:if test="${!empty list }">
+			         <c:forEach items="${list }" var="i">
+			            <tr class="qa_list">
+				            <c:if test="${i.qa_type eq 0 }">
+				            	   <td> 여행 </td>
+				            </c:if>
+				            <c:if test="${i.qa_type eq 1 }">
+				            	   <td> 예약 </td>
+				            </c:if>
+				            <c:if test="${i.qa_type eq 2 }">
+				            	   <td> 환불 </td>
+				            </c:if>
+				            <c:if test="${i.qa_type eq 3 }">
+				            	   <td> 결제 </td>
+				            </c:if>
+				            <c:if test="${i.qa_type eq 4 }">
+				            	   <td> 기타 </td>
+				            </c:if>
+			            
+			                
+			              
+			               
+			              
+			               	<td>
+			                  <a href="<%=request.getContextPath() %>/QA_content.do?qa_num=${i.qa_num }">
+             							${i.qa_title } </a></td>
+			              
+			                
+			               
+			               
+			               	<td> 
+			               		<c:if test="${i.qa_state eq 0}">
+			               			처리중
+			               		</c:if>
+			               		<c:if test="${i.qa_state eq 1}">
+			               			답변완료
+			               		</c:if>
+			               		
+			               	 </td>
+			            	</tr>
+	         		</c:forEach>
+	    		  </c:if>
+	      
+	      <c:if test="${empty list }">
+	         <tr  class="qa_list">
+	            <td colspan="3" align="center">
+	               <p class="p_margin">문의 내역이 없습니다.</p>
+	            </td>
+	         </tr>
+	      </c:if>
+	      
+	      <tr>
+	      
+	         <td class="qa_bottom" colspan="3" align="right">
+	         
+	            <input type="button" value="문의하기" class="qa_btn"
+	                 onclick="location.href='QA_write.do'" >
+	         </td>
+	      </tr>
+			</table>
+			
+		</div>
 	</div>
 	
 	

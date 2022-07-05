@@ -95,61 +95,61 @@
                 		<tr>
                 			<th>청결한가요?</th>
                 			<td>
-                			<input type="checkbox" name="acc_cl" value="1">1점
-                			<input type="checkbox" name="acc_cl" value="2">2점
-                			<input type="checkbox" name="acc_cl" value="3">3점
-                			<input type="checkbox" name="acc_cl" value="4">4점
-                			<input type="checkbox" name="acc_cl" value="5">5점
+                			<input type="radio" name="acc_cl" value="1">1점
+                			<input type="radio" name="acc_cl" value="2">2점
+                			<input type="radio" name="acc_cl" value="3">3점
+                			<input type="radio" name="acc_cl" value="4">4점
+                			<input type="radio" name="acc_cl" value="5">5점
                 			</td>
                 		</tr>
                 		<tr>
                 			<th>의사소통은 잘 되었나요?</th>
                 			<td>
-                			<input type="checkbox" name="acc_comm" value="1">1점
-                			<input type="checkbox" name="acc_comm" value="2">2점
-                			<input type="checkbox" name="acc_comm" value="3">3점
-                			<input type="checkbox" name="acc_comm" value="4">4점
-                			<input type="checkbox" name="acc_comm" value="5">5점
+                			<input type="radio" name="acc_comm" value="1">1점
+                			<input type="radio" name="acc_comm" value="2">2점
+                			<input type="radio" name="acc_comm" value="3">3점
+                			<input type="radio" name="acc_comm" value="4">4점
+                			<input type="radio" name="acc_comm" value="5">5점
                 			</td>
                 		</tr>
                 		<tr>
                 			<th>체크인 / 아웃 시간은 잘 지켜졌나요?</th>
                 			<td>
-                			<input type="checkbox" name="acc_check" value="1">1점
-                			<input type="checkbox" name="acc_check" value="2">2점
-                			<input type="checkbox" name="acc_check" value="3">3점
-                			<input type="checkbox" name="acc_check" value="4">4점
-                			<input type="checkbox" name="acc_check" value="5">5점
+                			<input type="radio" name="acc_check" value="1">1점
+                			<input type="radio" name="acc_check" value="2">2점
+                			<input type="radio" name="acc_check" value="3">3점
+                			<input type="radio" name="acc_check" value="4">4점
+                			<input type="radio" name="acc_check" value="5">5점
                 			</td>
                 		</tr>
                 		<tr>
                 			<th>주소는 정확한가요?</th>
                 			<td>
-                			<input type="checkbox" name="acc_acc" value="1">1점
-                			<input type="checkbox" name="acc_acc" value="2">2점
-                			<input type="checkbox" name="acc_acc" value="3">3점
-                			<input type="checkbox" name="acc_acc" value="4">4점
-                			<input type="checkbox" name="acc_acc" value="5">5점
+                			<input type="radio" name="acc_acc" value="1">1점
+                			<input type="radio" name="acc_acc" value="2">2점
+                			<input type="radio" name="acc_acc" value="3">3점
+                			<input type="radio" name="acc_acc" value="4">4점
+                			<input type="radio" name="acc_acc" value="5">5점
                 			</td>
                 		</tr>
                 		<tr>
                 			<th>교통편의성은 어떤가요?</th>
                 			<td>
-                			<input type="checkbox" name="acc_loc" value="1">1점
-                			<input type="checkbox" name="acc_loc" value="2">2점
-                			<input type="checkbox" name="acc_loc" value="3">3점
-                			<input type="checkbox" name="acc_loc" value="4">4점
-                			<input type="checkbox" name="acc_loc" value="5">5점
+                			<input type="radio" name="acc_loc" value="1">1점
+                			<input type="radio" name="acc_loc" value="2">2점
+                			<input type="radio" name="acc_loc" value="3">3점
+                			<input type="radio" name="acc_loc" value="4">4점
+                			<input type="radio" name="acc_loc" value="5">5점
                 			</td>
                 		</tr>
                 		<tr>
                 			<th>가격대비 만족도는 어떤가요?</th>
                 			<td>
-                			<input type="checkbox" name="acc_sat" value="1">1점
-                			<input type="checkbox" name="acc_sat" value="2">2점
-                			<input type="checkbox" name="acc_sat" value="3">3점
-                			<input type="checkbox" name="acc_sat" value="4">4점
-                			<input type="checkbox" name="acc_sat" value="5">5점
+                			<input type="radio" name="acc_sat" value="1">1점
+                			<input type="radio" name="acc_sat" value="2">2점
+                			<input type="radio" name="acc_sat" value="3">3점
+                			<input type="radio" name="acc_sat" value="4">4점
+                			<input type="radio" name="acc_sat" value="5">5점
                 			</td>
                 		</tr>
                 		<tr>
