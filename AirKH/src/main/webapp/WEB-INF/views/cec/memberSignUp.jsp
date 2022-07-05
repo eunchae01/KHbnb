@@ -32,7 +32,7 @@
 	}
 	
 	label{
-		margin-left: -10%;
+		margin-left: -13%;
 		text-align: left;
 	}
 	
