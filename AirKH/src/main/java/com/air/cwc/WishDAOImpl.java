@@ -16,20 +16,30 @@ public class WishDAOImpl implements WishDAO{
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<WishDTO> getWishList(String member_name) {
-	return this.sqlSession.selectList("allwish",member_name);
+	public List<WishDTO> getWishList(WishDTO dto) {
+	return this.sqlSession.selectList("allwish",dto);
 	}
 	
 	@Override
-	public int addWish(AccDTO dto) {
-		if(this.sqlSession.selectOne("wlist",dto)==null) {
+	public List<WishDTO> getcateList(String member_name) {
+		return this.sqlSession.selectList("allcate",member_name);
+	}
+	
+	
+	@Override
+	public int addWish(WishDTO dto) {
 		return this.sqlSession.insert("addwish", dto);
-		}else
-			return -1;
+		
 	}
 	
 	@Override
 	public int deleteWish(int acc_code) {
 		return this.sqlSession.delete("deletewish", acc_code);
 	}
+	
+	@Override
+	public int addCategory(WishCategoryDTO dto) {
+		return this.sqlSession.insert("addCate",dto);
+	}
+
 }
