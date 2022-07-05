@@ -59,6 +59,7 @@ public class KykController {
 		
 		
 		int check = this.re_dao.insertReview(dto);
+		this.re_dao.insertStar(dto.getAcc_code());
 		
 		if (check > 0) {
 			out.println("<script>");
