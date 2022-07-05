@@ -36,11 +36,6 @@ $(function(){
 .con2 {
 	margin-left: 3%;
 	margin-right: 3%;
-
-}
-
-button {
-	background-color: white;
 }
 </style>
 </head>
@@ -55,10 +50,12 @@ button {
 		<div class="con2" align="center">
 			<c:if test="${!empty list }">
 				<c:forEach items="${list }" var="dto">
-					<table width="80%" height="400px" style="border-top:2px solid gray;">
+					<table width="80%" height="400px"
+						style="border-top: 2px solid gray;">
 
 						<tr>
-							<td colspan="4" height="30%" style="vertical-align : bottom; padding-left: 50px;"><h2>${dto.getAcc_name() }</h2></td>
+							<td colspan="4" height="30%"
+								style="vertical-align: bottom; padding-left: 50px;"><h2>${dto.getAcc_name() }</h2></td>
 							<td width="30%" rowspan="5"><a
 								href="<%=request.getContextPath()%>/acc_content.do?no=${dto.getAcc_code() }">
 									<img
@@ -68,39 +65,51 @@ button {
 						</tr>
 
 						<tr>
-							<td style="vertical-align : top; padding-left: 70px;" colspan="3">${dto.getAcc_addr() }*
+							<td style="vertical-align: top; padding-left: 70px;" colspan="3">${dto.getAcc_addr() }*
 								게스트 ${dto.getCheck_person() }명</td>
 						</tr>
-						
+
 						<tr>
-							<td align="left" style="vertical-align : bottom;padding-left: 50px;">${dto.getCheck_in() }</td>
-							<td align="left" style="vertical-align : bottom;">${dto.getCheck_out() }</td>
+							<td align="left"
+								style="vertical-align: bottom; padding-left: 50px;">${dto.getCheck_in() }</td>
+							<td align="left" style="vertical-align: bottom;">${dto.getCheck_out() }</td>
 							<td></td>
 
 						</tr>
 
 						<tr>
-							<td align="left" style="vertical-align : top;padding-left: 50px;">체크인 시간: 15:00</td>
-							<td align="left" style="vertical-align : top;">체크아웃 시간: 12:00</td>
+							<td align="left" style="vertical-align: top; padding-left: 50px;">체크인
+								시간: 15:00</td>
+							<td align="left" style="vertical-align: top;">체크아웃 시간: 12:00</td>
 							<td>예약자 성함 : ${dto.getMember_name() }</td>
 						</tr>
 
 						<tr>
-							<td style="height: 20px;padding-left: 50px;"><button style="width: 100%; height: 100%;" type="button" class="btn btn-outline-success"
-									data-bs-toggle="modal" data-bs-target="#exampleModal1">
-									${dto.getReserve_info() }</button>
-									<div class="modal fade" id="exampleModal1" tabindex="-1"
+							<td style="height: 20px; padding-left: 50px;"><button
+									style="width: 100%; height: 100%;" type="button"
+									class="btn btn-outline-success" data-bs-toggle="modal"
+									data-bs-target="#exampleModal1">
+									<c:choose>
+										<c:when test="${dto.getReserve_info()=='0'}">예약 승인 대기 중</c:when>
+										<c:when test="${dto.getReserve_info()=='1'}">예약 승인 완료</c:when>
+									</c:choose>
+
+
+								</button>
+								<div class="modal fade" id="exampleModal1" tabindex="-1"
 									aria-labelledby="exampleModalLabel" aria-hidden="true">
 									<div class="modal-dialog">
 										<div class="modal-content">
 											<div class="modal-header">
-												<h5 class="modal-title" id="exampleModalLabel">
-												예약 정보</h5>
+												<h5 class="modal-title" id="exampleModalLabel">예약 정보</h5>
 												<button type="button" class="btn-close"
 													data-bs-dismiss="modal" aria-label="Close"></button>
 											</div>
 											<div class="modal-body">
-											<p>호스트가 요청한 예약을 승인해야 예약이 완료됩니다...</p>
+												<c:choose>
+													<c:when test="${dto.getReserve_info()=='0'}">호스트가 요청한 예약을 승인해야 예약이 완료됩니다.</c:when>
+													<c:when test="${dto.getReserve_info()=='1'}">예약이 성공적으로 완료되었습니다.</c:when>
+												</c:choose>
 											</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-secondary"
@@ -109,27 +118,31 @@ button {
 											</div>
 										</div>
 									</div>
-								</div>
-									</td>
-							<td><button style="width: 100%; height: 100%;"type="button" class="btn btn-outline-success"
-									data-bs-toggle="modal" data-bs-target="#exampleModal2">
-									변경 혹은 취소</button>
-							
-							<div class="modal fade" id="exampleModal2" tabindex="-1"
+								</div></td>
+							<td><button style="width: 100%; height: 100%;" type="button"
+									class="btn btn-outline-success" data-bs-toggle="modal"
+									data-bs-target="#exampleModal2">변경 및 취소</button>
+
+								<div class="modal fade" id="exampleModal2" tabindex="-1"
 									aria-labelledby="exampleModalLabel" aria-hidden="true">
 									<div class="modal-dialog">
-										<div class="modal-content">
+										<div style="width: 600px; height: 350px;"
+											class="modal-content">
 											<div class="modal-header">
-												<h5 class="modal-title" id="exampleModalLabel">
-												여행관리</h5>
+												<h5 class="modal-title" id="exampleModalLabel">변경 및 취소</h5>
 												<button type="button" class="btn-close"
 													data-bs-dismiss="modal" aria-label="Close"></button>
 											</div>
 											<div class="modal-body">
-											<p>변경을 원하시면 클릭해주세요: <button onclick="if(confirm('숙소 예약을 변경하시겠습니까?')) {
-											location.href='cart_update.do?cart_num=${dto.getCart_num() }'}else {  return; }">변경하기</button> </p>
-											<p>취소를 원하시면 클릭해주세요: <button onclick="if(confirm('숙소 예약을 취소하시겠습니까?')) {
-	               							location.href='cart_delete.do?cart_num=${dto.getCart_num() }'}else {  return; }">취소하기</button> </p>
+												<br>
+												<span>
+													취소를 원하시면 클릭해주세요<br><br>
+													<button class="btn btn-outline-success"
+														style="font-size: 20px;"
+														onclick="if(confirm('숙소 예약을 취소하시겠습니까?')) {
+	               							location.href='cart_delete.do?cart_num=${dto.getCart_num() }'}else {  return; }">
+														취소하기</button>
+												</span>
 											</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-secondary"
@@ -138,24 +151,22 @@ button {
 											</div>
 										</div>
 									</div>
-								</div>
-								</td>
-							<td><button style="width: 100%; height: 100%;"type="button" class="btn btn-outline-success"
-									data-bs-toggle="modal" data-bs-target="#exampleModal3">
-									호스트 정보 보기</button> <!-- Modal -->
+								</div></td>
+							<td><button style="width: 100%; height: 100%;" type="button"
+									class="btn btn-outline-success" data-bs-toggle="modal"
+									data-bs-target="#exampleModal3">호스트 정보 보기</button> <!-- Modal -->
 								<div class="modal fade" id="exampleModal3" tabindex="-1"
 									aria-labelledby="exampleModalLabel" aria-hidden="true">
 									<div class="modal-dialog">
 										<div class="modal-content">
 											<div class="modal-header">
-												<h5 class="modal-title" id="exampleModalLabel">
-												호스트 정보</h5>
+												<h5 class="modal-title" id="exampleModalLabel">호스트 정보</h5>
 												<button type="button" class="btn-close"
 													data-bs-dismiss="modal" aria-label="Close"></button>
 											</div>
 											<div class="modal-body">
-											<p>호스트 이름: ${dto.getHost_name() }</p>
-											<p>호스트 연락처: ${dto.getHost_phone() }</p>
+												<p>호스트 이름: ${dto.getHost_name() }</p>
+												<p>호스트 연락처: ${dto.getHost_phone() }</p>
 											</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-secondary"
@@ -269,6 +280,7 @@ button {
 								                				<textarea id="re_textCont" name="review_content" cols="100" rows="3"></textarea>
 								                				<div id="re_text_cnt">(0 / 200)</div>
 								                			</td>
+								                			
 								                		</tr>
 								                	</table>
 								                	<input class="submit_btn" type="submit" value="리뷰등록">
@@ -280,6 +292,8 @@ button {
 						</tr>
 
 					</table>
+					<br>
+					<hr>
 					<br>
 				</c:forEach>
 			</c:if>
@@ -293,14 +307,9 @@ button {
 					검색하기</button>
 			</c:if>
 			<hr>
-			(숙소검색하기) yes 리스트 뿌려주고 날짜 변경 요청 가능 => 승인 대기 change1 예약 취소 가능 => 승인 대기
-			change2 인원 변경 => => change3 => 디폴트 0 1이되면 요청을 한 것 변경을 했을 경우 yes에서
-			change값이 1인 경우 => 호스트의 승인을 대기중입니다.
 		</div>
 	</div>
-	
-	
-	 <script>
+		 <script>
   			// 모달 기본 틀
         	const modal = document.getElementById("modal")
             
