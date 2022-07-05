@@ -23,5 +23,6 @@ public interface AccDAO {
 	
 	String uploadFile(MultipartHttpServletRequest mRequest);
 	WishDTO likeAcc(int no);
+	List<WishCategoryDTO> getCategory(String member_id);
 	void updateAccDate(int no);
 }
