@@ -114,5 +114,7 @@ td {
 		</div>
 	</div>
 
+<jsp:include page="../jdy/include/footer.jsp"></jsp:include>
+
 </body>
 </html>

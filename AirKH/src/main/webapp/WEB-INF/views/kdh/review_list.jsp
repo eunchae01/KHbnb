@@ -167,7 +167,7 @@ text-transform: uppercase;
 		
 	
 	
-	
+	<jsp:include page="../jdy/include/footer.jsp"></jsp:include>
 
 </body>
 </html>
