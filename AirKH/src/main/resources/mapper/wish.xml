@@ -8,24 +8,33 @@
 <mapper namespace="com.air.cwc.WishDAO">
 	
 	<select id="allwish" parameterType="String" resultType="com.air.cwc.WishDTO">
-		select * from wish_hotel member where member_name=#{member_name}
+		select * from wish_hotel member where member_id=#{member_id} and wish_category=#{wish_category}
+	</select>
+	<select id="allcate" parameterType="String" resultType="com.air.cwc.WishCategoryDTO">
+		select * from wish_category_hotel member where member_id=#{member_id}
 	</select>
 	
 	<select id="wlist" parameterType="int" resultType="com.air.cwc.WishDTO">
 		select *from wish_hotel where acc_code=#{acc_code}
 	</select>
 	
-	<insert id="addwish" parameterType="com.air.jdy.AccDTO">
+	<insert id="addwish" parameterType="com.air.cwc.WishDTO">
 		insert into wish_hotel values(
 		(select nvl(max(wish_num),0) from wish_hotel) + 1,
 		#{acc_code},
 		#{acc_thumbnail}, #{acc_addr}, #{acc_name},
 		#{acc_price}, #{acc_maxp},
 		#{acc_bedroom}, #{acc_bed},
-		#{acc_bath}, #{acc_star}, #{member_name} )
+		#{acc_bath}, #{acc_star},#{wish_category},#{member_id} )
 	</insert>
 
 	<delete id="deletewish" parameterType="com.air.cwc.WishDTO">
 		delete from wish_hotel where acc_code = #{acc_code}
 	</delete>
+	
+	<insert id="addCate">
+		insert into wish_category_hotel values(
+		(select nvl(max(category_num),0) from wish_category_hotel) + 1,
+		#{wish_category}, #{member_id} )
+	</insert>
 </mapper>
