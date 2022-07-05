@@ -39,6 +39,17 @@ text-transform: uppercase;
 	text-decoration:none;
 	color:black;
 	}
+	
+	.searchbtn{
+	border:1px solid lightgray;
+	}
+	
+	.review_list_search select {
+	    font-size: 1.2em;
+   
+    cursor: pointer;
+    height:100%;
+	}
 </style>
 
 
@@ -59,7 +70,7 @@ text-transform: uppercase;
 	         <option value="writer">작성자</option>
 	      </select>
 	      
-	      <input name="keyword">&nbsp;&nbsp;
+	      <input name="keyword" class="searchbtn">
 	      <input class="btn btn-primary" type="submit" value="검색">
 	   </form>
 	</div>			
@@ -94,6 +105,7 @@ text-transform: uppercase;
 					<img src="<%=request.getContextPath()%>/resources/member/${i.member_pic}"  width="100px" >
 					<br>
 					${i.acc_name }
+					<br>
 					${i.member_id }
 					
 					${i.review_date.substring(0,7) }

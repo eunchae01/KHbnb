@@ -36,7 +36,7 @@
 	<br>
 	
 	<form method="post" enctype="multipart/form-data"  action="<%=request.getContextPath() %>/host_insert_ok.do">
-		<table border="1" cellspacing="0" width="450">
+		<table border="0" cellspacing="0" width="600">
 			<tr>
 				<th>호스트 아이디</th>
 				<td><input name="host_id">

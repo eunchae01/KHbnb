@@ -64,6 +64,10 @@
 	color:black;
 	}
 	
+		.searchbtn{
+	border:1px solid lightgray;
+	}
+	
 	
 	
 </style>
@@ -88,7 +92,7 @@
 	         
 	      </select>
 	   	
-	      <input class="search_bar keyword"  name="keyword">
+	     <input name="keyword" class="searchbtn">
 	      
 	      <input  class="btn btn-primary" type="submit" value="검색">
 		

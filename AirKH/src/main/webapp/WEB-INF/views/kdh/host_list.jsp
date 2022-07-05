@@ -64,6 +64,10 @@
 	text-decoration:none;
 	color:black;
 	}
+	
+	.searchbtn{
+	border:1px solid lightgray;
+	}
 
 </style>
 
@@ -86,7 +90,7 @@
 	         <option value="nameo">호스트명</option>
 	      </select>
 	      
-	      <input name="keyword">&nbsp;&nbsp;&nbsp;
+	      <input name="keyword" class="searchbtn">&nbsp;&nbsp;&nbsp;
 	      <input class="btn btn-primary" type="submit" value="검색">
 		
 		</form>

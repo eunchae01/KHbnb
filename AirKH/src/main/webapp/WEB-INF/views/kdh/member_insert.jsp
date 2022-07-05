@@ -38,7 +38,7 @@
 	<br>
 	
 		<form method="post" enctype="multipart/form-data" action="<%=request.getContextPath() %>/member_insert_ok.do">
-			<table border="1" cellspacing="0" width="450">
+			<table border="0" cellspacing="0" width="600">
 				<tr>
 					<th>회원아이디</th>
 					<td><input name="member_id">
