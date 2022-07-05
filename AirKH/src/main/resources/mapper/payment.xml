@@ -28,6 +28,14 @@
 		select * from payment_hotel where member_name=#{member_id}
 		order by check_in
 	</select>
+	
+		<select id="playlist" parameterType="String"
+		resultType="com.air.cwc.PaymentDTO">
+		<![CDATA[
+		select * from payment_hotel where host_name=#{host_name} and (check_out> to_char(SYSDATE+2,'YYYY/MM/DD') and check_in< to_char(SYSDATE,'YYYY/MM/DD'))
+		order by check_out
+		]]>
+	</select>
 
 	<select id="Hpaylist" parameterType="String"
 		resultType="com.air.cwc.PaymentDTO">
