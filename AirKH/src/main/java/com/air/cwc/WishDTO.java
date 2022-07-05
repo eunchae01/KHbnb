@@ -15,5 +15,7 @@ public class WishDTO {
 	private int acc_bedroom;
 	private int acc_bed;
 	private int acc_bath;
-	private int acc_star;
+	private String acc_star;
+	private String wish_category;
+	private String member_id;
 }
