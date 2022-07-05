@@ -46,11 +46,6 @@ table {
 }
 td{
 padding: 10px;}
-
-button {
-	background-color: white;
-}
-
 </style>
 </head>
 <body>
@@ -61,7 +56,7 @@ button {
 
 		<div class="tcontainer">
 		<div class="wl">
-			<h1>위시 리스트</h1>
+			<h1>${cate }</h1>
 		</div>
 		
 			<c:if test="${!empty list }">
