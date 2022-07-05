@@ -85,8 +85,10 @@
 								<a href="<%=request.getContextPath()%>/wish.content.do">위시리스트</a>
 								<a href="<%=request.getContextPath()%>/reservation_guest.do?member_id=member_id">여행</a>
 
-								<a href="#">계정</a>
-								<a href="<%=request.getContextPath()%>/QA.do">도움말</a>
+
+								<a href="<%=request.getContextPath()%>/info-update.do">계정</a>
+								<a href="<%=request.getContextPath()%>/QA_board.do">도움말</a>
+
 								<c:if test="${!empty hostORmember }">
 									<a href="<%=request.getContextPath()%>/jdy.do">로그아웃</a>
 								</c:if>
