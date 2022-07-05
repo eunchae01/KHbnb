@@ -191,6 +191,10 @@ public class AccDAOImpl implements AccDAO{
 	public WishDTO likeAcc(int no) {
 		return this.sqlSession.selectOne("like", no);
 	}
+	@Override
+	public List<WishCategoryDTO> getCategory(String member_id) {
+		return this.sqlSession.selectList("cwish",member_id);
+	}
 
 
 	@Override
