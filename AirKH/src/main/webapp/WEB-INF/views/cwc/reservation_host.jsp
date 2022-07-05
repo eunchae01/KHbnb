@@ -19,21 +19,32 @@
 		$("#check_i").css('display', 'none');
 		$("#check_p").css('display', 'none');
 		$("#approve_list").css('display', 'none');
+		$("#play").css('display', 'none');
 	}
 	function check_in() {
 		$("#check_i").css('display', 'block');
 		$("#approve_list").css('display', 'none');
 		$("#check_p").css('display', 'none');
 		$("#check_o").css('display', 'none');
+		$("#play").css('display', 'none');
 	}
 	function check_pre() {
 		$("#check_p").css('display', 'block');
 		$("#check_i").css('display', 'none');
 		$("#approve_list").css('display', 'none');
 		$("#check_o").css('display', 'none');
+		$("#play").css('display', 'none');
 	}
 	function approve() {
 		$("#approve_list").css('display', 'block');
+		$("#check_o").css('display', 'none');
+		$("#check_i").css('display', 'none');
+		$("#check_p").css('display', 'none');
+		$("#play").css('display', 'none');
+	}
+	function play() {
+		$("#play").css('display', 'block');
+		$("#approve_list").css('display', 'none');
 		$("#check_o").css('display', 'none');
 		$("#check_i").css('display', 'none');
 		$("#check_p").css('display', 'none');
@@ -84,6 +95,10 @@
 #check_p {
 	display: none;
 }
+	#play{
+	display: none;
+
+}
 </style>
 
 <script type="text/javascript">
@@ -96,6 +111,7 @@
 	<c:set var="list2" value="${in }" />
 	<c:set var="list3" value="${pre }" />
 	<c:set var="list4" value="${approve }" />
+	<c:set var="list5" value="${play }" />
 	
 	<jsp:include page="../jdy/include/host_top.jsp"></jsp:include>
 
@@ -406,6 +422,75 @@
 				</div>
 				
 			</div>
+			
+			<div id="play">
+				<h2>진행중인 예약:</h2>
+				<hr>
+				<br> <br>
+				<div align="center">
+					<c:if test="${!empty list5 }">
+						<c:forEach items="${list5 }" var="dto5">
+							<table width="80%" height="400px"
+								style="border-top: 2px solid gray;">
+
+								<tr>
+									<td colspan="3" height="30%"
+										style="vertical-align: bottom; padding-left: 50px;"><h2>${dto5.getAcc_name() }</h2></td>
+									<td width="30%" rowspan="5"><a
+										href="<%=request.getContextPath()%>/acc_content.do?no=${dto5.getAcc_code() }">
+											<img
+											src="<%=request.getContextPath() %>/resources/upload/2022-06-13/${dto5.getAcc_thumbnail() }"
+											alt="" class="thumbnail" width="100%" height="100%" />
+									</a></td>
+								</tr>
+
+								<tr>
+									<td style="vertical-align: top; padding-left: 70px;"
+										colspan="3">${dto5.getAcc_addr() }*게스트
+										${dto5.getCheck_person() }명</td>
+								</tr>
+
+								<tr>
+									<td align="left"
+										style="vertical-align: bottom; padding-left: 50px;">체크인
+										날짜</td>
+									<td align="left" style="vertical-align: bottom;">체크아웃 날짜</td>
+									<td></td>
+
+								</tr>
+
+								<tr>
+									<td align="left"
+										style="vertical-align: top; padding-left: 50px;">${dto5.getCheck_in() }</td>
+									<td align="left" style="color: red; vertical-align: top;">${dto5.getCheck_out() } /12:00  퇴실 예정</td>
+									<td></td>
+								</tr>
+
+								<tr>
+									<td style="height: 20px; padding-left: 50px;">예약자 성함:
+										${dto1.getMember_name() }</td>
+									<td>예약자 번호: ${dto5.getMember_phone() }</td>
+									<td>결재 금액: ₩<fmt:formatNumber
+											value="${dto5.getAcc_price() }" />원</td>
+								</tr>
+
+							</table>
+							<br>
+							<hr>
+							<br>
+						</c:forEach>
+					</c:if>
+					<c:if test="${empty list5 }">
+						<br>
+						<br>
+						<br>
+						<div align="center">
+							진행중인 <br> 게스트가 없습니다.
+						</div>
+					</c:if>
+				</div>
+			</div>
+			
 		</div>
 	</div>
 
