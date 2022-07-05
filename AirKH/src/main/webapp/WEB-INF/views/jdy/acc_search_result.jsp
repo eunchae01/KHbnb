@@ -72,7 +72,7 @@
 										</div>
 									</div>
 									<div class="acc-loc">${adto.acc_city }, ${adto.acc_country }</div>
-									<div class="acc-price"><strong>&bsol;<fmt:formatNumber value="${adto.acc_price }" /></strong>/박</div>
+									<div class="acc-price"><strong>&#65510;<fmt:formatNumber value="${adto.acc_price }" /></strong>/박</div>
 								</div>
 							</a>
 						</div>
