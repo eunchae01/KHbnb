@@ -345,21 +345,41 @@ $(function () {
 							<button type="submit" class="btn btn-danger" id="purchase-btn" >예약하기</button>
 						</form>
 						<div class="bill-dldd">
-							<input id="totalp" type="hidden" value="${dto.acc_price  }" />
-							<dl class="bill-dl">
-							<dt>&#65510;<fmt:formatNumber value="${dto.acc_price  }" />&nbsp;X&nbsp;<span id="ck_day2"></span>박</dt>
-							<dd><input id="totalp" readonly value="${dto.acc_price  }"></dd>
-							</dl>
-							
-							<dl class="bill-dl">
-								<dt>서비스 수수료</dt>
-								<dd><input id="totals2" readonly></dd>
-							</dl>
-							<hr>
-							<dl class="bill-dl bill-total">
-								<dt>총 합계</dt>
-								<dd><input id="totalm2" readonly></dd>
-							</dl>
+							<table width="100%">
+								<tr>
+									<td height="50px" colspan="2">예약 확정 전에는 요금이 청구 되지 않습니다.</td>
+								</tr>
+
+								<tr>
+									<td><input id="totalp" type="hidden"
+										value="${dto.acc_price  }" /> <font
+										style="font-family: serif; font-size: 20px; font-weight: bold;">
+											₩<fmt:formatNumber value="${dto.acc_price  }" />
+									</font> <font style="font-family: serif; font-size: 20px;"> X <font><span id="ck_day2"></span></font>박
+									</font></td>
+									<td align="right"><font
+										style="font-family: serif; font-size: 20px;"><span
+											id="totalp2"></span></font></td>
+								</tr>
+
+								<tr>
+									<td><font
+										style="font-family: serif; font-size: 20px; font-weight: bold;">서비스
+											수수료</font></td>
+									<td align="right"><font
+										style="font-family: serif; font-size: 20px;"><span
+											id="totals2"></span></font></td>
+								</tr>
+
+								<tr>
+									<td height="50px" style="border-top: 1px solid gray;"><font
+										style="font-family: serif; font-size: 20px; font-weight: bold;">총
+											합계</font></td>
+									<td align="right" style="border-top: 1px solid gray;"><font
+										style="font-family: serif; font-size: 20px;"><font
+											color="red"><span id="totalm2"></span></font></font></td>
+								</tr>
+							</table>
 						</div>
 					</div>
 				</div>
