@@ -48,6 +48,10 @@
 	
 		<form method="post" enctype="multipart/form-data" action="<%=request.getContextPath() %>/hacc_modify_ok.do">
 			<input type="hidden" name="acc_thumbnail" value="${dto.acc_thumbnail}">
+			<input type="hidden" name="acc_image1" value="${dto.acc_image1}">
+			<input type="hidden" name="acc_image2" value="${dto.acc_image2}">
+			<input type="hidden" name="acc_image3" value="${dto.acc_image3}">
+			<input type="hidden" name="acc_image4" value="${dto.acc_image4}">
 			<table border="0" cellspacing="0" width="1500">
 				<tr>
 					<th>숙소코드</th>
@@ -88,8 +92,8 @@
 				<tr>
 					
 					
-					<th>숙소 썸네일</th>
-					<td>${dto.acc_thumbnail }<input type="file" name="file"> </td>
+					<th>숙소 이미지</th>
+					<td>${dto.acc_thumbnail }<input type="file" name="file" multiple> </td>
 					<th>숙소 건물유형</th>
 					<td><select name="acc_build" required>
 								<option value="" selected>건물 유형 선택</option>

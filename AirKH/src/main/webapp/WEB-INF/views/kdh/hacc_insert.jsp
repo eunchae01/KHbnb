@@ -77,8 +77,8 @@
 				<tr>
 					
 					
-					<th>숙소 썸네일</th>
-					<td><input type="file" name="file"> </td>
+					<th>숙소 사진</th>
+					<td><input type="file" name="file" multiple> </td>
 					<th>숙소 건물유형</th>
 					<td><select name="acc_build" required>
 								<option value="" selected>건물 유형 선택</option>

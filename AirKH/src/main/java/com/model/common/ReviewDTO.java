@@ -4,8 +4,9 @@ import lombok.Data;
 
 @Data
 public class ReviewDTO {
-	private int acc_code;
 	private int review_num;
+	private int acc_code;
+	private String acc_name ;
 	private String member_id;
 	private int review_cl;
 	private int review_comm;

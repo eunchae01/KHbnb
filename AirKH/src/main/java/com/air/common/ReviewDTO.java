@@ -6,6 +6,7 @@ import lombok.Data;
 public class ReviewDTO {
 	private int review_num;
 	private int acc_code;
+	private String acc_name ;
 	private int host_num;
 	private String member_id;
 	private int review_cl;
