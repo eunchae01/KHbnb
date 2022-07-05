@@ -105,7 +105,7 @@
 			<table width="100%">
 				<tr>
 					<td><h2>예약</h2></td>
-					<td align="right">모든 예약 (<font
+					<td align="right"> 예약 (<font
 						style="color: blue; font-weight: bold;">${fn:length(list)}</font>)개
 					</td>
 				</tr>
