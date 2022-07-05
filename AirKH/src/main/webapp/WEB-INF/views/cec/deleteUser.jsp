@@ -23,6 +23,11 @@
 		float:right;
 		margin-right: 10%;
 	}
+	
+	button {
+		background-color: white;
+	}
+	
 </style>
 </head>
 <body>

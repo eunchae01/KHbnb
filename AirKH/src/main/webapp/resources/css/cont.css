@@ -239,7 +239,7 @@ img {
 .bill-container {
 	position: sticky;
 	top: 150px;
-	height: 400px;
+	height: 470px;
 	border: 1px solid lightgray;
 	border-radius: 10px;
 	padding: 24px;
@@ -311,6 +311,33 @@ img {
 	border: none;
 	font-weight: 700;
 }
+
+.bill-dldd hr{
+	margin-bottom: 16px;
+}
+
+.bill-dl {
+	display: flex;
+	justify-content: space-between;
+}
+
+.bill-dl dt {
+	font-weight: 400;
+}
+
+.bill-dl dd {
+	display: block;
+}
+
+.bill-dl dd input {
+	text-align: right;
+}
+
+.bill-total dt, 
+.bill-total dd {
+	font-weight: 700;
+}
+
 
 /* review */
 .review-section {
@@ -432,4 +459,10 @@ img {
 
 .know-row img {
 	margin-right: 15px;
+}
+
+.need-to-know h2 {
+	font-size: 32px;
+	font-weight: 700;
+	margin-bottom: 30px;
 }

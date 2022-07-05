@@ -23,6 +23,10 @@
 		margin-right: 30%;
 	}
 	
+	button {
+		background-color: white;
+	}
+	
 </style>
 </head>
 <body>

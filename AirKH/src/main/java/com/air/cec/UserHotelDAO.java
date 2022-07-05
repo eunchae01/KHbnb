@@ -26,6 +26,7 @@ public interface UserHotelDAO {
 	public MemberHotelDTO getMember(String id);
 	public HostHotelDTO getHostName(String name);
 	public MemberHotelDTO getMemberName(String name);
+	public HostHotelDTO getHostByNum(int hostno);
 	
 	//내정보 수정
 	public int updateMember(MemberHotelDTO dto);
@@ -37,7 +38,6 @@ public interface UserHotelDAO {
 	
 	public void updateMemberSequence(int no);
 	public void updatHostSequence(int no);
-	public HostHotelDTO getHostByNum(int hostno);
 
 	//메세지
 	public List<PaymentDTO> memReserve(String mem_name);

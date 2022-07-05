@@ -21,7 +21,7 @@
 			<div class="row">
 				<div class="col-12">
 					<form action="<%=request.getContextPath() %>/acc_insert_ok.do" 
-					method="post"  enctype="multipart/form-data">
+					method="post" enctype="multipart/form-data">
 					
 					<input type="hidden" name="acc_host" value="${host_num }">
 						<div class="acc-info">
@@ -251,6 +251,8 @@
 			</div>
 		</div>
 	</section>
+	
+	<jsp:include page="./include/footer.jsp"/>
 </body>
 <script>
 

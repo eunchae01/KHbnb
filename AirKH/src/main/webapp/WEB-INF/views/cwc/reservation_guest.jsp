@@ -20,6 +20,10 @@
 	margin-right: 3%;
 
 }
+
+button {
+	background-color: white;
+}
 </style>
 </head>
 <body>

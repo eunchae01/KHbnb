@@ -75,7 +75,6 @@ public class JdyController {
 	    int reinsert_hostnum = this.re_dao.reinsert_hostnum(no);
 	    
 	    
-		
 	    
 		String offer_str = dto.getAcc_offer();
 		String[] offer_arr = offer_str.split(",");
@@ -172,9 +171,13 @@ public class JdyController {
 		model.addAttribute("List", list);
 		
 		int host_num = (Integer) session.getAttribute("host_num");
+		
+		HostHotelDTO host = this.userDao.getHostByNum(host_num);
+		model.addAttribute("Host", host);
+		
 		List<ReviewDTOm> host_list = this.re_dao.hostReviewCont(host_num);
 		model.addAttribute("host_list",host_list);
-
+		
 		return "jdy/host_main";
 	}
 
@@ -269,12 +272,37 @@ public class JdyController {
 
 	// 호스트: 숙소 수정
 	@RequestMapping("acc_modify_ok.do")
-	public void hostAModifyOk(AccDTO dto, HttpServletResponse response) throws IOException {
-
-		int check = this.dao.updateAcc(dto);
+	public void hostAModifyOk(AccDTO dto, HttpServletResponse response, MultipartHttpServletRequest mRequest) throws IOException {
 
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
+		
+		// 파일 업로드 후 파일 문자열 받아오기 
+		String fileName = this.dao.uploadFile(mRequest);
+		System.out.println("fileName" + fileName);
+		
+		
+		if(fileName == null) {
+			dto.setAcc_thumbnail(dto.getAcc_thumbnail());
+			dto.setAcc_image1(dto.getAcc_image1());
+			dto.setAcc_image2(dto.getAcc_image2());
+			dto.setAcc_image3(dto.getAcc_image3());
+			dto.setAcc_image4(dto.getAcc_image4());
+		}else {
+			// , 기준으로 잘라서 dto에 넣기
+			String[] fileArr = fileName.split(",");
+			
+			dto.setAcc_thumbnail(fileArr[0]);
+			dto.setAcc_image1(fileArr[1]);
+			dto.setAcc_image2(fileArr[2]);
+			dto.setAcc_image3(fileArr[3]);
+			dto.setAcc_image4(fileArr[4]);
+			
+			// 수정일 업데이트
+			this.dao.updateAccDate(dto.getAcc_code());
+		}
+		
+		int check = this.dao.updateAcc(dto);
 
 		if (check > 0) {
 			out.println("<script>");

@@ -7,6 +7,7 @@ public class ReviewDTOm {
 
 	private int acc_code;		// 숙소번호
 	private int review_num;		// 리뷰번호
+	private int host_num;		// 호스트 아이디
 	private String member_id;	// 회원아이디
 	private int review_cl;		// 청결도 점수
 	private int review_comm;	// 의사소통 점수

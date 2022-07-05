@@ -78,6 +78,11 @@
 		margin-left: 2%;
 		margin-top: 2%;
 	}
+	
+	button {
+		background-color: white;
+	}
+	
 </style>
 </head>
 <body>

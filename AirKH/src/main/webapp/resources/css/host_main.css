@@ -79,6 +79,10 @@ h3 {
 	padding-left: 40px;
 }
 
+.host-acc h2{
+	margin-bottom: 20px;
+}
+
 .host-acc-title {
 	display: flex;
 	justify-content: space-between;
@@ -92,7 +96,7 @@ h3 {
 	align-items: center;
 	font-weight: 700;
 	height: 40px;
-	width: 180px;
+	width: 320px;
 	color: white;
 	background-color: #12d0b4;
 	border-radius: 5px;
@@ -142,4 +146,48 @@ h3 {
 /* review */
 .host-review {
 	padding-left: 40px;
+}
+
+.host-review h2{
+	display: flex;
+	align-items: center;
+	margin-bottom: 30px;
+}
+
+.host-review h2 img {
+	width: 30px;
+}
+
+.review-list {
+	margin-bottom: 40px;
+}
+
+.acc-name {
+	font-size: 18px;
+	font-weight: 700;
+	margin-bottom: 15px;
+}
+
+.rlist-cont {
+	margin-bottom: 10px;
+}
+
+.rlist-top {
+	display: flex;
+	align-items: center;
+}
+
+.rlist-top img {
+	width: 70px;
+	border-radius: 100%;
+	margin-right: 10px;
+}
+
+.rlist-name {
+	font-weight: 700;
+}
+
+.rlist-date {
+	font-size: 14px;
+	color: gray;
 }

@@ -23,4 +23,5 @@ public interface AccDAO {
 	
 	String uploadFile(MultipartHttpServletRequest mRequest);
 	WishDTO likeAcc(int no);
+	void updateAccDate(int no);
 }

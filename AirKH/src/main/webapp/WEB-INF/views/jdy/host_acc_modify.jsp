@@ -25,9 +25,15 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="cont-table">
-						<form action="<%=request.getContextPath() %>/acc_modify_ok.do" method="post">
+						<form action="<%=request.getContextPath() %>/acc_modify_ok.do" method="post"
+							 enctype="multipart/form-data">
 							<input type="hidden" name="acc_code" value="${dto.acc_code }" >
 							<input type="hidden" name="acc_host" value="${dto.acc_host }" >
+							<input type="hidden" name="acc_thumbnail" value="${dto.acc_thumbnail }" >
+							<input type="hidden" name="acc_image1" value="${dto.acc_image1 }" >
+							<input type="hidden" name="acc_image2" value="${dto.acc_image2 }" >
+							<input type="hidden" name="acc_image3" value="${dto.acc_image3 }" >
+							<input type="hidden" name="acc_image4" value="${dto.acc_image4 }" >
 							<table>
 								<tr>
 									<th colspan="2"><h1>숙소 수정 페이지</h1></th>
@@ -37,7 +43,7 @@
 									<td><input name="acc_name" id="name" value="${dto.acc_name }" /></td>
 								</tr>
 								
-								<tr>
+								<%-- <tr>
 									<th>숙소 테마</th>
 									<td>
 										<c:set var="tlist" value="${tList }"/>
@@ -50,7 +56,7 @@
 											</c:if>
 										</select>
 									</td>
-								</tr>
+								</tr> --%>
 								
 								<tr>
 									<th>숙소 설명</th>
@@ -150,6 +156,6 @@
 			</div>
 		</div>
 	</section>
-	
+	<jsp:include page="./include/footer.jsp"/>
 </body>
 </html>

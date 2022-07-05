@@ -13,6 +13,10 @@
 .con1 {
 	margin-top: 100px;
 }
+
+button {
+	background-color: white;
+}
 </style>
 
 </head>

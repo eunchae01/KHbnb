@@ -57,6 +57,11 @@
 	textarea{
 		resize: none !important;
 	}
+	
+	button {
+		background-color: white;
+	}
+	
 </style>
 </head>
 <body>

@@ -71,6 +71,10 @@ li {
 input {
 	height: 35px;
 }
+
+button {
+	background-color: white;
+}
 </style>
 
 <script src="//code.jquery.com/jquery.min.js"></script>

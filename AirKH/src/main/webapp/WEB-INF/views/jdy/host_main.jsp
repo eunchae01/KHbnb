@@ -14,28 +14,27 @@
 	<jsp:include page="./include/host_top.jsp" />
 	<c:set var="list" value="${List }" />
 	<c:set var="ho_list" value="${host_list }" />
+	<c:set var="host" value="${Host }" />
 
 	<section class="host-main">
 		<div class="container">
 			<div class="row">
 				<div class="col-4">
 					<div class="profile">
-						<img class="profile-img" src="<%=request.getContextPath() %>/resources/assets/user.png" alt="" />
-						<h3>안녕하세요. 저는 000입니다.</h3>
+						<img class="profile-img" src="<%=request.getContextPath() %>/resources/host/${host.host_pic}" alt="" />
+						<h3>안녕하세요. 저는 ${host.host_name }입니다.</h3>
 						<h3>소개</h3>
 						<p>
-							Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odit
-							quos minus, fuga eligendi molestias enim officia nam iste omnis!
-							A reprehenderit eligendi consectetur aspernatur modi tempore
-							asperiores quisquam cum impedit!
+							${host.host_int }
 						</p>
+						<br>
 						<a href="<%=request.getContextPath()%>/info-update.do">프로필 수정</a>
 					</div>
 				</div>
 				<div class="col-8">
 					<div class="host-acc">
+						<h2>${host.host_name }님의 숙소 관리</h2>
 						<div class="host-acc-title">
-							<h2>000님의 숙소</h2>
 							<a href="<%=request.getContextPath()%>/reservation_host.do">예약 관리</a>
 							<a href="<%=request.getContextPath()%>/acc_insert.do?no=${host_num}">새로운 숙소 등록하기</a>
 						</div>
@@ -69,17 +68,34 @@
 						</c:if>
 					</div>
 					<div class="host-review">
+						<h2>
+							<img class="star-icon" src="<%=request.getContextPath() %>/resources/assets/star.png" alt="" />
+							&nbsp;후기 000개
+						</h2>
 						<c:forEach items="${ho_list }" var="ho">
-							<li class="memeber_img"><img src="<%=request.getContextPath()%>/resources/member/${ho.member_pic }" width="70"></li>
-							<li class="re_list_name">${ho.member_id }</li>
-							<li class="re_list_date">${ho.review_date.substring(0,10) }</li>
-							<li class="re_list_cont">${ho.review_content }</li>
+							<a href="<%=request.getContextPath()%>/host_acc_cont.do?no=${ho.acc_code}">
+								<div class="review-list">
+									<div class="acc-name">숙소 이름~~~~~~~~~~~</div>
+									<div class="rlist-cont">${ho.review_content }</div>
+									<div class="rlist-top">
+										<img src="<%=request.getContextPath()%>/resources/member/${ho.member_pic }" alt="" />
+										<div class="rlist-title">
+											<div class="rlist-name">${ho.member_id }</div>
+											<div class="rlist-date">
+												${ho.review_date.substring(0,4) }년 ${ho.review_date.substring(5,7) }월 
+											</div>				
+										</div>
+									</div>
+								</div>
+							</a>
 						</c:forEach>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+	
+	<jsp:include page="./include/footer.jsp"/>
 
 </body>
 </html>

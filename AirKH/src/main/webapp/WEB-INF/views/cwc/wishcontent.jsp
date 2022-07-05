@@ -46,6 +46,11 @@ table {
 }
 td{
 padding: 10px;}
+
+button {
+	background-color: white;
+}
+
 </style>
 </head>
 <body>
