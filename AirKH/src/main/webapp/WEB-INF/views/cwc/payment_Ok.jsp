@@ -11,10 +11,6 @@
 }
 .con2{
 margin-bottom: 300px;}
-
-button {
-	background-color: white;
-}
 </style>
 </head>
 <body>
