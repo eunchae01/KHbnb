@@ -31,38 +31,37 @@
 
 	<select id="Hpaylist" parameterType="String"
 		resultType="com.air.cwc.PaymentDTO">
-		select * from payment_hotel where host_name=#{host_name}
-		order by check_in
+		<![CDATA[
+		select * from payment_hotel where host_name=#{host_name} and check_out > to_char(SYSDATE-1,'YYYY/MM/DD') order by check_in
+		]]>
 	</select>
 
 	<select id="out_list" parameterType="String"
 		resultType="com.air.cwc.PaymentDTO">
-		select * from payment_hotel where host_name=#{host_name}
-		order by check_in
+		select * from payment_hotel where host_name=#{host_name} and reserve_info='1' and
+		(check_out= to_char(SYSDATE,'YYYY/MM/DD') or check_out= to_char(SYSDATE+1,'YYYY/MM/DD')) order by check_in
+		
 	</select>
 
 	<select id="in_list" parameterType="String"
 		resultType="com.air.cwc.PaymentDTO">
-		select * from payment_hotel where host_name=#{host_name} order by check_in
+		select * from payment_hotel where host_name=#{host_name} and reserve_info='1' and
+		(check_in= to_char(SYSDATE,'YYYY/MM/DD') or check_in= to_char(SYSDATE+1,'YYYY/MM/DD')) order by check_in
 
 	</select>
 
 	<select id="pre_list" parameterType="String"
 		resultType="com.air.cwc.PaymentDTO">
-		select * from payment_hotel where host_name=#{host_name}
-		order by check_in
-	</select>
-
-	<select id="update_list" parameterType="String"
-		resultType="com.air.cwc.PaymentDTO">
-		select * from payment_hotel where host_name=#{host_name}
-		AND reserve_info='예약 승인 대기 중' order by check_in
+		<![CDATA[
+		select * from payment_hotel where host_name=#{host_name} and reserve_info='1' and
+		check_in > to_char(SYSDATE+2,'YYYY/MM/DD') order by check_in
+		]]>
 	</select>
 
 	<select id="approve_list" parameterType="String"
 		resultType="com.air.cwc.PaymentDTO">
 		select * from payment_hotel where host_name=#{host_name}
-		AND reserve_info='예약 승인 대기 중' order by check_in
+		AND (reserve_info='0'or reserve_info='2') order by check_in
 	</select>
 
 
@@ -92,4 +91,7 @@
 		where cart_num =#{cart_num}
 	</update>
 	
+	<update id="approve">
+	update payment_hotel set reserve_info='1' where cart_num=#{cart_num}
+	</update>
 </mapper>
