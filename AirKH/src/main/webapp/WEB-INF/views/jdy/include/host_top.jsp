@@ -43,7 +43,7 @@
 							<div class="dropdown-content" id="myDropdown">
 								<a href="<%=request.getContextPath()%>/message.do">메시지</a>
 								<a href="#">숙소 관리</a>
-								<a href="#">계정</a>
+								<a href="<%=request.getContextPath()%>/info-update.do">계정</a>
 								<a href="#">도움말</a>
 								<a href="<%=request.getContextPath()%>/log-out.do">로그아웃</a>
 							</div>
