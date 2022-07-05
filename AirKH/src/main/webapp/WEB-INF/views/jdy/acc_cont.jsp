@@ -58,13 +58,12 @@ $(function () {
     	$("#ck_day").text(total);
     	$("#ck_day2").text(total);
     	let pri=$("#totalp").val();
-    	let service=pri*0.1;
-    	let total_price=pri*total
+    	let total_price=pri*total;
+    	let service=total_price*0.1;
     	let tomoney=service+total_price;
-    	console.log(total_price);
-    	document.getElementById("totalp").value ="₩"+total_price.toLocaleString()+"원";
-    	document.getElementById("totals").value ="₩"+service.toLocaleString()+"원";
-    	document.getElementById("totalm").value ="₩"+tomoney.toLocaleString()+"원";
+    	$("#totalp2").text("₩"+(total_price.toLocaleString(undefined, { maximumFractionDigits: 0 }))+"원")
+    	$("#totals2").text("₩"+(service.toLocaleString(undefined, { maximumFractionDigits: 0 }))+"원")
+    	$("#totalm2").text("₩"+(tomoney.toLocaleString(undefined, { maximumFractionDigits: 0 }))+"원")
     });
     
    
@@ -82,6 +81,7 @@ $(function () {
 	<c:set var="list" value="${oList }" />
 	<c:set var="off" value="${offer }" />
 	<c:set var="like" value="${like }" />
+	<c:set var="cwish" value="${cwish }" />
 	<c:set var="host" value="${Host }" />
 	<c:set var="id_check" value="${id_check }" />
 	<c:set var="avg" value="${re_avg }"/>
@@ -111,15 +111,105 @@ $(function () {
 							<li><a href="#">후기 ${count }개</a>&nbsp;&middot;&nbsp;</li>
 							<li><a href="#">${dto.acc_city }, ${dto.acc_country }</a></li>
 						</ul>
-						<div class="rate">
+					<div class="rate">
 							<c:if test="${!empty like }">
-							<img class="icons" src="<%=request.getContextPath() %>/resources/assets/red-heart.png" alt="" />
-							<a href="<%=request.getContextPath() %>/wish_delete.do?acc_code=${dto.acc_code}"><strong>&nbsp;찜하기</strong></a>
+								<img class="icons"
+									src="<%=request.getContextPath()%>/resources/assets/red-heart.png"
+									alt="" />
+								<a
+									href="<%=request.getContextPath() %>/wish_delete.do?acc_code=${dto.acc_code}"><strong>&nbsp;찜하기</strong></a>
 							</c:if>
 
 							<c:if test="${empty like }">
-							<img class="icons" src="<%=request.getContextPath() %>/resources/assets/blank-heart.png" alt="" />
-							<a href="<%=request.getContextPath() %>/wish_add.do?acc_code=${dto.acc_code}"><strong>&nbsp;찜하기</strong></a>
+								<img class="icons"
+									src="<%=request.getContextPath()%>/resources/assets/blank-heart.png"
+									alt="" />
+								<a data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+									href="#"><strong>&nbsp;찜하기</strong></a>
+
+								<div class="modal fade" id="staticBackdrop"
+									data-bs-backdrop="static" data-bs-keyboard="false"
+									tabindex="-1" aria-labelledby="staticBackdropLabel"
+									aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content"
+											style="width: 600px; height: 600px;">
+											<div class="modal-header" align="center">
+												<h3 align="center" class="modal-title"
+													id="staticBackdropLabel">
+													<strong>위시 리스트</strong>
+												</h3>
+												<button type="button" class="btn-close"
+													data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+
+												<table>
+													<tr>
+														<td style="padding: 10px;"><a href="#"><img
+																style="width: 80px; height: 80px;"
+																src="<%=request.getContextPath()%>/resources/assets/wishbutton.png"
+																alt="" /></a></td>
+														<td style="padding: 10px;"><strong><a
+																href="#" data-bs-toggle="modal"
+																data-bs-target="#staticBackdrop4">새로운 위시리스트 만들기</a></strong></td>
+													</tr>
+
+													<c:if test="${!empty cwish }">
+														<c:forEach items="${cwish }" var="cate" varStatus="index">
+															<tr>
+																<td style="padding-top: 10px; padding-left: 5px;"><a
+																	href="<%=request.getContextPath() %>/wish_add.do?wish_category=${cate.getWish_category()}&&acc_code=${dto.acc_code}"><img
+																		style="width: 80px; height: 80px; border-radius: 20%;"
+																		src="<%=request.getContextPath() %>
+											/resources/upload/${dto.acc_date.substring(0, 10) }/${index.index }.png"
+																		alt="" class="thumbnail" /></a></td>
+																<td style="font-size:20px; padding: 10px; padding-left: 5px;"><a style="text-decoration:none;"
+																	href="<%=request.getContextPath() %>/wish_add.do?wish_category=${cate.getWish_category()}&&acc_code=${dto.acc_code}"><strong>${cate.getWish_category() }</strong></a></td>
+															</tr>
+														</c:forEach>
+													</c:if>
+
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="modal fade" id="staticBackdrop4"
+									data-bs-backdrop="static" data-bs-keyboard="false"
+									tabindex="-1" aria-labelledby="staticBackdropLabel"
+									aria-hidden="true">
+									<div class="modal-dialog">
+										<div style="width: 600px;" class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="staticBackdropLabel">
+													위시리스트 이름 정하기</h5>
+												<button type="button" class="btn-close"
+													data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+											<form action="<%=request.getContextPath() %>/wish_category_add.do">
+											<br>
+											<input name="wish_category" id="wish_category" style="background-color:white; font-size:20px; color:green; border:0px; width: 100%" type="text" placeholder="이름(최대  50자)">
+											<input type="hidden" name="member_id" value="${member_id }">
+											<input type="hidden" name="acc_code" value="${dto.getAcc_code() }">
+											<input type="hidden" name="acc_thumbnail" value="${dto.getAcc_thumbnail() }">
+											<input type="hidden" name="acc_addr" value="${dto.getAcc_addr() }">
+											<input type="hidden" name="acc_name" value="${dto.getAcc_name() }">
+											<input type="hidden" name="acc_price" value="${dto.getAcc_price() }">
+											<input type="hidden" name="acc_maxp" value="${dto.getAcc_maxp() }">
+											<input type="hidden" name="acc_bedroom" value="${dto.getAcc_bedroom() }">
+											<input type="hidden" name="acc_bed" value="${dto.getAcc_bed() }">
+											<input type="hidden" name="acc_bath" value="${dto.getAcc_bath() }">
+											<input type="hidden" name="acc_star" value="${dto.getAcc_star() }">
+											<br><br>
+											<input class="btn btn-outline-success" style="width: 100%" type="submit" value="새로만들기">
+											</form>
+											</div>	
+										</div>
+									</div>
+								</div>
 							</c:if>
 						</div>
 					</div>
@@ -217,10 +307,15 @@ $(function () {
 							</c:forEach>
 						</div>
 					</div>
-					<div>
-						<h3>${dto.acc_country }에서 <span id="ck_day">1</span>박</h3><br>
-						<div>예약 날짜: <span id="ck_in"></span> - <span id="ck_out"></span></div>
-						<br><a href="#day" class="fake-a">날짜 변경 하기</a>
+					<div class="com-box">
+						<h2>${dto.acc_country }에서
+							<span id="ck_day">1</span>박
+						</h2>
+						<br>
+						<h3>
+							예약 날짜: <span id="ck_in"></span> - <span id="ck_out"></span>
+						</h3>
+						<br> <a href="#day" class="fake-a">날짜 변경 하기</a>
 					</div>
 				</div>
 				<div class="col-4">
@@ -250,6 +345,7 @@ $(function () {
 							<button type="submit" class="btn btn-danger" id="purchase-btn" >예약하기</button>
 						</form>
 						<div class="bill-dldd">
+							<input id="totalp" type="hidden" value="${dto.acc_price  }" />
 							<dl class="bill-dl">
 							<dt>&#65510;<fmt:formatNumber value="${dto.acc_price  }" />&nbsp;X&nbsp;<span id="ck_day2"></span>박</dt>
 							<dd><input id="totalp" readonly value="${dto.acc_price  }"></dd>
@@ -257,12 +353,12 @@ $(function () {
 							
 							<dl class="bill-dl">
 								<dt>서비스 수수료</dt>
-								<dd><input id="totals" readonly></dd>
+								<dd><input id="totals2" readonly></dd>
 							</dl>
 							<hr>
 							<dl class="bill-dl bill-total">
 								<dt>총 합계</dt>
-								<dd><input id="totalm" readonly></dd>
+								<dd><input id="totalm2" readonly></dd>
 							</dl>
 						</div>
 					</div>
