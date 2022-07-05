@@ -3,10 +3,12 @@ package com.air.khie;
 
 import java.io.IOException;
 
+
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +26,7 @@ import com.air.cec.MemberHotelDTO;
 import com.air.cec.UserHotelDAO;
 import com.air.cwc.PaymentDAO;
 import com.air.cwc.PaymentDTO;
+import com.air.cwc.WishCategoryDTO;
 import com.air.cwc.WishDAO;
 import com.air.cwc.WishDTO;
 import com.air.jdy.AccDAO;
@@ -45,24 +48,26 @@ public class CwcController {
 	
 	@Autowired
 	private UserHotelDAO dao4;
-	
+
 	@Autowired
 	private ReviewDAOm re_dao;
-
-	// (�� ������� �˻��� �ؾ���)
+	
+	// (�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�떙�궪�삕�뜝�룞�삕 �뜝�뙏�뼲�삕�뜝�룞�삕)
 	@RequestMapping("wish.content.do")
-	public String Clist(Model model,HttpServletRequest req) {
+	public String Clist(@RequestParam("wish_category") String wish_category, Model model,HttpServletRequest req) {
 		HttpSession session = req.getSession();
-		String member_name;
+		String member_id;
 		if((String) session.getAttribute("member_id")!=null) {
-			member_name = (String) session.getAttribute("member_name");
+			member_id = (String) session.getAttribute("member_id");
 		}else {
-			System.out.println("로그인 먼저 진행하십셔");
 			return "cec/login";
 		}
-		
-		List<WishDTO> list = this.dao1.getWishList(member_name);
+		WishDTO dto= new WishDTO();
+		dto.setWish_category(wish_category);
+		dto.setMember_id(member_id);
+		List<WishDTO> list = this.dao1.getWishList(dto);
 		model.addAttribute("wishList", list);
+		model.addAttribute("cate", wish_category);
 		return "cwc/wishcontent";
 	}
 
@@ -73,29 +78,45 @@ public class CwcController {
 		if((String) session.getAttribute("member_id")!=null) {
 			member_id=(String) session.getAttribute("member_id");
 		}else {
-			System.out.println("로그인 먼저 진행하십셔");
 			return "cec/login";
 		}
-		List<WishDTO> list = this.dao1.getWishList(member_id);
-		model.addAttribute("wishList", list);
+		List<WishDTO> list = this.dao1.getcateList(member_id);
+		model.addAttribute("cateList", list);
 		return "cwc/wishlist";
 	}
 
 	@RequestMapping("wish_add.do")
-	public void add(@RequestParam("acc_code") int acc_code, HttpServletResponse res) throws IOException {
+	public void add(@RequestParam("wish_category") String wish_category, @RequestParam("acc_code") int acc_code, HttpServletResponse res,HttpServletRequest req) throws IOException {
+		HttpSession session= req.getSession();
+		String member_id=(String) session.getAttribute("member_id");
+		WishDTO wish=new WishDTO();
+		wish.setWish_category(wish_category);
+		wish.setMember_id(member_id);
 		
 		AccDTO dto= this.dao2.getAccCont(acc_code);
-		int check = this.dao1.addWish(dto);
+		wish.setAcc_code(dto.getAcc_code());
+		wish.setAcc_thumbnail(dto.getAcc_thumbnail());
+		wish.setAcc_addr(dto.getAcc_addr());
+		wish.setAcc_name(dto.getAcc_name());
+		wish.setAcc_price(dto.getAcc_price());
+		wish.setAcc_maxp(dto.getAcc_maxp());
+		wish.setAcc_bedroom(dto.getAcc_bedroom());
+		wish.setAcc_bed(dto.getAcc_bed());
+		wish.setAcc_bath(dto.getAcc_bath());
+		wish.setAcc_star(dto.getAcc_star());
+		
+		int check = this.dao1.addWish(wish);
+		System.out.println("2@@@@@@@@@@@@@@@@@");
 		res.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = res.getWriter();
 
 		if (check > 0) {
 			out.println("<script>");
-			out.println("location.href='wish.content.do'");
+			out.println("location.href = document.referrer");
 			out.println("</script>");
 		} else if(check==-1) {
 			out.println("<script>");
-			out.println("alert('위시리스트에 이미 추가 되었습니다.')");
+			out.println("alert('failed to wish list !!')");
 			out.println("history.back()");
 			out.println("</script>");
 		}
@@ -121,20 +142,20 @@ public class CwcController {
 		}
 
 	}
-	//�����ϱ� ������
+	//�뜝�룞�삕�뜝�룞�삕�뜝�떦源띿삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕
 	@RequestMapping("payment.do")
 	public String payment(@RequestParam("acc_code") int acc_code, Model model,HttpServletRequest req) throws ParseException, IOException {
-		//(DTO�� ���缭 �޾ƾ���)
+		//(DTO�뜝�룞�삕 �뜝�룞�삕�뜝�뜾�꽌 �뜝�뙣�븘�뼲�삕�뜝�룞�삕)
 		HttpSession session = req.getSession();
 		String member_id;
 		if((String) session.getAttribute("member_id")!=null) {
 			member_id=(String) session.getAttribute("member_id");
 		}else {
-			System.out.println("로그인 먼저 진행하십셔");
+			System.out.println("login gogo!");
 			return "cec/login";
 		}
 		
-		//체크 인, 체크 아웃
+		//筌ｋ똾寃� 占쎌뵥, 筌ｋ똾寃� 占쎈툡占쎌뜍
 		String day=req.getParameter("day");
 		String mon1=day.substring(5,7);
 		String day1=day.substring(8,10);
@@ -147,8 +168,8 @@ public class CwcController {
 		Date format1=new SimpleDateFormat("MM/dd").parse(date1);
 		Date format2=new SimpleDateFormat("MM/dd").parse(date2);
 		
-		String check_in=year1+"년 "+mon1+"월 "+day1+"일";
-		String check_out=year2+"년 "+mon2+"월 "+day2+"일";
+		String check_in=year1+"/"+mon1+"/"+day1;
+		String check_out=year2+"/"+mon2+"/"+day2;
 		long diffSec = (format2.getTime() - format1.getTime())/1000;
 		long diffDays = diffSec / (24*60*60);
 		int date= (int)(diffDays);
@@ -157,14 +178,13 @@ public class CwcController {
 			date=1;
 		}
 		
-		//게스트 인원
+		//野껊슣�뮞占쎈뱜 占쎌뵥占쎌뜚
 		String guest=req.getParameter("guest");
-		
 		
 		AccDTO dto = this.dao2.getAccCont(acc_code);
 		
-		HostHotelDTO host= this.dao3.getHost(dto.getAcc_host());//호스트 정보 가져오기
-		MemberHotelDTO member=this.dao4.getMember(member_id); //멤버 정보 가져오기
+		HostHotelDTO host= this.dao3.getHost(dto.getAcc_host());//占쎌깈占쎈뮞占쎈뱜 占쎌젟癰귨옙 揶쏉옙占쎌죬占쎌궎疫뀐옙
+		MemberHotelDTO member=this.dao4.getMember(member_id); //筌롢끇苡� 占쎌젟癰귨옙 揶쏉옙占쎌죬占쎌궎疫뀐옙
 		
 		int price= date*dto.getAcc_price();
 		int commission = (int)(price*0.1);
@@ -197,7 +217,7 @@ public class CwcController {
 		session.setAttribute("acc_code", acc_code);
 		if(dto.getCard_num()==""||dto.getExprie()==""||dto.getCvv()==""||dto.getZip_code() ==""||dto.getCountry() =="") {
 			out.println("<script>");
-			out.println("alert('결재 수단에 누락이 존재합니다..')");
+			out.println("alert('please fill in the blanks!!')");
 			out.println("history.back()");
 			out.println("</script>");
 		}else {
@@ -227,7 +247,7 @@ public class CwcController {
 		if((String) session.getAttribute("member_id")!=null) {
 			member_name = (String) session.getAttribute("member_name");
 		}else {
-			System.out.println("로그인 먼저 진행하십셔");
+			System.out.println("login-gogo");
 			return "cec/login";
 		}
 		int no= (Integer) session.getAttribute("acc_code");
@@ -235,13 +255,11 @@ public class CwcController {
 		String member_id = (String) session.getAttribute("member_id");
 		String mpic= this.re_dao.reinsert_pic(member_id);
 		
-		
-		
 		List<PaymentDTO> list = this.dao3.getPayList(member_name);
-		model.addAttribute("List", list);
 		model.addAttribute("mem",member_name);
 		model.addAttribute("mem_pic",mpic);
 		model.addAttribute("host_num",hostNum);
+		model.addAttribute("List", list);
 		return "cwc/reservation_guest";
 	}
 	@RequestMapping("cart_delete.do")
@@ -252,33 +270,28 @@ public class CwcController {
 		
 		if(check>0) {
 			out.println("<script>");
-			out.println("alert('예약이 취소 되었습니다...')");
+			out.println("alert('reservation has been canceled!!')");
 			out.println("location.href='reservation_guest.do?member_id=member_id'");
 			out.println("</script>");
 		}
 	}
 	
-	@RequestMapping("cart_update.do")
-	public String cart_update(@RequestParam("cart_num") int cart_num, Model model) {
-		PaymentDTO dto = this.dao3.cartCont(cart_num);
-		model.addAttribute("dto", dto);
-		return "cwc/payment_update";
-	}
-	
-	@RequestMapping("cart_update_ok.do")
-	public void update_cart(PaymentDTO dto, HttpServletResponse res) throws IOException {
+	@RequestMapping("cart_cancel.do")
+	public void cart_cancle(@RequestParam("cart_num") int cart_num, HttpServletResponse res) throws IOException {
 		res.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = res.getWriter();	
-		int check = this.dao3.update_cart(dto);
-		if(check > 0) {
+		PrintWriter out = res.getWriter();
+		int check =this.dao3.del_cart(cart_num);
+		
+		if(check>0) {
 			out.println("<script>");
-			out.println("alert('예약 수정 성공!!!')");
-			out.println("location.href='reservation_guest.do?member_id=member_id'");
+			out.println("alert('canceled!!')");
+			out.println("location.href='reservation_host.do'");
 			out.println("</script>");
-		}else { 
+		}else {
 			out.println("<script>");
-			out.println("history.back()");
+			out.println("alert('fail !!')");
 			out.println("</script>");
+			
 		}
 	}
 	
@@ -291,16 +304,50 @@ public class CwcController {
 		List<PaymentDTO> out = this.dao3.getPayList_out(host_name);
 		List<PaymentDTO> in = this.dao3.getPayList_in(host_name);
 		List<PaymentDTO> pre = this.dao3.getPayList_pre(host_name);
-		List<PaymentDTO> update = this.dao3.getPayList_update(host_name);
 		List<PaymentDTO> approve = this.dao3.getPayList_approve(host_name);
 		model.addAttribute("List", list);
 		model.addAttribute("out", out);
 		model.addAttribute("in", in);
 		model.addAttribute("pre", pre);
-		model.addAttribute("update", update);
 		model.addAttribute("approve", approve);
 		return "cwc/reservation_host";
-	}
-		
+	}	
 	
+	@RequestMapping("wish_category_add.do")
+	public void add_cate(WishCategoryDTO dto,WishDTO dto2, HttpServletRequest req,HttpServletResponse res) throws IOException {
+		int check=this.dao1.addCategory(dto);		
+		int check2=this.dao1.addWish(dto2);
+		res.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = res.getWriter();	
+		if(check > 0 && check2>0 ) {
+			out.println("<script>");
+			out.println("alert('added wishlist')");
+			out.println("location.href = document.referrer");
+			out.println("</script>");
+		}else { 
+			out.println("<script>");
+			out.println("history.back()");
+			out.println("</script>");
+		}
+		
+	}
+	@RequestMapping("cart_approve.do")
+	public void approve_cart(@RequestParam("cart_num") int cart_num,HttpServletResponse res) throws IOException {
+		int check= this.dao3.approve_guest(cart_num);
+		res.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = res.getWriter();	
+		if(check>0) {
+			out.println("<script>");
+			out.println("alert('success!!')");
+			out.println("location.href = document.referrer");
+			out.println("</script>");
+		}
+		else { 
+			out.println("<script>");
+			out.println("alert('fail..')");
+			out.println("history.back()");
+			out.println("</script>");
+		}
+		
+	}
 }
