@@ -63,6 +63,17 @@ public class ReviewDAOImplm implements ReviewDAOm{
 		return this.sqlSession.update("re_modify", review_num);
 	}
 
+	@Override
+	public double avgSelect(int no) {
+		
+		return this.sqlSession.selectOne("avg_select", no);
+	}
+
+	@Override
+	public int insertStar(int no) {
+		return this.sqlSession.update("acc_star", no);
+	}
+
 	
 
 	

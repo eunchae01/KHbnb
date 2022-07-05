@@ -84,6 +84,7 @@ $(function () {
 	<c:set var="like" value="${like }" />
 	<c:set var="host" value="${Host }" />
 	<c:set var="id_check" value="${id_check }" />
+	<c:set var="avg" value="${re_avg }"/>
 	
 	<header class="header">
 		<div class="container">
@@ -99,10 +100,10 @@ $(function () {
 					<div class="head-box">
 						<ul>
 							<li class="rate">
-								<c:if test="${dto.acc_star eq '0' }">
+								<c:if test="${avg eq '0' }">
 									<strong>&nbsp;NEW&nbsp;&middot;&nbsp;</strong>
 								</c:if>
-								<c:if test="${dto.acc_star ne '0' }">
+								<c:if test="${avg ne '0' }">
 									<img class="icons" src="<%=request.getContextPath() %>/resources/assets/star.png" alt="" />
 									<strong>&nbsp;<fmt:formatNumber value="${dto.acc_star }" pattern=".0"/>&nbsp;&middot;&nbsp;</strong>
 								</c:if>

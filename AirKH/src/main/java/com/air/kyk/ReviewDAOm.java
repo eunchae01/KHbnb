@@ -19,6 +19,10 @@ public interface ReviewDAOm {
 	public String reinsert_pic(String member_id);	//  멤버 아이디에 따른 멤버 사진
 	
 	public AvgDTO avgCont(int no);					// 뷰테이블 조회
+	
+	public double avgSelect(int no);				// 숙소 번호에 따른 평균 grade 조회
+	
+	public int insertStar(int no);					// acc_star 인서트
 
 	public List<ReviewDTOm> hostReviewCont(int no);		// 호스트번호에 따른 리뷰 조회
 

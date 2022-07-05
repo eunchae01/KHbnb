@@ -23,6 +23,11 @@
 		#{review_cl}, #{review_comm},#{review_check}, #{review_acc}, #{review_loc}, #{review_sat},
 				#{member_pic},sysdate,#{review_grade},#{review_content})
 	</insert>
+	
+	<update id="acc_star" parameterType="int">
+		update  acc_hotel set
+		acc_star = (select avg(review_grade) from review_hotel where acc_code = #{acc_code}) where acc_code = #{acc_code}
+	</update>
 
 	<update id="re_modify" parameterType="int">
 		update review_hotel set
@@ -42,7 +47,9 @@
 		select * from review_hotel where host_num =#{no}
 	</select>
 
-
+	<select id="avg_select" parameterType="int" resultType="double">
+		select avg(review_grade) from review_hotel where acc_code = #{acc_code}
+	</select>
 	
 	
 	
