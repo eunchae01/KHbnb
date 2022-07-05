@@ -8,21 +8,19 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-html, body {
-	width: 100%;
-	height: 100%;
+.con1 {
+	margin-top: 150px;
+	margin-left: 12%;
+	margin-right: 12%;
 }
 
-.container {
-	width: 100%;
-	margin: 20px;
-}
-
-.container2 {
+.con2 {
+	margin:10px;
+	margin-top: 50px;
 	display: block;
 }
 
-img{
+.img2{
 width: 300px;
 height: 170px;
 }
@@ -34,48 +32,41 @@ ul {
 li {
 	border: 0;
 	float: left;
-	padding-right: 30px;
-	padding-bottom: 50px;
+	padding-right: 40px;
+	padding-bottom: 80px;
 }
 
-font {
-	font-weight: 700;
-	font-size: 37px
+a{
+text-decoration: none;
 }
-
-a {
-	text-decoration: none;
-}
-
-button {
-	background-color: white;
-}
-
 </style>
 </head>
 <body>
-	<%@ include file="../jdy/include/main_top.jsp"%>
+	<jsp:include page="../jdy/include/main_top.jsp"></jsp:include>
+	<c:set var="list" value="${cateList }" />
 	
-	<c:set var="list" value="${wishList }" />
-	<div class="container">
+	<div class="con1">
+	
 		<div>
-			<font>위시리스트</font>
+			<font style="font-weight: bold; font-size: 40px;">위시 리스트</font>
 		</div>
 
-		<div class="container2">
+		<div class="con2">
 			<ul>
 			<c:if test="${!empty list }">
-			<c:forEach items="${list }" var="dto">
-				<li><a href="<%=request.getContextPath()%>/wish.content.do">
-						<div><img src="<%=request.getContextPath() %>/resources/hotel_images/${{dto.getAcc_thumbnail() }"></div>
-						<div>찜 이름</div>
+			<c:forEach items="${list }" var="dto" varStatus="index">
+				<li><a href="<%=request.getContextPath()%>/wish.content.do?wish_category=${dto.getWish_category() }">
+					<img style="width: 350px; height: 200px; border-radius: 5%;"
+						src="<%=request.getContextPath() %>
+						/resources/upload/2022-06-13/${index.index }.png"
+						alt="" class="thumbnail" /><br>
+						<font style="font-weight: bold;">${dto.getWish_category() }</font>
 				</a></li>
-
 			 </c:forEach>
 			 </c:if>	
 			</ul>
 		</div>
+		
 	</div>
-
 </body>
 </html>
