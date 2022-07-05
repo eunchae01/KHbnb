@@ -66,7 +66,7 @@
 					<td>${dto.acc_city }</td>
 					
 					<th>숙소가격</th>
-					<td>\<fmt:formatNumber>${dto.acc_price }</fmt:formatNumber>원</td>
+					<td>&#65510;<fmt:formatNumber>${dto.acc_price }</fmt:formatNumber>원</td>
 					
 					
 				<tr>

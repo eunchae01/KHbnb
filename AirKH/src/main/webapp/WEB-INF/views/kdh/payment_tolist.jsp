@@ -25,23 +25,21 @@
 	}
 
 
+.cont-table{
+padding-top:0px;
+}
+.cont-table table {
+	border-spacing: 0;
+	margin-bottom: 0px;
+}
+
 .cont-table table th,
-td {
-	border-bottom: 1px solid lightgray;
-}
-
 .cont-table table td {
-	padding: 20px 0;
+border-top: 1px solid lightgray;
+	border-bottom: 1px solid lightgray;
+	padding: 10px;
+	
 }
-
-.cont-table table th {
-	width: 200px;
-}
-
-.cont-table table td img {
-	width: 160px;
-}
-
 
 </style>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -62,7 +60,7 @@ td {
 			<h3>결제 매출액 목록 페이지</h3>
 		
 		<br>
-		<div class="cont-hotel">
+		<div class="cont-table">
 		<table border="0" cellspacing="0" width="850">
 		
 			
@@ -73,7 +71,7 @@ td {
 					
 					<td align ="center">
 					${dto.acc_name }</a></td>
-					<td align ="center">\<fmt:formatNumber>${dto.acc_price }</fmt:formatNumber>원</td>
+					<td align ="center">&#65510;<fmt:formatNumber>${dto.acc_price }</fmt:formatNumber>원</td>
 					<td align ="center"> ${dto.cart_date.substring(0,10) }</td>
 				</tr>
 				

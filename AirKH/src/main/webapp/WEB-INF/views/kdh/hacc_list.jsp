@@ -72,7 +72,7 @@
 				<br>
 				
 				${dto.acc_city }<br>
-				<fmt:formatNumber>${dto.acc_price }</fmt:formatNumber>원/박
+				&#65510;<fmt:formatNumber>${dto.acc_price }</fmt:formatNumber>원/박
 				
 				</a>
 			

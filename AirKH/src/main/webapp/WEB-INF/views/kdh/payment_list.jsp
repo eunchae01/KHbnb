@@ -33,6 +33,23 @@ color:black;
 	margin-left:700px;
 }
 
+
+.cont-table{
+padding-top:0px;
+}
+.cont-table table {
+	border-spacing: 0;
+	margin-bottom: 0px;
+}
+
+.cont-table table th,
+.cont-table table td {
+	border-top: 1px solid lightgray;
+	border-bottom: 1px solid lightgray;
+	padding: 10px;
+	
+}
+
 </style>
 
 </head>
@@ -48,7 +65,7 @@ color:black;
 		
 		<br>
 		<div class="lin">
-		<div class="cont-hotel">
+		<div class="cont-table">
 		<table border="0" cellspacing="0" width="850">
 			
 			<c:set var="list" value="${palist }"/>
@@ -60,7 +77,7 @@ color:black;
 					<td><a href="<%=request.getContextPath() %>/payment_content.do?num=${dto.cart_num}&page=${paging.page }">
 					${dto.acc_name }</a></td>
 					<td><a href="<%=request.getContextPath() %>/payment_content.do?num=${dto.cart_num}&page=${paging.page }">
-					\<fmt:formatNumber>${dto.acc_price }</fmt:formatNumber>원 </a></td>
+					&#65510;<fmt:formatNumber>${dto.acc_price }</fmt:formatNumber>원 </a></td>
 					<td> ${dto.cart_date.substring(0,10) }</td>
 				</tr>
 				
