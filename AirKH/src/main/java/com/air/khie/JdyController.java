@@ -66,7 +66,7 @@ public class JdyController {
 		AccDTO dto = this.dao.getAccCont(no);
 		List<OfferDTO> olist = this.dao.getOfferList();
 		WishDTO like=this.dao.likeAcc(no);
-		
+		List<WishCategoryDTO> cwish=this.dao.getCategory(member_id);
 		
 		String member_id = (String)session.getAttribute("member_id");
 		
@@ -100,13 +100,13 @@ public class JdyController {
 	    model.addAttribute("review_list", re_dto);
 	    model.addAttribute("count", count);
 	    
-
+model.addAttribute("member_id", member_id);
 	    model.addAttribute("Host", hostDto);
 		model.addAttribute("Cont", dto);
 		model.addAttribute("oList", olist);
 		model.addAttribute("offer", int_arr);
 		model.addAttribute("like",like);
-
+		model.addAttribute("cwish", cwish);
 		return "jdy/acc_cont";
 	}
 
