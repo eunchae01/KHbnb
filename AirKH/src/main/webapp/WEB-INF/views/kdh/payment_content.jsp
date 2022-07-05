@@ -62,7 +62,7 @@
 				</tr>
 				<tr>
 					<th>결제 금액</th>
-					<td colspan="5">\<fmt:formatNumber>${dto.acc_price}</fmt:formatNumber>원</td>
+					<td colspan="5">&#65510;<fmt:formatNumber>${dto.acc_price}</fmt:formatNumber>원</td>
 					
 					
 				</tr>

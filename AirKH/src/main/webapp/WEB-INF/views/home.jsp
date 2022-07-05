@@ -6,16 +6,11 @@
 </head>
 <body>
 <h1>
-	Hello world!  
+	
 	<br>
-	<a href="<%=request.getContextPath() %>/kdh.do">김도형 님</a>
+	<a href="<%=request.getContextPath() %>/jdy.do"> <img src="<%=request.getContextPath() %>/resources/assets/logo.png" alt="" class="logo-icon" width="100px"/>사이트가기</a>
 	<br>
-	<a href="<%=request.getContextPath() %>/kyk.do">김용국 님</a>
-	<br>
-	<a href="<%=request.getContextPath() %>/jdy.do">정도윤 님</a>
-	<br>
-	<a href="<%=request.getContextPath() %>/login.do">조은채 님</a>
-	<br>
+	
 	
 </h1>
 </body>

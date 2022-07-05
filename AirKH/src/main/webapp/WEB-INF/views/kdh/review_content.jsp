@@ -36,7 +36,7 @@
 		
 		<c:set var="dto" value="${Cont }"/>
 		<Br>
-			<h2>리뷰 테이블 ${dto.member_id}
+			<h2>리뷰 테이블 ${dto.acc_name}
 			상세내역 페이지</h2>
 			<br>
 			<img src="<%=request.getContextPath()%>/resources/member/${dto.member_pic}"  width="150px" height="150px">
@@ -45,6 +45,10 @@
 		
 		
 			<table border="0" cellspacing="0" width="750">
+				<tr>
+				<th>숙소이름</th>
+				<td colspan="5">${dto.acc_name }</td>
+			
 				<tr>
 					<th>리뷰번호</th>
 					<td>${dto.review_num }</td>

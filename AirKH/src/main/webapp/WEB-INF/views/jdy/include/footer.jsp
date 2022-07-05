@@ -13,7 +13,7 @@
 		<div class="container">
 			<div class="row footer-1st">
 				<div class="col-3">
-					<h5>에어비앤비 지원</h5>
+					<h5>Khbnb 지원</h5>
 					<ul>
 						<a href="#">
 							<li>도움말 센터</li>
@@ -34,7 +34,7 @@
 							<li>안전 정보</li>
 						</a>
 						<a href="#">
-							<li>에어비앤비의 코로나 19 대응 방안</li>
+							<li>Khbnb의 코로나 19 대응 방안</li>
 						</a>
 					</ul>
 				</div>
@@ -42,7 +42,7 @@
 					<h5>커뮤니티</h5>
 					<ul>
 						<a href="#">
-							<li>Airbnb.org:재난 구호 숙소</li>
+							<li>Khbnb.org:재난 구호 숙소</li>
 						</a>
 						<a href="#">
 							<li>아프간 난민 지원</li>
@@ -85,7 +85,7 @@
 							<li>새로운 기능에 대해 알아보기</li>
 						</a>
 						<a href="#">
-							<li>에어비앤비 공동창업자의 메시지</li>
+							<li>Khbnb 공동창업자의 메시지</li>
 						</a>
 						<a href="#">
 							<li>투자자 정보</li>
@@ -98,7 +98,7 @@
 					<hr />
 					<div class="footer-2nd-box">
 						<div class="footer-2nd">
-							<li>© 2022 Airbnb, Inc.&nbsp;&middot;&nbsp;</li>
+							<li>© 2022 Khbnb, Inc.&nbsp;&middot;&nbsp;</li>
 							<a href="#">
 								<li>개인정보 처리방침&nbsp;&middot;&nbsp;</li>
 							</a>
@@ -129,10 +129,10 @@
 					</div>
 					<hr />
 					<div class="footer-desc">
-						웹사이트 제공자: Airbnb Ireland UC, private unlimited company, 8
+						웹사이트 제공자: Khbnb Ireland UC, private unlimited company, 8
 						Hanover Quay Dublin 2, D02 DP23 Ireland | 이사: Dermot Clarke,
 						Killian Pattwell, Andrea Finnegan | VAT 번호: IE9827384L | 사업자
-						등록 번호: IE 511825 | 연락처: terms@airbnb.com, 웹사이트,
+						등록 번호: IE 511825 | 연락처: terms@Khbnb.com, 웹사이트,
 						080-822-0230 | 호스팅 서비스 제공업체: 아마존 웹서비스 |
 						에어비앤비는 통신판매 중개자로 에어비앤비 플랫폼을 통하여 게스트와
 						호스트 사이에 이루어지는 통신판매의 당사자가 아닙니다. 에어비앤비

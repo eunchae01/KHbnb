@@ -33,6 +33,24 @@ align:center;
 margin-left:400px;
 }
 
+.cont-table{
+padding-top:0px;
+}
+.cont-table table {
+	border-spacing: 0;
+	margin-bottom: 0px;
+}
+
+.cont-table table th,
+.cont-table table td {
+	border-top: 1px solid lightgray;
+	border-bottom: 1px solid lightgray;
+	padding: 10px;
+	
+}
+
+
+
 </style>
 </head>
 <body>
@@ -47,7 +65,7 @@ margin-left:400px;
 			<br>
 		
 		<div class="lin">
-		<div class="cont-hotel">
+		<div class="cont-table">
 		<table border="0" cellspacing="0" width="700">
 			<tr>
 				<th>게시글 종류</th> <th>글 제목</th>

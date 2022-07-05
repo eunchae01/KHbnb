@@ -52,6 +52,20 @@ public class ReviewDAOImplm implements ReviewDAOm{
 		return this.sqlSession.selectOne("re_pic", member_id);
 	}
 
+	@Override
+	public int gethostCount(int host_num) {
+
+		return this.sqlSession.selectOne("host_count", host_num);
+	}
+
+	@Override
+	public int review_modify(int review_num) {
+		return this.sqlSession.update("re_modify", review_num);
+	}
+
+	
+
+	
 
 
 

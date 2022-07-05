@@ -19,12 +19,19 @@
 	</select>
    <insert id="re_add" parameterType="re_dto">
 		
-		insert into review_hotel values((select max(review_num) from review_hotel) + 1, #{acc_code},#{member_id},
+		insert into review_hotel values((select max(review_num) from review_hotel) + 1, #{acc_code},#{acc_name}, #{host_num},#{member_id},
 		#{review_cl}, #{review_comm},#{review_check}, #{review_acc}, #{review_loc}, #{review_sat},
 				#{member_pic},sysdate,#{review_grade},#{review_content})
 	</insert>
 
-	
+	<update id="re_modify" parameterType="int">
+		update review_hotel set
+		review_content = #{recont_modity} where review_num = #{review_num}
+	</update>
+
+	<select id="re_pic" parameterType="String" resultType="String">
+		select member_pic from member_hotel where member_id = #{member_id}
+	</select>
 
 	
 	<select id="re_avg" parameterType="int" resultType="avg_dto">
@@ -35,8 +42,12 @@
 		select * from review_hotel where host_num =#{no}
 	</select>
 
-	<select id="re_pic" parameterType="String" resultType="String">
-		select member_pic from member_hotel where member_id = #{member_id}
+
+	
+	
+	
+	<select id="host_count" parameterType="int" resultType="int">
+		select count(*) from review_hotel where host_num =#{host_num}
 	</select>
 
 

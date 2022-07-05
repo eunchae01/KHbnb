@@ -44,6 +44,12 @@
 			<input type="hidden" name="page" value="${Page }">
 			<input type="hidden" name="member_pic" value="${dto.member_pic}">
 			<table border="0" cellspacing="0" width="1000">
+			
+				<tr>
+				<th>숙소이름</th>
+				<td colspan="5">${dto.acc_name }</td>
+			
+				<tr>
 				<tr>
 					<th>숙소코드</th>
 					<td><input name="acc_code" value="${dto.acc_code }"></td>

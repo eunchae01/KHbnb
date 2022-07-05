@@ -5,10 +5,13 @@ import lombok.Data;
 @Data
 public class QA_boardDTO {
 
-	private int QA_num;
-	private String QA_id;
-	private String QA_title;
-	private String QA_cont;
-	private String QA_type;
+	private int qa_num;
+	private int qa_index;
+	private int qa_type;
+	private String qa_id;
+	private String qa_title;
+	private String qa_cont;
+	private int qa_state;
+	
 	
 }

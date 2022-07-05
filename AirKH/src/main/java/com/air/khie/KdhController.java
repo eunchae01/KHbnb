@@ -1116,51 +1116,17 @@ public class KdhController {
     
     public void hinsertOk(MultipartHttpServletRequest pRequest, HaccDTO dto, HttpServletResponse response) throws IOException {
     	
-    	String uploadPath = "C:\\ncs\\workspace(spring)\\kdh\\AirKH\\src\\main\\webapp\\resources\\upload\\2022-06-13\\";
-		
-		// 업로드된 파일들의 이름 목록을 제공하는 메서드.
-		Iterator<String> iterator = pRequest.getFileNames();
-		
-		while(iterator.hasNext()) {
-			
-			String uploadFileName = iterator.next();
-			
-			MultipartFile mFile = pRequest.getFile(uploadFileName);
-			
-			// 업로드한 파일의 이름을 구하는 메서드.
-			String originaleFileName = mFile.getOriginalFilename();
-			
-			// 실제 폴더를 만들어 보자.
-			// ........\\resources\\upload\\2022-05-30
-			
-			
-			// 실제 파일을 만들어 보자.
-			
-			String saveFile=uploadPath+originaleFileName;
-			System.out.println("saveFile"+saveFile);
-			
-				
-				
-				
-				try {
-					//  ........\\resources\\upload\\2022-05-30\\실제 파일
-					// File origin = new File(homedir + "/" + saveFileName);
-					mFile.transferTo(new File(saveFile));
-					
-					dto.setAcc_thumbnail(originaleFileName);
-					
-					System.out.println("origin file >>> " + originaleFileName);
-					
-					// transferTo() : 파일 데이터를 지정한 폴더로 실제 저장시키는 메서드. 
-					
-					
-					//isUpload = true;
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					
-				}
-			
-		}  // while문 end
+    	// 파일 업로드 후 파일 문자열 받아오기 
+    			String fileName = this.hdao.uploadFile(pRequest);
+    			
+    			// , 기준으로 잘라서 dto에 넣기
+    			String[] fileArr = fileName.split(",");
+
+    			dto.setAcc_thumbnail(fileArr[0]);
+    			dto.setAcc_image1(fileArr[1]);
+    			dto.setAcc_image2(fileArr[2]);
+    			dto.setAcc_image3(fileArr[3]);
+    			dto.setAcc_image4(fileArr[4]);
     	int check= this.hdao.insertHacc(dto);
     	
     	response.setContentType("text/html; charset=UTF-8");
@@ -1235,51 +1201,30 @@ public class KdhController {
     
     @RequestMapping("hacc_modify_ok.do")
     public void hmodifyOk(MultipartHttpServletRequest pRequest,HaccDTO dto,HttpServletResponse response) throws IOException {
-    	String uploadPath = "C:\\ncs\\workspace(spring)\\kdh\\AirKH\\src\\main\\webapp\\resources\\upload\\2022-06-13\\";
-		
-		// 업로드된 파일들의 이름 목록을 제공하는 메서드.
-		Iterator<String> iterator = pRequest.getFileNames();
-		
-		while(iterator.hasNext()) {
-			
-			String uploadFileName = iterator.next();
-			
-			MultipartFile mFile = pRequest.getFile(uploadFileName);
-			
-			// 업로드한 파일의 이름을 구하는 메서드.
-			String originaleFileName = mFile.getOriginalFilename();
-			
-			// 실제 폴더를 만들어 보자.
-			// ........\\resources\\upload\\2022-05-30
-			
-			
-			// 실제 파일을 만들어 보자.
-			
-			String saveFile=uploadPath+originaleFileName;
-			System.out.println("saveFile"+saveFile);
-			
-				
-				
-				
-				try {
-					//  ........\\resources\\upload\\2022-05-30\\실제 파일
-					// File origin = new File(homedir + "/" + saveFileName);
-					mFile.transferTo(new File(saveFile));
-					
-					dto.setAcc_thumbnail(originaleFileName);
-					
-					System.out.println("origin file >>> " + originaleFileName);
-					
-					// transferTo() : 파일 데이터를 지정한 폴더로 실제 저장시키는 메서드. 
-					
-					
-					//isUpload = true;
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					
-				}
-			
-		}  // while문 end
+    	// 파일 업로드 후 파일 문자열 받아오기 
+    			String fileName = this.hdao.uploadFile(pRequest);
+    			System.out.println("fileName" + fileName);
+    			
+    			
+    			if(fileName == null) {
+    				dto.setAcc_thumbnail(dto.getAcc_thumbnail());
+    				dto.setAcc_image1(dto.getAcc_image1());
+    				dto.setAcc_image2(dto.getAcc_image2());
+    				dto.setAcc_image3(dto.getAcc_image3());
+    				dto.setAcc_image4(dto.getAcc_image4());
+    			}else {
+    				// , 기준으로 잘라서 dto에 넣기
+    				String[] fileArr = fileName.split(",");
+    				
+    				dto.setAcc_thumbnail(fileArr[0]);
+    				dto.setAcc_image1(fileArr[1]);
+    				dto.setAcc_image2(fileArr[2]);
+    				dto.setAcc_image3(fileArr[3]);
+    				dto.setAcc_image4(fileArr[4]);
+    				
+    				// 수정일 업데이트
+    				this.hdao.updateAccDate(dto.getAcc_code());
+    			}
     	
     	int check =this.hdao.updateHacc(dto);
     	

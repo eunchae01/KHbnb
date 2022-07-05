@@ -13,25 +13,32 @@ public class QA_boardDAOImpl implements QA_boardDAO{
 	
 	@Override
 	public int QA_insert(QA_boardDTO dto) {
-		return this.sqlSession.selectOne("QA_insert", dto);
+		return this.sqlSession.insert("QA_insert", dto);
 	}
 
 	@Override
-	public int QA_delete(int no) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int QA_delete(int qa_num) {
+		return this.sqlSession.delete("QA_delete", qa_num);
 	}
 
 	@Override
-	public int QA_update(int no) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int QA_update(QA_boardDTO dto) {
+		return this.sqlSession.update("QA_update", dto);
+	}
+
+
+	@Override
+	public List<QA_boardDTO> getQaList(String qa_id) {
+		return this.sqlSession.selectList("qa_select", qa_id);
 	}
 
 	@Override
-	public List<QA_boardDTO> getQaList() {
-		// TODO Auto-generated method stub
-		return null;
+	public QA_boardDTO getQaCont(int qa_num) {
+		return this.sqlSession.selectOne("qa_cont", qa_num);
 	}
+
+	
+
+	
 
 }

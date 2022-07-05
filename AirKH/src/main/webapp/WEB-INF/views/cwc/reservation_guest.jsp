@@ -8,7 +8,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/modal.css" />
+<script type="text/javascript">
+$(function(){
+	// 글자 수 제한
+    $('#re_textCont').on('keyup', function() {
+        $('#re_text_cnt').html("("+$(this).val().length+" / 200)");
+ 
+        if($(this).val().length > 200) {
+            $(this).val($(this).val().substring(0, 200));
+            $('re_text_cnt').html("(200 / 200)");
+        }
+    });
+});
+
+
+</script>
 <style>
+.accName{width:300px;}
 .con1 {
 	margin-top: 150px;
 	margin-left: 5%;
@@ -40,7 +58,7 @@ button {
 					<table width="80%" height="400px" style="border-top:2px solid gray;">
 
 						<tr>
-							<td colspan="3" height="30%" style="vertical-align : bottom; padding-left: 50px;"><h2>${dto.getAcc_name() }</h2></td>
+							<td colspan="4" height="30%" style="vertical-align : bottom; padding-left: 50px;"><h2>${dto.getAcc_name() }</h2></td>
 							<td width="30%" rowspan="5"><a
 								href="<%=request.getContextPath()%>/acc_content.do?no=${dto.getAcc_code() }">
 									<img
@@ -147,6 +165,118 @@ button {
 										</div>
 									</div>
 								</div></td>
+								<td>
+					      			<input class="btn btn-outline-success"type="button" value="리뷰 등록하기" id="btn-modal">
+					      			 <div id="modal" class="modal-overlay">
+				        				<div class="modal-window">
+				            				<div class="title">
+				                				<h2>리뷰 등록하기</h2>
+				            				</div>
+				            				<div class="close-area">X</div>
+				            <c:set var="mem" value="${mem }" />
+				            <c:set var="mem_pic" value="${mem_pic }" />
+				            <c:set var="host_num" value="${host_num }" />
+				            
+				            
+								            <div class="modal_content">
+								                <form method="post" action="<%=request.getContextPath() %>/review_insert_ok.do?hostno=${host_num}">
+								                	<table border="0" cellspacing="0" width="1200px">
+								                	<br/>
+								                		<tr>
+								                			<th>숙소 이름</th>
+								                			<td><input class="accName"type="text" name="acc_name" value="${dto.acc_name }"></td>
+								                			<td class="re_hidden"><input type="number" name="acc_code" value="${dto.acc_code }"></td>
+								                			<td class="re_hidden"><input type="number" name="host_num" value="${host_num }"></td>
+								                			<td class="re_hidden"><input type="text" name="member_pic" value="${mem_pic }"></td>
+								                			<td class="re_hidden"><input type="text" name="member_id" value="${mem }"></td>
+								                			
+								                			 
+								                		</tr>
+								                		<tr>
+								                			<th>청결한가요?</th>
+								                			<td>
+								                			<input type="radio" name="review_cl" value="1"> 1점
+								                			<input type="radio" name="review_cl" value="2"> 2점
+								                			<input type="radio" name="review_cl" value="3"> 3점
+								                			<input type="radio" name="review_cl" value="4"> 4점
+								                			<input type="radio" name="review_cl" value="5"> 5점
+								                			</td>
+								                		</tr>
+								                		<tr>
+								                			<th>의사소통은 잘 되었나요?</th>
+								                			<td>
+								                			<input type="radio" name="review_comm" value="1"> 1점
+								                			<input type="radio" name="review_comm" value="2"> 2점
+								                			<input type="radio" name="review_comm" value="3"> 3점
+								                			<input type="radio" name="review_comm" value="4"> 4점
+								                			<input type="radio" name="review_comm" value="5"> 5점
+								                			</td>
+								                		</tr>
+								                		<tr>
+								                			<th>체크인 / 아웃 시간은 잘 지켜졌나요?</th>
+								                			<td>
+								                			<input type="radio" name="review_check" value="1"> 1점
+								                			<input type="radio" name="review_check" value="2"> 2점
+								                			<input type="radio" name="review_check" value="3"> 3점
+								                			<input type="radio" name="review_check" value="4"> 4점
+								                			<input type="radio" name="review_check" value="5"> 5점
+								                			</td>
+								                		</tr>
+								                		<tr>
+								                			<th>주소는 정확한가요?</th>
+								                			<td>
+								                			<input type="radio" name="review_acc" value="1"> 1점
+								                			<input type="radio" name="review_acc" value="2"> 2점
+								                			<input type="radio" name="review_acc" value="3"> 3점
+								                			<input type="radio" name="review_acc" value="4"> 4점
+								                			<input type="radio" name="review_acc" value="5"> 5점
+								                			</td>
+								                		</tr>
+								                		<tr>
+								                			<th>교통편의성은 어떤가요?</th>
+								                			<td>
+								                			<input type="radio" name="review_loc" value="1"> 1점
+								                			<input type="radio" name="review_loc" value="2"> 2점
+								                			<input type="radio" name="review_loc" value="3"> 3점
+								                			<input type="radio" name="review_loc" value="4"> 4점
+								                			<input type="radio" name="review_loc" value="5"> 5점
+								                			</td>
+								                		</tr>
+								                		<tr>
+								                			<th>가격대비 만족도는 어떤가요?</th>
+								                			<td>
+								                			<input type="radio" name="review_sat" value="1"> 1점
+								                			<input type="radio" name="review_sat" value="2"> 2점
+								                			<input type="radio" name="review_sat" value="3"> 3점
+								                			<input type="radio" name="review_sat" value="4"> 4점
+								                			<input type="radio" name="review_sat" value="5"> 5점
+								                			</td>
+								                		</tr>
+								                		<tr>
+								                			<th>전체적인 평점은 어떤가요?</th>
+								                			<td>
+								                			<input type="radio" name="review_grade" value="1"> 1점
+								                			<input type="radio" name="review_grade" value="2"> 2점
+								                			<input type="radio" name="review_grade" value="3"> 3점
+								                			<input type="radio" name="review_grade" value="4"> 4점
+								                			<input type="radio" name="review_grade" value="5"> 5점
+								                			</td>
+								                		</tr>
+								                		<br/>
+								                		<tr>
+								                			<th>리뷰를 작성해주세요!</th>
+								                			<td>
+								                				<textarea id="re_textCont" name="review_content" cols="100" rows="3"></textarea>
+								                				<div id="re_text_cnt">(0 / 200)</div>
+								                			</td>
+								                		</tr>
+								                	</table>
+								                	<input class="submit_btn" type="submit" value="리뷰등록">
+								                </form>
+								            </div>
+							      	  </div>
+							  	  </div>
+								</td>
 						</tr>
 
 					</table>
@@ -168,6 +298,50 @@ button {
 			change값이 1인 경우 => 호스트의 승인을 대기중입니다.
 		</div>
 	</div>
+	
+	
+	 <script>
+  			// 모달 기본 틀
+        	const modal = document.getElementById("modal")
+            
+
+            function modalOn() {
+			    modal.style.display = "flex"
+			}
+			function isModalOn() {
+			    return modal.style.display === "flex"
+			}
+			function modalOff() {
+			    modal.style.display = "none"
+			}
+            
+            // 모달 보이게하기
+			const btnModal = document.getElementById("btn-modal")
+				btnModal.addEventListener("click", e => {
+				    modal.style.display = "flex"
+				})
+			
+			// x 버튼 클릭 시 닫기 
+			const closeBtn = modal.querySelector(".close-area")
+				closeBtn.addEventListener("click", e => {
+				    modal.style.display = "none"
+			})
+			
+			// 모달 바깥부분 클릭 시 닫기
+			modal.addEventListener("click", e => {
+			    const evTarget = e.target
+			    if(evTarget.classList.contains("modal-overlay")) {
+			        modal.style.display = "none"
+			    }
+			})
+	
+			// ESC 버튼 누르면 닫기
+			window.addEventListener("keyup", e => {
+			    if(modal.style.display === "flex" && e.key === "Escape") {
+			        modal.style.display = "none"
+			    }
+			})
+    </script>
 </body>
 </html>
 

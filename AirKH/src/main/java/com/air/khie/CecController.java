@@ -21,12 +21,16 @@ import com.air.cec.MemberHotelDTO;
 import com.air.cec.MsgHotelDTO;
 import com.air.cec.UserHotelDAO;
 import com.air.cwc.PaymentDTO;
+import com.air.kyk.ReviewDAOm;
 
 @Controller
 public class CecController {
 	@Autowired
 	private UserHotelDAO dao;
 
+	@Autowired
+	private ReviewDAOm re_dao;
+	
 	// 회원가입
 	@RequestMapping("signup.do")
 	public String signUp() {
@@ -129,8 +133,10 @@ public class CecController {
 
 					HttpSession session = request.getSession();
 
+					int count = this.re_dao.gethostCount(dto.getHost_num());
+					
 					String hostORmember = "host";
-
+					session.setAttribute("count", count);	
 					session.setAttribute("host_num", dto.getHost_num());
 					session.setAttribute("host_name", dto.getHost_name());
 					session.setAttribute("host_id", dto.getHost_id());
