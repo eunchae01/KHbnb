@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.air.cwc.WishCategoryDTO;
 import com.air.cwc.WishDTO;
 
 public interface AccDAO {

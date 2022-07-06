@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.air.cec.HostHotelDTO;
 import com.air.cec.UserHotelDAO;
+import com.air.cwc.WishCategoryDTO;
 import com.air.cwc.WishDTO;
 import com.air.jdy.AccDAO;
 import com.air.jdy.AccDTO;
@@ -66,10 +67,9 @@ public class JdyController {
 		AccDTO dto = this.dao.getAccCont(no);
 		List<OfferDTO> olist = this.dao.getOfferList();
 		WishDTO like=this.dao.likeAcc(no);
-		List<WishCategoryDTO> cwish=this.dao.getCategory(member_id);
 		
 		String member_id = (String)session.getAttribute("member_id");
-		
+		List<WishCategoryDTO> cwish=this.dao.getCategory(member_id);
 		
 		
 		List<ReviewDTOm> re_dto = this.re_dao.reviewCont(no);

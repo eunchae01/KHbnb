@@ -239,7 +239,7 @@ img {
 .bill-container {
 	position: sticky;
 	top: 150px;
-	height: 470px;
+	height: 500px;
 	border: 1px solid lightgray;
 	border-radius: 10px;
 	padding: 24px;
@@ -312,6 +312,11 @@ img {
 	font-weight: 700;
 }
 
+.bill-info {
+	font-size: 15px;
+	text-align: center;
+}
+
 .bill-dldd hr{
 	margin-bottom: 16px;
 }
@@ -336,6 +341,11 @@ img {
 .bill-total dt, 
 .bill-total dd {
 	font-weight: 700;
+	font-size: 18px;
+}
+
+#totalm2 {
+	color: red;
 }
 
 
