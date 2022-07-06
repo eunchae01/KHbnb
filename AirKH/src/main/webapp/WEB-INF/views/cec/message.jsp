@@ -27,7 +27,6 @@
 	.container2{
 		padding-top: 110px;
 		padding-bottom: 20px;
-/* 		border-style: solid; */
 		border-width: 1px;
 		border-color: black;
 		height:100vh;
@@ -84,6 +83,11 @@
 		background-color: white;
 	}
 	
+	#msg_srl{
+		width: 90%;
+		height: 100%;
+		overflow:auto;
+	}
 </style>
 </head>
 <body>
@@ -96,6 +100,7 @@
 				<c:set var="hostList" value="${hostList }"/>
 				<c:set var="picList" value="${picList }"/>
 				
+				<div id="msg_srl">
 				<c:set var="hostORmember" value="${hostORmember }"/>
 				<c:if test="${hostORmember == 'host' }">
 					<c:if test="${!empty hostList }">
@@ -117,11 +122,14 @@
 						예약 내역이 없습니다.
 					</c:if>
 				</c:if>
+				</div>
 				
 				<!-- 멤버 로그인 시 -->
 				<c:set var="memList" value="${memList }"/>
 				<c:set var="picMList" value="${picMList }"/>
 				
+				
+				<div id="msg_srl">
 				<c:if test="${hostORmember == 'member' }">
 					<c:if test="${!empty memList }">
 						<c:forEach items="${memList }" var="dtoM" varStatus="status">
@@ -142,6 +150,8 @@
 						예약 내역이 없습니다.
 					</c:if>
 				</c:if>
+				</div>
+				
 		</div>
 	</div>
 	
