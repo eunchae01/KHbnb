@@ -99,10 +99,10 @@
 			<hr id="line1">
 				<c:set var="hostList" value="${hostList }"/>
 				<c:set var="picList" value="${picList }"/>
-				
-				<div id="msg_srl">
 				<c:set var="hostORmember" value="${hostORmember }"/>
+				
 				<c:if test="${hostORmember == 'host' }">
+				<div id="msg_srl">
 					<c:if test="${!empty hostList }">
 						<c:forEach items="${hostList }" var="dtoH" varStatus="status">
 							<div class="host_info" onclick="chattM('${dtoH.getMember_name() }', '${dtoH.getCheck_in() }')">
@@ -121,16 +121,15 @@
 					<c:if test="${empty hostList }">
 						예약 내역이 없습니다.
 					</c:if>
-				</c:if>
 				</div>
+				</c:if>
 				
 				<!-- 멤버 로그인 시 -->
 				<c:set var="memList" value="${memList }"/>
 				<c:set var="picMList" value="${picMList }"/>
 				
-				
-				<div id="msg_srl">
 				<c:if test="${hostORmember == 'member' }">
+				<div id="msg_srl">
 					<c:if test="${!empty memList }">
 						<c:forEach items="${memList }" var="dtoM" varStatus="status">
 							<div class="host_info" onclick="chattM('${dtoM.getHost_name() }', '${dtoM.getCheck_in() }')">
@@ -149,9 +148,8 @@
 					<c:if test="${empty memList }">
 						예약 내역이 없습니다.
 					</c:if>
-				</c:if>
 				</div>
-				
+				</c:if>
 		</div>
 	</div>
 	
